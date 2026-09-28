@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Market Microstructure Index</title>
+<style>
+:root{
+  --bg:#f6f7f9; --ink:#171b24; --muted:#5a6273; --rule:#d9dee6; --card:#ffffff;
+  --accent:#2346a0; --gap:#8a4b00; --gapbg:#fdf1de; --idea:#eef2fb;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0f1218; --ink:#e4e7ee; --muted:#98a1b3; --rule:#283042; --card:#161a22;
+    --accent:#93abff; --gap:#f0b35a; --gapbg:#2a2010; --idea:#1a2033;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0f1218; --ink:#e4e7ee; --muted:#98a1b3; --rule:#283042; --card:#161a22;
+  --accent:#93abff; --gap:#f0b35a; --gapbg:#2a2010; --idea:#1a2033;
+}
+body{background:var(--bg);color:var(--ink);font:20px/1.75 "MesloLGS Nerd Font Propo","MesloLGS NF","MesloLGS Nerd Font",ui-monospace,monospace;padding-inline:16px;padding-block:24px 64px}
+.wrap{max-width:52rem;margin:0 auto}
+h1,h2{font-weight:700;text-wrap:balance;line-height:1.2}
+h1{font-size:2.4rem;margin:0 0 .25rem}
+h2{font-size:1.7rem;margin:3rem 0 .75rem;padding-top:1rem;border-top:1px solid var(--rule)}
+.sub{color:var(--muted);margin:0 0 1.25rem}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+nav.toc{font-size:.92rem;columns:2 14rem;column-gap:2rem;margin:0 0 1rem;padding:0}
+nav.toc a{display:block;color:var(--muted);text-decoration:none;padding:.1rem 0;break-inside:avoid}
+nav.toc a:hover{color:var(--accent)}
+a{color:var(--accent)}
+.idea{background:var(--idea);border-radius:8px;padding:.8rem 1rem;margin:.5rem 0 1.25rem}
+.idea p,.idea ol{margin:.3rem 0}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+.sec{margin:.2rem 0 .8rem}.sec>*:first-child{font-weight:600;text-decoration:none}
+.sec>span:first-child{color:var(--muted)}
+.sec ul{margin:.1rem 0;padding-left:1.4rem;color:var(--muted);font-size:.9rem}
+#q{font:inherit;font-size:.95rem;width:100%;box-sizing:border-box;padding:.4rem .7rem;background:var(--card);color:var(--ink);border:1px solid var(--rule);border-radius:6px}
+</style>
+<div class="wrap">
+<h1>Market Microstructure</h1>
+<p class="sub">Revision ledgers · 0 / 9 parts written. Grey headings = not written yet; they turn into links as pages land.</p>
+<nav class="toc">
+<a href="#road">Roadmap &amp; sources</a>
+<a href="#structure">1 · Market structure</a>
+<a href="#liquidity">2 · Liquidity &amp; costs</a>
+<a href="#inventory">3 · Inventory models</a>
+<a href="#info">4 · Information models</a>
+<a href="#discovery">5 · Price discovery</a>
+<a href="#lob">6 · Order book dynamics</a>
+<a href="#impact">7 · Impact &amp; execution</a>
+<a href="#mm">8 · Market making</a>
+<a href="#hft">9 · HFT &amp; regulation</a>
+</nav>
+<input id="q" type="search" placeholder="Filter sections / topics…" aria-label="Filter">
+<h2 id="road">Roadmap &amp; sources</h2>
+<div class="idea"><p>Order: mechanics → cost of trading → why the spread exists (inventory, then information) → what prices reveal → the book as a process → trading against it (execution) → quoting into it (market making) → the modern venue landscape.</p><ol><li><b>Harris</b>, <i>Trading and Exchanges</i>: parts 1–2 (vocabulary, no maths).</li><li><b>O'Hara</b>, <i>Market Microstructure Theory</i>: parts 3–4.</li><li><b>Hasbrouck</b>, <i>Empirical Market Microstructure</i>: part 5.</li><li><b>Bouchaud, Bonart, Donier, Gould</b>, <i>Trades, Quotes and Prices</i>: parts 6–7.</li><li><b>Cartea, Jaimungal, Penalva</b>, <i>Algorithmic and High-Frequency Trading</i>: parts 7–8.</li></ol></div>
+<h2 id="structure">1 · Market structure</h2>
+<div class="sec"><span>1.1 · Participants</span><ul><li>Investors, brokers, dealers, market makers, HFTs</li><li>Informed vs uninformed (noise) traders</li></ul></div>
+<div class="sec"><span>1.2 · Order types</span><ul><li>Market, limit, stop, IOC, FOK, iceberg, pegged</li></ul></div>
+<div class="sec"><span>1.3 · Market designs</span><ul><li>Quote-driven (dealer) vs order-driven</li><li>Continuous auction vs call auction (open / close)</li></ul></div>
+<div class="sec"><span>1.4 · The limit order book</span><ul><li>Best bid / ask, depth, mid-price, microprice</li><li>Price-time priority, pro-rata matching</li><li>Tick size and queue position</li></ul></div>
+<h2 id="liquidity">2 · Liquidity &amp; transaction costs</h2>
+<div class="sec"><span>2.1 · Dimensions of liquidity</span><ul><li>Tightness, depth, resilience</li></ul></div>
+<div class="sec"><span>2.2 · Spread measures</span><ul><li>Quoted, effective, realized spread</li><li>Decomposition: realized spread + price impact</li></ul></div>
+<div class="sec"><span>2.3 · Cost of a large order</span><ul><li>Implementation shortfall</li><li>Amihud illiquidity, Kyle's lambda (preview)</li></ul></div>
+<h2 id="inventory">3 · Inventory models</h2>
+<div class="sec"><span>3.1 · Garman (1976)</span><ul><li>Order arrivals as Poisson flows, dealer ruin</li></ul></div>
+<div class="sec"><span>3.2 · Stoll (1978)</span><ul><li>Risk-averse dealer, spread as inventory compensation</li></ul></div>
+<div class="sec"><span>3.3 · Ho–Stoll (1981)</span><ul><li>Quotes skewed by inventory</li></ul></div>
+<h2 id="info">4 · Information models</h2>
+<div class="sec"><span>4.1 · Adverse selection</span><ul><li>Bagehot: the market maker loses to the informed</li></ul></div>
+<div class="sec"><span>4.2 · Glosten–Milgrom (1985)</span><ul><li>Bid / ask as conditional expectations</li><li>Bayesian updating after each trade</li></ul></div>
+<div class="sec"><span>4.3 · Kyle (1985)</span><ul><li>Insider, noise traders, market maker</li><li>Kyle's lambda, linear equilibrium</li></ul></div>
+<div class="sec"><span>4.4 · PIN</span><ul><li>Easley–Kiefer–O'Hara–Paperman</li><li>VPIN and order-flow toxicity</li></ul></div>
+<h2 id="discovery">5 · Price discovery</h2>
+<div class="sec"><span>5.1 · Roll model</span><ul><li>Spread from negative autocovariance of price changes</li></ul></div>
+<div class="sec"><span>5.2 · Efficient price vs noise</span><ul><li>Microstructure noise, bid–ask bounce</li><li>Signature plot, realized variance</li></ul></div>
+<div class="sec"><span>5.3 · Hasbrouck VAR</span><ul><li>Permanent price impact of trades</li><li>Information shares across venues</li></ul></div>
+<h2 id="lob">6 · Order book dynamics</h2>
+<div class="sec"><span>6.1 · Stylized facts</span><ul><li>Order-sign autocorrelation (long memory)</li><li>Intraday U-shape in volume and spread</li></ul></div>
+<div class="sec"><span>6.2 · Order flow imbalance</span><ul><li>Cont–Kukanov–Stoikov (2014)</li><li>Queue imbalance predicting the next mid move</li></ul></div>
+<div class="sec"><span>6.3 · Point processes</span><ul><li>Poisson order arrivals</li><li>Hawkes processes, self-excitation</li></ul></div>
+<div class="sec"><span>6.4 · Queue-reactive models</span><ul><li>Cont–Stoikov–Talreja; Huang–Lehalle–Rosenbaum</li></ul></div>
+<h2 id="impact">7 · Price impact &amp; optimal execution</h2>
+<div class="sec"><span>7.1 · Impact laws</span><ul><li>Square-root law</li><li>Temporary vs permanent impact</li></ul></div>
+<div class="sec"><span>7.2 · Propagator model</span><ul><li>Bouchaud et al., decaying impact kernel</li></ul></div>
+<div class="sec"><span>7.3 · Almgren–Chriss (2000)</span><ul><li>Mean–variance trade-off, efficient frontier</li><li>TWAP / VWAP as special cases</li></ul></div>
+<div class="sec"><span>7.4 · Obizhaeva–Wang</span><ul><li>Order-book resilience in execution</li></ul></div>
+<h2 id="mm">8 · Market making</h2>
+<div class="sec"><span>8.1 · Avellaneda–Stoikov (2008)</span><ul><li>Reservation price, optimal spread</li><li>HJB derivation</li></ul></div>
+<div class="sec"><span>8.2 · Guéant–Lehalle–Fernandez-Tapia (2013)</span><ul><li>Inventory limits, closed-form approximations</li></ul></div>
+<div class="sec"><span>8.3 · Adverse selection in quoting</span><ul><li>Markouts, alpha signals in quotes</li></ul></div>
+<h2 id="hft">9 · HFT, fragmentation &amp; regulation</h2>
+<div class="sec"><span>9.1 · Latency</span><ul><li>Latency arbitrage, co-location</li><li>Budish–Cramton–Shim: frequent batch auctions</li></ul></div>
+<div class="sec"><span>9.2 · Fragmentation</span><ul><li>Reg NMS, dark pools, smart order routing</li><li>Maker–taker fees</li></ul></div>
+<div class="sec"><span>9.3 · India</span><ul><li>NSE / BSE structure, SEBI algo rules, co-location</li></ul></div>
+</div>
+<script>
+q.oninput=()=>{const t=q.value.toLowerCase();document.querySelectorAll('.sec').forEach(s=>{let any=s.firstChild.textContent.toLowerCase().includes(t);s.querySelectorAll('li').forEach(l=>{const k=!t||any||l.textContent.toLowerCase().includes(t);l.hidden=!k;any||=k&&!!t});s.hidden=!any&&!!t})}
+</script>
