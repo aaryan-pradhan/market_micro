@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Midsem 2025 Solutions</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false})"></script>
+<style>
+:root{
+  --bg:#f6f7f9; --ink:#171b24; --muted:#5a6273; --rule:#d9dee6; --card:#ffffff;
+  --accent:#2346a0; --gap:#8a4b00; --gapbg:#fdf1de; --idea:#eef2fb;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0f1218; --ink:#e4e7ee; --muted:#98a1b3; --rule:#283042; --card:#161a22;
+    --accent:#93abff; --gap:#f0b35a; --gapbg:#2a2010; --idea:#1a2033;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0f1218; --ink:#e4e7ee; --muted:#98a1b3; --rule:#283042; --card:#161a22;
+  --accent:#93abff; --gap:#f0b35a; --gapbg:#2a2010; --idea:#1a2033;
+}
+body{background:var(--bg);color:var(--ink);font:20px/1.75 "MesloLGS Nerd Font Propo","MesloLGS NF","MesloLGS Nerd Font",ui-monospace,monospace;padding-inline:16px;padding-block:24px 64px}
+.wrap{max-width:52rem;margin:0 auto}
+h1,h2,h3{font-family:"MesloLGS Nerd Font Propo","MesloLGS NF","MesloLGS Nerd Font",ui-monospace,monospace;font-weight:700;text-wrap:balance;line-height:1.2}
+h1{font-size:2.4rem;margin:0 0 .25rem}
+h2{font-size:1.7rem;margin:3rem 0 .75rem;padding-top:1rem;border-top:1px solid var(--rule)}
+h3{font-size:1.2rem;margin:0 0 .4rem}
+.sub{color:var(--muted);margin:0 0 1.25rem}
+.bar{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-bottom:1rem}
+button{font:inherit;font-size:.9rem;color:var(--accent);background:transparent;border:1px solid var(--rule);border-radius:6px;padding:.3rem .8rem;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+nav.toc{font-size:.92rem;columns:2 14rem;column-gap:2rem;margin:0 0 1rem;padding:0}
+nav.toc a{display:block;color:var(--muted);text-decoration:none;padding:.1rem 0;break-inside:avoid}
+nav.toc a:hover{color:var(--accent)}
+a{color:var(--accent)}
+.idea{background:var(--idea);border-radius:8px;padding:.8rem 1rem;margin:.5rem 0 1.25rem}
+.idea p,.idea ol,.idea ul{margin:.3rem 0}
+.prob{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem;margin:1rem 0}
+.prob > p{margin:.2rem 0 .6rem}
+.ans{font-weight:600}
+.sec{border-top:1px solid var(--rule);padding:.45rem 0}
+.sh{color:var(--accent);font-weight:600;font-size:.95rem;margin:0}
+.sec > *:not(.sh){margin-top:.5rem}
+ol.pf{padding-left:1.6rem;margin:.4rem 0}
+ol.pf li{margin:.2rem 0}
+.why{color:var(--muted);font-size:.85em;white-space:nowrap}
+.qed{float:right;color:var(--muted)}
+.claim{margin:.3rem 0}
+.gap{background:var(--gapbg);color:var(--gap);border-radius:6px;padding:.5rem .8rem;font-size:.92rem}
+table{border-collapse:collapse;font-size:.92rem}
+.tw{overflow-x:auto}
+td,th{border:1px solid var(--rule);padding:.25rem .6rem;text-align:center;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+<style>.katex{font-size:1.15em}.katex-display{overflow-x:auto;overflow-y:hidden;padding:.2rem 0}</style>
+<style>
+pre{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:.6rem .8rem;font-size:.85rem;overflow-x:auto}
+.fig{display:block;margin:.8rem auto;max-width:100%;height:auto;font-size:13px}
+.fig text{fill:var(--ink);font-family:inherit}
+.fig .m{fill:var(--muted)} .fig .a{fill:var(--accent)} .fig .g{fill:var(--gap)}
+.fig .ln{stroke:var(--ink);fill:none;stroke-width:1.5}
+.fig .mu{stroke:var(--muted);fill:none;stroke-width:1}
+.fig .ac{stroke:var(--accent);fill:none;stroke-width:2.5}
+.fig .rg{fill:var(--accent);fill-opacity:.22;stroke:var(--accent);stroke-width:1.5}
+.fig .bad{fill:var(--gap);fill-opacity:.28;stroke:var(--gap);stroke-width:1.5}
+.fig .nd{fill:var(--card);stroke:var(--ink);stroke-width:1.5}
+.fig .dot{fill:var(--ink)} .fig .adot{fill:var(--accent)}
+.fig .dsh{stroke-dasharray:5 4} .fig .gl{stroke:var(--gap);fill:none;stroke-width:2.5} .fig .ink{fill:var(--ink)} .fig .bg{fill:var(--bg);stroke:var(--rule)} .fig .thk{stroke-width:4.5;stroke-linecap:round} .fig .sol{fill:var(--ink);fill-opacity:.55;stroke:var(--ink);stroke-width:1}
+.pf li{margin:.55rem 0} .pf .r{display:block;margin-top:.15rem;font-size:.93em} .pf .r > b:first-child{color:var(--accent)} .setup{margin:.3rem 0 .5rem}
+.prob > p.stmt{margin:.35rem 0 .5rem}
+.ahp{fill:var(--ink)} .ahpa{fill:var(--accent)}
+</style>
+<style>.brute td{text-align:left}.brute td:first-child{color:var(--muted);white-space:nowrap}.brute tr.dies td:first-child{color:var(--gap)}.brute tr.therefore td:first-child{color:var(--accent)}</style>
+<div class="wrap">
+<h1>Midsem 2025 · Solutions</h1>
+<p class="sub"><a href="../index.html">← Index</a> · BM51002 · 22 Sep 2025 · 2 hrs · 40 marks · <a href="midsem_2025.pdf">question paper</a> · <a href="midsem_2024.html">2024 paper</a></p>
+<nav class="toc">
+<a href="#q1">Q1 · Liquidity dimensions [7]</a>
+<a href="#q2">Q2 · Trader categories, Madhavan [7]</a>
+<a href="#q3">Q3 · Liquidity, costs, transitory volatility [6]</a>
+<a href="#q4">Q4 · Garman numerical [7]</a>
+<a href="#q5">Q5 · Amihud–Mendelson numerical [6]</a>
+<a href="#q6">Q6 · Stoll spread, competition [7]</a>
+</nav>
+
+<h2 id="q1">Q1 · Four dimensions of liquidity [7 = 4 + 3]</h2>
+<div class="prob">
+<p class="stmt"><b>Question:</b> What are the four key dimensions used to evaluate liquidity in financial markets? Explain each dimension with relevant examples, highlighting its impact on market functioning. Which liquidity dimension is critically important for a monopolistic market maker, and why does it hold such significance in a specific context?</p>
+
+<div class="sec"><p class="sh">1 · Target reading list</p>
+<p class="gap">⚠ PARTLY SLIDES MISSING. None of the decks has a slide listing the four dimensions (immediacy, width, depth, resiliency). They come from Larry Harris, <i>Trading and Exchanges</i>, Ch 19, and <code>Topics Discussed.xlsx</code> lists the lecture "Liquidity" against exactly that chapter. The definitions below are Harris's. The slides do supply the measures, the examples and the whole monopolist part. This topic is not on the 2026 midsem syllabus (that has the Chordia 2000 and Amihud 2002 measures), but those measures are how the dimensions get measured, so it is still worth knowing.</p>
+<div class="tw"><table class="brute">
+<tr><th>Deck</th><th>Pages</th><th>What it gives you</th></tr>
+<tr><td><a href="../1_market_structure/1.%20Introduction%20of%20Market%20Microstructure.pdf#page=10">1. Introduction…</a></td><td>10, 14, 15</td><td>Spread, mid price, price impact, tick size; picture of the order book (volume at each price = depth)</td></tr>
+<tr><td><a href="../1_market_structure/1.%20Introduction%20of%20Market%20Microstructure.pdf#page=20">same</a></td><td>20</td><td>Axis Bank order book: a real example of spread and depth (used below)</td></tr>
+<tr><td><a href="../1_market_structure/1.%20Introduction%20of%20Market%20Microstructure.pdf#page=23">same</a></td><td>23</td><td>Order properties table: which orders <i>demand immediacy</i>, <i>supply liquidity</i>, <i>supply resiliency</i></td></tr>
+<tr><td><a href="../1_market_structure/1.%20Introduction%20of%20Market%20Microstructure.pdf#page=26">same</a></td><td>26, 32</td><td>Liquidity is the first measure of market quality</td></tr>
+<tr><td><a href="../1_market_structure/1.1%20Orders%20and%20Trades%20.pdf#page=2">1.1 Orders and Trades</a></td><td>2, 3, 5</td><td>Orders offer vs take liquidity; "market orders pay the spread"; price impact depends on liquidity</td></tr>
+<tr><td><a href="../2_liquidity/1.5.%20Empirical%20Liquidity%20and%20it%20characteristics.pdf#page=9">1.5 Empirical Liquidity</a></td><td>9, 10</td><td>Chordia et al. measures: QSPR, PQSPR, DEP, ESPR, PESPR, and the correlation between depth and spread</td></tr>
+<tr><td><a href="../2_liquidity/1.5.%20Empirical%20Liquidity%20and%20it%20characteristics.pdf#page=30">same</a></td><td>30, 31</td><td>Stoll 2000: friction = "price concession paid for <b>immediacy</b>" (Demsetz 1968)</td></tr>
+<tr><td><a href="../3_inventory_models/2%20Inventory%20model%20Full.pdf#page=4">2 Inventory model Full</a></td><td>4, 5</td><td>Garman: <b>monopolistic dealer</b>; buy and sell orders arrive <b>asynchronously</b></td></tr>
+<tr><td><a href="../3_inventory_models/2%20Inventory%20model%20Full.pdf#page=19">same</a></td><td>19–23</td><td>Zero-drift condition, profit maximisation, dealership vs auction market ("immediate execution"), contribution</td></tr>
+</table></div>
+</div>
+
+<div class="sec"><p class="sh">2 · Deep-dive concept summary</p>
+<p><b>2.1 What liquidity is.</b> Harris: <i>liquidity is the ability to trade large size, quickly, at low cost, when you want to trade.</i> That sentence packs in four separate questions a trader asks:</p>
+<div class="tw"><table class="brute">
+<tr><th>Trader asks</th><th>Dimension</th></tr>
+<tr><td>How <b>fast</b> can I trade?</td><td>Immediacy</td></tr>
+<tr><td>How much does it <b>cost</b> me?</td><td>Width</td></tr>
+<tr><td>How <b>much</b> can I trade at that cost?</td><td>Depth</td></tr>
+<tr><td>How fast does the price <b>come back</b> after I trade?</td><td>Resiliency</td></tr>
+</table></div>
+<p>Liquidity is two-sided:</p>
+<ul><li><b>Supply:</b> standing limit orders and dealer quotes offer other traders a chance to trade (Orders deck p2).</li><li><b>Demand:</b> market orders and marketable limit orders take that chance (Intro p23: "Demands immediacy").</li></ul>
+<div class="idea"><p><b>Terms used below</b> (Intro p14; Liquidity p9):</p><ul><li>Ask \(P_A\) = the lowest price a seller will accept. Bid \(P_B\) = the highest price a buyer will pay.</li><li>Mid price \(P_M = \tfrac12(P_A + P_B)\).</li><li>\(Q_A\) and \(Q_B\) = the number of shares offered at the best ask and at the best bid.</li></ul></div>
+
+<p><b>2.2 The four dimensions.</b></p>
+<p><b>(1) Immediacy: how quickly a trade of a given size can be done at a given cost.</b></p>
+<ul><li><b>Supplied by:</b> dealers and standing limit orders. <b>Demanded by:</b> market orders.</li><li><b>Measured by:</b> time to execution; how often trades happen; whether a counterparty exists <i>right now</i>.</li><li><b>Example:</b> a stock with an active limit order book fills a 100-share market order in milliseconds. In an illiquid SME stock, a buyer may wait hours for a seller. NSE runs a separate call auction for illiquid stocks (Intro p29) because continuous trading there has no immediacy.</li><li><b>Impact on the market:</b> patient traders get better prices, impatient ones pay for speed. Stoll 2000 defines friction as exactly this: the price concession paid for immediacy (Liquidity p30).</li></ul>
+<p><b>(2) Width (also called tightness): the cost of a trade of a given size, per share.</b></p>
+<ul><li><b>Measured by</b> the spread (Liquidity p9):<ul><li>Quoted spread QSPR = \(P_A - P_B\)</li><li>Proportional quoted spread PQSPR = \((P_A - P_B)/P_M\)</li><li>Effective spread ESPR = \(2\lvert P_t - P_M\rvert\), which captures trades that happen inside the quotes</li></ul></li><li><b>Example (Axis Bank, Intro p20):</b> bid 664.40, ask 664.55.<ul><li>QSPR = 0.15, and PQSPR = 0.15/664.475 = 0.0226%.</li><li>A round trip (buy then sell) costs one full spread.</li></ul></li><li><b>Impact on the market:</b> a wide spread raises the cost of trading, so people trade less. It also raises the cost of capital (Biais–Glosten–Spatt, p4: 5 cents × 360 billion shares = $18 billion). Amihud &amp; Mendelson (1986) use the spread as their illiquidity proxy (Liquidity p3).</li></ul>
+<p><b>(3) Depth: the size of trade that can be done at a given price or cost.</b></p>
+<ul><li><b>Measured by:</b> DEP = \(\tfrac12(Q_A + Q_B)\), in shares (Liquidity p9), or the full volume profile of the book (Intro p15).</li><li><b>Example (Axis Bank):</b><ul><li>DEP = ½(453 + 714) = 583.5 shares at the best quotes.</li><li>A 2,000-share market buy takes all 714 shares at 664.55, then 1,286 shares at 664.60. Its average price is 664.582.</li><li>So it pays 0.107 per share over the mid, compared with 0.075 (half the spread) for a small order. The book is <b>shallow</b>, so the order <b>walked the book</b>, and the best ask moves up to 664.60.</li></ul></li><li><b>Impact on the market:</b> depth decides the price impact of large orders, which matters for institutions and block trades. Width and depth move together: in Chordia et al., QSPR and DEP have correlation <b>−0.396</b> (Liquidity p10). When the spread widens, depth thins, so the two dimensions reinforce each other.</li></ul>
+<p><b>(4) Resiliency: how quickly prices return to their fundamental level after a large <i>uninformed</i> trade pushes them away.</b></p>
+<ul><li><b>Supplied by:</b> traders who post new limit orders after the price moves (Intro p23: a market-if-touched order "supplies resiliency"). Value traders also step in against mispricing.</li><li><b>Measured by:</b> how fast the price reverts, and how fast the book refills.</li><li><b>Example:</b> after the Axis Bank buy above, the ask sits at 664.60. In a resilient market, new sellers post at 664.55 within seconds, and the spread and depth recover.</li><li><b>Impact on the market:</b> resiliency separates <b>transitory</b> volatility (moves that revert, caused by uninformed traders) from <b>fundamental</b> volatility (Volatility deck p10–11). Low resiliency lets uninformed trades leave lasting price errors, which hurts price discovery.</li></ul>
+
+<p><b>2.3 How the four fit together.</b></p>
+<div class="tw"><table class="brute">
+<tr><th>Dimension</th><th>What it answers</th><th>Slide measure</th><th>Who supplies it</th></tr>
+<tr><td>Immediacy</td><td>How fast?</td><td>Time to fill; trade frequency</td><td>Dealers, limit orders</td></tr>
+<tr><td>Width</td><td>At what cost per share?</td><td>QSPR, PQSPR, ESPR</td><td>Competition among liquidity suppliers</td></tr>
+<tr><td>Depth</td><td>How much?</td><td>DEP, book volume</td><td>Limit order volume, dealer inventory</td></tr>
+<tr><td>Resiliency</td><td>How fast does it recover?</td><td>Reversal speed</td><td>New limit orders, value traders</td></tr>
+</table></div>
+<p>The dimensions trade off against each other. Faster trading (immediacy) or larger size (depth) costs more (width). Chordia et al. and Amihud (2002) are simply measurements of these same dimensions.</p>
+
+<p><b>2.4 The monopolistic market maker (Garman 1976; Inventory deck p4–5, p19–23).</b></p>
+<p><i>Setup:</i></p>
+<ul><li>One dealer sets the prices: an ask \(p_a\) for public buys and a bid \(p_b\) for public sells.</li><li>Every order is for one unit, and the dealer's goal is maximum profit per unit time.</li><li>Buy orders and sell orders arrive <b>asynchronously</b>, as independent Poisson processes with rates \(\lambda_a(p_a)\) and \(\lambda_b(p_b)\).</li><li>The dealer cannot borrow cash or stock. Running out of either is <b>failure</b>, which Garman analyses as a gambler's ruin problem (p17–18).</li></ul>
+<p><i>The key point:</i> buyers and sellers almost never show up at the same instant.</p>
+<ul><li>Without the dealer, a buyer would have to wait for a seller.</li><li>The dealer bridges that time gap from his own inventory. In the dealership-vs-auction table (p22), orders are "filled against the market-maker's inventory" and the transaction stream is "Poisson due to <b>immediate execution</b>."</li><li><b>So what the monopolist sells is immediacy, and the spread is its price.</b></li><li>He can keep selling it only while his inventory of cash and stock lasts. That is why Garman needs \(\lambda_a p_a &gt; \lambda_b p_b\) and zero drift, \(\lambda_a = \lambda_b\) (p19).</li></ul>
+</div>
+
+<div class="sec"><p class="sh">3 · Comprehensive solution</p>
+<p><b>Part (a) [4 marks]: the four dimensions.</b></p>
+<p><i>Definition.</i> Liquidity is the ability to trade a large size, quickly, at low cost, when one wants to trade (Harris). It has four dimensions.</p>
+<ol class="pf">
+<li><b>Immediacy</b>: how quickly a trade of a given size can be executed.<ul><li><i>Example:</i> a market order in a liquid large-cap stock fills instantly. An illiquid SME stock may need a call auction, as NSE runs for illiquid stocks.</li><li><i>Impact:</i> impatient traders can trade when they need to, and this is what they pay the spread for (Demsetz 1968: friction is the price of immediacy).</li></ul></li>
+<li><b>Width (tightness)</b>: the cost per share of a trade, measured by the bid–ask spread.<ul><li>Quoted spread \(P_A - P_B\); proportional spread \((P_A - P_B)/P_M\); effective spread \(2\lvert P_t - P_M\rvert\).</li><li><i>Example:</i> Axis Bank at 664.40 / 664.55 has a spread of 0.15, or 0.0226% of the mid.</li><li><i>Impact:</i> a narrow spread lowers transaction costs and the cost of capital, and encourages trading.</li></ul></li>
+<li><b>Depth</b>: the quantity that can be traded near the best prices without moving them. Measured by \(\tfrac12(Q_A + Q_B)\).<ul><li><i>Example:</i> Axis Bank depth is 583.5 shares. A 2,000-share buy walks the book, averages 664.582 and pushes the ask up to 664.60.</li><li><i>Impact:</i> depth decides the price impact of large or institutional orders. Depth and spread are negatively related (Chordia et al.: correlation −0.40).</li></ul></li>
+<li><b>Resiliency</b>: how quickly prices and the book return to fundamental levels after a large uninformed trade.<ul><li><i>Example:</i> new limit sellers restore the 664.55 ask within seconds of the buy.</li><li><i>Impact:</i> high resiliency keeps transitory volatility short-lived and prices informative, which is good for price discovery.</li></ul></li>
+</ol>
+<p><b>Part (b) [3 marks]: the monopolistic market maker.</b></p>
+<p><b>Answer: <span class="ans">immediacy</span> is the critical dimension.</b></p>
+<ol class="pf">
+<li><b>The context: Garman's (1976) dealership market.</b> A single monopolistic dealer is the only counterparty. Public buy and sell orders arrive <b>asynchronously</b>, as independent Poisson flows \(\lambda_a(p_a)\) and \(\lambda_b(p_b)\). No buyer ever meets a seller directly.</li>
+<li><b>Why immediacy matters most there.</b><ul><li>Because arrivals don't coincide, trade happens only if someone stands ready to take the other side <i>now</i>. The dealer does this from his own stock and cash, so every order is executed <b>immediately</b> against his inventory.</li><li>Immediacy is therefore the product he sells, and the spread \(p_a - p_b\) is its price. Garman's spread exists partly to pay for it and partly to cut the failure probability.</li><li>Width is just the price he charges, and he sets it himself as the monopolist, choosing the spread that maximises \(\pi = \bar s\,\bar\lambda\).</li></ul></li>
+<li><b>Why inventory ties it together.</b><ul><li>The dealer cannot borrow. If order flow runs out his cash or his stock (gambler's ruin), he fails, and the market loses all its immediacy at once.</li><li>So he sets \(\lambda_a p_a &gt; \lambda_b p_b\) (cash inflow beats outflow) and keeps inventory drift at zero, \(\lambda_a = \lambda_b\). That way he can keep supplying immediacy indefinitely.</li><li>In short, depth (his inventory) is only the constraint. Immediacy is what the market needs from him.</li></ul></li>
+</ol>
+<div class="idea"><p><b>Takeaway.</b> Liquidity has four dimensions:</p><ul><li><b>Immediacy</b>: how fast</li><li><b>Width</b>: at what cost, measured by the spread</li><li><b>Depth</b>: how much, measured by \(\tfrac12(Q_A + Q_B)\)</li><li><b>Resiliency</b>: how fast prices recover</li></ul><p>For Garman's monopolist, <b>immediacy</b> is critical. Buy and sell orders arrive asynchronously, so the dealer is the only source of immediate execution. The spread is the price of that immediacy, and zero-drift inventory is how he keeps supplying it without failing.</p></div>
+</div>
+
+<div class="sec"><p class="sh">Exam</p>
+<p><b>How to adapt this to similar questions:</b></p>
+<ul><li><i>"Define liquidity and its dimensions" (2024 Q2, 5 = 2 + 3):</i> use the definition plus the four-row table.</li><li><i>"Which dimension is critical for X":</i> reason from who is missing in that market.<ul><li>No counterparty present → <b>immediacy</b>.</li><li>Large orders → <b>depth</b>.</li><li>Many small trades → <b>width</b>.</li><li>After shocks or news → <b>resiliency</b>.</li></ul></li></ul>
+</div>
+</div>
+
+<h2 id="q2">Q2 · Categories of traders, why they compete, why each matters [7 = 3 + 2 + 2]</h2>
+<div class="prob">
+<p class="stmt"><b>Question:</b> What are the different categories of traders in a financial market? Explain the reasons why these traders compete with one another. Why is the participation of each type of trader important from the perspective of both regulators and the overall market? Support your explanation using insights and findings from Madhavan's (2000) study.</p>
+
+<div class="sec"><p class="sh">1 · Target reading list</p>
+<p class="gap">⚠ PARTLY SLIDES MISSING. There is no Madhavan (2000) deck. The course outline lists it (item 8, "Market microstructure: A survey", <i>Journal of Financial Markets</i> 3(3), 205–258) and the Intro deck p27 names it, but no slides were shared. The Madhavan points below come from the paper itself. The trader categories are fully covered by the slides.</p>
+<div class="tw"><table class="brute">
+<tr><th>Deck</th><th>Pages</th><th>What it gives you</th></tr>
+<tr><td><a href="../1_market_structure/1.%20Introduction%20of%20Market%20Microstructure.pdf#page=8">1. Introduction…</a></td><td>8, 9</td><td>Types of traders; Harris's taxonomy (Figure 8-1): utilitarian, profit-motivated, futile, agents</td></tr>
+<tr><td><a href="../1_market_structure/1.1%20Exchanges.pdf#page=4">1.1 Exchanges</a></td><td>4–8</td><td>Zero-sum trading; who each trader is; buy side vs sell side tables; trade facilitators</td></tr>
+<tr><td><a href="../1_market_structure/1.4%20Market%20Survey%20Empirical%20Biais%2C%20Glosten%20Spatt%202005.pdf#page=8">1.4 Biais–Glosten–Spatt</a></td><td>7, 8</td><td>Informed profits = mirror image of uninformed losses; adverse selection reduces welfare</td></tr>
+<tr><td><a href="../4_volatility/2.1%20Sources%20of%20Volatility.pdf#page=9">2.1 Sources of Volatility</a></td><td>4, 9</td><td>Informed traders move prices to fundamental value; value traders and arbitrageurs push prices back</td></tr>
+</table></div></div>
+
+<div class="sec"><p class="sh">2 · Deep-dive concept summary</p>
+<p><b>2.1 Harris's taxonomy (Intro p9).</b> Every trader is either a <b>principal</b> (trades for their own account) or an <b>agent</b> (trades for someone else).</p>
+<div class="tw"><table class="brute">
+<tr><th>Category</th><th>Who</th><th>Why they trade</th></tr>
+<tr><td><b>Utilitarian</b></td><td>Investors and borrowers, hedgers, asset exchangers, gamblers, tax-avoiders</td><td>For a benefit other than trading profit: moving wealth through time, cutting risk, swapping assets, fun</td></tr>
+<tr><td><b>Profit-motivated: speculators, informed</b></td><td>Value traders, news traders, information-oriented technical traders, arbitrageurs</td><td>They know something about value that the price does not yet reflect</td></tr>
+<tr><td><b>Profit-motivated: speculators, parasitic</b></td><td>Order anticipators (front-runners, squeezers), bluffers (rumourmongers, manipulators)</td><td>They profit from <i>other traders'</i> orders, not from information about value</td></tr>
+<tr><td><b>Profit-motivated: dealers</b></td><td>Market makers, specialists, block facilitators</td><td>To earn the spread by supplying liquidity (Exchanges p7)</td></tr>
+<tr><td><b>Futile</b></td><td>Pseudo-informed traders, victimised traders</td><td>They think they are informed but are not; on average they lose</td></tr>
+<tr><td><b>Agents</b></td><td>Brokers, block brokers, buy-side traders (fund desks)</td><td>To earn commissions by arranging trades for clients</td></tr>
+</table></div>
+<p><b>Buy side vs sell side (Exchanges p6–7).</b> The <b>buy side</b> buys exchange services: investors, borrowers, hedgers, asset exchangers, gamblers. The <b>sell side</b> sells those services: dealers (supply liquidity) and brokers (arrange trades); broker-dealers do both.</p>
+<p><b>2.2 Why they compete.</b></p>
+<ul>
+<li><b>Trading is zero-sum relative to the market average</b> (Exchanges p4). One trader's gain over the average is another's loss, so every trade has a winner and a loser.</li>
+<li><b>Informed traders compete with each other</b> for the same information. The first to trade on it captures the profit, and each one's trading moves the price and shrinks what is left for the rest.</li>
+<li><b>Liquidity suppliers compete for order flow.</b> Dealers and limit-order traders undercut each other's quotes (price priority) or arrive first (time priority), which narrows the spread.</li>
+<li><b>Informed traders compete against dealers.</b> Dealers lose to well-informed speculators because they end up on the wrong side of the trade (Exchanges p4), so dealers widen spreads to protect themselves.</li>
+<li><b>Parasitic traders compete against large traders.</b> Front-runners try to trade ahead of big orders.</li>
+<li><b>Patient vs impatient.</b> Patient traders get better prices because they search longer (Exchanges p4). Impatient traders pay for immediacy.</li>
+</ul>
+<p><b>2.3 Madhavan (2000), from the paper.</b> A survey of four areas: (1) price formation and price discovery; (2) market structure and design; (3) transparency; (4) the link between microstructure and other areas of finance. The points the question wants:</p>
+<ul>
+<li>Prices form from the <b>interaction of informed traders, uninformed (liquidity) traders and market makers</b>. The market maker cannot tell them apart, so the spread must cover losses to the informed with gains from the uninformed (inventory and information models).</li>
+<li><b>Uninformed traders are necessary.</b> Without them the informed have no one to trade with profitably, and the market can break down (the no-trade result). Liquidity traders are the ones who "pay" for price discovery.</li>
+<li><b>Informed traders make prices informative.</b> Their trades push prices to fundamental value.</li>
+<li><b>Market design changes who participates.</b> Competition among dealers, transparency and fragmentation shift costs between trader groups. Transparency, for example, helps uninformed traders but can hurt dealers who hold large positions.</li>
+</ul>
+</div>
+
+<div class="sec"><p class="sh">3 · Comprehensive solution</p>
+<p><b>(a) Categories [3].</b> Following Harris's taxonomy:</p>
+<ol class="pf">
+<li><b>Utilitarian traders</b> trade for a reason other than profit: investors and borrowers (move wealth through time), hedgers (cut risk), asset exchangers (swap assets), gamblers.</li>
+<li><b>Profit-motivated traders.</b><ul><li><i>Informed speculators</i>: value traders, news traders, arbitrageurs.</li><li><i>Parasitic speculators</i>: order anticipators and front-runners, bluffers.</li><li><i>Dealers</i>: market makers, specialists, block facilitators.</li></ul></li>
+<li><b>Futile traders</b>: pseudo-informed traders who lose on average.</li>
+<li><b>Agents</b>: brokers and block brokers who trade for clients.</li>
+</ol>
+<p>The buy side (investors, hedgers, borrowers) demands exchange services; the sell side (dealers, brokers) supplies them.</p>
+<p><b>(b) Why they compete [2].</b></p>
+<ul>
+<li>Relative to the market average, trading is a zero-sum game: profit for one trader means a loss for another.</li>
+<li>Informed traders race each other to trade on the same information before the price absorbs it.</li>
+<li>Dealers and limit-order traders compete on price and time priority for order flow, which narrows spreads.</li>
+<li>Dealers try to avoid losing to informed traders by widening spreads, while parasitic traders try to profit from large traders' orders.</li>
+</ul>
+<p><b>(c) Why each type matters to regulators and to the market [2].</b></p>
+<ul>
+<li><b>Utilitarian and uninformed traders</b> are the reason markets exist. They create the gains from trade and pay the spread that funds liquidity. Without them, informed traders have no counterparty and the market breaks down (Madhavan; Biais–Glosten–Spatt: informed profits are the mirror image of uninformed losses).</li>
+<li><b>Informed traders</b> make prices informative. They drive <b>price discovery</b>, and regulators want accurate prices for capital allocation.</li>
+<li><b>Dealers</b> supply liquidity and immediacy, and they bridge buyers and sellers who arrive at different times (Garman).</li>
+<li><b>Arbitrageurs</b> keep prices consistent across markets (Exchanges p5).</li>
+<li><b>Brokers</b> lower search costs.</li>
+<li><b>What regulators watch for:</b>
+<ul><li><i>Balance.</i> Too much informed trading raises adverse selection, which widens spreads and drives the uninformed away (Akerlof-type market failure).</li>
+<li><i>Parasitic trading.</i> Front-running and manipulation transfer wealth without adding information, so regulators police them to keep markets fair and orderly.</li></ul></li>
+</ul>
+<div class="idea"><p><b>Takeaway.</b> Categories: utilitarian, informed, parasitic, dealers, futile, agents (buy side vs sell side).</p><p>They compete because trading is zero-sum and speed and price priority decide who profits.</p><p>Every group has a job: the uninformed fund liquidity, the informed make prices right, dealers supply immediacy, arbitrageurs link markets. Regulators keep the mix balanced so that adverse selection and manipulation do not drive the uninformed out (Madhavan 2000).</p></div>
+</div>
+</div>
+
+<h2 id="q3">Q3 · Liquidity, transaction costs and transitory volatility [6 = 2 + 2 + 1 + 1]</h2>
+<div class="prob">
+<p class="stmt"><b>Question:</b> What are the relationships among liquidity, transaction costs, and transitory volatility? To which volatility component do the price impacts of news traders contribute? To which volatility component do the price impacts of value traders contribute? What causes volatility to vary over time? How would you measure time-varying volatilities?</p>
+
+<div class="sec"><p class="sh">1 · Target reading list</p>
+<p class="gap">⚠ PARTLY SLIDES MISSING. The volatility deck covers the two components and how they are measured. It does not name "news traders" or discuss time-varying measures such as GARCH or realised volatility. Those come from Harris Ch 20 (which <code>Topics Discussed.xlsx</code> lists for "Volatility") and standard econometrics.</p>
+<div class="tw"><table class="brute">
+<tr><th>Deck</th><th>Pages</th><th>What it gives you</th></tr>
+<tr><td><a href="../4_volatility/2.1%20Sources%20of%20Volatility.pdf#page=2">2.1 Sources of Volatility</a></td><td>2–5</td><td>Prices move on information and on impatient traders' liquidity demand; fundamental vs transitory; dealers and adverse selection</td></tr>
+<tr><td><a href="../4_volatility/2.1%20Sources%20of%20Volatility.pdf#page=6">same</a></td><td>6, 7</td><td>What drives fundamental volatility: commodity, bond, stock and currency factors; uncertainty, political risk, leverage</td></tr>
+<tr><td><a href="../4_volatility/2.1%20Sources%20of%20Volatility.pdf#page=8">same</a></td><td>8, 9</td><td>Transitory volatility: bid–ask bounce, uninformed order imbalances, reversal by value traders and arbitrageurs</td></tr>
+<tr><td><a href="../4_volatility/2.1%20Sources%20of%20Volatility.pdf#page=10">same</a></td><td>10–12</td><td>Total = fundamental + transitory; measured by variance, standard deviation, mean absolute deviation; negative serial correlation marks transitory volatility</td></tr>
+<tr><td><a href="../4_volatility/2.1%20Sources%20of%20Volatility.pdf#page=14">same</a></td><td>14</td><td>Roll: \(\text{Var}(\Delta P) = \sigma^2 + \tfrac12 S^2\), which ties the spread to transitory volatility</td></tr>
+</table></div></div>
+
+<div class="sec"><p class="sh">2 · Deep-dive concept summary</p>
+<ul>
+<li><b>Fundamental volatility</b>: price changes caused by unexpected changes in value, such as earnings surprises or central bank decisions. It is <b>permanent</b> and does not revert (p3, p10).</li>
+<li><b>Transitory volatility</b>: price changes caused by <b>uninformed, impatient</b> traders' demand for liquidity, such as bid–ask bounce or a large one-off trade. It is <b>temporary</b>: prices revert to fundamental value (p8–10).</li>
+<li><b>Total volatility = fundamental + transitory</b> (p10). Reversion makes successive price changes negatively correlated, so negative serial correlation is the signature of transitory volatility (p11–12).</li>
+<li><b>The link to transaction costs is exact in Roll's model (p14).</b>
+\[\text{Var}(\Delta P_t) = \underbrace{\sigma^2}_{\text{fundamental}} + \underbrace{\tfrac12 S^2}_{\text{transitory}}\]
+Here \(\sigma^2\) is the variance of the value change and \(S\) is the spread. The transitory part grows with the square of the spread, which is the transaction cost.</li>
+<li><b>Informed vs uninformed trades.</b>
+<ul><li>Informed traders' trades move prices to the new value, so their price impact is <b>fundamental</b> (p4). Dealers' inference from order flow, the adverse-selection part of the spread, is also fundamental (p5).</li>
+<li>Uninformed traders' impact is <b>transitory</b>. It is reversed when <b>value traders or arbitrageurs</b> notice the mispricing and trade against it (p9).</li></ul></li>
+<li><b>News traders vs value traders</b> (Harris Ch 20).
+<ul><li>News traders trade on <i>new</i> information (announcements, events) the moment it arrives.</li>
+<li>Value traders estimate fundamental value and trade whenever the price is away from it. They buy after uninformed selling pushes the price down, and sell after uninformed buying pushes it up.</li></ul></li>
+</ul>
+</div>
+
+<div class="sec"><p class="sh">3 · Comprehensive solution</p>
+<p><b>(a) Relationship [2].</b></p>
+<ol class="pf">
+<li><b>More liquidity means lower transaction costs.</b> A deep, tight, resilient market has a small spread and small price impact per order.</li>
+<li><b>Lower transaction costs mean lower transitory volatility.</b> Transitory volatility is the price moving away from value because of liquidity demand. In Roll's model it equals \(\tfrac12 S^2\), so a smaller spread gives less bid–ask bounce. In a deep book an uninformed order also moves the price less, and the move reverts faster.</li>
+<li><b>The chain is</b>: illiquid market → high transaction costs → high transitory volatility. Liquidity suppliers earn their revenue by absorbing that transitory volatility, buying below value and selling above it.</li>
+</ol>
+<p><b>(b) News traders [1 of the 2].</b> Their price impacts contribute to <span class="ans">fundamental volatility</span>. They trade on new information about value, so the prices they move do not revert: the move is permanent.</p>
+<p><b>(b) Value traders [1 of the 2].</b></p>
+<ul>
+<li>They trade <i>against</i> deviations caused by uninformed traders, and that pushes prices back towards fundamental value (slide p9).</li>
+<li>The price change they cause is the <b>reversal</b> half of the transitory swing. So their impact belongs to <span class="ans">transitory volatility</span>, and it <b>dampens</b> it: the faster value traders act, the smaller and shorter the transitory component.</li>
+<li>To the extent that their valuation reflects genuinely new information about value, that part of their impact is fundamental.</li>
+</ul>
+<p><b>(c) Why volatility varies over time [1].</b></p>
+<ul>
+<li><b>Fundamental side:</b> information arrives unevenly (earnings seasons, central-bank meetings, crises); uncertainty about fundamentals rises and falls (for example tech stocks); political risk; changes in leverage (slides p6–7).</li>
+<li><b>Transitory side:</b> liquidity changes. Spreads widen and depth drops in stress, and liquidity moves together across stocks (Chordia et al. 2000: commonality). Order imbalances and uninformed trading pressure change over time, and volume and volatility both follow an intraday U-shape.</li>
+<li>The result is <b>volatility clustering</b>: calm and turbulent periods each tend to persist.</li>
+</ul>
+<p><b>(d) How to measure time-varying volatility [1].</b></p>
+<ul>
+<li><b>Rolling-window</b> standard deviation (or mean absolute deviation) of returns over the last \(k\) days. This is the slide measure, applied through time.</li>
+<li><b>Realised volatility</b>: the sum of squared intraday returns, which gives a fresh estimate each day.</li>
+<li><b>GARCH(1,1)</b>: \(\sigma_t^2 = \omega + \alpha\,r_{t-1}^2 + \beta\,\sigma_{t-1}^2\), which models clustering directly.</li>
+<li><b>Range-based</b> estimators (Parkinson high–low), and <b>implied volatility</b> from option prices (for example India VIX).</li>
+<li><b>To split the components:</b> use Roll's estimator for the transitory part (\(\tfrac12 S^2\)), or Hasbrouck's (1993) VAR, which separates the permanent (fundamental) and transitory parts of price changes (slide p16).</li>
+</ul>
+<div class="idea"><p><b>Takeaway.</b> Liquidity ↑ ⇒ transaction costs ↓ ⇒ transitory volatility ↓. In Roll's model the transitory part is exactly \(\tfrac12 S^2\).</p><p>News traders → <b>fundamental</b> (permanent). Value traders → they reverse <b>transitory</b> moves and so dampen transitory volatility.</p><p>Volatility varies with how fast information arrives and with liquidity conditions. Measure it with rolling standard deviations, realised volatility or GARCH, and decompose it with Roll or Hasbrouck's VAR.</p></div>
+</div>
+</div>
+
+<h2 id="q4">Q4 · Garman (1976): bid for a target profit, spread, inventory [7 = 3 + 2 + 2]</h2>
+<div class="prob">
+<p class="stmt">Buy orders arrive as a Poisson process with rate \(\lambda_b = 12\)/hour; sell orders with rate \(\lambda_s = 8\)/hour. Each order is for 1 unit. The dealer's valuation is \(V = 100\). Following Garman's price setup, the dealer sets a bid \(P_b\) and an ask \(P_a\); the spread is \(S = P_a - P_b\). The dealer wants (1) expected inventory to be stable (arrival rates balanced) and (2) expected profit per unit time of at least 5 per hour.</p>
+<p class="stmt"><b>Question:</b> (a) If \(P_a = 101.5\), find the \(P_b\) needed for an expected profit of 5 per hour. (b) Compute the resulting spread and comment on it. (c) Comment on the dealer's inventory level based on the buy and sell arrival rates.</p>
+
+<div class="sec"><p class="sh">1 · Target reading list</p>
+<div class="tw"><table class="brute">
+<tr><th>Deck</th><th>Pages</th><th>What it gives you</th></tr>
+<tr><td><a href="../3_inventory_models/2%20Inventory%20model%20Full.pdf#page=4">2 Inventory model Full</a></td><td>4, 5, 10, 11</td><td>Monopolist dealer; Poisson arrivals; assumptions D-1 to D-6; no borrowing, no price change midstream</td></tr>
+<tr><td><a href="../3_inventory_models/2%20Inventory%20model%20Full.pdf#page=12">same</a></td><td>12</td><td>Inventory equations (3.1) cash and (3.2) stock</td></tr>
+<tr><td><a href="../3_inventory_models/2%20Inventory%20model%20Full.pdf#page=17">same</a></td><td>17–19</td><td>Gambler's ruin; failure probabilities (2.8) cash and (2.9) stock; conditions \(\lambda_a p_a &gt; \lambda_b p_b\), zero drift \(\lambda_a = \lambda_b\)</td></tr>
+<tr><td><a href="../3_inventory_models/2%20Inventory%20model%20Full.pdf#page=20">same</a></td><td>20, 21</td><td>Profit maximisation: \(\bar\pi = \bar s\,\bar\lambda\); the figure</td></tr>
+</table></div>
+<p class="gap">Notation trap: the slides write the <i>public buy</i> rate as \(\lambda_a(p_a)\) (orders filled at the ask, stock going out) and the <i>public sell</i> rate as \(\lambda_b(p_b)\) (filled at the bid, stock coming in). The exam calls the buy rate \(\lambda_b\). Below, "buy rate" = 12 and "sell rate" = 8, whatever the letters.</p></div>
+
+<div class="sec"><p class="sh">2 · Deep-dive concept summary</p>
+<ul>
+<li><b>Setup (slides p10–11).</b> One monopolist dealer. Buy and sell orders are independent Poisson flows whose rates depend on price: a higher ask means fewer buyers, a higher bid means more sellers. The dealer fixes one bid and one ask for all time, cannot borrow cash or stock, and fails if either runs out.</li>
+<li><b>Inventory dynamics (p12):</b> cash \(I_c(t) = I_c(0) + p_a N_{buy}(t) - p_b N_{sell}(t)\); stock \(I_s(t) = I_s(0) + N_{sell}(t) - N_{buy}(t)\).
+<ul><li>Expected change in stock per hour = sell rate − buy rate.</li>
+<li>Expected change in cash per hour = \(p_a\cdot\)buy rate − \(p_b\cdot\)sell rate.</li></ul></li>
+<li><b>Failure (gambler's ruin, p17–18):</b>
+<ul><li>Stock failure is <b>certain</b> unless the sell (stock-in) rate exceeds the buy (stock-out) rate.</li>
+<li>Cash failure is certain unless cash inflow \(\lambda_a p_a\) exceeds cash outflow \(\lambda_b p_b\).</li>
+<li>Avoiding both needs \(\lambda_a p_a &gt; \lambda_b p_b\) <i>and</i> \(\lambda_b &gt; \lambda_a\) (p19). The borderline case is <b>zero drift</b>, \(\lambda_a = \lambda_b\).</li></ul></li>
+<li><b>Profit (p20):</b> with balanced flows at a common rate \(\bar\lambda\), every buy is matched by a sell. Each matched pair (a round trip) earns \(p_a - p_b = S\). So
+\[\bar\pi = S \times \bar\lambda .\]</li>
+</ul>
+</div>
+
+<div class="sec"><p class="sh">3 · Comprehensive solution</p>
+<p class="setup"><b>Setup.</b> Buy rate \(= 12\)/hr, sell rate \(= 8\)/hr, \(P_a = 101.5\), \(V = 100\), target \(\bar\pi = 5\)/hr. Balanced flow requires stock in = stock out.</p>
+<p><b>(a) Required bid [3].</b></p>
+<ol class="pf">
+<li>Balanced rate: \(\bar\lambda = \min(12, 8) = 8\) round trips per hour.<span class="r"><b>Why:</b> for stable inventory, units sold must equal units bought. Only 8 sellers arrive per hour, so at most 8 of the 12 buyers can be served without draining stock (condition 1).</span></li>
+<li>Profit: \(\bar\pi = (P_a - P_b)\,\bar\lambda = 8\,(101.5 - P_b)\).<span class="r"><b>Why:</b> Garman \(\bar\pi = \bar s\bar\lambda\) (slide p20); each round trip earns the spread.</span></li>
+<li>Set \(8(101.5 - P_b) = 5\): \(101.5 - P_b = 0.625\), so \(P_b = \) <span class="ans">100.875</span>.<span class="r"><b>Why:</b> condition 2 at equality (the lowest acceptable profit).</span></li>
+<li>Check against \(V\): profit = \(8(P_a - V) + 8(V - P_b) = 8(1.5) + 8(-0.875) = 12 - 7 = 5\). ✓<span class="r"><b>Why:</b> the gain over value on sales, plus the gain over value on purchases, adds up to the spread times the rate.</span></li>
+</ol>
+<p><b>(b) Spread and comment [2].</b></p>
+<ul>
+<li>\(S = 101.5 - 100.875 = \) <span class="ans">0.625</span>, which is 0.625% of \(V\). This is the <i>minimum</i> spread that meets the profit target: \(S_{\min} = \bar\pi / \bar\lambda\). Any wider spread earns more.</li>
+<li><b>Placement:</b> both quotes are <b>above</b> \(V = 100\) (the mid is 101.19).
+<ul><li>The dealer pays 100.875 for something he values at 100, so he loses 0.875 on every purchase, and makes it back by selling at 101.5.</li>
+<li>Quoting high makes sense under excess buying pressure (12 buys vs 8 sells): a high ask discourages buyers, a high bid attracts sellers. This is the Amihud–Mendelson logic that low inventory raises both prices.</li></ul></li>
+<li>The spread is thin: it covers only the minimum profit, with no cushion for risk. Garman's point is that the spread also has to cut the failure probability.</li>
+</ul>
+<p><b>(c) Inventory [2].</b></p>
+<ul>
+<li>If the dealer fills every order at these fixed quotes, the stock drift is sell rate − buy rate \(= 8 - 12 = -4\) units per hour. <b>Inventory falls on average by 4 units every hour.</b></li>
+<li>By Garman (2.9), stock failure is <b>certain</b>: the buy (stock-out) rate 12 exceeds the sell (stock-in) rate 8. Starting with \(I_s(0)\) units, stock runs out after about \(I_s(0)/4\) hours on average.</li>
+<li><b>Cash side:</b> inflow \(12 \times 101.5 = 1218\) exceeds outflow \(8 \times 100.875 = 807\), so cash grows. The cash-failure probability is \((807/1218)^{I_c(0)/\bar p} &lt; 1\).</li>
+<li><b>Conclusion.</b> The dealer is cash-rich and stock-poor, and condition 1 fails at the given arrival rates. To stabilise inventory he must raise \(P_a\) (fewer buys) and/or \(P_b\) (more sells) until the two rates are equal. Garman's fixed prices cannot do that midstream, which is exactly what Amihud–Mendelson later fix.</li>
+</ul>
+<p class="gap">⚠ Ambiguity. The paper doesn't say which \(\bar\lambda\) to use. We used the balanced (matched) rate 8, which is the only rate consistent with stable inventory. If the examiner means the <i>average</i> rate \((12+8)/2 = 10\), then \(P_b = 101.5 - 5/10 = 101.0\) and \(S = 0.5\). State your assumption in the exam.</p>
+<div class="idea"><p><b>Takeaway.</b> \(\bar\pi = S\bar\lambda\) with \(\bar\lambda = 8\) ⇒ \(S = 0.625\), \(P_b = 100.875\).</p><p>Both quotes sit above \(V\) because buying pressure is high.</p><p>At 12 buys vs 8 sells, inventory drifts down 4 units per hour, so stock failure is certain while cash builds up. The dealer must raise both quotes to rebalance.</p></div>
+</div>
+</div>
+
+<h2 id="q5">Q5 · Amihud &amp; Mendelson (1980): transaction rate and zero-drift bid [6 = 3 + 3]</h2>
+<div class="prob">
+<p class="stmt">Buy-order (demand) arrival rate at ask \(P_a\): \(D(P_a) = 100 - 2P_a\). Sell-order (supply) arrival rate at bid \(P_b\): \(S(P_b) = 20 + P_b\). Each trade is one unit. The total expected transaction rate is \(\lambda = D(P_a) + S(P_b)\). If \(D(P_a) = S(P_b) = \lambda/2\), inventory has zero drift.</p>
+<p class="stmt"><b>Question:</b> (a) If the ask and bid are 50 and 48, compute \(\lambda\). (b) With zero expected drift and \(P_a = 30\), find the bid that ensures zero drift and compute the spread.</p>
+
+<div class="sec"><p class="sh">1 · Target reading list</p>
+<div class="tw"><table class="brute">
+<tr><th>Deck</th><th>Pages</th><th>What it gives you</th></tr>
+<tr><td><a href="../3_inventory_models/2%20Inventory%20model%20Full.pdf#page=24">2 Inventory model Full</a></td><td>24, 25</td><td>A–M relaxes Garman's fixed prices: prices depend on inventory</td></tr>
+<tr><td><a href="../3_inventory_models/2%20Inventory%20model%20Full.pdf#page=26">same</a></td><td>26–28</td><td>Assumptions A–G: \(D' &lt; 0\), \(S' &gt; 0\); next order is a buy with probability \(D/(D+S)\); inventory is a birth–death process</td></tr>
+<tr><td><a href="../3_inventory_models/2%20Inventory%20model%20Full.pdf#page=29">same</a></td><td>29–31</td><td>Figure 3: bid and ask fall as inventory rises; preferred position; findings</td></tr>
+<tr><td><a href="../3_inventory_models/2%20Inventory%20model%20Full.pdf#page=20">same</a></td><td>20</td><td>Garman's optimal rate and prices for linear rates (used in the extension)</td></tr>
+</table></div></div>
+
+<div class="sec"><p class="sh">2 · Deep-dive concept summary</p>
+<ul>
+<li><b>Demand \(D(P_a)\)</b> = public buy orders per unit time. It falls as the ask rises (\(D' = -2 &lt; 0\)). At \(P_a = 50\), \(D = 0\): 50 is the choke price.</li>
+<li><b>Supply \(S(P_b)\)</b> = public sell orders per unit time. It rises with the bid (\(S' = +1 &gt; 0\)).</li>
+<li><b>Inventory drift</b> = \(S(P_b) - D(P_a)\) units per unit time: sells add stock, buys remove it. Zero drift means \(D = S\).</li>
+<li><b>Birth–death process (slide p27).</b> The next order is a buy with probability \(D/(D+S)\), and the waiting time is exponential with mean \(1/(D+S)\). The dealer controls both rates through prices.</li>
+<li><b>A–M finding (p31):</b> bid and ask both <b>decrease</b> as inventory rises. With too much stock, the dealer lowers the ask to sell more and lowers the bid to buy less, which pulls inventory back to the preferred level. The spread stays positive.</li>
+</ul>
+</div>
+
+<div class="sec"><p class="sh">3 · Comprehensive solution</p>
+<p><b>(a) [3].</b></p>
+<ol class="pf">
+<li>\(D(50) = 100 - 2(50) = 0\) buy orders per unit time.<span class="r"><b>Why:</b> substitute \(P_a = 50\).</span></li>
+<li>\(S(48) = 20 + 48 = 68\) sell orders per unit time.<span class="r"><b>Why:</b> substitute \(P_b = 48\).</span></li>
+<li>\(\lambda = D + S = 0 + 68 = \) <span class="ans">68 trades per unit time</span>.<span class="r"><b>Why:</b> definition of \(\lambda\).</span></li>
+<li><b>Comment.</b> Every trade is a dealer <i>purchase</i>, so inventory drifts by \(+68\) per unit time and cash drains by \(68 \times 48 = 3264\) per unit time. These quotes are far from zero drift. The ask of 50 has priced out all buyers, and the high bid of 48 invites heavy selling. By A–M, the dealer should cut <b>both</b> prices.</li>
+</ol>
+<p><b>(b) [3].</b></p>
+<ol class="pf">
+<li>\(D(30) = 100 - 2(30) = 40\).<span class="r"><b>Why:</b> substitute \(P_a = 30\).</span></li>
+<li>Zero drift: \(S(P_b) = D(P_a) \Rightarrow 20 + P_b = 40 \Rightarrow P_b = \) <span class="ans">20</span>.<span class="r"><b>Why:</b> the zero-drift condition \(D = S\).</span></li>
+<li>Spread \(= P_a - P_b = 30 - 20 = \) <span class="ans">10</span>.</li>
+<li>Check: \(\lambda = 40 + 40 = 80\), so \(D = S = \lambda/2 = 40\) ✓. Expected profit \(= 40(30) - 40(20) = 400\) per unit time.<span class="r"><b>Why:</b> cash in from 40 sales at 30, minus cash out for 40 purchases at 20.</span></li>
+</ol>
+<p><b>Going further (Garman's monopoly optimum, slide p20).</b> In slide notation: \(\lambda_S = \alpha + \beta p\) with \(\alpha = 20, \beta = 1\), and \(\lambda_B = \gamma - \delta p\) with \(\gamma = 100, \delta = 2\).</p>
+<ul>
+<li>\(\bar\lambda = \dfrac{\gamma\beta + \alpha\delta}{2(\beta + \delta)} = \dfrac{100 + 40}{6} = 23.33\).</li>
+<li>Bid \(= (\bar\lambda - \alpha)/\beta = 3.33\); ask \(= (\gamma - \bar\lambda)/\delta = 38.33\).</li>
+<li>Spread \(= 35\), \(\bar\pi = 35 \times 23.33 = 816.7\).</li>
+</ul>
+<p>A profit-maximising monopolist quotes a much wider spread and trades less. The quotes 30/20 in (b) give up profit for more volume.</p>
+<div class="idea"><p><b>Takeaway.</b> (a) \(\lambda = 0 + 68 = 68\). All flow is sells, so inventory piles up and both quotes must fall.</p><p>(b) \(D(30) = 40 = S(P_b)\) ⇒ \(P_b = 20\), spread \(= 10\), \(\lambda = 80\).</p><p>Rule: zero drift ⇔ \(D(P_a) = S(P_b)\). Solve for the missing price.</p></div>
+</div>
+</div>
+
+<h2 id="q6">Q6 · Stoll (1978): spread components, competition, vs Amihud–Mendelson [7 = 4 + 2 + 1]</h2>
+<div class="prob">
+<p class="stmt"><b>Question:</b> Explain the components of the bid–ask spread in Stoll's (1978) model. Why is the spread not simply a transaction cost? How does competition among the dealers impact the market? Compare Stoll's (1978) supply-of-dealer-services approach with Amihud and Mendelson's (1980) inventory model. How are they similar and different?</p>
+
+<div class="sec"><p class="sh">1 · Target reading list</p>
+<div class="tw"><table class="brute">
+<tr><th>Deck</th><th>Pages</th><th>What it gives you</th></tr>
+<tr><td><a href="../3_inventory_models/2%20Inventory%20model%20Full.pdf#page=32">2 Inventory model Full</a></td><td>32, 33</td><td>Stoll: risk aversion enters inventory models; assumptions</td></tr>
+<tr><td><a href="../3_inventory_models/2%20Inventory%20model%20Full.pdf#page=34">same</a></td><td>34–39</td><td>When the dealer trades (expected utility unchanged); wealth; cost (2.14); holding cost; more explanation</td></tr>
+<tr><td><a href="../3_inventory_models/2%20Inventory%20model%20Full.pdf#page=40">same</a></td><td>40–42</td><td>Price determination (2.15–2.16); order cost \(M/Q\); information cost \(\gamma a_i\)</td></tr>
+<tr><td><a href="../3_inventory_models/2%20Inventory%20model%20Full.pdf#page=43">same</a></td><td>43–46</td><td>Optimal scale \(Q^*\); U-shaped spread; optimum number of dealers \(d^*\); findings</td></tr>
+<tr><td><a href="../3_inventory_models/2%20Inventory%20model%20Full.pdf#page=24">same</a></td><td>24–31</td><td>Amihud–Mendelson, for the comparison</td></tr>
+<tr><td><a href="../1_market_structure/1.4%20Market%20Survey%20Empirical%20Biais%2C%20Glosten%20Spatt%202005.pdf#page=12">1.4 Biais–Glosten–Spatt</a></td><td>12</td><td>Finite dealers ⇒ non-competitive prices; NASDAQ collusion; spreads fell after 1997 competition</td></tr>
+</table></div></div>
+
+<div class="sec"><p class="sh">2 · Deep-dive concept summary</p>
+<p><b>Setup (p33).</b> Dealers are liquidity suppliers with a utility function over terminal wealth (risk-averse). The model has two periods and one transaction per interval, with no bankruptcy. The dealer accepts a trade only if it leaves his expected utility unchanged: \(E[U(W_0(1+\tilde R^*))] = E[U(\tilde W)]\) (2.13).</p>
+<p><b>The cost of a trade of size \(Q_i\), as a proportion (2.14 plus p41):</b>
+\[c_i = \underbrace{\frac{z}{W_0}\sigma_{ip}Q_p + \frac12\frac{z}{W_0}\sigma_i^2 Q_i}_{\text{holding (inventory) cost}} + \underbrace{\gamma a_i}_{\text{information cost}} + \underbrace{\frac{M}{Q_i}}_{\text{order cost}}\]</p>
+<ul>
+<li>\(z\) = the dealer's relative risk aversion (the Pratt index).</li>
+<li>\(W_0\) = the dealer's initial wealth.</li>
+<li>\(\sigma_i^2\) = the variance of stock \(i\)'s return.</li>
+<li>\(\sigma_{ip}\) = the comovement of stock \(i\) with the dealer's existing portfolio.</li>
+<li>\(Q_p\) = the dealer's existing inventory.</li>
+<li>\(a_i\) = the expected return to informed traders; \(\gamma = +1\) if the dealer buys, −1 if he sells.</li>
+<li>\(M\) = a fixed cost per order.</li>
+</ul>
+<p><b>Spread (2.16 and p44).</b> Take the cost of a purchase minus the cost of a sale, for equal sizes \(|Q|\). The \(Q_p\) term cancels, and
+\[s_i = \frac{z\sigma_i^2}{W_0}|Q_i| + 2a_i + \frac{2M}{|Q_i|}.\]
+It is linear in risk aversion, trade size and variance, and <b>independent of existing inventory</b>. Inventory shifts both prices but not their difference. As a function of \(|Q|\) it is U-shaped.</p>
+<p><b>Competition (p43–45).</b> Each dealer's average cost is lowest at \(Q_i^* = \sqrt{2MW_0/(z\sigma_i^2)}\). Here falling order cost per dollar is offset by rising holding cost; information cost is unaffected because it doesn't depend on size. With free entry, the number of dealers is \(d_i^* = |D_i|/|Q_i^*|\), the demand the market can support when every dealer operates at minimum average cost.</p>
+</div>
+
+<div class="sec"><p class="sh">3 · Comprehensive solution</p>
+<p><b>(a) Spread components [4].</b></p>
+<ol class="pf">
+<li><b>Holding (inventory) cost</b>, \(\frac{z}{W_0}\sigma_{ip}Q_p + \frac12\frac{z}{W_0}\sigma_i^2 Q_i\): the risk premium a risk-averse dealer needs to hold an undiversified position. It rises with risk aversion \(z\), return variance \(\sigma_i^2\) and trade size \(Q_i\), and falls with wealth \(W_0\).</li>
+<li><b>Order-processing cost</b>, \(M/Q_i\): a fixed cost per transaction (clearing, record-keeping, the dealer's time). Per dollar traded it falls as trade size grows.</li>
+<li><b>Information (adverse-selection) cost</b>, \(\gamma a_i\): compensation for trading with better-informed investors. It is independent of trade size.</li>
+<li><b>Resulting spread:</b> \(s_i = \dfrac{z\sigma_i^2}{W_0}|Q_i| + 2a_i + \dfrac{2M}{|Q_i|}\).
+<ul><li>It is U-shaped in trade size and independent of current inventory \(Q_p\).</li>
+<li>Inventory moves the <i>placement</i> of the bid and ask, through \(\sigma_{ip}Q_p\).</li></ul></li>
+</ol>
+<p><b>(b) Why the spread is not simply a transaction cost [part of 4].</b></p>
+<ul>
+<li>The spread is the <b>price of a service, immediacy</b>, supplied by a risk-bearing dealer. It is not a mechanical fee.</li>
+<li>Only \(M/Q\) is a real processing cost.</li>
+<li>The holding-cost part pays for <b>risk</b>. It depends on the dealer's own risk aversion and wealth, and on the stock's variance and correlation with the dealer's portfolio. So two dealers with the same technology quote different spreads.</li>
+<li>The information part is a <b>transfer</b> that recovers losses to informed traders. It is not a resource cost.</li>
+<li>So the spread is an <i>equilibrium price</i> set by the supply of dealer services and the demand for immediacy, and it changes with market conditions (Stoll 2000: real vs informational friction).</li>
+</ul>
+<p><b>(c) Competition among dealers [2].</b></p>
+<ul>
+<li>With free entry, dealers enter until each operates at minimum average cost, trading \(Q^* = \sqrt{2MW_0/(z\sigma^2)}\). The market supports \(d^* = |D|/|Q^*|\) dealers.</li>
+<li>So competition pushes the spread down to the <b>minimum average cost</b> of immediacy and removes monopoly rents. This narrows spreads, deepens liquidity and lowers the cost of capital.</li>
+<li>More demand (\(|D|\)) or riskier stocks (larger \(\sigma^2\), smaller \(Q^*\)) support more dealers.</li>
+<li><b>Evidence:</b> with few dealers, prices are non-competitive. NASDAQ dealers colluded before 1994, and spreads fell sharply after the 1997 reforms let limit orders compete (Biais–Glosten–Spatt).</li>
+</ul>
+<p><b>(d) Stoll (1978) vs Amihud–Mendelson (1980) [1].</b></p>
+<div class="tw"><table class="brute">
+<tr><th></th><th>Stoll (1978)</th><th>Amihud–Mendelson (1980)</th></tr>
+<tr><td>Similar</td><td colspan="2">Both are inventory-based. The dealer supplies immediacy, the spread is positive, and inventory drives how quotes are set.</td></tr>
+<tr><td>Dealer's goal</td><td>Maximise expected <b>utility</b> of terminal wealth (risk-averse)</td><td>Maximise expected <b>profit</b> per unit time (monopolist)</td></tr>
+<tr><td>Why a spread</td><td>Cost-based: holding + order + information costs</td><td>Market power plus managing inventory between bounds</td></tr>
+<tr><td>Role of inventory</td><td>Shifts bid and ask together; <i>spread</i> independent of inventory</td><td>Bid and ask both monotone decreasing in inventory; <b>preferred inventory</b> position</td></tr>
+<tr><td>Time / order flow</td><td>Two periods, one trade per interval</td><td>Continuous time; Poisson demand and supply; birth–death inventory</td></tr>
+<tr><td>Market structure</td><td>Competitive: optimal scale, number of dealers</td><td>A single monopolist dealer</td></tr>
+<tr><td>Information</td><td>Includes an adverse-selection term \(a_i\)</td><td>None</td></tr>
+</table></div>
+<p class="gap">⚠ Slide gap: slide p24 says A–M dealers are "risk-averse", but the model's objective (p26, assumption D) is expected profit per unit time, which is risk-neutral. The inventory control in A–M comes from the inventory bounds, not from a utility function. Stoll is the paper that brings in risk aversion (p32).</p>
+<div class="idea"><p><b>Takeaway.</b> Stoll's spread = holding cost (risk) + order cost + information cost: \(s = \frac{z\sigma^2}{W_0}|Q| + 2a + \frac{2M}{|Q|}\).</p><p>It is the price of immediacy supplied by a risk-averse dealer, not a mechanical fee.</p><p>Competition drives it to minimum average cost, with \(d^* = |D|/Q^*\) dealers.</p><p>A–M: a risk-neutral monopolist whose bid and ask both fall with inventory around a preferred level. Stoll: a risk-averse, competitive dealer whose spread doesn't depend on inventory.</p></div>
+</div>
+</div>
+
+</div>

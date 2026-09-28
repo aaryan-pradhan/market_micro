@@ -2,6 +2,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Market Microstructure Index</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\(',right:'\\)',display:false}],throwOnError:false})"></script>
 <style>
 :root{
   --bg:#f6f7f9; --ink:#171b24; --muted:#5a6273; --rule:#d9dee6; --card:#ffffff;
@@ -40,62 +43,39 @@ a{color:var(--accent)}
 </style>
 <div class="wrap">
 <h1>Market Microstructure</h1>
-<p class="sub">Revision ledgers · 0 / 9 parts written. Grey headings = not written yet; they turn into links as pages land.</p>
+<p class="sub">BM51002 · IIT KGP · Autumn 2026. Grey headings = ledger not written yet.</p>
 <nav class="toc">
-<a href="#road">Roadmap &amp; sources</a>
-<a href="#structure">1 · Market structure</a>
-<a href="#liquidity">2 · Liquidity &amp; costs</a>
-<a href="#inventory">3 · Inventory models</a>
-<a href="#info">4 · Information models</a>
-<a href="#discovery">5 · Price discovery</a>
-<a href="#lob">6 · Order book dynamics</a>
-<a href="#impact">7 · Impact &amp; execution</a>
-<a href="#mm">8 · Market making</a>
-<a href="#hft">9 · HFT &amp; regulation</a>
+<a href="#midsem">Mid Term · 29 Sep</a>
+<a href="#papers">Past midsem papers</a>
+<a href="#inventory">Inventory models</a>
+<a href="#roll">Roll (1984)</a>
+<a href="#liquidity">Liquidity measures</a>
+<a href="#structure">Market structure</a>
+<a href="#volatility">Volatility</a>
 </nav>
 <input id="q" type="search" placeholder="Filter sections / topics…" aria-label="Filter">
-<h2 id="road">Roadmap &amp; sources</h2>
-<div class="idea"><p>Order: mechanics → cost of trading → why the spread exists (inventory, then information) → what prices reveal → the book as a process → trading against it (execution) → quoting into it (market making) → the modern venue landscape.</p><ol><li><b>Harris</b>, <i>Trading and Exchanges</i>: parts 1–2 (vocabulary, no maths).</li><li><b>O'Hara</b>, <i>Market Microstructure Theory</i>: parts 3–4.</li><li><b>Hasbrouck</b>, <i>Empirical Market Microstructure</i>: part 5.</li><li><b>Bouchaud, Bonart, Donier, Gould</b>, <i>Trades, Quotes and Prices</i>: parts 6–7.</li><li><b>Cartea, Jaimungal, Penalva</b>, <i>Algorithmic and High-Frequency Trading</i>: parts 7–8.</li></ol></div>
-<h2 id="structure">1 · Market structure</h2>
-<div class="sec"><span>1.1 · Participants</span><ul><li>Investors, brokers, dealers, market makers, HFTs</li><li>Informed vs uninformed (noise) traders</li></ul></div>
-<div class="sec"><span>1.2 · Order types</span><ul><li>Market, limit, stop, IOC, FOK, iceberg, pegged</li></ul></div>
-<div class="sec"><span>1.3 · Market designs</span><ul><li>Quote-driven (dealer) vs order-driven</li><li>Continuous auction vs call auction (open / close)</li></ul></div>
-<div class="sec"><span>1.4 · The limit order book</span><ul><li>Best bid / ask, depth, mid-price, microprice</li><li>Price-time priority, pro-rata matching</li><li>Tick size and queue position</li></ul></div>
-<h2 id="liquidity">2 · Liquidity &amp; transaction costs</h2>
-<div class="sec"><span>2.1 · Dimensions of liquidity</span><ul><li>Tightness, depth, resilience</li></ul></div>
-<div class="sec"><span>2.2 · Spread measures</span><ul><li>Quoted, effective, realized spread</li><li>Decomposition: realized spread + price impact</li></ul></div>
-<div class="sec"><span>2.3 · Cost of a large order</span><ul><li>Implementation shortfall</li><li>Amihud illiquidity, Kyle's lambda (preview)</li></ul></div>
-<h2 id="inventory">3 · Inventory models</h2>
-<div class="sec"><span>3.1 · Garman (1976)</span><ul><li>Order arrivals as Poisson flows, dealer ruin</li></ul></div>
-<div class="sec"><span>3.2 · Stoll (1978)</span><ul><li>Risk-averse dealer, spread as inventory compensation</li></ul></div>
-<div class="sec"><span>3.3 · Ho–Stoll (1981)</span><ul><li>Quotes skewed by inventory</li></ul></div>
-<h2 id="info">4 · Information models</h2>
-<div class="sec"><span>4.1 · Adverse selection</span><ul><li>Bagehot: the market maker loses to the informed</li></ul></div>
-<div class="sec"><span>4.2 · Glosten–Milgrom (1985)</span><ul><li>Bid / ask as conditional expectations</li><li>Bayesian updating after each trade</li></ul></div>
-<div class="sec"><span>4.3 · Kyle (1985)</span><ul><li>Insider, noise traders, market maker</li><li>Kyle's lambda, linear equilibrium</li></ul></div>
-<div class="sec"><span>4.4 · PIN</span><ul><li>Easley–Kiefer–O'Hara–Paperman</li><li>VPIN and order-flow toxicity</li></ul></div>
-<h2 id="discovery">5 · Price discovery</h2>
-<div class="sec"><span>5.1 · Roll model</span><ul><li>Spread from negative autocovariance of price changes</li></ul></div>
-<div class="sec"><span>5.2 · Efficient price vs noise</span><ul><li>Microstructure noise, bid–ask bounce</li><li>Signature plot, realized variance</li></ul></div>
-<div class="sec"><span>5.3 · Hasbrouck VAR</span><ul><li>Permanent price impact of trades</li><li>Information shares across venues</li></ul></div>
-<h2 id="lob">6 · Order book dynamics</h2>
-<div class="sec"><span>6.1 · Stylized facts</span><ul><li>Order-sign autocorrelation (long memory)</li><li>Intraday U-shape in volume and spread</li></ul></div>
-<div class="sec"><span>6.2 · Order flow imbalance</span><ul><li>Cont–Kukanov–Stoikov (2014)</li><li>Queue imbalance predicting the next mid move</li></ul></div>
-<div class="sec"><span>6.3 · Point processes</span><ul><li>Poisson order arrivals</li><li>Hawkes processes, self-excitation</li></ul></div>
-<div class="sec"><span>6.4 · Queue-reactive models</span><ul><li>Cont–Stoikov–Talreja; Huang–Lehalle–Rosenbaum</li></ul></div>
-<h2 id="impact">7 · Price impact &amp; optimal execution</h2>
-<div class="sec"><span>7.1 · Impact laws</span><ul><li>Square-root law</li><li>Temporary vs permanent impact</li></ul></div>
-<div class="sec"><span>7.2 · Propagator model</span><ul><li>Bouchaud et al., decaying impact kernel</li></ul></div>
-<div class="sec"><span>7.3 · Almgren–Chriss (2000)</span><ul><li>Mean–variance trade-off, efficient frontier</li><li>TWAP / VWAP as special cases</li></ul></div>
-<div class="sec"><span>7.4 · Obizhaeva–Wang</span><ul><li>Order-book resilience in execution</li></ul></div>
-<h2 id="mm">8 · Market making</h2>
-<div class="sec"><span>8.1 · Avellaneda–Stoikov (2008)</span><ul><li>Reservation price, optimal spread</li><li>HJB derivation</li></ul></div>
-<div class="sec"><span>8.2 · Guéant–Lehalle–Fernandez-Tapia (2013)</span><ul><li>Inventory limits, closed-form approximations</li></ul></div>
-<div class="sec"><span>8.3 · Adverse selection in quoting</span><ul><li>Markouts, alpha signals in quotes</li></ul></div>
-<h2 id="hft">9 · HFT, fragmentation &amp; regulation</h2>
-<div class="sec"><span>9.1 · Latency</span><ul><li>Latency arbitrage, co-location</li><li>Budish–Cramton–Shim: frequent batch auctions</li></ul></div>
-<div class="sec"><span>9.2 · Fragmentation</span><ul><li>Reg NMS, dark pools, smart order routing</li><li>Maker–taker fees</li></ul></div>
-<div class="sec"><span>9.3 · India</span><ul><li>NSE / BSE structure, SEBI algo rules, co-location</li></ul></div>
+<h2 id="midsem">Mid Term · Tue 29 Sep 2026 · 25%</h2>
+<div class="idea"><ol><li>Five theories under inventory-based models</li><li>Roll (1984)</li><li>Liquidity measures: Chordia, Roll &amp; Subrahmanyam (2000), Amihud (2002)</li></ol></div>
+<h2 id="papers">Past midsem papers</h2>
+<div class="sec"><a href="papers/midsem_2025.html">Midsem 2025 · 40 marks</a><ul><li><a href="papers/midsem_2025.html#q1">Q1 · Four dimensions of liquidity; monopolistic market maker</a></li><li><a href="papers/midsem_2025.html#q2">Q2 · Trader categories, competition, Madhavan (2000)</a></li><li><a href="papers/midsem_2025.html#q3">Q3 · Liquidity, transaction costs, transitory volatility</a></li><li><a href="papers/midsem_2025.html#q4">Q4 · Garman: bid for target profit, spread, inventory</a></li><li><a href="papers/midsem_2025.html#q5">Q5 · Amihud–Mendelson: transaction rate, zero-drift bid</a></li><li><a href="papers/midsem_2025.html#q6">Q6 · Stoll: spread components, competition, vs A–M</a></li></ul></div>
+<div class="sec"><a href="papers/midsem_2024.html">Midsem 2024 · 50 marks</a><ul><li><a href="papers/midsem_2024.html#q1">Q1 · Participants, buy vs sell side, liquidity, price discovery</a></li><li><a href="papers/midsem_2024.html#q2">Q2 · Liquidity and its dimensions</a></li><li><a href="papers/midsem_2024.html#q3">Q3 · Ho–Stoll: spread profit and inventory loss</a></li><li><a href="papers/midsem_2024.html#q4">Q4 · Garman: Poisson buys vs sells, binomial</a></li><li><a href="papers/midsem_2024.html#q5">Q5 · O'Hara–Oldfield: risk aversion, limit orders</a></li><li><a href="papers/midsem_2024.html#q6">Q6 · Volatility types, Roll estimator, limitations</a></li><li><a href="papers/midsem_2024.html#q7">Q7 · Market design and efficiency; Stoll dealers</a></li></ul></div>
+<h2 id="inventory">Inventory-based models</h2>
+<div class="sec"><span>1 · Garman (1976)</span><ul><li>Monopolist dealer, Poisson order arrivals</li><li>Gambler's ruin, failure probability</li><li>Profit-maximising bid / ask, linear order rates</li></ul></div>
+<div class="sec"><span>2 · Amihud &amp; Mendelson (1980)</span><ul><li>Inventory-dependent prices, birth–death process</li><li>Preferred inventory position</li></ul></div>
+<div class="sec"><span>3 · Stoll (1978)</span><ul><li>Risk-averse dealer, holding / order / information costs</li><li>Optimal scale, number of dealers</li></ul></div>
+<div class="sec"><span>4 · Ho &amp; Stoll (1981)</span><ul><li>Multi-period DP, Poisson flow + Brownian returns</li><li>Risk-neutral spread + risk adjustment</li></ul></div>
+<div class="sec"><span>5 · O'Hara &amp; Oldfield (1986)</span><ul><li>Limit + market orders, discrete time</li><li>Three-part spread decomposition</li></ul></div>
+<h2 id="roll">Roll (1984)</h2>
+<div class="sec"><a href="_template.html#roll">Roll's serial-covariance spread estimator</a><ul><li>Bid–ask bounce</li><li>\(s = 2\sqrt{-\text{Cov}(\Delta p_t, \Delta p_{t-1})}\)</li></ul></div>
+<h2 id="liquidity">Liquidity measures</h2>
+<div class="sec"><span>Chordia, Roll &amp; Subrahmanyam (2000)</span><ul><li>Commonality in liquidity</li><li>Market / industry regressions, inventory vs information</li></ul></div>
+<div class="sec"><span>Amihud (2002)</span><ul><li>ILLIQ = average |return| / dollar volume</li><li>Illiquidity premium, Fama–MacBeth</li></ul></div>
+<div class="sec"><span>Also in the deck</span><ul><li>Ince (2022) liquidity components</li><li>Stoll (2000) friction</li></ul></div>
+<h2 id="structure">Market structure (not in midsem)</h2>
+<div class="sec"><span>Introduction, exchanges, orders &amp; trades</span><ul><li>Larry Harris ch 1–6</li></ul></div>
+<div class="sec"><span>Biais, Glosten &amp; Spatt (2005) survey</span></div>
+<h2 id="volatility">Volatility (not in midsem, except Roll)</h2>
+<div class="sec"><span>Sources of volatility</span><ul><li>Fundamental vs transitory</li><li>Hasbrouck VAR (1993)</li><li>Almgren–Chriss (2000)</li></ul></div>
 </div>
 <script>
 q.oninput=()=>{const t=q.value.toLowerCase();document.querySelectorAll('.sec').forEach(s=>{let any=s.firstChild.textContent.toLowerCase().includes(t);s.querySelectorAll('li').forEach(l=>{const k=!t||any||l.textContent.toLowerCase().includes(t);l.hidden=!k;any||=k&&!!t});s.hidden=!any&&!!t})}

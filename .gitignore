@@ -1,0 +1,5 @@
+.DS_Store
+# course slides are the instructor's; group sheet has classmates' emails
+*.pdf
+*.xlsx
+course/Links.txt

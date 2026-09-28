@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TITLE Ledger</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false})"></script>
+<style>
+:root{
+  --bg:#f6f7f9; --ink:#171b24; --muted:#5a6273; --rule:#d9dee6; --card:#ffffff;
+  --accent:#2346a0; --gap:#8a4b00; --gapbg:#fdf1de; --idea:#eef2fb;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0f1218; --ink:#e4e7ee; --muted:#98a1b3; --rule:#283042; --card:#161a22;
+    --accent:#93abff; --gap:#f0b35a; --gapbg:#2a2010; --idea:#1a2033;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0f1218; --ink:#e4e7ee; --muted:#98a1b3; --rule:#283042; --card:#161a22;
+  --accent:#93abff; --gap:#f0b35a; --gapbg:#2a2010; --idea:#1a2033;
+}
+body{background:var(--bg);color:var(--ink);font:20px/1.75 "MesloLGS Nerd Font Propo","MesloLGS NF","MesloLGS Nerd Font",ui-monospace,monospace;padding-inline:16px;padding-block:24px 64px}
+.wrap{max-width:52rem;margin:0 auto}
+h1,h2,h3{font-family:"MesloLGS Nerd Font Propo","MesloLGS NF","MesloLGS Nerd Font",ui-monospace,monospace;font-weight:700;text-wrap:balance;line-height:1.2}
+h1{font-size:2.4rem;margin:0 0 .25rem}
+h2{font-size:1.7rem;margin:3rem 0 .75rem;padding-top:1rem;border-top:1px solid var(--rule)}
+h3{font-size:1.2rem;margin:0 0 .4rem}
+.sub{color:var(--muted);margin:0 0 1.25rem}
+.bar{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-bottom:1rem}
+button{font:inherit;font-size:.9rem;color:var(--accent);background:transparent;border:1px solid var(--rule);border-radius:6px;padding:.3rem .8rem;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+nav.toc{font-size:.92rem;columns:2 14rem;column-gap:2rem;margin:0 0 1rem;padding:0}
+nav.toc a{display:block;color:var(--muted);text-decoration:none;padding:.1rem 0;break-inside:avoid}
+nav.toc a:hover{color:var(--accent)}
+a{color:var(--accent)}
+.idea{background:var(--idea);border-radius:8px;padding:.8rem 1rem;margin:.5rem 0 1.25rem}
+.idea p,.idea ol,.idea ul{margin:.3rem 0}
+.prob{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem;margin:1rem 0}
+.prob > p{margin:.2rem 0 .6rem}
+.ans{font-weight:600}
+.sec{border-top:1px solid var(--rule);padding:.45rem 0}
+.sh{color:var(--accent);font-weight:600;font-size:.95rem;margin:0}
+.sec > *:not(.sh){margin-top:.5rem}
+ol.pf{padding-left:1.6rem;margin:.4rem 0}
+ol.pf li{margin:.2rem 0}
+.why{color:var(--muted);font-size:.85em;white-space:nowrap}
+.qed{float:right;color:var(--muted)}
+.claim{margin:.3rem 0}
+.gap{background:var(--gapbg);color:var(--gap);border-radius:6px;padding:.5rem .8rem;font-size:.92rem}
+table{border-collapse:collapse;font-size:.92rem}
+.tw{overflow-x:auto}
+td,th{border:1px solid var(--rule);padding:.25rem .6rem;text-align:center;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+<style>.katex{font-size:1.15em}.katex-display{overflow-x:auto;overflow-y:hidden;padding:.2rem 0}</style>
+<style>
+pre{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:.6rem .8rem;font-size:.85rem;overflow-x:auto}
+.fig{display:block;margin:.8rem auto;max-width:100%;height:auto;font-size:13px}
+.fig text{fill:var(--ink);font-family:inherit}
+.fig .m{fill:var(--muted)} .fig .a{fill:var(--accent)} .fig .g{fill:var(--gap)}
+.fig .ln{stroke:var(--ink);fill:none;stroke-width:1.5}
+.fig .mu{stroke:var(--muted);fill:none;stroke-width:1}
+.fig .ac{stroke:var(--accent);fill:none;stroke-width:2.5}
+.fig .rg{fill:var(--accent);fill-opacity:.22;stroke:var(--accent);stroke-width:1.5}
+.fig .bad{fill:var(--gap);fill-opacity:.28;stroke:var(--gap);stroke-width:1.5}
+.fig .nd{fill:var(--card);stroke:var(--ink);stroke-width:1.5}
+.fig .dot{fill:var(--ink)} .fig .adot{fill:var(--accent)}
+.fig .dsh{stroke-dasharray:5 4} .fig .gl{stroke:var(--gap);fill:none;stroke-width:2.5} .fig .ink{fill:var(--ink)} .fig .bg{fill:var(--bg);stroke:var(--rule)} .fig .thk{stroke-width:4.5;stroke-linecap:round} .fig .sol{fill:var(--ink);fill-opacity:.55;stroke:var(--ink);stroke-width:1}
+.pf li{margin:.55rem 0} .pf .r{display:block;margin-top:.15rem;font-size:.93em} .pf .r > b:first-child{color:var(--accent)} .setup{margin:.3rem 0 .5rem}
+.prob > p.stmt{margin:.35rem 0 .5rem}
+.ahp{fill:var(--ink)} .ahpa{fill:var(--accent)}
+</style>
+<style>.brute td{text-align:left}.brute td:first-child{color:var(--muted);white-space:nowrap}.brute tr.dies td:first-child{color:var(--gap)}.brute tr.therefore td:first-child{color:var(--accent)}</style>
+<div class="wrap">
+<h1>TITLE</h1>
+<p class="sub"><a href="../index.html">← Index</a> · BM51002 · N models · midsem 29 Sep 2026.</p>
+<nav class="toc">
+<a href="#roll">Roll (1984)</a>
+</nav>
+
+<!-- ============ ENTRY: copy this block per model / paper ============ -->
+<h2 id="roll">1 · Roll (1984): spread from price changes</h2>
+<div class="idea"><ol>
+<li><b>Bid–ask bounce.</b> A trade prints at the ask (a buy) or at the bid (a sell). So the traded price jumps between two levels even when the true value does not move.</li>
+<li><b>Serial covariance.</b> \(\text{Cov}(\Delta p_t, \Delta p_{t-1})\) = how much one price change moves with the previous one. Bounce makes it negative: an up-bounce is followed by a down-bounce.</li>
+</ol></div>
+<div class="prob"><h3>Roll's spread estimator</h3>
+<p class="stmt">Trades happen one after another. Only the traded prices \(p_t\) are observed, not the quotes.</p><p class="stmt"><b>Question:</b> recover the bid–ask spread \(s\) from the traded prices alone.</p>
+<div class="sec"><p class="sh">Key idea</p><p><b>The spread is hidden in the negative autocovariance.</b> Each trade adds \(\pm s/2\) to the true value; consecutive changes share one of those terms with opposite signs, so \(\text{Cov}(\Delta p_t,\Delta p_{t-1}) = -s^2/4\).</p></div>
+<div class="sec"><p class="sh">Previous model → why it falls short</p><div class="tw"><table class="brute">
+<tr><td>before</td><td>Quoted spread = ask − bid, read straight from the quotes.</td></tr>
+<tr><td>assumes</td><td>Quote data exists and trades happen at the quotes.</td></tr>
+<tr class="dies"><td>fails at</td><td>Old or thin markets with only closing / traded prices; trades inside the quotes.</td></tr>
+<tr class="therefore"><td>therefore</td><td>Estimate the <i>effective</i> spread from the trade price series alone.</td></tr>
+</table></div></div>
+<div class="sec"><p class="sh">Solution</p><p class="setup"><b>Setup.</b> \(m_t\) = true (efficient) value after trade \(t\). \(q_t = +1\) if trade \(t\) is a buy, \(-1\) if a sell. \(s\) = spread, constant. Assumptions: (A1) \(p_t = m_t + \tfrac{s}{2}q_t\). (A2) \(q_t = \pm1\) with probability \(\tfrac12\) each, independent over \(t\). (A3) \(\Delta m_t = m_t - m_{t-1}\) is independent over \(t\) and independent of every \(q\) (efficient market).</p>
+<p class="claim"><b>Claim.</b> \(\text{Cov}(\Delta p_t, \Delta p_{t-1}) = -\tfrac{s^2}{4}\), so \(s = 2\sqrt{-\text{Cov}(\Delta p_t, \Delta p_{t-1})}\).</p><ol class="pf">
+<li>\(\Delta p_t = \Delta m_t + \tfrac{s}{2}(q_t - q_{t-1})\).<span class="r"><b>Why:</b> subtract (A1) at \(t-1\) from (A1) at \(t\).</span></li>
+<li>\(\Delta p_{t-1} = \Delta m_{t-1} + \tfrac{s}{2}(q_{t-1} - q_{t-2})\).<span class="r"><b>Why:</b> step 1 with \(t\) replaced by \(t-1\).</span></li>
+<li>Expand the covariance term by term. Every term with a \(\Delta m\) is 0, so \(\text{Cov}(\Delta p_t,\Delta p_{t-1}) = \tfrac{s^2}{4}\,\text{Cov}(q_t - q_{t-1},\ q_{t-1} - q_{t-2})\).<span class="r"><b>Why:</b> by (A3), \(\Delta m_t\) and \(\Delta m_{t-1}\) are independent of each other and of all \(q\), and independent variables have covariance 0.</span></li>
+<li>\(\text{Cov}(q_t - q_{t-1},\ q_{t-1} - q_{t-2}) = \text{Cov}(q_t,q_{t-1}) - \text{Cov}(q_t,q_{t-2}) - \text{Var}(q_{t-1}) + \text{Cov}(q_{t-1},q_{t-2}) = 0 - 0 - \text{Var}(q_{t-1}) + 0\).<span class="r"><b>Why:</b> covariance is bilinear; by (A2), different \(q\)'s are independent, so their covariance is 0.</span></li>
+<li>\(\text{Var}(q_{t-1}) = \mathbb{E}[q^2] - (\mathbb{E}[q])^2 = 1 - 0 = 1\).<span class="r"><b>Why:</b> \(q^2 = 1\) always; \(\mathbb{E}[q] = \tfrac12(+1) + \tfrac12(-1) = 0\) by (A2).</span></li>
+<li>So \(\text{Cov}(\Delta p_t,\Delta p_{t-1}) = \tfrac{s^2}{4}\cdot(-1) = -\tfrac{s^2}{4}\), and solving for \(s\): <span class="ans">\(s = 2\sqrt{-\text{Cov}(\Delta p_t,\Delta p_{t-1})}\)</span>.<span class="r"><b>Why:</b> steps 3–5; \(s &gt; 0\), so take the positive root.</span></li>
+</ol><p><b>Conclusion.</b> The effective spread is twice the square root of minus the first-order serial covariance of price changes. ∎</p></div>
+<div class="sec"><p class="sh">Exam</p><p><b>Gotcha:</b> in real samples the covariance is often <i>positive</i>, and then \(\sqrt{\cdot}\) of a negative number is undefined. It happens when (A2)/(A3) fail: trades cluster (buys follow buys) or quotes move with order flow.</p><p><b>Recognize:</b> "estimate the spread with no quote data" / "implicit spread" / "bid–ask bounce" → Roll: \(s = 2\sqrt{-\text{Cov}}\).</p></div>
+<!-- <p class="gap">⚠ Slide gap: only when the slide's argument is incomplete or wrong.</p> -->
+</div>
+<!-- ========================= END ENTRY ========================= -->
+</div>
