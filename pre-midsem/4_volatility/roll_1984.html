@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Roll 1984 Ledger</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false})"></script>
+<style>
+:root{
+  --bg:#f6f7f9; --ink:#171b24; --muted:#5a6273; --rule:#d9dee6; --card:#ffffff;
+  --accent:#2346a0; --gap:#8a4b00; --gapbg:#fdf1de; --idea:#eef2fb;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0f1218; --ink:#e4e7ee; --muted:#98a1b3; --rule:#283042; --card:#161a22;
+    --accent:#93abff; --gap:#f0b35a; --gapbg:#2a2010; --idea:#1a2033;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0f1218; --ink:#e4e7ee; --muted:#98a1b3; --rule:#283042; --card:#161a22;
+  --accent:#93abff; --gap:#f0b35a; --gapbg:#2a2010; --idea:#1a2033;
+}
+body{background:var(--bg);color:var(--ink);font:20px/1.75 "MesloLGS Nerd Font Propo","MesloLGS NF","MesloLGS Nerd Font",ui-monospace,monospace;padding-inline:16px;padding-block:24px 64px}
+.wrap{max-width:52rem;margin:0 auto}
+h1,h2,h3{font-family:"MesloLGS Nerd Font Propo","MesloLGS NF","MesloLGS Nerd Font",ui-monospace,monospace;font-weight:700;text-wrap:balance;line-height:1.2}
+h1{font-size:2.4rem;margin:0 0 .25rem}
+h2{font-size:1.7rem;margin:3rem 0 .75rem;padding-top:1rem;border-top:1px solid var(--rule)}
+h3{font-size:1.2rem;margin:0 0 .4rem}
+.sub{color:var(--muted);margin:0 0 1.25rem}
+.bar{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-bottom:1rem}
+button{font:inherit;font-size:.9rem;color:var(--accent);background:transparent;border:1px solid var(--rule);border-radius:6px;padding:.3rem .8rem;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+nav.toc{font-size:.92rem;columns:2 14rem;column-gap:2rem;margin:0 0 1rem;padding:0}
+nav.toc a{display:block;color:var(--muted);text-decoration:none;padding:.1rem 0;break-inside:avoid}
+nav.toc a:hover{color:var(--accent)}
+a{color:var(--accent)}
+.idea{background:var(--idea);border-radius:8px;padding:.8rem 1rem;margin:.5rem 0 1.25rem}
+.idea p,.idea ol,.idea ul{margin:.3rem 0}
+.prob{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem;margin:1rem 0}
+.prob > p{margin:.2rem 0 .6rem}
+.ans{font-weight:600}
+.sec{border-top:1px solid var(--rule);padding:.45rem 0}
+.sh{color:var(--accent);font-weight:600;font-size:.95rem;margin:0}
+.sec > *:not(.sh){margin-top:.5rem}
+ol.pf{padding-left:1.6rem;margin:.4rem 0}
+ol.pf li{margin:.2rem 0}
+.why{color:var(--muted);font-size:.85em;white-space:nowrap}
+.qed{float:right;color:var(--muted)}
+.claim{margin:.3rem 0}
+.gap{background:var(--gapbg);color:var(--gap);border-radius:6px;padding:.5rem .8rem;font-size:.92rem}
+table{border-collapse:collapse;font-size:.92rem}
+.tw{overflow-x:auto}
+td,th{border:1px solid var(--rule);padding:.25rem .6rem;text-align:center;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+@media print{body{font-size:11pt;padding:0;background:#fff}nav.toc,#q{display:none}h2{break-before:page;margin-top:0}h1+p+nav+h2,h1+p+h2{break-before:auto}.idea,.gap,tr,li{break-inside:avoid}a{color:inherit;text-decoration:none}}
+</style>
+<style>.katex{font-size:1.15em}.katex-display{overflow-x:auto;overflow-y:hidden;padding:.2rem 0}</style>
+<style>
+pre{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:.6rem .8rem;font-size:.85rem;overflow-x:auto}
+.fig{display:block;margin:.8rem auto;max-width:100%;height:auto;font-size:13px}
+.fig text{fill:var(--ink);font-family:inherit}
+.fig .m{fill:var(--muted)} .fig .a{fill:var(--accent)} .fig .g{fill:var(--gap)}
+.fig .ln{stroke:var(--ink);fill:none;stroke-width:1.5}
+.fig .mu{stroke:var(--muted);fill:none;stroke-width:1}
+.fig .ac{stroke:var(--accent);fill:none;stroke-width:2.5}
+.fig .rg{fill:var(--accent);fill-opacity:.22;stroke:var(--accent);stroke-width:1.5}
+.fig .bad{fill:var(--gap);fill-opacity:.28;stroke:var(--gap);stroke-width:1.5}
+.fig .nd{fill:var(--card);stroke:var(--ink);stroke-width:1.5}
+.fig .dot{fill:var(--ink)} .fig .adot{fill:var(--accent)}
+.fig .dsh{stroke-dasharray:5 4} .fig .gl{stroke:var(--gap);fill:none;stroke-width:2.5} .fig .ink{fill:var(--ink)} .fig .bg{fill:var(--bg);stroke:var(--rule)} .fig .thk{stroke-width:4.5;stroke-linecap:round} .fig .sol{fill:var(--ink);fill-opacity:.55;stroke:var(--ink);stroke-width:1}
+.pf li{margin:.55rem 0} .pf .r{display:block;margin-top:.15rem;font-size:.93em} .pf .r > b:first-child{color:var(--accent)} .setup{margin:.3rem 0 .5rem}
+.prob > p.stmt{margin:.35rem 0 .5rem}
+.ahp{fill:var(--ink)} .ahpa{fill:var(--accent)}
+</style>
+<style>.brute td{text-align:left}.brute td:first-child{color:var(--muted);white-space:nowrap}.brute tr.dies td:first-child{color:var(--gap)}.brute tr.therefore td:first-child{color:var(--accent)}</style>
+<div class="wrap">
+<h1>Roll (1984)</h1>
+<p class="sub"><a href="../index.html">← Index</a> · BM51002 · 1 paper · midsem 29 Sep 2026. Source: <code>2.1 Sources of Volatility.pdf</code> slides 8–15 (PDF pages). Paper: Roll, R. (1984), "A simple implicit measure of the effective bid–ask spread in an efficient market", <i>Journal of Finance</i> 39(4), 1127–1139.</p>
+<nav class="toc">
+<a href="#basics">0 · Words used on this page</a>
+<a href="#roll">1 · Roll's serial-covariance spread estimator</a>
+</nav>
+
+<h2 id="basics">0 · Words used on this page</h2>
+<div class="idea"><ol>
+<li><b>Quote vs trade.</b> A <i>quote</i> is a price offered for trading: the <b>bid</b> (the highest price someone will pay) and the <b>ask</b> (the lowest price someone will sell at). A <i>trade</i> (transaction) happens at some price \(P_t\), where \(t = 1, 2, 3, \dots\) numbers the trades in order.</li>
+<li><b>Spread</b> \(S\) = ask − bid. <b>Mid</b> = (bid + ask)/2. Example: bid 49.90, ask 50.10 → \(S = 0.20\), mid 50.00.</li>
+<li><b>Buyer- and seller-initiated trades.</b> An impatient buyer takes the ask, so the trade prints at the ask. An impatient seller hits the bid, so it prints at the bid. \(Q_t = +1\) if trade \(t\) is a buy and \(-1\) if it is a sell (slide 13).</li>
+<li><b>Quoted vs effective spread.</b> The <i>quoted</i> spread is ask − bid as posted. The <i>effective</i> spread is what traders actually pay: twice the distance between the trade price and the true value. They differ when trades happen inside the quotes.</li>
+<li><b>Fundamental value</b> \(V_t\): what the stock is really worth at trade \(t\). The <b>value innovation</b> \(\varepsilon_t = V_t - V_{t-1}\) is the change in value caused by news.</li>
+<li><b>Random walk.</b> \(V_t = V_{t-1} + \varepsilon_t\) with the \(\varepsilon_t\) independent over time, mean 0, variance \(\sigma^2\). Past changes tell you nothing about the next one.</li>
+<li><b>Efficient market.</b> Prices (here, the values \(V_t\)) already reflect all information, so value changes cannot be predicted: exactly the random-walk property.</li>
+<li><b>Expected value, variance, covariance.</b> \(E[X]\) = probability-weighted average. \(\text{Var}(X) = E[(X - EX)^2]\). \(\text{Cov}(X,Y) = E[(X - EX)(Y - EY)]\). If \(EX = EY = 0\), these simplify to \(\text{Var}(X) = E[X^2]\) and \(\text{Cov}(X,Y) = E[XY]\). Independent quantities have covariance 0. Covariance is <i>bilinear</i>: \(\text{Cov}(X_1 + X_2, Y) = \text{Cov}(X_1,Y) + \text{Cov}(X_2,Y)\), and constants factor out.</li>
+<li><b>Serial covariance</b> (first-order autocovariance) of price changes: \(\text{Cov}(\Delta P_t, \Delta P_{t-1})\), the covariance of each price change with the one before it. Negative means a rise tends to be followed by a fall.</li>
+<li><b>Sample serial covariance</b> from \(m\) pairs of consecutive changes \((x_i, y_i) = (\Delta P_t, \Delta P_{t-1})\): \(\widehat{\text{Cov}} = \frac1m\sum_i (x_i - \bar x)(y_i - \bar y)\), where \(\bar x, \bar y\) are the sample means.</li>
+<li><b>Bid–ask bounce</b> (slide 8): trade prices jump between bid and ask as buys and sells alternate, even when the value does not move.</li>
+<li><b>Fundamental vs transitory volatility</b> (slides 3–11). <i>Fundamental</i> volatility comes from news about value: it is permanent and does not revert. <i>Transitory</i> volatility comes from trading by uninformed, impatient traders (bounce, order imbalances): prices revert. Total = fundamental + transitory. Reversion makes consecutive price changes negatively correlated, so "negative serial correlation is a strong indicator of transitory volatility" (slide 11).</li>
+</ol></div>
+
+<h2 id="roll">1 · Roll (1984): the spread hidden in price changes</h2>
+<div class="prob"><h3>Roll's serial covariance spread estimator</h3>
+<p class="stmt">Only the sequence of trade prices \(P_1, P_2, \dots\) is observed: no quotes, and no record of which trades were buys. Each price equals the fundamental value plus or minus half the spread, depending on whether the trade was a buy or a sell.</p>
+<p class="stmt"><b>Question:</b> Estimate the effective spread \(S\) from trade prices alone, and split price-change variance into its fundamental and transitory parts.</p>
+<div class="sec"><p class="sh">Key idea</p><p><b>The spread leaves a fingerprint: a negative covariance between consecutive price changes.</b> Each trade price is value \(\pm S/2\). Two consecutive price changes share the middle trade's \(\pm S/2\) term, once with a plus sign and once with a minus sign. That shared term makes their covariance exactly \(-S^2/4\), while news (a random walk) adds nothing to it.</p></div>
+<div class="sec"><p class="sh">Previous model → why it falls short</p><div class="tw"><table class="brute">
+<tr><td>before</td><td>Read the quoted spread (ask − bid) straight from the quote record.</td></tr>
+<tr><td>assumes</td><td>Quote data exists, and trades happen at the posted quotes.</td></tr>
+<tr class="dies"><td>fails at</td><td>Old or thin markets with only closing or trade prices (e.g. daily CRSP returns); trades executed inside the quotes, so the quoted spread overstates the real cost.</td></tr>
+<tr class="therefore"><td>therefore</td><td>Infer the <i>effective</i> spread from the trade-price series alone, using its serial covariance.</td></tr>
+</table></div></div>
+<div class="sec"><p class="sh">Solution</p><p class="setup"><b>Setup</b> (slide 13). \(P_t\) = price of trade \(t\); \(S\) = spread, constant; \(V_t\) = fundamental value at trade \(t\); \(\varepsilon_t = V_t - V_{t-1}\); \(Q_t = \pm1\) for a buy or a sell. Assumptions: (A1) \(P_t = V_t + \tfrac12SQ_t\) (slide 14). (A2) \(V\) is a random walk: the \(\varepsilon_t\) are independent over time with mean 0 and variance \(\sigma^2\). (A3) \(P(Q_t = +1) = \tfrac12\). (A4) \(Q_t\) is independent of all earlier \(Q\)'s. (A5) \(Q_t\) is independent of \(\varepsilon_t\) and \(\varepsilon_{t+1}\) (and of all other \(\varepsilon\)'s).</p>
+<p class="claim"><b>Claim.</b> \(\text{Var}(\Delta P_t) = \sigma^2 + \tfrac12S^2\) and \(\text{Cov}(\Delta P_t, \Delta P_{t-1}) = -\tfrac14S^2\), so \(S = 2\sqrt{-\text{Cov}(\Delta P_t,\Delta P_{t-1})}\).</p>
+<p><b>Part A: facts about \(Q\).</b></p><ol class="pf">
+<li>\(E[Q_t] = \tfrac12(+1) + \tfrac12(-1) = 0\).<span class="r"><b>Why:</b> A3.</span></li>
+<li>\(Q_t^2 = 1\) always, so \(E[Q_t^2] = 1\).<span class="r"><b>Why:</b> \((+1)^2 = (-1)^2 = 1\).</span></li>
+<li>For \(s \ne t\): \(E[Q_tQ_s] = E[Q_t]E[Q_s] = 0\).<span class="r"><b>Why:</b> A4 (independence lets the expectation split), then step 1.</span></li>
+</ol>
+<p><b>Part B: the price change.</b></p><ol class="pf" start="4">
+<li>\(\Delta P_t = P_t - P_{t-1} = (V_t - V_{t-1}) + \tfrac12S(Q_t - Q_{t-1}) = \varepsilon_t + \tfrac12S\,\Delta Q_t\), where \(\Delta Q_t = Q_t - Q_{t-1}\).<span class="r"><b>Why:</b> subtract A1 at \(t-1\) from A1 at \(t\) (slide 14).</span></li>
+<li>\(\Delta Q_t\) takes the values \(-2, 0, +2\) with probabilities \(\tfrac14, \tfrac12, \tfrac14\). So the bounce alone moves the price by \(-S\), 0 or \(+S\).<span class="r"><b>Why:</b> the four equally likely pairs \((Q_{t-1}, Q_t)\) (A3, A4): \((+,+)\) and \((-,-)\) give 0; \((+,-)\) gives −2; \((-,+)\) gives +2.</span></li>
+<li>\(E[\Delta P_t] = E[\varepsilon_t] + \tfrac12S(E[Q_t] - E[Q_{t-1}]) = 0\).<span class="r"><b>Why:</b> A2 and step 1. So variance and covariance of \(\Delta P\) are plain expectations of squares and products (primer 8).</span></li>
+</ol>
+<p><b>Part C: variance (slide 14).</b></p><ol class="pf" start="7">
+<li>\(\text{Var}(\Delta P_t) = E[(\varepsilon_t + \tfrac12S\Delta Q_t)^2] = E[\varepsilon_t^2] + 2\cdot\tfrac12S\,E[\varepsilon_t\Delta Q_t] + \tfrac14S^2E[(\Delta Q_t)^2]\).<span class="r"><b>Why:</b> step 6, then expand \((x+y)^2 = x^2 + 2xy + y^2\).</span></li>
+<li>\(E[\varepsilon_t^2] = \sigma^2\) and \(E[\varepsilon_t\Delta Q_t] = E[\varepsilon_t]\,E[\Delta Q_t] = 0\).<span class="r"><b>Why:</b> A2 (mean 0, so \(E\varepsilon^2 = \sigma^2\)); A5 (independence splits the expectation).</span></li>
+<li>\(E[(\Delta Q_t)^2] = E[Q_t^2] - 2E[Q_tQ_{t-1}] + E[Q_{t-1}^2] = 1 - 0 + 1 = 2\).<span class="r"><b>Why:</b> expand the square; steps 2 and 3.</span></li>
+<li><span class="ans">\(\text{Var}(\Delta P_t) = \sigma^2 + \tfrac14S^2\cdot 2 = \sigma^2 + \tfrac12S^2\)</span>. The first term is fundamental volatility, the second transitory volatility.<span class="r"><b>Why:</b> steps 7–9; \(\sigma^2\) comes from news, \(\tfrac12S^2\) only from the spread (primer 12).</span></li>
+</ol>
+<p><b>Part D: serial covariance (slide 15).</b></p><ol class="pf" start="11">
+<li>\(\text{Cov}(\Delta P_t, \Delta P_{t-1}) = E\big[(\varepsilon_t + \tfrac12S\Delta Q_t)(\varepsilon_{t-1} + \tfrac12S\Delta Q_{t-1})\big]\) \(= E[\varepsilon_t\varepsilon_{t-1}] + \tfrac12S\,E[\varepsilon_t\Delta Q_{t-1}] + \tfrac12S\,E[\varepsilon_{t-1}\Delta Q_t] + \tfrac14S^2E[\Delta Q_t\Delta Q_{t-1}]\).<span class="r"><b>Why:</b> step 6 (both means are 0); multiply out the four products.</span></li>
+<li>The first three terms are 0.<span class="r"><b>Why:</b> \(\varepsilon_t\) and \(\varepsilon_{t-1}\) are independent with mean 0 (A2); every \(\varepsilon\) is independent of every \(Q\) with mean 0 (A5).</span></li>
+<li>\(E[\Delta Q_t\Delta Q_{t-1}] = E[(Q_t - Q_{t-1})(Q_{t-1} - Q_{t-2})] = E[Q_tQ_{t-1}] - E[Q_tQ_{t-2}] - E[Q_{t-1}^2] + E[Q_{t-1}Q_{t-2}] = 0 - 0 - 1 + 0 = -1\).<span class="r"><b>Why:</b> multiply out; step 3 for products of different \(Q\)'s, step 2 for \(Q_{t-1}^2\). Only the shared middle trade \(Q_{t-1}\) survives, and it enters once with each sign.</span></li>
+<li><span class="ans">\(\text{Cov}(\Delta P_t, \Delta P_{t-1}) = \tfrac14S^2\cdot(-1) = -\tfrac14S^2\)</span>.<span class="r"><b>Why:</b> steps 11–13.</span></li>
+</ol>
+<p><b>Part E: the estimator and the volatility split.</b></p><ol class="pf" start="15">
+<li>Solve step 14 for \(S\): \(S^2 = -4\,\text{Cov}\), and <span class="ans">\(S = 2\sqrt{-\text{Cov}(\Delta P_t, \Delta P_{t-1})}\)</span>.<span class="r"><b>Why:</b> \(S &gt; 0\), so take the positive root. This needs \(\text{Cov} &lt; 0\).</span></li>
+<li>Roll's estimator replaces the true covariance with the sample serial covariance: \(\hat S = 2\sqrt{-\widehat{\text{Cov}}(\Delta P_t, \Delta P_{t-1})}\).<span class="r"><b>Why:</b> slide 15; the sample covariance (primer 10) estimates the true one.</span></li>
+<li>Fundamental variance: \(\hat\sigma^2 = \widehat{\text{Var}}(\Delta P) - \tfrac12\hat S^2 = \widehat{\text{Var}}(\Delta P) + 2\,\widehat{\text{Cov}}\).<span class="r"><b>Why:</b> step 10 solved for \(\sigma^2\); \(\tfrac12S^2 = \tfrac12\cdot(-4\,\text{Cov}) = -2\,\text{Cov}\).</span></li>
+</ol><p><b>Conclusion.</b> In an efficient market with random, independent buys and sells, the effective spread is twice the square root of minus the first-order serial covariance of price changes. The same covariance splits total volatility into a fundamental part \(\sigma^2\) and a transitory part \(\tfrac12S^2\). ∎</p></div>
+<div class="sec"><p class="sh">Numerical example</p>
+<p><b>(1) Why the average of \(\Delta Q_t\Delta Q_{t-1}\) is −1.</b> List all 8 equally likely triples \((Q_{t-2}, Q_{t-1}, Q_t)\):</p>
+<div class="tw"><table>
+<tr><th>\(Q_{t-2}\)</th><th>\(Q_{t-1}\)</th><th>\(Q_t\)</th><th>\(\Delta Q_{t-1}\)</th><th>\(\Delta Q_t\)</th><th>product</th></tr>
+<tr><td>+1</td><td>+1</td><td>+1</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>+1</td><td>+1</td><td>−1</td><td>0</td><td>−2</td><td>0</td></tr>
+<tr><td>+1</td><td>−1</td><td>+1</td><td>−2</td><td>+2</td><td>−4</td></tr>
+<tr><td>+1</td><td>−1</td><td>−1</td><td>−2</td><td>0</td><td>0</td></tr>
+<tr><td>−1</td><td>+1</td><td>+1</td><td>+2</td><td>0</td><td>0</td></tr>
+<tr><td>−1</td><td>+1</td><td>−1</td><td>+2</td><td>−2</td><td>−4</td></tr>
+<tr><td>−1</td><td>−1</td><td>+1</td><td>0</td><td>+2</td><td>0</td></tr>
+<tr><td>−1</td><td>−1</td><td>−1</td><td>0</td><td>0</td><td>0</td></tr>
+</table></div>
+<p>Average \(= (-4 - 4)/8 = -1\), as in step 13. Only the two "zig-zag" paths (buy-sell-buy, sell-buy-sell) contribute, and both are reversals. That is bid–ask bounce.</p>
+<p><b>(2) A ten-trade sample.</b> The value is constant at 50.00 (\(\sigma^2 = 0\)) and the true spread is \(S = 0.20\), so buys print at 50.10 and sells at 49.90. The trades are B S S B S B B B B S.</p>
+<svg class="fig" viewBox="-30 0 630 170" role="img" aria-label="Ten trade prices bouncing between 50.10 and 49.90 around a constant value of 50.00">
+<line class="mu dsh" x1="40" y1="85" x2="515" y2="85"/><text class="m" x="524" y="89">V = 50.00</text>
+<line class="mu" x1="40" y1="35" x2="515" y2="35"/><line class="mu" x1="40" y1="135" x2="515" y2="135"/>
+<text class="m" x="36" y="39" text-anchor="end">50.10</text><text class="m" x="36" y="139" text-anchor="end">49.90</text>
+<polyline class="ac" points="60,35 110,135 160,135 210,35 260,135 310,35 360,35 410,35 460,35 510,135"/>
+<g class="adot"><circle cx="60" cy="35" r="4"/><circle cx="110" cy="135" r="4"/><circle cx="160" cy="135" r="4"/><circle cx="210" cy="35" r="4"/><circle cx="260" cy="135" r="4"/><circle cx="310" cy="35" r="4"/><circle cx="360" cy="35" r="4"/><circle cx="410" cy="35" r="4"/><circle cx="460" cy="35" r="4"/><circle cx="510" cy="135" r="4"/></g>
+<g class="m"><text x="60" y="160" text-anchor="middle">B</text><text x="110" y="160" text-anchor="middle">S</text><text x="160" y="160" text-anchor="middle">S</text><text x="210" y="160" text-anchor="middle">B</text><text x="260" y="160" text-anchor="middle">S</text><text x="310" y="160" text-anchor="middle">B</text><text x="360" y="160" text-anchor="middle">B</text><text x="410" y="160" text-anchor="middle">B</text><text x="460" y="160" text-anchor="middle">B</text><text x="510" y="160" text-anchor="middle">S</text></g>
+</svg>
+<ol class="pf">
+<li>Prices: 50.10, 49.90, 49.90, 50.10, 49.90, 50.10, 50.10, 50.10, 50.10, 49.90.<span class="r"><b>Why:</b> A1 with \(V = 50\), \(S/2 = 0.10\).</span></li>
+<li>Nine changes \(\Delta P\): −0.2, 0, +0.2, −0.2, +0.2, 0, 0, 0, −0.2.<span class="r"><b>Why:</b> step 4; each is \(\pm S\) or 0 (step 5).</span></li>
+<li>Eight pairs (\(x = \Delta P_t\), \(y = \Delta P_{t-1}\)): (0, −0.2), (+0.2, 0), (−0.2, +0.2), (+0.2, −0.2), (0, +0.2), (0, 0), (0, 0), (−0.2, 0). Means: \(\bar x = 0\), \(\bar y = 0\).<span class="r"><b>Why:</b> the \(x\)'s sum to 0 and so do the \(y\)'s.</span></li>
+<li>Products \(xy\): 0, 0, −0.04, −0.04, 0, 0, 0, 0. \(\widehat{\text{Cov}} = -0.08/8 = -0.01\).<span class="r"><b>Why:</b> primer 10 with zero means.</span></li>
+<li>\(\hat S = 2\sqrt{0.01} = 2 \times 0.1 = 0.20\), the true spread.<span class="r"><b>Why:</b> step 16.</span></li>
+</ol>
+<p><b>(3) A large simulation</b> (200,000 trades, \(S = 0.10\), \(\sigma = 0.02\)): \(\widehat{\text{Cov}} = -0.002494\) against \(-S^2/4 = -0.0025\), \(\hat S = 0.0999\); \(\widehat{\text{Var}}(\Delta P) = 0.005407\) against \(\sigma^2 + S^2/2 = 0.0054\). If instead each trade repeats the previous direction with probability 0.8 (A4 broken), the same prices give \(\hat S = 0.040\): the estimator badly <i>understates</i> the spread.</p>
+<p><b>(4) Volatility split.</b> Suppose daily data give \(\widehat{\text{Var}}(\Delta P) = 0.0300\) and \(\widehat{\text{Cov}} = -0.0025\). Then \(\hat S = 2\sqrt{0.0025} = 0.10\), transitory variance \(= \tfrac12(0.10)^2 = 0.0050\), and fundamental variance \(= 0.0300 - 0.0050 = 0.0250\). So one-sixth of the variance is bounce.</p></div>
+<div class="sec"><p class="sh">Exam</p><p><b>Gotcha:</b> in real samples \(\widehat{\text{Cov}}\) is often <i>positive</i>, and then \(\sqrt{-\widehat{\text{Cov}}}\) is undefined. Hasbrouck (2002) finds positive autocovariances for about half the stocks (Biais–Glosten–Spatt slides). Causes: small-sample noise; value changes that are not a random walk (A2 fails); quotes that move in the direction of trades because trades carry information. Clustered order flow (buys following buys, A4 fails) makes the estimate too small (simulation 3).</p>
+<p><b>Limitations to list:</b> spread assumed constant; trades assumed at the quotes (\(\pm S/2\)); buys and sells assumed equally likely and independent; no information in trades (no adverse selection), so it measures the order-processing, transitory part of the spread (Biais–Glosten–Spatt: "order-handling costs (Roll, 1984)"); needs an efficient market.</p>
+<p><b>Recognize:</b> "estimate the spread without quote data", "implicit / effective spread", "bid–ask bounce", "negative serial covariance of price changes", "transitory vs fundamental volatility" → Roll: \(S = 2\sqrt{-\text{Cov}}\), \(\text{Var} = \sigma^2 + S^2/2\).</p>
+<p><b>Findings</b> (paper abstract and the slides):</p><ul>
+<li>In an efficient market, the effective spread can be measured from the first-order serial covariance of price changes alone; no quote data is needed.</li>
+<li>Roll computes the measure from daily and weekly returns of NYSE and AMEX stocks (1963–1982); the estimated spread is closely related to firm size (smaller firms have larger spreads).</li>
+<li>Price-change variance = fundamental \(\sigma^2\) + transitory \(\tfrac12S^2\); negative serial covariance signals transitory volatility (slide 11).</li>
+<li>Later work: Schultz (2000) applies Roll's method intraday; Hasbrouck (2004) estimates the Roll model with a Bayesian Gibbs sampler (Biais–Glosten–Spatt slide 7).</li>
+</ul><p>Past paper: <a href="../papers/midsem_2024.html#q6">Midsem 2024 Q6</a>.</p></div>
+<p class="gap">⚠ Slide gap. Slides 14–15 write \(\text{Var}(\Delta P_t) = E(\cdot)^2\) and \(\text{SCov} = E(\cdot)(\cdot)\) without subtracting means. That is correct only because \(E[\Delta P_t] = 0\) in this model (step 6); with a drift in \(V\) you must subtract the means, as the sample formula does.</p>
+</div>
+</div>

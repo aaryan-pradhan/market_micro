@@ -1,0 +1,3154 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Slides Explained</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false})"></script>
+<style>
+:root{
+  --bg:#f6f7f9; --ink:#171b24; --muted:#5a6273; --rule:#d9dee6; --card:#ffffff;
+  --accent:#2346a0; --gap:#8a4b00; --gapbg:#fdf1de; --idea:#eef2fb;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0f1218; --ink:#e4e7ee; --muted:#98a1b3; --rule:#283042; --card:#161a22;
+    --accent:#93abff; --gap:#f0b35a; --gapbg:#2a2010; --idea:#1a2033;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0f1218; --ink:#e4e7ee; --muted:#98a1b3; --rule:#283042; --card:#161a22;
+  --accent:#93abff; --gap:#f0b35a; --gapbg:#2a2010; --idea:#1a2033;
+}
+body{background:var(--bg);color:var(--ink);font:20px/1.75 "MesloLGS Nerd Font Propo","MesloLGS NF","MesloLGS Nerd Font",ui-monospace,monospace;padding-inline:16px;padding-block:24px 64px}
+.wrap{max-width:52rem;margin:0 auto}
+h1,h2,h3{font-family:"MesloLGS Nerd Font Propo","MesloLGS NF","MesloLGS Nerd Font",ui-monospace,monospace;font-weight:700;text-wrap:balance;line-height:1.2}
+h1{font-size:2.4rem;margin:0 0 .25rem}
+h2{font-size:1.7rem;margin:3rem 0 .75rem;padding-top:1rem;border-top:1px solid var(--rule)}
+h3{font-size:1.2rem;margin:0 0 .4rem}
+.sub{color:var(--muted);margin:0 0 1.25rem}
+.bar{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-bottom:1rem}
+button{font:inherit;font-size:.9rem;color:var(--accent);background:transparent;border:1px solid var(--rule);border-radius:6px;padding:.3rem .8rem;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+nav.toc{font-size:.92rem;columns:2 14rem;column-gap:2rem;margin:0 0 1rem;padding:0}
+nav.toc a{display:block;color:var(--muted);text-decoration:none;padding:.1rem 0;break-inside:avoid}
+nav.toc a:hover{color:var(--accent)}
+a{color:var(--accent)}
+.idea{background:var(--idea);border-radius:8px;padding:.8rem 1rem;margin:.5rem 0 1.25rem}
+.idea p,.idea ol,.idea ul{margin:.3rem 0}
+.prob{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem;margin:1rem 0}
+.prob > p{margin:.2rem 0 .6rem}
+.ans{font-weight:600}
+.sec{border-top:1px solid var(--rule);padding:.45rem 0}
+.sh{color:var(--accent);font-weight:600;font-size:.95rem;margin:0}
+.sec > *:not(.sh){margin-top:.5rem}
+ol.pf{padding-left:1.6rem;margin:.4rem 0}
+ol.pf li{margin:.2rem 0}
+.why{color:var(--muted);font-size:.85em;white-space:nowrap}
+.qed{float:right;color:var(--muted)}
+.claim{margin:.3rem 0}
+.gap{background:var(--gapbg);color:var(--gap);border-radius:6px;padding:.5rem .8rem;font-size:.92rem}
+table{border-collapse:collapse;font-size:.92rem}
+.tw{overflow-x:auto}
+td,th{border:1px solid var(--rule);padding:.25rem .6rem;text-align:center;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+@media print{body{font-size:11pt;padding:0;background:#fff}nav.toc,#q{display:none}h2{break-before:page;margin-top:0}h1+p+nav+h2,h1+p+h2{break-before:auto}.idea,.gap,tr,li{break-inside:avoid}a{color:inherit;text-decoration:none}}
+</style>
+<style>.katex{font-size:1.15em}.katex-display{overflow-x:auto;overflow-y:hidden;padding:.2rem 0}</style>
+<style>
+pre{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:.6rem .8rem;font-size:.85rem;overflow-x:auto}
+.fig{display:block;margin:.8rem auto;max-width:100%;height:auto;font-size:13px}
+.fig text{fill:var(--ink);font-family:inherit}
+.fig .m{fill:var(--muted)} .fig .a{fill:var(--accent)} .fig .g{fill:var(--gap)}
+.fig .ln{stroke:var(--ink);fill:none;stroke-width:1.5}
+.fig .mu{stroke:var(--muted);fill:none;stroke-width:1}
+.fig .ac{stroke:var(--accent);fill:none;stroke-width:2.5}
+.fig .rg{fill:var(--accent);fill-opacity:.22;stroke:var(--accent);stroke-width:1.5}
+.fig .bad{fill:var(--gap);fill-opacity:.28;stroke:var(--gap);stroke-width:1.5}
+.fig .nd{fill:var(--card);stroke:var(--ink);stroke-width:1.5}
+.fig .dot{fill:var(--ink)} .fig .adot{fill:var(--accent)}
+.fig .dsh{stroke-dasharray:5 4} .fig .gl{stroke:var(--gap);fill:none;stroke-width:2.5} .fig .ink{fill:var(--ink)} .fig .bg{fill:var(--bg);stroke:var(--rule)} .fig .thk{stroke-width:4.5;stroke-linecap:round} .fig .sol{fill:var(--ink);fill-opacity:.55;stroke:var(--ink);stroke-width:1}
+.pf li{margin:.55rem 0} .pf .r{display:block;margin-top:.15rem;font-size:.93em} .pf .r > b:first-child{color:var(--accent)} .setup{margin:.3rem 0 .5rem}
+.prob > p.stmt{margin:.35rem 0 .5rem}
+.ahp{fill:var(--ink)} .ahpa{fill:var(--accent)}
+</style>
+<style>.brute td{text-align:left}.brute td:first-child{color:var(--muted);white-space:nowrap}.brute tr.dies td:first-child{color:var(--gap)}.brute tr.therefore td:first-child{color:var(--accent)}</style>
+<style>details{border-top:1px solid var(--rule);padding:.35rem 0}summary{cursor:pointer;color:var(--accent);font-weight:600}details[open]>summary{margin-bottom:.4rem}.prob details:last-child{padding-bottom:0}img{display:block;width:100%;height:auto;margin:.5rem 0;border:1px solid var(--rule);border-radius:6px}#top{position:fixed;right:16px;bottom:16px;background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:.2rem .6rem;font-size:.85rem;text-decoration:none}</style>
+<div class="wrap" id="start">
+<h1>Slides Explained</h1>
+<p class="sub"><a href="index.html">← Index</a> · BM51002 · plain-language walk-through of the Ho–Stoll, O'Hara–Oldfield and Chordia–Roll–Subrahmanyam decks, each section opens with its slide, key graphs redrawn. Questions are folded: tap one, answer it in your head, then read.</p>
+<details><summary><a href="#hs">1 · Ho &amp; Stoll (1981): optimal dealer pricing</a> · 57 sections</summary><nav class="toc"><a href="#s1">1. Big picture: What is Ho and Stoll (1981) trying to solve?</a><a href="#s2">2. What does the dealer actually do?</a><a href="#s3">3. Why are \(a\) and \(b\) called prices of immediacy?</a><a href="#s4">4. Very important: \(a\) and \(b\) have opposite effects on demand</a><a href="#s5">5. Transaction uncertainty: Poisson process</a><a href="#s6">6. What exactly is a dealer sale?</a><a href="#s7">7. Linear demand curve</a><a href="#s8">8. Why are there two different prices \(p\) and \(p^*\)?</a><a href="#s9">9. Interpretation of the graph</a><a href="#s10">10. Portfolio uncertainty</a><a href="#s11">11. Why is portfolio uncertainty important?</a><a href="#s12">12. Dealer wealth has three components</a><a href="#s13">13. Cash equation</a><a href="#s14">14. Example of cash equation</a><a href="#s15">15. Inventory equation</a><a href="#s16">16. Why is inventory valued at \(p\), not \(p-b\) or \(p+a\)?</a><a href="#s17">17. The strange-looking but important point</a><a href="#s18">18. Why does \(dI\) contain \(p\,dq_b-p\,dq_a\)?</a><a href="#s19">19. Inventory return uncertainty</a><a href="#s20">20. Base wealth \(Y\)</a><a href="#s21">21. Why does the model include base wealth?</a><a href="#s22">22. No-bankruptcy assumption</a><a href="#s23">23. Terminal wealth</a><a href="#s24">24. Why expected utility instead of expected wealth?</a><a href="#s25">25. Risk aversion</a><a href="#s26">26. Dynamic programming</a><a href="#s27">27. Why is \(J\) called the value/performance function?</a><a href="#s28">28. State variables</a><a href="#s29">29. Why does time matter?</a><a href="#s30">30. Why does risk decrease near the end?</a><a href="#s31">31. Taylor expansion</a><a href="#s32">32. What is \(\phi^0\)?</a><a href="#s33">33. What does \(\phi^1\) mean?</a><a href="#s34">34. Why does dynamic programming help?</a><a href="#s35">35. The most important finding: spread has two components</a><a href="#s36">36. Risk-neutral spread</a><a href="#s37">37. Risk adjustment</a><a href="#s38">38. Why transaction size \(Q\) affects spread</a><a href="#s39">39. Why return variance affects spread</a><a href="#s40">40. Why dealer risk aversion affects spread</a><a href="#s41">41. Very important distinction: Spread vs price adjustment</a><a href="#s42">42. Inventory skew</a><a href="#s43">43. Very important: Inventory affects midpoint, not necessarily spread</a><a href="#s44">44. Complete intuition of the model</a><a href="#s45">45. Now let's do the examiner-style "what if?" questions</a><a href="#s46">85. A very important conceptual distinction</a><a href="#s47">86. One complete example</a><a href="#s48">87. How all equations fit together</a><a href="#s49">88. Exam/viva questions you should definitely prepare</a><a href="#s50">89. Intermediate viva questions</a><a href="#s51">90. Advanced viva questions</a><a href="#s52">91. A particularly tricky question</a><a href="#s53">92. Another tricky one</a><a href="#s54">93. Therefore, for a long dealer</a><a href="#s55">94. One subtle point about "spread does not depend on inventory"</a><a href="#s56">95. Final mental model to memorize</a><a href="#s57">⭐ The 10 relationships I'd memorize for your exam</a></nav></details>
+<details><summary><a href="#oo">2 · O'Hara &amp; Oldfield (1986): the microeconomics of market making</a> · 22 sections</summary><nav class="toc"><a href="#s58">0. First: Where does O’Hara–Oldfield fit relative to Ho–Stoll?</a><a href="#s59">SLIDE 1 — O'HARA AND OLDFIELD (1986)</a><a href="#s60">SLIDE 2 — UNIQUE CONTRIBUTION</a><a href="#s61">SLIDE 3 — HOW IS THE MODEL DIFFERENT?</a><a href="#s62">SLIDE 4 — CONTRIBUTION</a><a href="#s63">SLIDE 5 — MODEL</a><a href="#s64">SLIDE 6 — HOW DOES THE MARKET MAKER TRADE?</a><a href="#s65">SLIDE 7 — LIMIT ORDERS: ASK AND BID</a><a href="#s66">SLIDE 8 — MARKET ORDER FLOW</a><a href="#s67">SLIDE 9 — ORDER CLEARING</a><a href="#s68">SLIDE 10 — INVENTORY AND DEALER'S PROBLEM</a><a href="#s69">SLIDE 11 — OPTIMAL PRICING</a><a href="#s70">SLIDE 12 — DEALER'S PROFIT</a><a href="#s71">SLIDE 13 — OPTIMAL ASK AND BID</a><a href="#s72">SLIDE 14 — MARKET MAKER'S SPREAD</a><a href="#s73">SLIDE 15 — FINDINGS</a><a href="#s74">Now let's build your "WHAT IF?" exam questions</a><a href="#s75">The most important comparison with Ho-Stoll</a><a href="#s76">The entire O'Hara–Oldfield model in one diagram</a><a href="#s77">⭐ The 15 relationships I would memorize</a><a href="#s78">One final conceptual question your professor could easily ask</a><a href="#s79">And the one-line difference from your previous Ho-Stoll slides</a></nav></details>
+<details><summary><a href="#crs">3 · Chordia, Roll &amp; Subrahmanyam (2000): commonality in liquidity</a> · 18 sections</summary><nav class="toc"><a href="#s80">Slide 1 — Commonality in Liquidity</a><a href="#s81">Slide 2 — Plausible Reasons for Commonality</a><a href="#s82">Slide 3 — Implications of Commonality</a><a href="#s83">Slide 4 — Data</a><a href="#s84">Slide 5 — NYSE Features</a><a href="#s85">Slide 6 — Liquidity Variables</a><a href="#s86">Slide 7 — Cross-sectional Statistics</a><a href="#s87">Slide 7 — Panel C: Correlation Between Liquidity Measures</a><a href="#s88">Slide 8 — Absolute Daily Proportional Changes</a><a href="#s89">Slide 9 — Empirical Commonality in Liquidity</a><a href="#s90">Slide 10 — Results of Commonality Regression</a><a href="#s91">Slide 11 — Sources of Commonality</a><a href="#s92">Slide 12 — Commonality, Inventory Risk and Asymmetric Information</a><a href="#s93">Slide 13 — Individual, Market and Industry Transaction Frequencies</a><a href="#s94">Slide 14 — Observations</a><a href="#s95">THE ENTIRE STORY OF THESE SLIDES</a><a href="#s96">Very Important Exam Concepts</a><a href="#s97">One final mental picture</a></nav></details>
+<h2 id="hs">1 · Ho &amp; Stoll (1981): optimal dealer pricing</h2>
+<div class="idea"><p>These slides are describing the Ho and Stoll (1981) optimal dealer pricing model, which is one of the important foundations for understanding how a market maker chooses bid/ask prices when there is both transaction uncertainty and inventory/return uncertainty.</p></div>
+<div class="prob" id="s1"><h3>1. Big picture: What is Ho and Stoll (1981) trying to solve?</h3><img src="slides/inv-47.jpg" alt="Deck inventory models, page 47" loading="lazy">
+<p>The central question is:</p>
+<p>How should a dealer choose bid and ask prices when he does not know when the next customer will arrive and is also uncertain about the return on the inventory he is holding?</p>
+<p>A dealer is continuously facing two risks:</p>
+<p class="sh">Risk 1: Transaction uncertainty</p>
+<p>The dealer doesn't know:</p>
+<ul><li>when the next customer arrives,</li><li>whether the customer wants to buy or sell,</li><li>how many transactions will occur.</li></ul>
+<p>This is modeled using a Poisson jump process.</p>
+<p class="sh">Risk 2: Inventory return uncertainty</p>
+<p>Suppose the dealer is holding 1,000 shares.</p>
+<p>The stock price can move unexpectedly.</p>
+<p>So the value of his inventory is uncertain.</p>
+<p>This is modeled using a Brownian motion.</p>
+<p>Therefore:</p>
+<div>\[\boxed{\text{Ho-Stoll model}= \text{Poisson transaction uncertainty} + \text{Brownian return uncertainty}}\]</div>
+<p>This is the key idea to remember.</p>
+</div>
+<div class="prob" id="s2"><h3>2. What does the dealer actually do?</h3><img src="slides/inv-49.jpg" alt="Deck inventory models, page 49" loading="lazy">
+<p>Suppose the dealer believes the stock's current true/intrinsic value is</p>
+<div>\[p.\]</div>
+<p>He quotes:</p>
+<div>\[\boxed{p_b=p-b}\]</div>
+<p>and</p>
+<div>\[\boxed{p_a=p+a}\]</div>
+<p>where:</p>
+<ul><li>\(p_b\) = bid price</li><li>\(p_a\) = ask price</li><li>\(p\) = dealer's estimate of intrinsic/fair value</li><li>\(b\) = distance of bid from \(p\)</li><li>\(a\) = distance of ask from \(p\)</li></ul>
+<p>Therefore the spread is</p>
+<div>\[p_a-p_b = (p+a)-(p-b)\]</div>
+<p>so</p>
+<div>\[\boxed{\text{Spread}=a+b}\]</div>
+</div>
+<div class="prob" id="s3"><h3>3. Why are \(a\) and \(b\) called prices of immediacy?</h3>
+<p>This is important.</p>
+<p>A customer who wants to trade immediately does not have to wait for a better price.</p>
+<p>Instead, they trade with the dealer.</p>
+<p>For example:</p>
+<p>Suppose</p>
+<div>\[p=100.\]</div>
+<p>If</p>
+<div>\[a=2,\qquad b=1,\]</div>
+<p>then</p>
+<div>\[p_a=102\]</div>
+<p>and</p>
+<div>\[p_b=99.\]</div>
+<p>So:</p>
+<ul><li>customer wants to buy → pays ₹102</li><li>customer wants to sell → receives ₹99</li></ul>
+<p>The dealer earns compensation for providing immediacy/liquidity.</p>
+</div>
+<div class="prob" id="s4"><h3>4. Very important: \(a\) and \(b\) have opposite effects on demand</h3>
+<p>This is one of the most likely conceptual exam questions.</p>
+<p class="sh">Ask side</p>
+<p>Dealer sells to public at</p>
+<div>\[p_a=p+a.\]</div>
+<p>If dealer increases \(a\),</p>
+<div>\[a\uparrow \Rightarrow p_a\uparrow\]</div>
+<p>The stock becomes more expensive for buyers.</p>
+<p>Therefore:</p>
+<div>\[\boxed{a\uparrow\Rightarrow \lambda_a\downarrow}\]</div>
+<p>where \(\lambda_a\) is the rate of dealer sales.</p>
+<p class="sh">Bid side</p>
+<p>Dealer buys from public at</p>
+<div>\[p_b=p-b.\]</div>
+<p>If dealer increases \(b\),</p>
+<div>\[b\uparrow \Rightarrow p_b\downarrow\]</div>
+<p>The customer receives a lower price when selling to the dealer.</p>
+<p>Therefore fewer customers want to sell to him.</p>
+<p>So:</p>
+<div>\[\boxed{b\uparrow\Rightarrow\lambda_b\downarrow}\]</div>
+<p>This is extremely important.</p>
+</div>
+<div class="prob" id="s5"><h3>5. Transaction uncertainty: Poisson process</h3><img src="slides/inv-48.jpg" alt="Deck inventory models, page 48" loading="lazy">
+<p>The model assumes transactions arrive randomly.</p>
+<p>For a small interval \(dt\):</p>
+<p>Dealer sale</p>
+<div>\[dq_a= \begin{cases} Q &amp; \text{with probability }\lambda_a dt\\ 0 &amp; \text{with probability }1-\lambda_a dt \end{cases}\]</div>
+<p>Here:</p>
+<div>\[Q=\text{number of shares per transaction}\]</div>
+<p>and</p>
+<div>\[\lambda_a=\text{arrival intensity of dealer sales}.\]</div>
+<p>So:</p>
+<div>\[\boxed{P(dq_a=Q)=\lambda_a dt}\]</div>
+<p class="sh">Dealer purchase</p>
+<p>Similarly,</p>
+<div>\[dq_b= \begin{cases} Q &amp; \text{with probability }\lambda_bdt\\ 0 &amp; \text{with probability }1-\lambda_bdt \end{cases}\]</div>
+<p>where</p>
+<div>\[\lambda_b=\text{arrival intensity of dealer purchases}.\]</div>
+<p>Thus:</p>
+<div>\[\boxed{P(dq_b=Q)=\lambda_bdt}\]</div>
+</div>
+<div class="prob" id="s6"><h3>6. What exactly is a dealer sale?</h3>
+<p>This terminology can be confusing.</p>
+<p class="sh">Dealer sale</p>
+<p>A customer comes and buys from the dealer.</p>
+<p>Therefore:</p>
+<div>\[\text{Dealer sells shares}\]</div>
+<p>and receives cash.</p>
+<p>This occurs at the ask price.</p>
+<div>\[\boxed{p_a=p+a}\]</div>
+<p class="sh">Dealer purchase</p>
+<p>A customer comes and sells to the dealer.</p>
+<p>Therefore:</p>
+<div>\[\text{Dealer buys shares}\]</div>
+<p>and pays cash.</p>
+<p>This occurs at the bid price.</p>
+<div>\[\boxed{p_b=p-b}\]</div>
+</div>
+<div class="prob" id="s7"><h3>7. Linear demand curve</h3><img src="slides/inv-50.jpg" alt="Deck inventory models, page 50" loading="lazy">
+<p>The slide shows two demand curves.</p>
+<p class="sh">Public buyers</p>
+<p>They buy from dealer.</p>
+<p>Their arrival rate is</p>
+<div>\[\lambda_a.\]</div>
+<p>As the ask price increases:</p>
+<div>\[p_a\uparrow\]</div>
+<p>fewer people buy.</p>
+<p>Therefore:</p>
+<div>\[\boxed{\frac{\partial\lambda_a}{\partial p_a}&lt;0}\]</div>
+<p class="sh">Public sellers</p>
+<p>They sell to dealer.</p>
+<p>Their arrival rate is</p>
+<div>\[\lambda_b.\]</div>
+<p>As the bid price increases:</p>
+<div>\[p_b\uparrow\]</div>
+<p>more people are willing to sell.</p>
+<p>Therefore:</p>
+<div>\[\boxed{\frac{\partial\lambda_b}{\partial p_b}&gt;0}\]</div>
+<p>Equivalently, since</p>
+<div>\[p_b=p-b,\]</div>
+<p>increasing \(b\) decreases \(p_b\), so:</p>
+<div>\[\boxed{b\uparrow\Rightarrow\lambda_b\downarrow}\]</div>
+</div>
+<div class="prob" id="s8"><h3>8. Why are there two different prices \(p\) and \(p^*\)?</h3>
+<p>This is subtle and important.</p>
+<p>The dealer has his own estimate:</p>
+<div>\[p\]</div>
+<p>of the true value.</p>
+<p>The public has an opinion:</p>
+<div>\[p^*.\]</div>
+<p>The model allows:</p>
+<div>\[\boxed{p\neq p^*}\]</div>
+<p>For example:</p>
+<p>Dealer thinks:</p>
+<div>\[p=100\]</div>
+<p>but public thinks:</p>
+<div>\[p^*=105.\]</div>
+<p>Then the public may consider the stock undervalued relative to their belief and may be more willing to buy.</p>
+<p>The dealer therefore has to account for the difference between:</p>
+<div>\[\boxed{\text{dealer's valuation }p}\]</div>
+<p>and</p>
+<div>\[\boxed{\text{public valuation }p^*}.\]</div>
+</div>
+<div class="prob" id="s9"><h3>9. Interpretation of the graph</h3>
+<p>The graph has:</p>
+<ul><li>\(p^*\) = public opinion of true price</li><li>\(p\) = dealer's opinion</li><li>\(p_a\) = ask price</li><li>\(p_b\) = bid price</li></ul>
+<p>The intersection of the two demand curves occurs around the public valuation \(p^*\).</p>
+<p>The dealer chooses bid and ask around his own valuation \(p\).</p>
+<p>This means the dealer can adjust prices to influence:</p>
+<div>\[\lambda_a,\lambda_b.\]</div>
+<p>That is the fundamental control mechanism.</p>
+<svg class="fig" viewBox="0 0 640 330" role="img" aria-label="Ho–Stoll linear demand curves: public buyers λa fall and public sellers λb rise with price; they cross at the public value p*; the dealer quotes pa and pb around his own value p and so fixes the arrival rates λa* and λb*">
+<line class="ln" x1="70" y1="290" x2="520" y2="290"/><line class="ln" x1="70" y1="290" x2="70" y2="20"/>
+<text x="300" y="322" text-anchor="middle">arrival rate λa, λb</text>
+<text x="18" y="160" text-anchor="middle" transform="rotate(-90 18 160)">stock price</text>
+<line class="ac" x1="100" y1="40" x2="440" y2="260"/>
+<text class="a" x="448" y="264" text-anchor="start">λa (public buyers)</text>
+<line class="ln" x1="110" y1="250" x2="440" y2="50"/>
+<text x="448" y="54" text-anchor="start">λb (public sellers)</text>
+<line class="mu dsh" x1="70" y1="152" x2="500" y2="152"/><text class="g" x="62" y="157" text-anchor="end">p*</text>
+<line class="mu dsh" x1="70" y1="178" x2="500" y2="178"/><text class="a" x="62" y="183" text-anchor="end">pa</text>
+<line class="mu dsh" x1="70" y1="200" x2="500" y2="200"/><text x="62" y="205" text-anchor="end">p</text>
+<line class="mu dsh" x1="70" y1="222" x2="500" y2="222"/><text class="a" x="62" y="227" text-anchor="end">pb</text>
+<line class="mu dsh" x1="313" y1="178" x2="313" y2="290"/>
+<circle class="adot" cx="313" cy="178" r="4"/>
+<text class="a" x="313" y="306" text-anchor="middle">λa*</text>
+<line class="mu dsh" x1="157" y1="222" x2="157" y2="290"/>
+<circle class="adot" cx="157" cy="222" r="4"/>
+<text class="a" x="157" y="306" text-anchor="middle">λb*</text>
+<circle class="dot" cx="272" cy="152" r="4"/>
+<text class="g" x="505" y="157" text-anchor="start">public's value</text>
+<text class="m" x="505" y="205" text-anchor="start">dealer's value</text>
+</svg>
+<p><b>Figure (deck p. 50, redrawn).</b> The public thinks the stock is worth \(p^*\); the two demand lines cross there. The dealer thinks it is worth \(p\) and quotes \(p_a = p + a\) and \(p_b = p - b\) around it. Reading across from each quote to its line gives the arrival rates the dealer is choosing: buyers arrive at \(\lambda_a^*\), sellers at \(\lambda_b^*\). Raise \(p_a\) and \(\lambda_a^*\) slides left (fewer buyers); lower \(p_b\) and \(\lambda_b^*\) slides left (fewer sellers).</p>
+</div>
+<div class="prob" id="s10"><h3>10. Portfolio uncertainty</h3><img src="slides/inv-51.jpg" alt="Deck inventory models, page 51" loading="lazy">
+<p>Now comes the second major component.</p>
+<p>The dealer has an existing portfolio.</p>
+<p>Its value changes according to:</p>
+<div>\[\boxed{ dX=r_X Xdt+X\,dZ_X }\]</div>
+<p>This is essentially a geometric-Brownian-motion-type process.</p>
+<ul><li>Meaning of every term</li><li>\(X\)</li></ul>
+<p>Current portfolio value.</p>
+<p>\(r_X\)</p>
+<p>Mean return per unit time.</p>
+<p>\(r_XXdt\)</p>
+<p>Expected/average growth of the portfolio.</p>
+<p>\(dZ_X\)</p>
+<p>Random component.</p>
+<p>The slide says:</p>
+<div>\[E[dZ_X]=0\]</div>
+<p>and instantaneous variance is</p>
+<div>\[\sigma_X^2dt.\]</div>
+<p>You can equivalently think of</p>
+<div>\[dZ_X=\sigma_XdW_X\]</div>
+<p>if \(dW_X\) is a standard Wiener process.</p>
+<p>Then:</p>
+<div>\[dX=r_XXdt+\sigma_XXdW_X.\]</div>
+</div>
+<div class="prob" id="s11"><h3>11. Why is portfolio uncertainty important?</h3>
+<p>Suppose the dealer holds:</p>
+<div>\[X=\$10\text{ million}.\]</div>
+<p>Even if there are no transactions, the value of this portfolio can change.</p>
+<p>For example:</p>
+<div>\[X\rightarrow 9.5\text{ million}\]</div>
+<p>or</p>
+<div>\[X\rightarrow10.5\text{ million}.\]</div>
+<p>Therefore the dealer faces inventory/portfolio risk.</p>
+<p>This gives him another reason to adjust his prices.</p>
+</div>
+<div class="prob" id="s12"><h3>12. Dealer wealth has three components</h3><img src="slides/inv-52.jpg" alt="Deck inventory models, page 52" loading="lazy">
+<p>The dealer's total wealth is composed of:</p>
+<div>\[\boxed{\text{Cash}+\text{Inventory}+\text{Base wealth}}\]</div>
+<p>or:</p>
+<div>\[\boxed{ W=F+I+Y }\]</div>
+<p>where:</p>
+<ul><li>\(F\) = cash</li><li>\(I\) = inventory value</li><li>\(Y\) = base wealth</li></ul>
+<p>At terminal time \(T\):</p>
+<div>\[\boxed{ W_T=F_T+I_T+Y_T }\]</div>
+<p>The dealer wants to maximize:</p>
+<div>\[\boxed{ EU(W_T) }\]</div>
+<p>That means:</p>
+<p>Choose prices \(a,b\) so that expected utility of final wealth is maximized.</p>
+</div>
+<div class="prob" id="s13"><h3>13. Cash equation</h3><img src="slides/inv-53.jpg" alt="Deck inventory models, page 53" loading="lazy">
+<p>The cash equation is:</p>
+<div>\[\boxed{ dF=rFdt-(p-b)dq_b+(p+a)dq_a }\]</div>
+<p>Let's understand every term.</p>
+<p>Term 1</p>
+<div>\[rFdt\]</div>
+<p>Cash earns interest.</p>
+<p>If the dealer has ₹100,000 and risk-free rate is 5%:</p>
+<div>\[rFdt\]</div>
+<p>represents the interest earned during \(dt\).</p>
+<p>Term 2</p>
+<div>\[-(p-b)dq_b\]</div>
+<p>This occurs when dealer buys shares.</p>
+<p>The dealer pays:</p>
+<div>\[p-b\]</div>
+<p>per share.</p>
+<p>Therefore cash decreases.</p>
+<p>Hence the negative sign:</p>
+<div>\[\boxed{-(p-b)dq_b}\]</div>
+<p>Term 3</p>
+<div>\[+(p+a)dq_a\]</div>
+<p>This occurs when dealer sells shares.</p>
+<p>He receives:</p>
+<div>\[p+a\]</div>
+<p>per share.</p>
+<p>Therefore cash increases:</p>
+<div>\[\boxed{+(p+a)dq_a}\]</div>
+</div>
+<div class="prob" id="s14"><h3>14. Example of cash equation</h3>
+<p>Suppose:</p>
+<div>\[p=100\]</div><div>\[a=2,\quad b=1\]</div>
+<p>so:</p>
+<div>\[p_a=102\]</div>
+<p>and</p>
+<div>\[p_b=99.\]</div>
+<p>Suppose one transaction of \(Q=100\) shares occurs.</p>
+<p class="sh">Dealer buys</p>
+<p>Cash change:</p>
+<div>\[-99(100)=-9900.\]</div>
+<p class="sh">Dealer sells</p>
+<p>Cash change:</p>
+<div>\[+102(100)=+10200.\]</div>
+<p>So the spread provides:</p>
+<div>\[10200-9900=300\]</div>
+<p>of trading revenue across the two sides.</p>
+</div>
+<div class="prob" id="s15"><h3>15. Inventory equation</h3><img src="slides/inv-54.jpg" alt="Deck inventory models, page 54" loading="lazy">
+<p>The inventory equation is:</p>
+<div>\[\boxed{ dI=r_IIdt+p\,dq_b-p\,dq_a+I\,dZ_I }\]</div>
+<p>This is extremely important.</p>
+<p class="sh">Why \(+p\,dq_b\)?</p>
+<p>When dealer buys shares:</p>
+<div>\[dq_b&gt;0.\]</div>
+<p>Inventory increases.</p>
+<p>Since inventory is valued at \(p\):</p>
+<div>\[+p\,dq_b.\]</div>
+<p class="sh">Why \(-p\,dq_a\)?</p>
+<p>When dealer sells:</p>
+<div>\[dq_a&gt;0.\]</div>
+<p>Inventory decreases.</p>
+<p>Therefore:</p>
+<div>\[-p\,dq_a.\]</div>
+</div>
+<div class="prob" id="s16"><h3>16. Why is inventory valued at \(p\), not \(p-b\) or \(p+a\)?</h3>
+<p>This is a very likely exam question.</p>
+<p>The model treats \(p\) as the intrinsic/reference value of the stock.</p>
+<p>The transaction prices are:</p>
+<div>\[p-b\]</div>
+<p>and</p>
+<div>\[p+a.\]</div>
+<p>The difference between transaction price and intrinsic value captures the dealer's spread compensation.</p>
+<p>Therefore inventory accounting uses:</p>
+<div>\[\boxed{p}\]</div>
+<p>rather than the bid or ask.</p>
+</div>
+<div class="prob" id="s17"><h3>17. The strange-looking but important point</h3>
+<p>The slide says:</p>
+<p>Value of inventory does not change due to change in transaction size \(q_a,q_b\).</p>
+<p class="sh">Why?</p>
+<p>Because the transaction itself changes the composition:</p>
+<ul><li>cash decreases/increases,</li><li>inventory increases/decreases.</li></ul>
+<p>The valuation of the existing inventory is driven by:</p>
+<div>\[r_IIdt+I\,dZ_I.\]</div>
+<p>The transaction itself is accounted for separately.</p>
+<p>This distinction is very important.</p>
+</div>
+<div class="prob" id="s18"><h3>18. Why does \(dI\) contain \(p\,dq_b-p\,dq_a\)?</h3>
+<p>Let's derive it.</p>
+<p>Suppose the dealer owns \(N\) shares.</p>
+<p>Inventory value:</p>
+<div>\[I=pN.\]</div>
+<p>If he buys \(Q\) shares:</p>
+<div>\[N\rightarrow N+Q.\]</div>
+<p>Therefore:</p>
+<div>\[I\rightarrow p(N+Q)\]</div>
+<p>so the inventory value increases by:</p>
+<div>\[pQ.\]</div>
+<p>Hence:</p>
+<div>\[+p\,dq_b.\]</div>
+<p>If he sells \(Q\):</p>
+<div>\[N\rightarrow N-Q\]</div>
+<p>and inventory decreases by:</p>
+<div>\[pQ.\]</div>
+<p>Hence:</p>
+<div>\[-p\,dq_a.\]</div>
+</div>
+<div class="prob" id="s19"><h3>19. Inventory return uncertainty</h3>
+<p>The terms</p>
+<div>\[r_IIdt\]</div>
+<p>and</p>
+<div>\[I\,dZ_I\]</div>
+<p>represent uncertainty in the value of the inventory.</p>
+<p>Expected component</p>
+<div>\[r_IIdt.\]</div>
+<p>Random component</p>
+<div>\[I\,dZ_I.\]</div>
+<p>The larger \(I\) is, the larger the exposure to the random price movement.</p>
+<p>Therefore:</p>
+<div>\[\boxed{|I|\uparrow\Rightarrow\text{inventory risk}\uparrow}\]</div>
+<p>assuming the same volatility.</p>
+</div>
+<div class="prob" id="s20"><h3>20. Base wealth \(Y\)</h3><img src="slides/inv-55.jpg" alt="Deck inventory models, page 55" loading="lazy">
+<p>The dealer also has wealth outside the market-making inventory.</p>
+<p>The model calls this:</p>
+<div>\[Y.\]</div>
+<p>It follows:</p>
+<div>\[\boxed{ dY=r_YYdt+YdZ_Y }\]</div>
+<p>So base wealth itself is stochastic.</p>
+<p class="sh">Why?</p>
+<p>Because the dealer may have other investments/assets.</p>
+</div>
+<div class="prob" id="s21"><h3>21. Why does the model include base wealth?</h3>
+<p>Because the dealer's willingness to take risk depends on his overall wealth, not just his trading portfolio.</p>
+<p>For example:</p>
+<p>Dealer A has:</p>
+<div>\[Y=\$100\text{ million}\]</div>
+<p>while Dealer B has:</p>
+<div>\[Y=\$100,000.\]</div>
+<p>A $1 million inventory loss is much more significant for B than A.</p>
+<p>Thus wealth influences the dealer's effective risk-bearing capacity.</p>
+</div>
+<div class="prob" id="s22"><h3>22. No-bankruptcy assumption</h3>
+<p>The slide says:</p>
+<p>Model assumes no bankruptcy as time horizon is short and sufficient collateral is available.</p>
+<p>This is an assumption that simplifies the problem.</p>
+<p>The dealer is assumed to have sufficient wealth/collateral to continue operating over the horizon.</p>
+<p>So we don't need to explicitly model:</p>
+<ul><li>default,</li><li>bankruptcy,</li><li>forced liquidation before \(T\).</li></ul>
+</div>
+<div class="prob" id="s23"><h3>23. Terminal wealth</h3>
+<p>At time \(T\):</p>
+<div>\[\boxed{ W_T=F_T+I_T+Y_T }\]</div>
+<p>The dealer's objective is:</p>
+<div>\[\boxed{ \max_{a,b} E[U(W_T)] }\]</div>
+<p>This is the core optimization problem.</p>
+</div>
+<div class="prob" id="s24"><h3>24. Why expected utility instead of expected wealth?</h3>
+<p>This is a major conceptual point.</p>
+<p>Suppose two strategies give:</p>
+<p>Strategy A</p>
+<div>\[E(W_T)=100\]</div>
+<p>with almost no risk.</p>
+<p>Strategy B</p>
+<div>\[E(W_T)=105\]</div>
+<p>but huge volatility.</p>
+<p>A risk-averse dealer may prefer A.</p>
+<p>Expected wealth alone would choose B.</p>
+<p>Expected utility incorporates risk preferences.</p>
+<p>Thus:</p>
+<div>\[\boxed{\text{Expected utility captures both return and risk}}\]</div>
+</div>
+<div class="prob" id="s25"><h3>25. Risk aversion</h3>
+<p>Suppose the dealer has a concave utility function:</p>
+<div>\[U'(W)&gt;0\]</div>
+<p>and</p>
+<div>\[U''(W)&lt;0.\]</div>
+<p>Then:</p>
+<ul><li>more wealth is preferred,</li><li>but the dealer is risk averse.</li></ul>
+<p>For example, under CARA utility:</p>
+<div>\[U(W)=-e^{-\gamma W}\]</div>
+<p>where</p>
+<div>\[\gamma&gt;0\]</div>
+<p>is the coefficient of absolute risk aversion.</p>
+<p>Higher \(\gamma\) means more risk aversion.</p>
+</div>
+<div class="prob" id="s26"><h3>26. Dynamic programming</h3><img src="slides/inv-56.jpg" alt="Deck inventory models, page 56" loading="lazy">
+<p>Now we reach the mathematical heart of the model.</p>
+<p>Define:</p>
+<div>\[\boxed{ J(t,F,I,Y) = \max_{a,b} E[U(W_T)\mid t,F,I,Y] }\]</div>
+<p>This means:</p>
+<p>Starting at time \(t\), with current cash \(F\), inventory \(I\), and base wealth \(Y\), what is the maximum expected utility of terminal wealth that the dealer can obtain by choosing optimal \(a\) and \(b\)?</p>
+</div>
+<div class="prob" id="s27"><h3>27. Why is \(J\) called the value/performance function?</h3>
+<p>Because it tells us the best achievable expected utility from the current state.</p>
+<p>For example:</p>
+<div>\[J(t,F,I,Y)=50.\]</div>
+<p>means:</p>
+<p>Given the current state, the maximum achievable expected utility is 50.</p>
+<p>The dealer chooses:</p>
+<div>\[a^*,b^*\]</div>
+<p>to maximize \(J\).</p>
+</div>
+<div class="prob" id="s28"><h3>28. State variables</h3>
+<p>The model uses:</p>
+<div>\[\boxed{(t,F,I,Y)}\]</div>
+<p>as the state.</p>
+<p class="sh">Why these?</p>
+<p>Because to decide optimal prices, the dealer needs to know:</p>
+<p>Time</p>
+<div>\[t\]</div>
+<p class="sh">How much time remains?</p>
+<p>Cash</p>
+<div>\[F\]</div>
+<p class="sh">How much cash does he have?</p>
+<p>Inventory</p>
+<div>\[I\]</div>
+<p class="sh">How much stock exposure does he have?</p>
+<p>Base wealth</p>
+<div>\[Y\]</div>
+<p class="sh">How much outside wealth does he have?</p>
+</div>
+<div class="prob" id="s29"><h3>29. Why does time matter?</h3>
+<p>Suppose there are:</p>
+<p>6 hours left</p>
+<p>The dealer has plenty of time to execute future trades.</p>
+<p>5 minutes left</p>
+<p>He has little opportunity to correct an inventory imbalance.</p>
+<p>Therefore:</p>
+<div>\[\boxed{\text{Inventory risk depends on time remaining}}\]</div>
+<p>This leads directly to one of the major findings.</p>
+</div>
+<div class="prob" id="s30"><h3>30. Why does risk decrease near the end?</h3>
+<p>Suppose:</p>
+<div>\[\tau=T-t\]</div>
+<p>is time remaining.</p>
+<p>When:</p>
+<div>\[\tau\rightarrow0,\]</div>
+<p>there is almost no time left for future uncertainty.</p>
+<p>Therefore the dealer's exposure to future transaction and return uncertainty becomes smaller.</p>
+<p>Thus:</p>
+<div>\[\boxed{ \tau\downarrow \Rightarrow \text{future risk adjustment}\downarrow }\]</div>
+<p>This is why the model says dealer risk is a function of time horizon.</p>
+</div>
+<div class="prob" id="s31"><h3>31. Taylor expansion</h3>
+<p>The model doesn't have a convenient closed-form solution.</p>
+<p>So the authors approximate:</p>
+<div>\[J(\tau,F,I,Y)\]</div>
+<p>using a Taylor expansion around:</p>
+<div>\[\tau=0.\]</div>
+<p>They write:</p>
+<div>\[\boxed{ J(\tau,F,I,Y) = \phi^0(F,I,Y) + \phi^1(F,I,Y)\tau + \phi^2(F,I,Y)\tau^2 +\cdots }\]</div>
+</div>
+<div class="prob" id="s32"><h3>32. What is \(\phi^0\)?</h3>
+<p>At:</p>
+<div>\[\tau=0\]</div>
+<p>we are at the terminal date.</p>
+<p>Therefore:</p>
+<div>\[J(0,F,I,Y)=\phi^0(F,I,Y).\]</div>
+<p>At the terminal date:</p>
+<div>\[W=F+I+Y.\]</div>
+<p>Therefore:</p>
+<div>\[\boxed{ \phi^0(F,I,Y)=U(F+I+Y) }\]</div>
+<p>essentially represents terminal utility.</p>
+</div>
+<div class="prob" id="s33"><h3>33. What does \(\phi^1\) mean?</h3>
+<div>\[\phi^1(F,I,Y)\]</div>
+<p>captures the first-order effect of having some additional time before the terminal date.</p>
+<p>Similarly:</p>
+<div>\[\phi^2(F,I,Y)\]</div>
+<p>captures second-order effects.</p>
+<p>Adding more terms gives a more accurate approximation.</p>
+</div>
+<div class="prob" id="s34"><h3>34. Why does dynamic programming help?</h3>
+<p>Instead of optimizing the entire trading path simultaneously, we solve the problem recursively.</p>
+<p>The principle is:</p>
+<p>An optimal strategy from today onward must also be optimal from tomorrow onward, conditional on the state reached tomorrow.</p>
+<p>This is the Bellman principle.</p>
+</div>
+<div class="prob" id="s35"><h3>35. The most important finding: spread has two components</h3><img src="slides/inv-57.jpg" alt="Deck inventory models, page 57" loading="lazy">
+<p>The slide says:</p>
+<p>Spread = risk-neutral spread + adjustment for uncertainty.</p>
+<p>Conceptually:</p>
+<div>\[\boxed{ \text{Spread} = \text{compensation for providing liquidity} + \text{compensation for bearing risk} }\]</div>
+<p>This is extremely important.</p>
+<p>The dealer isn't charging a spread only because he wants profit.</p>
+<p>Part of the spread compensates him for uncertainty.</p>
+</div>
+<div class="prob" id="s36"><h3>36. Risk-neutral spread</h3>
+<p>Imagine the dealer is completely risk neutral.</p>
+<p>Then he only cares about expected profit.</p>
+<p>He chooses prices based primarily on:</p>
+<ul><li>transaction arrival probabilities,</li><li>transaction size,</li><li>expected trading revenue.</li></ul>
+<p>This gives the risk-neutral component.</p>
+</div>
+<div class="prob" id="s37"><h3>37. Risk adjustment</h3>
+<p>A risk-averse dealer additionally considers:</p>
+<p>"If I execute this trade, how much additional risk am I taking?"</p>
+<p>Therefore:</p>
+<div>\[\boxed{\text{Risk adjustment}\uparrow \Rightarrow \text{spread adjustment}\uparrow}\]</div>
+<p>under the model's risk-averse setting.</p>
+</div>
+<div class="prob" id="s38"><h3>38. Why transaction size \(Q\) affects spread</h3>
+<p>Suppose every customer trade is:</p>
+<div>\[Q=10\]</div>
+<p>shares.</p>
+<p>Now suppose:</p>
+<div>\[Q=10,000.\]</div>
+<p>One transaction can massively change the dealer's inventory.</p>
+<p>Therefore:</p>
+<div>\[Q\uparrow \Rightarrow |\Delta I|\uparrow \Rightarrow \text{inventory risk}\uparrow.\]</div>
+<p>Hence the dealer needs more compensation for risk.</p>
+<p>So generally:</p>
+<div>\[\boxed{ Q\uparrow \Rightarrow \text{risk adjustment to spread}\uparrow }\]</div>
+</div>
+<div class="prob" id="s39"><h3>39. Why return variance affects spread</h3>
+<p>Suppose inventory has volatility:</p>
+<div>\[\sigma_I.\]</div>
+<p>If:</p>
+<div>\[\sigma_I\uparrow,\]</div>
+<p>the dealer faces greater uncertainty in inventory value.</p>
+<p>Therefore:</p>
+<div>\[\boxed{ \sigma_I\uparrow \Rightarrow \text{inventory risk}\uparrow \Rightarrow \text{risk compensation}\uparrow }\]</div>
+<p>Hence spread tends to increase.</p>
+</div>
+<div class="prob" id="s40"><h3>40. Why dealer risk aversion affects spread</h3>
+<p>Let:</p>
+<div>\[\gamma=\text{risk aversion}.\]</div>
+<p>If:</p>
+<div>\[\gamma\uparrow,\]</div>
+<p>the dealer dislikes inventory risk more.</p>
+<p>Therefore he demands greater compensation.</p>
+<p>Thus:</p>
+<div>\[\boxed{ \gamma\uparrow \Rightarrow \text{risk adjustment}\uparrow \Rightarrow \text{spread generally widens} }\]</div>
+</div>
+<div class="prob" id="s41"><h3>41. Very important distinction: Spread vs price adjustment</h3>
+<p>The slide says:</p>
+<p>Spread does not depend on inventory position, however, dealer's price adjustment depends on inventory level.</p>
+<p>This is subtle.</p>
+<p>Suppose the dealer's inventory is:</p>
+<div>\[I=0.\]</div>
+<p>He may quote:</p>
+<div>\[p_b=99,\quad p_a=101.\]</div>
+<p>Now suppose:</p>
+<div>\[I=+10,000.\]</div>
+<p>He owns too many shares.</p>
+<p>He wants to reduce inventory.</p>
+<p>So he wants:</p>
+<ul><li>more customers to buy from him,</li><li>fewer customers to sell to him.</li></ul>
+<p>Therefore he can shift his quotes.</p>
+<p>For example, conceptually:</p>
+<div>\[p_a\downarrow\]</div>
+<p>makes customers more willing to buy.</p>
+<p>And:</p>
+<div>\[p_b\downarrow\]</div>
+<p>makes customers less willing to sell to him.</p>
+<p>Thus both prices can move downward.</p>
+</div>
+<div class="prob" id="s42"><h3>42. Inventory skew</h3>
+<p>This is often called inventory-induced quote skew.</p>
+<p>If:</p>
+<div>\[I&gt;0\]</div>
+<p>the dealer is long.</p>
+<p>He wants to sell inventory.</p>
+<p>Therefore:</p>
+<div>\[\boxed{\text{quote prices shift to encourage sales}}\]</div>
+<p>If:</p>
+<div>\[I&lt;0\]</div>
+<p>the dealer is short.</p>
+<p>He wants to buy inventory.</p>
+<p>Therefore:</p>
+<div>\[\boxed{\text{quote prices shift to encourage purchases}}\]</div>
+</div>
+<div class="prob" id="s43"><h3>43. Very important: Inventory affects midpoint, not necessarily spread</h3>
+<p>Think of:</p>
+<div>\[p_b=p-b\]</div><div>\[p_a=p+a.\]</div>
+<p>The spread is:</p>
+<div>\[a+b.\]</div>
+<p>Inventory may change the location of both prices relative to \(p\), while the width can remain determined by risk/transaction considerations.</p>
+<p>So:</p>
+<div>\[\boxed{\text{Inventory}\rightarrow\text{quote skew}}\]</div>
+<p>while:</p>
+<div>\[\boxed{\text{risk/transaction uncertainty}\rightarrow\text{spread}}\]</div>
+<p>This is one of the most important conclusions from the slides.</p>
+<svg class="fig" viewBox="0 0 520 280" role="img" aria-label="Quote skew: short dealer quotes 100 to 102, flat dealer 99 to 101, long dealer 98 to 100; the width stays 2 while the whole quote moves with inventory">
+<line class="ln" x1="70" y1="230" x2="500" y2="230"/><line class="ln" x1="70" y1="230" x2="70" y2="10"/>
+<text x="18" y="125" text-anchor="middle" transform="rotate(-90 18 125)">price</text>
+<text class="m" x="62" y="200" text-anchor="end">98</text>
+<text class="m" x="62" y="130" text-anchor="end">100</text>
+<text class="m" x="62" y="60" text-anchor="end">102</text>
+<line class="mu dsh" x1="70" y1="125" x2="500" y2="125"/>
+<rect class="rg" x="120" y="55" width="60" height="70"/>
+<text class="a" x="186" y="60" text-anchor="start">ask 102</text>
+<text class="a" x="186" y="130" text-anchor="start">bid 100</text>
+<text x="150" y="250" text-anchor="middle">short, I &lt; 0</text>
+<rect class="rg" x="255" y="90" width="60" height="70"/>
+<text class="a" x="321" y="95" text-anchor="start">ask 101</text>
+<text class="a" x="321" y="165" text-anchor="start">bid 99</text>
+<text x="285" y="250" text-anchor="middle">flat, I = 0</text>
+<rect class="rg" x="390" y="125" width="60" height="70"/>
+<text class="a" x="456" y="130" text-anchor="start">ask 100</text>
+<text class="a" x="456" y="200" text-anchor="start">bid 98</text>
+<text x="420" y="250" text-anchor="middle">long, I &gt; 0</text>
+</svg>
+<p><b>Figure (illustrative numbers from §41).</b> Each box runs from the bid (bottom) to the ask (top); the dashed line is the dealer&#39;s value \(p = 100\). The box is the same height (spread = 2) in all three cases. Inventory only slides it: a long dealer drops both quotes to attract buyers and deter sellers; a short dealer raises both.</p>
+</div>
+<div class="prob" id="s44"><h3>44. Complete intuition of the model</h3>
+<p>Think of the dealer as constantly balancing three objectives:</p>
+<p class="sh">Objective 1 — Earn spread</p>
+<p>He wants:</p>
+<div>\[a,b\]</div>
+<p>large enough to compensate him.</p>
+<p class="sh">Objective 2 — Attract customers</p>
+<p>If he makes prices too unattractive:</p>
+<div>\[\lambda_a,\lambda_b\]</div>
+<p>fall.</p>
+<p>Then he gets fewer trades.</p>
+<p class="sh">Objective 3 — Control inventory risk</p>
+<p>If he accumulates too much inventory, he changes quotes to encourage the desired direction of trade.</p>
+<p>Therefore:</p>
+<div>\[\boxed{ \text{Optimal quote} = \text{profit} + \text{execution probability} + \text{inventory-risk management} }\]</div>
+</div>
+<div class="prob" id="s45"><h3>45. Now let's do the examiner-style "what if?" questions</h3>
+<p>This is probably the most useful part for your viva/exam.</p>
+<details><summary>Q1. What happens if \(a\) increases?</summary>
+<p>Recall:</p>
+<div>\[p_a=p+a.\]</div>
+<p>Therefore:</p>
+<div>\[a\uparrow \Rightarrow p_a\uparrow.\]</div>
+<p>The dealer's ask becomes more expensive.</p>
+<p>Public buyers are less willing to buy.</p>
+<p>Therefore:</p>
+<div>\[\boxed{\lambda_a\downarrow}\]</div>
+<p>and expected dealer sales decrease.</p>
+<p>Final answer:</p>
+<p>Increasing \(a\) increases the ask price, reduces the probability/intensity of public purchases, and therefore reduces dealer sales.</p>
+</details>
+<details><summary>Q2. What happens if \(b\) increases?</summary>
+<div>\[p_b=p-b.\]</div>
+<p>So:</p>
+<div>\[b\uparrow \Rightarrow p_b\downarrow.\]</div>
+<p>Customers receive a lower price for selling.</p>
+<p>Therefore:</p>
+<div>\[\boxed{\lambda_b\downarrow}\]</div>
+<p>Dealer purchases become less frequent.</p>
+</details>
+<details><summary>Q3. What happens if \(a\) decreases?</summary>
+<div>\[a\downarrow \Rightarrow p_a\downarrow.\]</div>
+<p>The dealer's ask becomes cheaper.</p>
+<p>More customers want to buy.</p>
+<p>Therefore:</p>
+<div>\[\boxed{\lambda_a\uparrow}\]</div>
+<p>and dealer sales increase.</p>
+</details>
+<details><summary>Q4. What happens if \(b\) decreases?</summary>
+<div>\[b\downarrow \Rightarrow p_b\uparrow.\]</div>
+<p>Customers get a better selling price.</p>
+<p>Therefore:</p>
+<div>\[\boxed{\lambda_b\uparrow}\]</div>
+<p>Dealer purchases increase.</p>
+</details>
+<details><summary>Q5. What happens if transaction size \(Q\) increases?</summary>
+<p>Each transaction changes inventory by more.</p>
+<p>Therefore:</p>
+<div>\[Q\uparrow \Rightarrow |\Delta I|\uparrow\]</div>
+<p>and inventory risk increases.</p>
+<p>Therefore:</p>
+<div>\[\boxed{\text{risk compensation increases}}\]</div>
+<p>and the dealer has stronger incentives to control trade flow.</p>
+</details>
+<details><summary>Q6. What happens if inventory volatility \(\sigma_I\) increases?</summary>
+<p>Inventory becomes more risky.</p>
+<div>\[\sigma_I\uparrow\]</div>
+<p>means:</p>
+<div>\[I\,dZ_I\]</div>
+<p>becomes more volatile.</p>
+<p>Therefore:</p>
+<div>\[\boxed{\text{risk adjustment}\uparrow}\]</div>
+<p>and generally the dealer requires a larger spread.</p>
+</details>
+<details><summary>Q7. What happens if the dealer becomes more risk averse?</summary>
+<p>Let:</p>
+<div>\[\gamma\uparrow.\]</div>
+<p>He dislikes uncertain terminal wealth more.</p>
+<p>Therefore:</p>
+<div>\[\boxed{\text{risk adjustment}\uparrow}\]</div>
+<p>and the dealer will generally demand more compensation for taking inventory risk.</p>
+</details>
+<details><summary>Q8. What happens if the dealer becomes risk neutral?</summary>
+<p>Then:</p>
+<div>\[U(W)=W\]</div>
+<p>approximately.</p>
+<p>Risk itself does not directly reduce utility.</p>
+<p>Therefore the inventory-risk adjustment disappears or becomes much smaller.</p>
+<p>The dealer focuses mainly on:</p>
+<div>\[\boxed{\text{expected trading profit}}\]</div>
+<p>rather than risk compensation.</p>
+</details>
+<details><summary>Q9. What happens if inventory \(I\) becomes very positive?</summary>
+<p>The dealer is heavily long.</p>
+<p>He owns too many shares.</p>
+<p>If prices remain unchanged, he wants to sell them.</p>
+<p>Therefore he adjusts quotes to increase customer purchases and reduce customer sales.</p>
+<p>Conceptually:</p>
+<div>\[\boxed{ I\uparrow \Rightarrow \text{dealer encourages selling to customers} }\]</div>
+<p>So the dealer tends to skew quotes downward.</p>
+</details>
+<details><summary>Q10. What happens if inventory \(I\) becomes very negative?</summary>
+<p>The dealer is short.</p>
+<p>He wants to acquire shares.</p>
+<p>Therefore he makes his bid more attractive and/or ask less attractive in a way that encourages customer selling to him and discourages further customer buying from him.</p>
+<p>Conceptually:</p>
+<div>\[\boxed{ I\downarrow \Rightarrow \text{dealer encourages customer sales to dealer} }\]</div>
+<p>So quote skew moves upward.</p>
+</details>
+<details><summary>Q11. What happens if \(I=0\)?</summary>
+<p>There is no inventory imbalance.</p>
+<p>Therefore there is no inventory-driven reason to skew the quotes.</p>
+<p>The dealer's pricing is then driven mainly by:</p>
+<ul><li>transaction economics,</li><li>risk,</li><li>return uncertainty,</li><li>time horizon,</li><li>public/dealer valuation differences.</li></ul>
+</details>
+<details><summary>Q12. What happens if time remaining \(T-t\) increases?</summary>
+<p>There is more time during which:</p>
+<ul><li>inventory can remain exposed,</li><li>prices can move,</li><li>future transactions can arrive.</li></ul>
+<p>Therefore:</p>
+<div>\[\boxed{ T-t\uparrow \Rightarrow \text{future uncertainty}\uparrow }\]</div>
+<p>The risk-related pricing adjustment generally becomes more important.</p>
+</details>
+<details><summary>Q13. What happens as \(t\rightarrow T\)?</summary>
+<p>Time remaining goes to zero:</p>
+<div>\[T-t\rightarrow0.\]</div>
+<p>There is little time for additional uncertainty.</p>
+<p>Therefore the dealer's future inventory risk decreases.</p>
+<p>This is why:</p>
+<div>\[\boxed{ \text{risk adjustment tends to decline near the horizon} }\]</div>
+<p>This is one of the paper's main findings.</p>
+</details>
+<details><summary>Q14. What happens if the risk-free rate \(r\) increases?</summary>
+<p>Look at:</p>
+<div>\[dF=rFdt-(p-b)dq_b+(p+a)dq_a.\]</div>
+<p>If:</p>
+<div>\[r\uparrow,\]</div>
+<p>the cash balance earns more interest.</p>
+<p>Therefore:</p>
+<div>\[rFdt\uparrow.\]</div>
+<p>However, the direct effect on optimal bid/ask spreads is more subtle because it depends on the complete optimization problem.</p>
+<p>Exam answer:</p>
+<p>A higher \(r\) increases the growth of the cash account, but its effect on optimal quotes is indirect and depends on the dealer's wealth and dynamic optimization.</p>
+<p>Do not automatically say "spread increases" just from this equation.</p>
+</details>
+<details><summary>Q15. What happens if \(r_I\) increases?</summary>
+<p>From:</p>
+<div>\[dI=r_II dt+p\,dq_b-p\,dq_a+I\,dZ_I.\]</div>
+<p>A higher \(r_I\) increases the expected growth of inventory value.</p>
+<p>Thus:</p>
+<div>\[r_I\uparrow \Rightarrow E[dI]\uparrow\]</div>
+<p>holding other things constant.</p>
+<p>But its effect on optimal quotes depends on the entire model.</p>
+</details>
+<details><summary>Q16. What happens if \(r_Y\) increases?</summary>
+<p>From:</p>
+<div>\[dY=r_YYdt+YdZ_Y.\]</div>
+<p>Higher \(r_Y\) means higher expected growth of base wealth.</p>
+<p>Thus:</p>
+<div>\[\boxed{E[dY]\uparrow}\]</div>
+<p>Again, the effect on optimal bid/ask quotes is indirect through the dealer's total wealth and utility.</p>
+</details>
+<details><summary>Q17. What happens if \(\lambda_a\) increases?</summary>
+<div>\[\lambda_a\uparrow\]</div>
+<p>means customers are buying from the dealer more frequently.</p>
+<p>Therefore:</p>
+<div>\[dq_a\]</div>
+<p>occurs more often.</p>
+<p>The dealer:</p>
+<ul><li>sells more inventory,</li><li>receives more cash,</li><li>earns more transaction/spread revenue.</li></ul>
+<p>But if the dealer is already short, more sales could worsen the short position.</p>
+<p>Therefore the effect depends on current inventory.</p>
+<p>This is a very good viva answer:</p>
+<p>Higher \(\lambda_a\) increases the expected frequency of dealer sales, but whether this is desirable depends on the dealer's current inventory.</p>
+</details>
+<details><summary>Q18. What happens if \(\lambda_b\) increases?</summary>
+<p>Similarly:</p>
+<div>\[\lambda_b\uparrow\]</div>
+<p>means more customers sell to the dealer.</p>
+<p>Dealer:</p>
+<div>\[\boxed{\text{buys more shares}}\]</div>
+<p>Therefore inventory tends to increase.</p>
+<p>If the dealer is already long, this is undesirable.</p>
+<p>If he is short, it helps him reduce his short position.</p>
+</details>
+<details><summary>Q19. What happens if public valuation \(p^*\) rises?</summary>
+<p>Suppose:</p>
+<div>\[p^*\uparrow.\]</div>
+<p>The public believes the stock is worth more.</p>
+<p>Therefore the demand for buying from the dealer can shift.</p>
+<p>The dealer needs to account for the difference:</p>
+<div>\[p^*-p.\]</div>
+<p>If public valuation is much higher than dealer valuation, public buyers may be more willing to purchase.</p>
+<p>Therefore dealer sales can become more likely.</p>
+</details>
+<details><summary>Q20. What happens if dealer valuation \(p\) rises?</summary>
+<p>Since:</p>
+<div>\[p_b=p-b\]</div>
+<p>and</p>
+<div>\[p_a=p+a,\]</div>
+<p>an increase in \(p\) shifts both quotes upward if \(a,b\) are held fixed.</p>
+<p>Thus:</p>
+<div>\[p\uparrow \Rightarrow p_b\uparrow,\quad p_a\uparrow.\]</div>
+<p>But again, optimal \(a,b\) may themselves change after optimization.</p>
+<p>So distinguish:</p>
+<p>Mechanical effect: both quotes rise.</p>
+<p>from</p>
+<p>Optimal response: requires solving the model.</p>
+</details>
+<details><summary>Q21. What happens if spread \(a+b\) increases?</summary>
+<p>The dealer gets more compensation per transaction.</p>
+<p>But customers face worse prices.</p>
+<p>Therefore:</p>
+<div>\[\boxed{ a+b\uparrow \Rightarrow \text{profit per trade}\uparrow }\]</div>
+<p>but generally:</p>
+<div>\[\boxed{ \text{trade arrival rate}\downarrow }\]</div>
+<p>This is the fundamental trade-off.</p>
+</details>
+<details><summary>Q22. What happens if spread becomes extremely large?</summary>
+<p>Suppose:</p>
+<div>\[a,b\rightarrow\text{very large}.\]</div>
+<p>The dealer earns a lot if a trade occurs.</p>
+<p>But customers may stop trading.</p>
+<p>Therefore:</p>
+<div>\[\lambda_a,\lambda_b\rightarrow\text{small}.\]</div>
+<p>Hence the dealer can actually reduce total expected trading profit.</p>
+<p class="sh">This is why the optimal spread isn't simply "as large as possible."</p>
+</details>
+<details><summary>Q23. What happens if spread is extremely small?</summary>
+<p>Then:</p>
+<div>\[a,b\approx0.\]</div>
+<p>The dealer gets little compensation per trade.</p>
+<p>But:</p>
+<div>\[\lambda_a,\lambda_b\]</div>
+<p>may be high.</p>
+<p>So:</p>
+<div>\[\boxed{ \text{low spread} \Rightarrow \text{high trading frequency but low revenue per trade} }\]</div>
+<p>Again, optimal pricing balances both.</p>
+</details>
+<details><summary>Q24. What happens if transaction arrival is deterministic rather than Poisson?</summary>
+<p>The model's transaction uncertainty disappears.</p>
+<p>Under Poisson:</p>
+<div>\[dq_a,dq_b\]</div>
+<p>are random jumps.</p>
+<p>If transaction timing were deterministic, one major source of uncertainty would disappear.</p>
+<p>Therefore the dealer's uncertainty about future cash/inventory flows would decrease.</p>
+<p>This would generally reduce the need for compensation for transaction uncertainty.</p>
+</details>
+<details><summary>Q25. What happens if inventory return volatility is zero?</summary>
+<p>Suppose:</p>
+<div>\[\sigma_I=0.\]</div>
+<p>Then:</p>
+<div>\[dZ_I=0\]</div>
+<p>for the stochastic component.</p>
+<p>Inventory no longer experiences random return fluctuations.</p>
+<p>Thus inventory risk from price uncertainty disappears.</p>
+<p>The dealer's pricing would then rely more on:</p>
+<ul><li>transaction uncertainty,</li><li>inventory effects,</li><li>spread revenue.</li></ul>
+</details>
+<details><summary>Q26. What happens if \(I=0\) in the stochastic term?</summary>
+<p>The inventory diffusion term is:</p>
+<div>\[I\,dZ_I.\]</div>
+<p>If:</p>
+<div>\[I=0,\]</div>
+<p>then:</p>
+<div>\[I\,dZ_I=0.\]</div>
+<p>So the dealer has no exposure to stochastic inventory return at that instant.</p>
+<p>Very intuitive:</p>
+<p>No shares held → no inventory-price exposure.</p>
+</details>
+<details><summary>Q27. What happens if \(I\) doubles?</summary>
+<p>Suppose:</p>
+<div>\[I\rightarrow2I.\]</div>
+<p>The diffusion exposure becomes:</p>
+<div>\[2I\,dZ_I.\]</div>
+<p>Therefore the absolute magnitude of inventory exposure doubles.</p>
+<p>Variance of the diffusion component scales approximately with:</p>
+<div>\[I^2.\]</div>
+<p>So:</p>
+<div>\[I\rightarrow2I\]</div>
+<p>can make variance exposure roughly:</p>
+<div>\[4\times\]</div>
+<p>larger, holding volatility constant.</p>
+<p>This is an excellent quantitative viva question.</p>
+</details>
+<details><summary>Q28. What happens if volatility doubles?</summary>
+<p>Suppose:</p>
+<div>\[\sigma_I\rightarrow2\sigma_I.\]</div>
+<p>Since variance is proportional to:</p>
+<div>\[\sigma_I^2,\]</div>
+<p>variance becomes:</p>
+<div>\[4\sigma_I^2.\]</div>
+<p>Therefore:</p>
+<div>\[\boxed{ \text{volatility}\times2 \Rightarrow \text{variance}\times4 }\]</div>
+<p>This is a very common exam trap.</p>
+</details>
+<details><summary>Q29. What happens if transaction size doubles?</summary>
+<p>Suppose:</p>
+<div>\[Q\rightarrow2Q.\]</div>
+<p>Each transaction causes twice as much inventory movement.</p>
+<p>Thus inventory exposure per transaction doubles.</p>
+<p>Under many quadratic risk approximations, the variance impact associated with inventory change can grow roughly with:</p>
+<div>\[Q^2.\]</div>
+<p>So doubling \(Q\) can produce approximately four times the squared exposure.</p>
+</details>
+<details><summary>Q30. What happens if the dealer has very high base wealth \(Y\)?</summary>
+<p>A large \(Y\) means a given trading loss represents a smaller fraction of total wealth.</p>
+<p>For a risk-averse dealer, this can reduce the marginal impact of a given inventory risk.</p>
+<p>So the dealer may have greater capacity to bear inventory risk.</p>
+<p>Conceptually:</p>
+<div>\[\boxed{ Y\uparrow \Rightarrow \text{relative importance of a given trading risk}\downarrow }\]</div>
+<p>although the exact optimal quote response depends on the utility function.</p>
+</details>
+<details><summary>Q31. What happens if the dealer is extremely risk averse?</summary>
+<p>Suppose:</p>
+<div>\[\gamma\rightarrow\infty.\]</div>
+<p>Even small inventory risk becomes very painful.</p>
+<p>Therefore the dealer strongly wants to avoid unwanted inventory.</p>
+<p>He will place greater emphasis on:</p>
+<div>\[\boxed{\text{inventory control}}\]</div>
+<p>and risk compensation.</p>
+</details>
+<details><summary>Q32. What happens if the dealer is risk neutral?</summary>
+<p>If:</p>
+<div>\[U(W)=W,\]</div>
+<p>then:</p>
+<div>\[E[U(W)]=E[W].\]</div>
+<p>Variance doesn't directly enter utility.</p>
+<p>Therefore risk aversion no longer generates a risk premium in the same way.</p>
+<p>This gives:</p>
+<div>\[\boxed{ \text{Risk-neutral dealer} \Rightarrow \text{focus on expected profit} }\]</div>
+</details>
+<details><summary>Q33. What happens if the stock is very volatile?</summary>
+<p>Higher stock volatility means:</p>
+<div>\[\sigma_I\uparrow.\]</div>
+<p>Inventory becomes more dangerous.</p>
+<p>Therefore the dealer needs greater compensation for holding inventory.</p>
+<p>Hence generally:</p>
+<div>\[\boxed{ \text{volatility}\uparrow \Rightarrow \text{risk component of spread}\uparrow }\]</div>
+</details>
+<details><summary>Q34. What happens in an extremely inactive stock?</summary>
+<p>Suppose transaction arrival rates are very low:</p>
+<div>\[\lambda_a,\lambda_b\approx0.\]</div>
+<p>The dealer receives very few trades.</p>
+<p>Therefore the expected spread income may be insufficient to compensate for the risk of being a market maker.</p>
+<p>This is exactly what the final finding says:</p>
+<p>In an inactive stock, required trading may not generate enough expected profit to offset risk.</p>
+</details>
+<details><summary>Q35. Why doesn't the dealer simply set a huge spread in an inactive stock?</summary>
+<p>Because:</p>
+<div>\[\text{huge spread} \Rightarrow \lambda_a,\lambda_b\downarrow.\]</div>
+<p>But the stock is already inactive.</p>
+<p>Therefore the dealer could end up with almost no trades.</p>
+<p>So widening the spread does not automatically solve the problem.</p>
+</details>
+<details><summary>Q36. What happens if the dealer is long and increases \(b\)?</summary>
+<p>Recall:</p>
+<div>\[p_b=p-b.\]</div>
+<p>Increasing \(b\):</p>
+<div>\[b\uparrow\Rightarrow p_b\downarrow.\]</div>
+<p>Customers become less willing to sell to the dealer.</p>
+<p>That is useful because the dealer is already long.</p>
+<p>Therefore:</p>
+<div>\[\boxed{ I&gt;0,\quad b\uparrow \Rightarrow \lambda_b\downarrow }\]</div>
+<p>and further inventory accumulation is discouraged.</p>
+</details>
+<details><summary>Q37. What happens if the dealer is long and decreases \(a\)?</summary>
+<div>\[a\downarrow \Rightarrow p_a\downarrow.\]</div>
+<p>Customers find it cheaper to buy.</p>
+<p>Therefore:</p>
+<div>\[\lambda_a\uparrow.\]</div>
+<p>The dealer sells more inventory.</p>
+<p>Thus:</p>
+<div>\[\boxed{ I&gt;0,\quad a\downarrow \Rightarrow \text{inventory decreases} }\]</div>
+<p>This is exactly how inventory management works.</p>
+</details>
+<details><summary>Q38. What happens if the dealer is short and increases \(b\)?</summary>
+<p>Increasing \(b\) lowers:</p>
+<div>\[p_b.\]</div>
+<p>Customers are less willing to sell to him.</p>
+<p>But the dealer is short and wants customers to sell to him.</p>
+<p>Therefore increasing \(b\) is counterproductive for inventory correction.</p>
+<p>Instead, he would generally want to make the bid more attractive:</p>
+<div>\[b\downarrow \Rightarrow p_b\uparrow \Rightarrow \lambda_b\uparrow.\]</div>
+</details>
+<details><summary>Q39. What happens if dealer inventory is positive but return variance increases?</summary>
+<p>Two effects reinforce each other:</p>
+<div>\[I&gt;0\]</div>
+<p>means the dealer is already exposed to inventory risk.</p>
+<p>Higher variance means:</p>
+<div>\[\sigma_I^2\uparrow.\]</div>
+<p>Therefore:</p>
+<div>\[\boxed{ \text{long inventory} + \text{high volatility} = \text{higher risk pressure} }\]</div>
+<p>The dealer has stronger incentive to reduce inventory.</p>
+</details>
+<details><summary>Q40. What happens as maturity approaches?</summary>
+<p>Let:</p>
+<div>\[\tau=T-t.\]</div>
+<p>As:</p>
+<div>\[\tau\rightarrow0,\]</div>
+<p>future transaction opportunities disappear.</p>
+<p>Therefore the dealer has less time to:</p>
+<ul><li>earn spread,</li><li>rebalance inventory,</li><li>experience additional price shocks.</li></ul>
+<p>The model therefore predicts a changing risk adjustment as the terminal date approaches.</p>
+</details>
+</div>
+<div class="prob" id="s46"><h3>85. A very important conceptual distinction</h3>
+<p>You should remember these three mechanisms separately:</p>
+<div class="tw"><table><tr><th>Variable</th><th>Main effect</th></tr><tr><td>\(a\)</td><td>Controls ask price and dealer-sale intensity</td></tr><tr><td>\(b\)</td><td>Controls bid price and dealer-purchase intensity</td></tr><tr><td>\(I\)</td><td>Controls inventory exposure and quote skew</td></tr><tr><td>\(Q\)</td><td>Controls inventory change per transaction</td></tr><tr><td>\(\sigma_I\)</td><td>Controls inventory return uncertainty</td></tr><tr><td>\(\gamma\)</td><td>Controls sensitivity to risk</td></tr><tr><td>\(T-t\)</td><td>Controls time available for future uncertainty</td></tr><tr><td>\(\lambda_a\)</td><td>Frequency of dealer sales</td></tr><tr><td>\(\lambda_b\)</td><td>Frequency of dealer purchases</td></tr><tr><td>\(p\)</td><td>Dealer's valuation</td></tr><tr><td>\(p^*\)</td><td>Public's valuation</td></tr><tr><td>\(F\)</td><td>Cash</td></tr><tr><td>\(Y\)</td><td>Base/outside wealth</td></tr></table></div>
+</div>
+<div class="prob" id="s47"><h3>86. One complete example</h3>
+<p>Suppose:</p>
+<div>\[p=100\]</div><div>\[a=2,\quad b=1\]</div>
+<p>so:</p>
+<div>\[p_a=102\]</div>
+<p>and</p>
+<div>\[p_b=99.\]</div>
+<p>Suppose dealer currently has:</p>
+<div>\[I=+10,000.\]</div>
+<p>He is long.</p>
+<p>Now suppose stock volatility increases substantially.</p>
+<p>The dealer now thinks:</p>
+<p>"I already have 10,000 shares, and those shares are now more risky."</p>
+<p>Therefore he wants to reduce inventory.</p>
+<p>He can:</p>
+<p>Increase \(b\)</p>
+<div>\[b\uparrow \Rightarrow p_b\downarrow \Rightarrow \lambda_b\downarrow\]</div>
+<p>so fewer people sell shares to him.</p>
+<p>And/or:</p>
+<p>Decrease \(a\)</p>
+<div>\[a\downarrow \Rightarrow p_a\downarrow \Rightarrow \lambda_a\uparrow\]</div>
+<p>so more people buy shares from him.</p>
+<p>Therefore:</p>
+<div>\[\boxed{ \text{Long inventory} \Rightarrow \text{discourage purchases by dealer} + \text{encourage sales by dealer} }\]</div>
+<p>That is the core inventory-management mechanism.</p>
+</div>
+<div class="prob" id="s48"><h3>87. How all equations fit together</h3>
+<p>You can visualize the entire model as:</p>
+<div>\[\boxed{ (a,b) }\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<p>determine</p>
+<div>\[\boxed{ p_a=p+a,\qquad p_b=p-b }\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<p>determine customer arrival rates</p>
+<div>\[\boxed{ \lambda_a,\lambda_b }\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<p>determine random transactions</p>
+<div>\[\boxed{ dq_a,dq_b }\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<p>transactions change:</p>
+<div>\[\boxed{ F,\ I }\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<p>inventory is exposed to:</p>
+<div>\[\boxed{ r_IIdt+IdZ_I }\]</div>
+<p>and cash earns:</p>
+<div>\[\boxed{ rFdt }\]</div>
+<p>while base wealth follows:</p>
+<div>\[\boxed{ dY=r_YYdt+YdZ_Y }\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<p>terminal wealth:</p>
+<div>\[\boxed{ W_T=F_T+I_T+Y_T }\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<p>dealer maximizes:</p>
+<div>\[\boxed{ E[U(W_T)] }\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<p>dynamic programming gives:</p>
+<div>\[\boxed{ J(t,F,I,Y) }\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<p>optimal:</p>
+<div>\[\boxed{ a^*,b^* }\]</div>
+<p>This is the entire Ho-Stoll framework.</p>
+</div>
+<div class="prob" id="s49"><h3>88. Exam/viva questions you should definitely prepare</h3>
+<p class="sh">Basic</p>
+<details><summary>Q1. What are the two major sources of uncertainty?</summary>
+<p>Answer:</p>
+<ul><li>Transaction timing/order-flow uncertainty → Poisson process.</li><li>Return on inventory/portfolio uncertainty → Brownian motion.</li></ul>
+</details>
+<details><summary>Q2. Why does the dealer use bid and ask prices?</summary>
+<p>Answer:</p>
+<p>To provide immediate liquidity while earning compensation for execution and bearing inventory/transaction risk.</p>
+</details>
+<details><summary>Q3. What is the spread?</summary>
+<div>\[\boxed{S=p_a-p_b=a+b}\]</div>
+</details>
+<details><summary>Q4. What is \(Q\)?</summary>
+<p>Number of shares in each transaction.</p>
+</details>
+<details><summary>Q5. What are \(\lambda_a,\lambda_b\)?</summary>
+<p>Transaction arrival intensities.</p>
+<div>\[\lambda_a=\text{dealer sales}\]</div><div>\[\lambda_b=\text{dealer purchases}.\]</div>
+</details>
+<details><summary>Q6. Why Poisson?</summary>
+<p>Because transactions are modeled as discrete random arrivals in continuous time.</p>
+</details>
+<details><summary>Q7. Why Brownian motion?</summary>
+<p>Because inventory value can change continuously and randomly due to asset returns.</p>
+</details>
+</div>
+<div class="prob" id="s50"><h3>89. Intermediate viva questions</h3>
+<details><summary>Q8. Why does increasing \(a\) reduce \(\lambda_a\)?</summary>
+<p>Because:</p>
+<div>\[a\uparrow \Rightarrow p_a\uparrow\]</div>
+<p>making the stock more expensive to public buyers.</p>
+</details>
+<details><summary>Q9. Why does increasing \(b\) reduce \(\lambda_b\)?</summary>
+<p>Because:</p>
+<div>\[b\uparrow \Rightarrow p_b\downarrow\]</div>
+<p>making the price received by public sellers less attractive.</p>
+</details>
+<details><summary>Q10. Why does inventory risk depend on \(I\)?</summary>
+<p>Because:</p>
+<div>\[I\,dZ_I\]</div>
+<p>is the stochastic exposure.</p>
+</details>
+<details><summary>Q11. Why does inventory risk increase quadratically with inventory under a variance measure?</summary>
+<p>Because:</p>
+<div>\[\operatorname{Var}(I\,dZ_I) = I^2\sigma_I^2dt.\]</div>
+<p>Therefore:</p>
+<div>\[\boxed{\text{inventory variance}\propto I^2}\]</div>
+</details>
+<details><summary>Q12. Why does transaction size matter?</summary>
+<p>Because each transaction changes inventory by \(Q\).</p>
+<p>Larger \(Q\) means larger inventory exposure.</p>
+</details>
+</div>
+<div class="prob" id="s51"><h3>90. Advanced viva questions</h3>
+<details><summary>Q13. Why can spread increase with volatility?</summary>
+<p>Because the dealer requires greater compensation for holding risky inventory.</p>
+</details>
+<details><summary>Q14. Why can the spread be independent of inventory while quotes depend on inventory?</summary>
+<p>Because inventory can change the center/skew of the quotes, while uncertainty determines the width of the quotes.</p>
+</details>
+<details><summary>Q15. Why does risk adjustment decrease near \(T\)?</summary>
+<p>Because there is less time remaining for uncertain returns and future transactions.</p>
+</details>
+<details><summary>Q16. Why is there no closed-form solution?</summary>
+<p>Because the optimization simultaneously involves:</p>
+<ul><li>continuous state variables,</li><li>stochastic diffusion,</li><li>discrete jumps,</li><li>nonlinear utility,</li><li>endogenous transaction arrival rates,</li><li>bid/ask controls.</li></ul>
+<p>This produces a difficult dynamic programming/HJB-type problem.</p>
+</details>
+</div>
+<div class="prob" id="s52"><h3>91. A particularly tricky question</h3>
+<p class="sh">Q: If the dealer is long, should he increase or decrease the ask price?</p>
+<p>Answer:</p>
+<p>Generally, he wants to encourage customers to buy from him.</p>
+<p>Since:</p>
+<div>\[p_a=p+a,\]</div>
+<p>lowering \(a\) lowers the ask:</p>
+<div>\[a\downarrow \Rightarrow p_a\downarrow \Rightarrow \lambda_a\uparrow.\]</div>
+<p>Thus he encourages dealer sales and reduces inventory.</p>
+<div>\[\boxed{I&gt;0\Rightarrow a\downarrow\text{ as an inventory-control incentive}}\]</div>
+</div>
+<div class="prob" id="s53"><h3>92. Another tricky one</h3>
+<p class="sh">Q: If the dealer is long, should he increase or decrease \(b\)?</p>
+<p>He wants to discourage customers from selling to him.</p>
+<p>Since:</p>
+<div>\[b\uparrow \Rightarrow p_b\downarrow \Rightarrow \lambda_b\downarrow.\]</div>
+<p>Thus:</p>
+<div>\[\boxed{I&gt;0\Rightarrow b\uparrow}\]</div>
+<p>as an inventory-control incentive.</p>
+</div>
+<div class="prob" id="s54"><h3>93. Therefore, for a long dealer</h3>
+<p>Remember this table:</p>
+<div class="tw"><table><tr><th>Inventory</th><th>\(a\)</th><th>\(b\)</th><th>Effect</th></tr><tr><td>\(I&gt;0\), long</td><td>↓</td><td>↑</td><td>Encourage sales, discourage purchases</td></tr><tr><td>\(I&lt;0\), short</td><td>↑</td><td>↓</td><td>Discourage sales, encourage purchases</td></tr></table></div>
+<p>This is very important for your exam.</p>
+</div>
+<div class="prob" id="s55"><h3>94. One subtle point about "spread does not depend on inventory"</h3>
+<p>Don't interpret this as:</p>
+<p>"Inventory doesn't matter."</p>
+<p>That is wrong.</p>
+<p>Inventory matters enormously.</p>
+<p>The statement means:</p>
+<div>\[\boxed{ \text{inventory affects quote location/skew rather than the fundamental spread component} }\]</div>
+<p>under the particular Ho-Stoll result described on your slide.</p>
+</div>
+<div class="prob" id="s56"><h3>95. Final mental model to memorize</h3>
+<p>If you remember only this, remember:</p>
+<p>Dealer chooses:</p>
+<div>\[\boxed{a,b}\]</div>
+<p>These determine:</p>
+<div>\[\boxed{p_a=p+a,\quad p_b=p-b}\]</div>
+<p>Prices determine:</p>
+<div>\[\boxed{\lambda_a,\lambda_b}\]</div>
+<p>Arrival rates determine:</p>
+<div>\[\boxed{dq_a,dq_b}\]</div>
+<p>Transactions change:</p>
+<div>\[\boxed{F,I}\]</div>
+<p>Inventory is risky because:</p>
+<div>\[\boxed{dI=r_IIdt+IdZ_I+\text{transaction effects}}\]</div>
+<p>Cash evolves through:</p>
+<div>\[\boxed{ dF=rFdt-(p-b)dq_b+(p+a)dq_a }\]</div>
+<p>Base wealth evolves through:</p>
+<div>\[\boxed{ dY=r_YYdt+YdZ_Y }\]</div>
+<p>Final wealth:</p>
+<div>\[\boxed{ W_T=F_T+I_T+Y_T }\]</div>
+<p>Objective:</p>
+<div>\[\boxed{ \max_{a,b}E[U(W_T)] }\]</div>
+<p>Dynamic programming:</p>
+<div>\[\boxed{ J(t,F,I,Y) = \max_{a,b}E[U(W_T)\mid t,F,I,Y] }\]</div>
+<p>Main economic result:</p>
+<div>\[\boxed{ \text{Spread} = \text{risk-neutral compensation} + \text{risk compensation} }\]</div>
+<p>and</p>
+<div>\[\boxed{ \text{Inventory} \rightarrow \text{quote skew} }\]</div>
+<p>while</p>
+<div>\[\boxed{ Q,\sigma_I,\gamma,T-t \rightarrow \text{risk adjustment} }\]</div>
+</div>
+<div class="idea" id="s57"><h3>⭐ The 10 relationships I'd memorize for your exam</h3>
+<div>\[\boxed{a\uparrow\Rightarrow p_a\uparrow\Rightarrow\lambda_a\downarrow}\]</div><div>\[\boxed{a\downarrow\Rightarrow\lambda_a\uparrow}\]</div><div>\[\boxed{b\uparrow\Rightarrow p_b\downarrow\Rightarrow\lambda_b\downarrow}\]</div><div>\[\boxed{b\downarrow\Rightarrow\lambda_b\uparrow}\]</div><div>\[\boxed{Q\uparrow\Rightarrow\text{inventory risk}\uparrow}\]</div><div>\[\boxed{\sigma_I\uparrow\Rightarrow\text{risk adjustment}\uparrow}\]</div><div>\[\boxed{\gamma\uparrow\Rightarrow\text{risk adjustment}\uparrow}\]</div><div>\[\boxed{I&gt;0\Rightarrow\text{encourage dealer sales}}\]</div><div>\[\boxed{I&lt;0\Rightarrow\text{encourage dealer purchases}}\]</div><div>\[\boxed{T-t\downarrow\Rightarrow\text{future risk adjustment}\downarrow}\]</div>
+<p>And the one sentence summary:</p>
+<p>Ho and Stoll (1981) models a dealer who chooses bid and ask prices to maximize expected utility of terminal wealth, balancing spread revenue and transaction arrival against the risk created by uncertain order flow and uncertain returns on inventory.</p>
+</div>
+<h2 id="oo">2 · O'Hara &amp; Oldfield (1986): the microeconomics of market making</h2>
+<div class="idea"><p>These slides are about O’Hara and Oldfield (1986), “The Microeconomics of Market Making.” This paper is especially important because it extends the earlier dealer-pricing literature by explicitly incorporating both limit orders and market orders, and it shows how risk aversion and inventory affect both the size and location of the spread.</p></div>
+<div class="prob" id="s58"><h3>0. First: Where does O’Hara–Oldfield fit relative to Ho–Stoll?</h3>
+<p>Before the individual slides, understand this comparison:</p>
+<div class="tw"><table><tr><th>Feature</th><th>Ho &amp; Stoll (1981)</th><th>O’Hara &amp; Oldfield (1986)</th></tr><tr><td>Time</td><td>Continuous time</td><td>Discrete time</td></tr><tr><td>Horizon</td><td>Finite horizon</td><td>Infinite horizon</td></tr><tr><td>Orders</td><td>Mainly stochastic market/order arrivals</td><td>Limit + market orders</td></tr><tr><td>Inventory</td><td>Important</td><td>Very important</td></tr><tr><td>Risk aversion</td><td>Yes</td><td>Explicitly important</td></tr><tr><td>Inventory liquidation</td><td>At terminal \(T\)</td><td>No fixed liquidation date</td></tr><tr><td>Objective</td><td>Expected utility of terminal wealth</td><td>Expected discounted utility of trading profits</td></tr><tr><td>State variable</td><td>Cash, inventory, wealth</td><td>Mainly inventory</td></tr><tr><td>Main result</td><td>Spread + inventory effects</td><td>Spread decomposed into limit-order component + risk-neutral component + risk adjustment</td></tr></table></div>
+<p>The biggest conceptual difference is:</p>
+<div>\[\boxed{\text{Ho-Stoll: terminal wealth problem}}\]</div>
+<p>whereas</p>
+<div>\[\boxed{\text{O'Hara-Oldfield: repeated/infinite trading-profit problem}}\]</div>
+</div>
+<div class="prob" id="s59"><h3>SLIDE 1 — O'HARA AND OLDFIELD (1986)</h3><img src="slides/inv-58.jpg" alt="Deck inventory models, page 58" loading="lazy">
+<p>"The Microeconomics of Market Making"</p>
+<p>The paper asks:</p>
+<p>How should a market maker set bid and ask prices when he is risk averse, faces uncertain market orders, and has an inventory position?</p>
+<p>There are three important sources of economics here:</p>
+<p class="sh">1. Limit orders</p>
+<p>These are orders already sitting in the order book.</p>
+<p>For example:</p>
+<p>"I will buy 500 shares if price reaches ₹99."</p>
+<p>or</p>
+<p>"I will sell 300 shares if price reaches ₹101."</p>
+<p>The market maker can observe these orders.</p>
+<p class="sh">2. Market orders</p>
+<p>These arrive later and demand immediate execution.</p>
+<p>For example:</p>
+<p>"Buy 500 shares now at the current ask."</p>
+<p>The market maker doesn't know exactly how many market orders will arrive.</p>
+<p>Therefore:</p>
+<div>\[\boxed{\text{market-order flow is uncertain}}\]</div>
+<p class="sh">3. Inventory</p>
+<p>Suppose the market maker has accumulated:</p>
+<div>\[I=10,000\]</div>
+<p>shares.</p>
+<p>If the stock price falls, his inventory loses value.</p>
+<p>Therefore:</p>
+<div>\[\boxed{\text{inventory creates risk}}\]</div>
+<p class="sh">Main contribution of the paper</p>
+<p>The slide says:</p>
+<p>Bid-ask spread can be decomposed into three portions.</p>
+<p>Conceptually:</p>
+<div>\[\boxed{ \text{Spread} = \text{known-limit component} + \text{risk-neutral market-order component} + \text{risk adjustment} }\]</div>
+<p>This is the central result of the paper.</p>
+<p class="sh">Why is the risk-averse spread potentially smaller?</p>
+<p>This is one of the most counterintuitive results.</p>
+<p>You might initially think:</p>
+<p>"If the dealer is more risk averse, shouldn't he charge a larger spread?"</p>
+<p>Not necessarily.</p>
+<p>A risk-averse dealer may prefer to trade less aggressively, and depending on the covariance between order flow and marginal utility, the optimal spread can actually be smaller than the risk-neutral spread.</p>
+<p>So:</p>
+<div>\[\boxed{ \text{Risk aversion does NOT mechanically imply a larger spread} }\]</div>
+<p>This is a very important difference from simplistic inventory-risk intuition.</p>
+</div>
+<div class="prob" id="s60"><h3>SLIDE 2 — UNIQUE CONTRIBUTION</h3><img src="slides/inv-59.jpg" alt="Deck inventory models, page 59" loading="lazy">
+<p>This slide explains exactly what O'Hara and Oldfield added.</p>
+<p class="sh">1. Both limit and market orders</p>
+<p>Earlier models often focused primarily on market-order arrivals.</p>
+<p>O'Hara–Oldfield says:</p>
+<p>Let's also explicitly model the limit order book.</p>
+<p>Therefore the market maker knows something about the existing order book before choosing quotes.</p>
+<p>This creates an important information advantage.</p>
+<p class="sh">2. Order-flow uncertainty</p>
+<p>Market orders are uncertain.</p>
+<p>For example, the market maker might expect:</p>
+<div>\[500\]</div>
+<p>shares of buying pressure, but actual market demand could be:</p>
+<div>\[800\]</div>
+<p>or</p>
+<div>\[200.\]</div>
+<p>This uncertainty affects optimal prices.</p>
+<p class="sh">3. Inventory-value uncertainty</p>
+<p>Suppose:</p>
+<div>\[I=10,000.\]</div>
+<p>If stock price changes unexpectedly, the value of the inventory changes.</p>
+<p>Thus:</p>
+<div>\[\boxed{\text{Inventory value is uncertain}}\]</div>
+<p class="sh">4. Discrete-time model</p>
+<p>Unlike Ho-Stoll's continuous-time formulation, O'Hara–Oldfield divides time into discrete periods.</p>
+<p>For example:</p>
+<div>\[\text{Day 1} \rightarrow \text{Day 2} \rightarrow \text{Day 3} \rightarrow\cdots\]</div>
+<p>And each trading day is itself divided into:</p>
+<div>\[n\]</div>
+<p>trading intervals.</p>
+<p>So:</p>
+<div>\[\boxed{ \text{Day }j = t=1,2,\ldots,n }\]</div>
+<p class="sh">5. Infinite number of trading days</p>
+<p>The dealer does not optimize only until some terminal date \(T\).</p>
+<p>Instead:</p>
+<div>\[j=0,1,2,\ldots,\infty.\]</div>
+<p>This is why the model has an infinite horizon.</p>
+<p>The idea is:</p>
+<p>A market maker is continuously operating rather than planning to shut down at some predetermined liquidation date.</p>
+<p class="sh">6. Payoff occurs every day</p>
+<p>This is another major difference from Ho-Stoll.</p>
+<p>The dealer receives trading profits repeatedly.</p>
+<p>So there isn't necessarily:</p>
+<div>\[\boxed{\text{one final payoff at }T}\]</div>
+<p>Instead:</p>
+<div>\[\boxed{ \pi_1,\pi_2,\pi_3,\ldots }\]</div>
+<p>are earned through time.</p>
+<p class="sh">7. No presumed inventory liquidation date</p>
+<p>This is important.</p>
+<p>In Ho-Stoll, there is a terminal date where inventory is liquidated.</p>
+<p>Here:</p>
+<div>\[\boxed{\text{No fixed liquidation date}}\]</div>
+<p>The dealer can carry inventory from one period into the next.</p>
+<p>Therefore inventory itself becomes a state variable.</p>
+</div>
+<div class="prob" id="s61"><h3>SLIDE 3 — HOW IS THE MODEL DIFFERENT?</h3><img src="slides/inv-60.jpg" alt="Deck inventory models, page 60" loading="lazy">
+<p>This slide summarizes the previous one.</p>
+<p class="sh">1. Discrete time</p>
+<p>The market maker makes decisions at:</p>
+<div>\[t=1,2,\ldots,n\]</div>
+<p>rather than continuously.</p>
+<p class="sh">2. Both limit and market orders</p>
+<p>This is perhaps the most important modeling extension.</p>
+<p>The dealer sees:</p>
+<p class="sh">Existing limit orders</p>
+<p>Known at the beginning of the interval.</p>
+<p class="sh">Future market orders</p>
+<p>Not known exactly, only expected.</p>
+<p>So:</p>
+<div>\[\boxed{ \text{Known limit order flow} + \text{uncertain market order flow} }\]</div>
+<p class="sh">4. Overnight settlement</p>
+<p>This is an interesting feature.</p>
+<p>Suppose the dealer finishes today with:</p>
+<div>\[I_n=+10,000\]</div>
+<p>shares.</p>
+<p>Those shares need financing overnight.</p>
+<p>The dealer can borrow/lend through a repurchase market.</p>
+<p>The slide says:</p>
+<p>If the dealer is short, he pays \(r\tilde p I_n\), and if long, he receives it.</p>
+<p>So the overnight financing/stock-lending cost depends on inventory.</p>
+<p>If dealer is long</p>
+<div>\[I_n&gt;0.\]</div>
+<p>He owns shares.</p>
+<p>The model gives him the corresponding overnight amount.</p>
+<p>If dealer is short</p>
+<div>\[I_n&lt;0.\]</div>
+<p>He has borrowed/sold shares short.</p>
+<p>There is a financing/stock-borrow cost.</p>
+<p class="sh">Why is this important?</p>
+<p>Because inventory doesn't just create price risk.</p>
+<p>It also creates:</p>
+<div>\[\boxed{\text{financing/holding cost}}\]</div>
+<p>between trading days.</p>
+<p>So inventory affects future profitability.</p>
+</div>
+<div class="prob" id="s62"><h3>SLIDE 4 — CONTRIBUTION</h3><img src="slides/inv-61.jpg" alt="Deck inventory models, page 61" loading="lazy">
+<p>The spread is decomposed into three components.</p>
+<p>This is probably the most important slide conceptually.</p>
+<div>\[\boxed{ \text{Spread} = \text{Known-limit component} + \text{Risk-neutral adjustment} + \text{Risk adjustment} }\]</div>
+<p>Let's understand each.</p>
+<p class="sh">Component 1: Known-limit orders</p>
+<p>The dealer already knows the limit order book.</p>
+<p>For example:</p>
+<div class="tw"><table><tr><th>Price</th><th>Limit orders</th></tr><tr><td>₹101</td><td>Sell 500</td></tr><tr><td>₹100.5</td><td>Sell 300</td></tr><tr><td>₹99.5</td><td>Buy 200</td></tr><tr><td>₹99</td><td>Buy 600</td></tr></table></div>
+<p>This information tells the market maker something about potential trading opportunities.</p>
+<p>Therefore some portion of the optimal quote comes from the existing limit-order book.</p>
+<p class="sh">Component 2: Risk-neutral adjustment</p>
+<p>Suppose the dealer is risk neutral.</p>
+<p>Then he only cares about expected profit.</p>
+<p>He asks:</p>
+<p class="sh">At what price should I quote so that expected trading profit is maximized?</p>
+<p>This creates the risk-neutral adjustment.</p>
+<p class="sh">Component 3: Risk adjustment</p>
+<p>Now suppose the dealer is risk averse.</p>
+<p>He additionally asks:</p>
+<p>"What happens to my utility if this trade increases my inventory risk?"</p>
+<p>Therefore the optimal quote contains a risk adjustment.</p>
+<p class="sh">The surprising part</p>
+<p>The slide says:</p>
+<p>A risk-averse market maker may set a smaller spread than a risk-neutral specialist.</p>
+<p class="sh">Why?</p>
+<p>Because the risk adjustment term can be negative.</p>
+<p>This will become clear when we reach equation (2.47).</p>
+<p>Inventory affects both:</p>
+<div>\[\boxed{\text{size of spread}}\]</div>
+<p>and</p>
+<div>\[\boxed{\text{location of spread}}\]</div>
+<p>This is stronger than simply saying inventory shifts the midpoint.</p>
+<p>In this model, inventory can affect both:</p>
+<ul><li>how wide the spread is,</li><li>where the bid and ask are located.</li></ul>
+</div>
+<div class="prob" id="s63"><h3>SLIDE 5 — MODEL</h3><img src="slides/inv-62.jpg" alt="Deck inventory models, page 62" loading="lazy">
+<p>Now we reach the central objective function.</p>
+<p>The dealer chooses:</p>
+<div>\[a_t,b_t\]</div>
+<p>where:</p>
+<ul><li>\(a_t\) = ask price</li><li>\(b_t\) = bid price</li></ul>
+<p>to maximize:</p>
+<div>\[\boxed{ E\left[ \sum_{j=0}^{\infty} \phi^j U \left( \sum_{t=1}^{n}\tilde{\pi}_{jt} \right) \right] }\]</div>
+<p>Let's break this down.</p>
+<p>What is \(j\)?</p>
+<div>\[j=0,1,2,\ldots\]</div>
+<p>is the trading-day index.</p>
+<p class="sh">What is \(t\)?</p>
+<p>Within each day:</p>
+<div>\[t=1,\ldots,n.\]</div>
+<p>So:</p>
+<div>\[\tilde{\pi}_{jt}\]</div>
+<p>is the trading profit during interval \(t\) of day \(j\).</p>
+<p>What is \(\phi\)?</p>
+<div>\[\boxed{0\leq\phi&lt;1}\]</div>
+<p>is the discount factor.</p>
+<p>It tells us how much the dealer values future profits relative to current profits.</p>
+<p>For example:</p>
+<div>\[\phi=0.95.\]</div>
+<p>Then next year's/day's profits are discounted.</p>
+<p class="sh">What happens if \(\phi\) increases?</p>
+<p>Suppose:</p>
+<div>\[\phi=0.5.\]</div>
+<p>The dealer heavily discounts future profits.</p>
+<p>Now:</p>
+<div>\[\phi=0.99.\]</div>
+<p>Future profits matter much more.</p>
+<p>Thus:</p>
+<div>\[\boxed{ \phi\uparrow \Rightarrow \text{future profits become more important} }\]</div>
+<p>This can affect inventory decisions because carrying inventory into future periods becomes more relevant.</p>
+<p class="sh">What is \(U\)?</p>
+<p>\(U\) is a concave utility function.</p>
+<p>The slide says:</p>
+<div>\[U''&lt;0.\]</div>
+<p>This means:</p>
+<div>\[\boxed{\text{dealer is risk averse}}\]</div>
+<p>because marginal utility decreases as wealth/profit increases.</p>
+<p class="sh">Why does \(U''&lt;0\) imply risk aversion?</p>
+<p>Suppose:</p>
+<div>\[U(x)=\sqrt{x}.\]</div>
+<p>Then:</p>
+<div>\[U''(x)&lt;0.\]</div>
+<p>The dealer prefers a smoother payoff to a highly uncertain payoff with the same expected value.</p>
+<p>This is why risk enters the optimal pricing.</p>
+</div>
+<div class="prob" id="s64"><h3>SLIDE 6 — HOW DOES THE MARKET MAKER TRADE?</h3><img src="slides/inv-63.jpg" alt="Deck inventory models, page 63" loading="lazy">
+<p>At the beginning of every trading interval, the market maker knows the limit order book.</p>
+<p>For example:</p>
+<div>\[\boxed{ \text{Buy limits} + \text{Sell limits} }\]</div>
+<p>with:</p>
+<ul><li>quantities,</li><li>prices.</li></ul>
+<p>This information is known.</p>
+<p class="sh">But market orders are uncertain</p>
+<p>The dealer doesn't know exactly how many market orders will arrive.</p>
+<p>He has an expectation.</p>
+<p>For example:</p>
+<div>\[E[\text{market buys}]=500.\]</div>
+<p>But actual market buys could be:</p>
+<div>\[300,\;500,\;700,\ldots\]</div>
+<p>Therefore:</p>
+<div>\[\boxed{\text{market-order uncertainty}}\]</div>
+<p class="sh">Dealer's decision sequence</p>
+<p>This is extremely important.</p>
+<p class="sh">Step 1</p>
+<p>Observe limit order book.</p>
+<p class="sh">Step 2</p>
+<p>Form expectations about future market orders.</p>
+<p class="sh">Step 3</p>
+<p>Choose:</p>
+<div>\[a_t,b_t.\]</div>
+<p class="sh">Step 4</p>
+<p>Execute relevant limit orders and market orders.</p>
+<p class="sh">Step 5</p>
+<p>Calculate ending inventory.</p>
+<p class="sh">Step 6</p>
+<p>Move to next trading interval.</p>
+<p>So:</p>
+<div>\[\boxed{ \text{Observe} \rightarrow \text{Expect} \rightarrow \text{Quote} \rightarrow \text{Trade} \rightarrow \text{Update inventory} }\]</div>
+</div>
+<div class="prob" id="s65"><h3>SLIDE 7 — LIMIT ORDERS: ASK AND BID</h3><img src="slides/inv-64.jpg" alt="Deck inventory models, page 64" loading="lazy">
+<p>Now the equations become more detailed.</p>
+<p>The limit buy orders are:</p>
+<div>\[\boxed{ A_t^L = \alpha^L-a_t\gamma^L = \int_{a_t}^{\bar a}q_a(a_t)\,da_t }\]</div>
+<p>and limit sell orders:</p>
+<div>\[\boxed{ B_t^L = \beta^L+b_t\phi^L = \int_{\underline b}^{b_t}q_b(b_t)\,db_t }\]</div>
+<p>Don't get scared by these equations.</p>
+<p>The economic idea is simple.</p>
+<p class="sh">Understanding \(A_t^L\)</p>
+<p>\(A_t^L\) represents the quantity of limit orders to buy from the dealer.</p>
+<p>It depends on the dealer's ask price.</p>
+<p>The model writes:</p>
+<div>\[A_t^L=\alpha^L-a_t\gamma^L.\]</div>
+<p>Therefore:</p>
+<div>\[\boxed{ \frac{\partial A_t^L}{\partial a_t} = -\gamma^L }\]</div>
+<p>assuming:</p>
+<div>\[\gamma^L&gt;0.\]</div>
+<p>So:</p>
+<div>\[\boxed{ a_t\uparrow \Rightarrow A_t^L\downarrow }\]</div>
+<p class="sh">Economic interpretation</p>
+<p>If the dealer increases his ask:</p>
+<div>\[a_t\uparrow\]</div>
+<p>customers must pay more.</p>
+<p>Therefore fewer limit buy orders are willing to trade with him.</p>
+<p class="sh">Understanding \(B_t^L\)</p>
+<p>Similarly:</p>
+<div>\[B_t^L=\beta^L+b_t\phi^L.\]</div>
+<p>Therefore:</p>
+<div>\[\frac{\partial B_t^L}{\partial b_t} = \phi^L.\]</div>
+<p>If:</p>
+<div>\[\phi^L&gt;0,\]</div>
+<p>then:</p>
+<div>\[\boxed{ b_t\uparrow \Rightarrow B_t^L\uparrow }\]</div>
+<p class="sh">Why?</p>
+<p>Because a higher bid gives sellers a better price.</p>
+<p class="sh">Important difference from the previous notation</p>
+<p>Here \(a_t\) and \(b_t\) are being used as actual ask and bid prices, rather than the \(a,b\) price offsets used in your previous Ho-Stoll slide.</p>
+<p>So don't confuse:</p>
+<div>\[\text{Ho-Stoll }a,b\]</div>
+<p>with</p>
+<div>\[\text{O'Hara-Oldfield actual }a_t,b_t.\]</div>
+<p class="sh">What are \(\alpha^L,\beta^L\)?</p>
+<p>They represent baseline components of limit-order demand/supply.</p>
+<p>And:</p>
+<div>\[\gamma^L,\phi^L\]</div>
+<p>represent sensitivities of limit-order quantities to prices.</p>
+</div>
+<div class="prob" id="s66"><h3>SLIDE 8 — MARKET ORDER FLOW</h3><img src="slides/inv-65.jpg" alt="Deck inventory models, page 65" loading="lazy">
+<p>The model now introduces market orders.</p>
+<p>The equations are:</p>
+<div>\[\boxed{ \tilde A_t^m = \alpha^m-a_t\gamma^m+\tilde\omega_t }\]</div>
+<p>and</p>
+<div>\[\boxed{ \tilde B_t^m = \beta^m+b_t\phi^m+\tilde\epsilon_t }\]</div>
+<p class="sh">What does the tilde mean?</p>
+<p>A tilde means the quantity is random.</p>
+<p>For example:</p>
+<div>\[\tilde A_t^m\]</div>
+<p>is random market-buy order flow.</p>
+<p>Market buy orders</p>
+<div>\[\tilde A_t^m = \alpha^m-a_t\gamma^m+\tilde\omega_t.\]</div>
+<p>There are three parts.</p>
+<p>Expected/base component</p>
+<div>\[\alpha^m\]</div>
+<p>Price effect</p>
+<div>\[-a_t\gamma^m\]</div>
+<p>Random component</p>
+<div>\[\tilde\omega_t.\]</div>
+<p>Why is the price coefficient negative?</p>
+<div>\[-a_t\gamma^m.\]</div>
+<p>If:</p>
+<div>\[a_t\uparrow,\]</div>
+<p>the ask price becomes more expensive.</p>
+<p>Therefore market buyers demand less.</p>
+<p>So:</p>
+<div>\[\boxed{ a_t\uparrow \Rightarrow \tilde A_t^m\downarrow }\]</div>
+<p>in expectation.</p>
+<p>Market sell orders</p>
+<div>\[\tilde B_t^m = \beta^m+b_t\phi^m+\tilde\epsilon_t.\]</div>
+<p>If:</p>
+<div>\[b_t\uparrow,\]</div>
+<p>the dealer offers a better price to sellers.</p>
+<p>Therefore more sellers are willing to sell.</p>
+<p>Thus:</p>
+<div>\[\boxed{ b_t\uparrow \Rightarrow \tilde B_t^m\uparrow }\]</div>
+<p>in expectation.</p>
+<p class="sh">What are \(\tilde\omega_t\) and \(\tilde\epsilon_t\)?</p>
+<p>These are random variables.</p>
+<p>They capture unexpected market-order flow.</p>
+<p>For example:</p>
+<p>Expected buying:</p>
+<div>\[500.\]</div>
+<p>Actual:</p>
+<div>\[700.\]</div>
+<p>Then the surprise is:</p>
+<div>\[\tilde\omega_t=200.\]</div>
+<p>Similarly, if expected selling is 400 but actual selling is 250:</p>
+<div>\[\tilde\epsilon_t=-150.\]</div>
+<p class="sh">Why are these random terms important?</p>
+<p>Because the dealer doesn't know future market-order flow exactly.</p>
+<p>Thus:</p>
+<div>\[\boxed{ \text{uncertain order flow} \rightarrow \text{inventory uncertainty} }\]</div>
+</div>
+<div class="prob" id="s67"><h3>SLIDE 9 — ORDER CLEARING</h3><img src="slides/inv-66.jpg" alt="Deck inventory models, page 66" loading="lazy">
+<p>Now we ask:</p>
+<p class="sh">What happens after all these orders arrive?</p>
+<p>The dealer must clear all relevant orders at his quoted prices.</p>
+<p>Therefore he can end up with:</p>
+<div>\[\boxed{I_n&gt;0}\]</div>
+<p>or:</p>
+<div>\[\boxed{I_n&lt;0}.\]</div>
+<p>Positive inventory</p>
+<div>\[I_n&gt;0.\]</div>
+<p>Dealer is long.</p>
+<p>He owns shares.</p>
+<p>Negative inventory</p>
+<div>\[I_n&lt;0.\]</div>
+<p>Dealer is short.</p>
+<p>He owes/has borrowed shares.</p>
+<p class="sh">End-of-day settlement</p>
+<p>At the end of the day, all transactions are settled.</p>
+<p>But inventory may remain.</p>
+<p>So the dealer needs overnight financing.</p>
+<p class="sh">Repurchase market</p>
+<p>The overnight market establishes:</p>
+<div>\[\tilde p\]</div>
+<p>and</p>
+<div>\[r.\]</div>
+<p>Here:</p>
+<ul><li>\(\tilde p\) = random/market value used for overnight transaction</li><li>\(r\) = interest/financing rate</li></ul>
+<p>If dealer is short, he pays a financing/borrowing cost.</p>
+<p>If dealer is long, he receives the corresponding amount.</p>
+<p>This creates another inventory-related cash-flow effect.</p>
+</div>
+<div class="prob" id="s68"><h3>SLIDE 10 — INVENTORY AND DEALER'S PROBLEM</h3><img src="slides/inv-67.jpg" alt="Deck inventory models, page 67" loading="lazy">
+<p>This is one of the most important slides.</p>
+<p>The paper says:</p>
+<p>Inventory affects both current cash flow and future operations.</p>
+<p>Therefore:</p>
+<div>\[\boxed{ I_n=\text{state variable} }\]</div>
+<p class="sh">Why?</p>
+<p>Because what you hold today affects what you can do tomorrow.</p>
+<p class="sh">Dynamic programming equation</p>
+<p>The problem is:</p>
+<div>\[\boxed{ \max E \left[ U\left( \sum_{t=1}^{n}\tilde\pi_t \right) + V(\tilde I_n) \right] }\]</div>
+<p>Let's understand it.</p>
+<p>First part</p>
+<div>\[U\left( \sum_{t=1}^{n}\tilde\pi_t \right)\]</div>
+<p>is the utility of today's trading profits.</p>
+<p>Second part</p>
+<div>\[V(\tilde I_n)\]</div>
+<p>is the continuation value of ending the day with inventory \(I_n\).</p>
+<p>This is crucial.</p>
+<p class="sh">What does \(V(I_n)\) mean?</p>
+<p>Suppose you finish today with:</p>
+<div>\[I_n=5000.\]</div>
+<p>That inventory affects tomorrow's opportunities.</p>
+<p>So the value function asks:</p>
+<p>Given that I carry 5,000 shares into tomorrow, how much future expected utility can I obtain if I behave optimally tomorrow and thereafter?</p>
+<p>That's:</p>
+<div>\[V(5000).\]</div>
+<p>Therefore</p>
+<div>\[\boxed{ V(I) = \text{value of future trading opportunities given inventory }I }\]</div>
+<p>This is why inventory is a state variable.</p>
+</div>
+<div class="prob" id="s69"><h3>SLIDE 11 — OPTIMAL PRICING</h3><img src="slides/inv-68.jpg" alt="Deck inventory models, page 68" loading="lazy">
+<p>This slide says:</p>
+<p>Work backward.</p>
+<p>This is the dynamic programming approach.</p>
+<p>You first solve the final/last decision, then use that information to solve the previous decision.</p>
+<p class="sh">Why work backward?</p>
+<p>Suppose there are three intervals:</p>
+<div>\[1\rightarrow2\rightarrow3.\]</div>
+<p>At interval 3, you know what happens after interval 3: essentially nothing within the day.</p>
+<p>So you can solve:</p>
+<div>\[a_3^*,b_3^*.\]</div>
+<p>Then use that solution to determine:</p>
+<div>\[a_2^*,b_2^*.\]</div>
+<p>Then:</p>
+<div>\[a_1^*,b_1^*.\]</div>
+<p>Thus:</p>
+<div>\[\boxed{ \text{Backward induction} }\]</div>
+<p class="sh">Equation (2.41)</p>
+<p>The objective contains:</p>
+<p>1. Previous accumulated profits</p>
+<div>\[\sum_{t=1}^{n-1}\tilde\pi_t\]</div>
+<p>2. Current ask-side trading</p>
+<div>\[a_n(\alpha-a_n\gamma+\tilde\omega_n)\]</div>
+<p>3. Current bid-side trading</p>
+<div>\[-b_n(\beta+b_n\phi+\tilde\epsilon_n)\]</div>
+<p>4. Inventory financing cost/benefit</p>
+<div>\[r\tilde p(\cdots)\]</div>
+<p>5. Continuation value</p>
+<div>\[V(\cdots)\]</div>
+<p>So the dealer isn't merely maximizing today's spread revenue.</p>
+<p>He is maximizing:</p>
+<div>\[\boxed{ \text{current profit} + \text{inventory consequences} + \text{future value} }\]</div>
+</div>
+<div class="prob" id="s70"><h3>SLIDE 12 — DEALER'S PROFIT</h3><img src="slides/inv-69.jpg" alt="Deck inventory models, page 69" loading="lazy">
+<p>The profit equation is:</p>
+<div>\[\boxed{ \pi_n= a_n(\alpha-a_n\gamma+\tilde\omega_n) - b_n(\beta+b_n\phi+\tilde\epsilon_n) + r\tilde p ( I_{n-1} +\beta+b_n\phi+\tilde\epsilon_n -\alpha+a_n\gamma-\tilde\omega_n ) }\]</div>
+<p>This looks complicated, but it has a very intuitive structure.</p>
+<p>First term</p>
+<div>\[\boxed{ a_n(\alpha-a_n\gamma+\tilde\omega_n) }\]</div>
+<p>This is the ask-side cash-flow effect.</p>
+<p>The dealer sells to buyers.</p>
+<p>Revenue depends on:</p>
+<div>\[\text{ask price}\times\text{quantity sold}.\]</div>
+<p>Second term</p>
+<div>\[\boxed{ -b_n(\beta+b_n\phi+\tilde\epsilon_n) }\]</div>
+<p>This is the bid-side cash-flow effect.</p>
+<p>The dealer buys from sellers.</p>
+<p>Buying costs money, hence the negative sign.</p>
+<p>Third term</p>
+<div>\[\boxed{ r\tilde p(\text{ending inventory}) }\]</div>
+<p>This represents the financing/lending cost or benefit associated with carrying inventory overnight.</p>
+<p class="sh">Important economic trade-off</p>
+<p>Suppose ask price \(a_n\) increases.</p>
+<p>Then:</p>
+<p class="sh">Revenue per share increases</p>
+<p>but:</p>
+<p>Quantity sold decreases.</p>
+<p>Because:</p>
+<div>\[Q_a=\alpha-a_n\gamma+\omega_n.\]</div>
+<p>So:</p>
+<div>\[a_n\uparrow \Rightarrow \text{price per share}\uparrow\]</div>
+<p>but</p>
+<div>\[a_n\uparrow \Rightarrow \text{quantity sold}\downarrow.\]</div>
+<p>Therefore the dealer needs an optimal price.</p>
+</div>
+<div class="prob" id="s71"><h3>SLIDE 13 — OPTIMAL ASK AND BID</h3><img src="slides/inv-70.jpg" alt="Deck inventory models, page 70" loading="lazy">
+<p>This is one of the most important mathematical slides.</p>
+<p>The optimal ask:</p>
+<div>\[\boxed{ a_n= \frac{\alpha}{2\gamma} + \frac{E(U'\tilde\omega_n)}{2\gamma E(U')} + \frac{E(U'\tilde p)}{2E(U')} + \frac{E(V')}{2E(U')} }\]</div>
+<p>And optimal bid:</p>
+<div>\[\boxed{ b_n= -\frac{\beta}{2\phi} - \frac{E(U'\tilde\epsilon_n)} {2\phi E(U')} + \frac{rE(U'\tilde p)} {2E(U')} + \frac{E(V')} {2E(U')} }\]</div>
+<p>The slide groups these terms into:</p>
+<ul><li>known limit orders,</li><li>expected market orders,</li><li>inventory/risk effects.</li></ul>
+<p>Let's unpack.</p>
+<p>ASK PRICE — first term</p>
+<div>\[\boxed{ \frac{\alpha}{2\gamma} }\]</div>
+<p>This is related to the baseline demand for buying from the dealer.</p>
+<p>If:</p>
+<div>\[\alpha\uparrow\]</div>
+<p>then:</p>
+<div>\[a_n\uparrow.\]</div>
+<p class="sh">Why?</p>
+<p>Because stronger baseline demand allows the dealer to charge more.</p>
+<p>ASK PRICE — denominator \(\gamma\)</p>
+<div>\[\frac{\alpha}{2\gamma}.\]</div>
+<p>Here \(\gamma\) measures how strongly market buying responds to ask price.</p>
+<p>If:</p>
+<div>\[\gamma\uparrow,\]</div>
+<p>buyers become more price sensitive.</p>
+<p>Therefore the dealer cannot increase ask too much without losing quantity.</p>
+<p>Thus:</p>
+<div>\[\boxed{ \gamma\uparrow \Rightarrow \text{optimal ask component}\downarrow }\]</div>
+<p>ASK PRICE — random-order-flow term</p>
+<div>\[\frac{E(U'\tilde\omega_n)} {2\gamma E(U')}.\]</div>
+<p>This is where risk aversion enters.</p>
+<p>If unexpected buying is associated with high marginal utility states, the dealer values those outcomes differently.</p>
+<p>Therefore the covariance between:</p>
+<div>\[U'\]</div>
+<p>and</p>
+<div>\[\tilde\omega_n\]</div>
+<p>matters.</p>
+<p>ASK PRICE — inventory/value term</p>
+<div>\[\frac{E(U'\tilde p)} {2E(U')}.\]</div>
+<p>This captures the interaction between utility and the value of inventory/financing.</p>
+<p>Again:</p>
+<div>\[\boxed{ \text{risk and inventory affect optimal ask} }\]</div>
+<p>ASK PRICE — continuation-value term</p>
+<div>\[\frac{E(V')}{2E(U')}.\]</div>
+<p>This says:</p>
+<p>The value of ending the period with inventory affects today's ask.</p>
+<p>That is dynamic programming.</p>
+<p class="sh">BID PRICE</p>
+<p>The first term is:</p>
+<div>\[-\frac{\beta}{2\phi}.\]</div>
+<p>Because \(\beta\) represents baseline selling pressure to the dealer.</p>
+<p>The negative sign reflects the fact that a bid is a cash outflow: the dealer pays to acquire shares.</p>
+<p class="sh">What happens if \(\beta\) increases?</p>
+<p>Ignoring the other terms:</p>
+<div>\[b_n=-\frac{\beta}{2\phi}+\cdots\]</div>
+<p>so:</p>
+<div>\[\boxed{ \beta\uparrow \Rightarrow b_n\downarrow }\]</div>
+<p>under this parameterization.</p>
+<p>Interpretation:</p>
+<p>Higher baseline selling/order flow affects the optimal bid because the dealer faces more potential inventory accumulation.</p>
+<p class="sh">Why is \(b_n\) written with a negative first term?</p>
+<p>Because of the particular definition/normalization of \(b_n\) in this paper.</p>
+<p>Don't try to interpret the sign without looking at the whole equation.</p>
+<p>The important economic relationship is:</p>
+<div>\[\boxed{ \text{optimal bid balances purchase profitability against inventory consequences} }\]</div>
+</div>
+<div class="prob" id="s72"><h3>SLIDE 14 — MARKET MAKER'S SPREAD</h3><img src="slides/inv-71.jpg" alt="Deck inventory models, page 71" loading="lazy">
+<p>Now we get the key result.</p>
+<p>The spread is:</p>
+<div>\[\boxed{ a_n-b_n }\]</div>
+<p>and the paper obtains:</p>
+<div>\[\boxed{ a_n-b_n = \frac{\alpha\phi+\beta\gamma} {2\phi\gamma} + \frac{ \phi E(\tilde\omega_n)+ \gamma E(\tilde\epsilon_n) } {2\phi\gamma} + \frac{ \phi\operatorname{Cov}(U',\tilde\omega_n) + \gamma\operatorname{Cov}(U',\tilde\epsilon_n) } {2\phi\gamma E(U')} }\]</div>
+<p>This is the equation you really need to understand.</p>
+<p class="sh">Break it into three pieces</p>
+<p>Write:</p>
+<div>\[\boxed{ S=S_{KN}+S_{RN}+S_R }\]</div>
+<p>where:</p>
+<p>\(S_{KN}\)</p>
+<p>Known-limit component.</p>
+<p>\(S_{RN}\)</p>
+<p>Risk-neutral expected-order-flow component.</p>
+<p>\(S_R\)</p>
+<p>Risk adjustment.</p>
+<p>First term</p>
+<div>\[\boxed{ \frac{\alpha\phi+\beta\gamma} {2\phi\gamma} }\]</div>
+<p>This reflects the known/expected structure of order flow.</p>
+<p>Second term</p>
+<div>\[\boxed{ \frac{ \phi E(\tilde\omega_n)+ \gamma E(\tilde\epsilon_n) } {2\phi\gamma} }\]</div>
+<p>This incorporates expected market-order flow.</p>
+<p>Third term</p>
+<div>\[\boxed{ \frac{ \phi\operatorname{Cov}(U',\tilde\omega_n) + \gamma\operatorname{Cov}(U',\tilde\epsilon_n) } {2\phi\gamma E(U')} }\]</div>
+<p>This is the risk adjustment.</p>
+<p>This is where risk aversion enters the spread.</p>
+<p class="sh">Why does covariance appear?</p>
+<p>This is extremely important.</p>
+<p>Recall:</p>
+<div>\[U'=U'(\pi)\]</div>
+<p>is marginal utility.</p>
+<p>If an unexpected order arrives, it changes the dealer's profit/inventory.</p>
+<p>The effect on utility depends on whether that unexpected order occurs when marginal utility is high or low.</p>
+<p>Therefore we need:</p>
+<div>\[\boxed{ \operatorname{Cov}(U',\text{order shock}) }\]</div>
+<p>rather than merely:</p>
+<div>\[\operatorname{Var}(\text{order shock}).\]</div>
+<p class="sh">Why can the risk adjustment be negative?</p>
+<p>Suppose:</p>
+<div>\[\operatorname{Cov}(U',\tilde\omega_n)&lt;0\]</div>
+<p>and/or</p>
+<div>\[\operatorname{Cov}(U',\tilde\epsilon_n)&lt;0.\]</div>
+<p>Then the numerator of the risk term can be negative.</p>
+<p>Therefore:</p>
+<div>\[S_R&lt;0.\]</div>
+<p>Hence:</p>
+<div>\[\boxed{ S_{\text{risk-averse}} &lt; S_{\text{risk-neutral}} }\]</div>
+<p>can occur.</p>
+<p>This is the surprising O'Hara–Oldfield result shown on the slide.</p>
+<p class="sh">Risk-neutral dealer</p>
+<p>If the dealer is risk neutral:</p>
+<div>\[U(W)=W.\]</div>
+<p>Then:</p>
+<div>\[U'=\text{constant}.\]</div>
+<p>Therefore:</p>
+<div>\[\operatorname{Cov}(U',X)=0\]</div>
+<p>for any random variable \(X\).</p>
+<p>Hence:</p>
+<div>\[\boxed{S_R=0}\]</div>
+<p>and the spread reduces to the risk-neutral components.</p>
+<svg class="fig" viewBox="0 0 540 300" role="img" aria-label="O'Hara–Oldfield spread: risk-neutral dealer has known-limit plus risk-neutral parts only; a risk-averse dealer with negative covariance has a smaller spread; with positive covariance a larger one">
+<line class="ln" x1="40" y1="250" x2="520" y2="250"/>
+<rect class="rg" x="70" y="148" width="80" height="102"/>
+<rect class="sol" x="70" y="80" width="80" height="68"/>
+<text x="110" y="270" text-anchor="middle">risk-neutral</text>
+<text class="m" x="110" y="288" text-anchor="middle">Cov = 0</text>
+<rect class="rg" x="240" y="148" width="80" height="102"/>
+<rect class="sol" x="240" y="121" width="80" height="27"/>
+<rect class="bad dsh" x="240" y="80" width="80" height="41" style="fill-opacity:0"/>
+<text class="g" x="280" y="72" text-anchor="middle">S_R &lt; 0 cuts this</text>
+<text x="280" y="270" text-anchor="middle">risk-averse</text>
+<text class="m" x="280" y="288" text-anchor="middle">Cov &lt; 0</text>
+<rect class="rg" x="410" y="148" width="80" height="102"/>
+<rect class="sol" x="410" y="80" width="80" height="68"/>
+<rect class="bad" x="410" y="39" width="80" height="41"/>
+<text class="g" x="450" y="64" text-anchor="middle">S_R &gt; 0</text>
+<text x="450" y="270" text-anchor="middle">risk-averse</text>
+<text class="m" x="450" y="288" text-anchor="middle">Cov &gt; 0</text>
+<text class="a" x="110" y="204" text-anchor="middle">S_KN</text>
+<text x="110" y="119" text-anchor="middle">S_RN</text>
+</svg>
+<p><b>Figure (illustrative sizes).</b> Blue = known-limit part \(S_{KN}\), grey = risk-neutral expected-order part \(S_{RN}\), orange = risk adjustment \(S_R\). For a risk-neutral dealer \(U'\) is constant, so \(S_R = 0\). For a risk-averse dealer \(S_R\) has the sign of the covariance term: negative covariance makes the spread <i>smaller</i> than the risk-neutral one.</p>
+<ul><li>This is an excellent exam question</li><li>Q: Why does the covariance term disappear under risk neutrality?</li></ul>
+<p>Because:</p>
+<div>\[U'=\text{constant}.\]</div>
+<p>The covariance of a constant with any random variable is zero:</p>
+<div>\[\operatorname{Cov}(c,X)=0.\]</div>
+<p>Therefore:</p>
+<div>\[\boxed{\text{risk adjustment}=0}.\]</div>
+</div>
+<div class="prob" id="s73"><h3>SLIDE 15 — FINDINGS</h3><img src="slides/inv-72.jpg" alt="Deck inventory models, page 72" loading="lazy">
+<p>The final slide gives two major conclusions.</p>
+<p class="sh">Finding 1: Risk aversion affects both spread and individual prices</p>
+<p>Risk aversion can change:</p>
+<div>\[a_n\]</div>
+<p>and:</p>
+<div>\[b_n.\]</div>
+<p>Therefore it changes both:</p>
+<ul><li>spread size,</li><li>spread location.</li><li>Finding 2: Risk-averse spread can be smaller</li></ul>
+<p>Again:</p>
+<div>\[S=S_{RN}+S_R.\]</div>
+<p>If:</p>
+<div>\[S_R&lt;0,\]</div>
+<p>then:</p>
+<div>\[S&lt;S_{RN}.\]</div>
+<p>So:</p>
+<div>\[\boxed{ \text{Risk aversion can narrow the spread} }\]</div>
+<p>under this model.</p>
+<p class="sh">Finding 3: Inventory has a pervasive influence</p>
+<p>Inventory affects:</p>
+<div>\[\boxed{\text{where the spread is located}}\]</div>
+<p>and:</p>
+<div>\[\boxed{\text{how large the spread is}}\]</div>
+<p>This is stronger than the earlier simple idea:</p>
+<p>"Inventory only shifts the midpoint."</p>
+<p>Here inventory interacts with future value and risk.</p>
+<p class="sh">VERY IMPORTANT: Why can inventory affect spread size?</p>
+<p>Suppose the dealer is heavily long.</p>
+<p>Then future inventory exposure becomes undesirable.</p>
+<p>The dealer may modify both sides of the quote.</p>
+<p>Because both optimal:</p>
+<div>\[a_n\]</div>
+<p>and:</p>
+<div>\[b_n\]</div>
+<p>depend on the continuation value:</p>
+<div>\[V(I_n).\]</div>
+<p>Therefore their difference:</p>
+<div>\[a_n-b_n\]</div>
+<p>can also depend on inventory.</p>
+</div>
+<div class="prob" id="s74"><h3>Now let's build your "WHAT IF?" exam questions</h3>
+<p>These are particularly useful for this paper.</p>
+<details><summary>Q1. What happens if risk aversion increases?</summary>
+<p>Let risk aversion increase.</p>
+<p>Then marginal utility becomes more sensitive to uncertainty.</p>
+<p>Therefore the covariance terms become more important.</p>
+<p>The key point:</p>
+<div>\[\boxed{ \text{Spread does not necessarily increase} }\]</div>
+<p>because the risk adjustment can be positive or negative.</p>
+</details>
+<details><summary>Q2. What happens if the dealer becomes risk neutral?</summary>
+<p>Then:</p>
+<div>\[U'=\text{constant}.\]</div>
+<p>Therefore:</p>
+<div>\[\operatorname{Cov}(U',\tilde\omega) = \operatorname{Cov}(U',\tilde\epsilon) =0.\]</div>
+<p>Thus:</p>
+<div>\[\boxed{ S_R=0 }\]</div>
+<p>and only risk-neutral components remain.</p>
+</details>
+<details><summary>Q3. What happens if unexpected market buying increases?</summary>
+<p>Suppose:</p>
+<div>\[\tilde\omega_n\uparrow.\]</div>
+<p>The dealer receives more unexpected buying pressure.</p>
+<p>He sells more inventory.</p>
+<p>If he is already long, this may actually help him reduce inventory.</p>
+<p>If he is short, it can make his position worse.</p>
+<p>Therefore the effect depends on inventory and the covariance structure.</p>
+</details>
+<details><summary>Q4. What happens if unexpected market selling increases?</summary>
+<div>\[\tilde\epsilon_n\uparrow.\]</div>
+<p>The dealer buys more shares.</p>
+<p>Thus inventory increases.</p>
+<p>If dealer is already long:</p>
+<div>\[\boxed{\text{inventory risk increases}}\]</div>
+<p>If dealer is short:</p>
+<div>\[\boxed{\text{short position may be reduced}}\]</div>
+</details>
+<details><summary>Q5. What happens if inventory \(I\) increases?</summary>
+<p>The dealer becomes more long.</p>
+<p>He has greater exposure to future stock-price movements.</p>
+<p>Therefore he generally wants to encourage customers to buy from him and discourage further sales to him.</p>
+<p>Thus:</p>
+<div>\[\boxed{ I\uparrow \Rightarrow \text{quote skew toward reducing inventory} }\]</div>
+<p>But unlike simpler models, the inventory effect can also change spread width.</p>
+</details>
+<details><summary>Q6. What happens if inventory becomes very negative?</summary>
+<p>Dealer is very short.</p>
+<p>He wants to acquire shares.</p>
+<p>Therefore he adjusts quotes to encourage trades that increase inventory.</p>
+<p>So:</p>
+<div>\[\boxed{ I\downarrow \Rightarrow \text{dealer wants more purchases} }\]</div>
+</details>
+<details><summary>Q7. What happens if order-flow uncertainty increases?</summary>
+<p>Suppose:</p>
+<div>\[\operatorname{Var}(\omega) \uparrow.\]</div>
+<p>The dealer becomes less certain about future order flow.</p>
+<p>The exact effect on the spread is not determined by variance alone because the relevant term is:</p>
+<div>\[\operatorname{Cov}(U',\omega).\]</div>
+<p>Therefore the correct answer is:</p>
+<p>Higher order-flow uncertainty increases the importance of the risk adjustment, but the direction of the spread change depends on the covariance structure.</p>
+<p>This is a very good exam answer.</p>
+</details>
+<details><summary>Q8. What happens if \(\operatorname{Cov}(U',\omega)&lt;0\)?</summary>
+<p>Then the corresponding risk term is negative:</p>
+<div>\[\frac{\phi\operatorname{Cov}(U',\omega)} {2\phi\gamma E(U')} &lt;0.\]</div>
+<p>Therefore it pushes the spread downward.</p>
+</details>
+<details><summary>Q9. What happens if covariance becomes positive?</summary>
+<p>Then:</p>
+<div>\[S_R&gt;0\]</div>
+<p>assuming the other covariance term doesn't dominate negatively.</p>
+<p>Therefore:</p>
+<div>\[\boxed{ \text{risk adjustment widens the spread} }\]</div>
+</details>
+<details><summary>Q10. What happens if covariance is zero?</summary>
+<p>If:</p>
+<div>\[\operatorname{Cov}(U',\omega) = \operatorname{Cov}(U',\epsilon) =0,\]</div>
+<p>then:</p>
+<div>\[\boxed{S_R=0}.\]</div>
+<p>The risk-averse spread equals the risk-neutral spread.</p>
+</details>
+<details><summary>Q11. What happens if market-order sensitivity \(\gamma\) increases?</summary>
+<p>From:</p>
+<div>\[A^m=\alpha-a\gamma+\omega.\]</div>
+<p>Higher \(\gamma\) means customers are more sensitive to the ask price.</p>
+<p>Thus:</p>
+<div>\[a\uparrow\]</div>
+<p>causes a larger decrease in demand.</p>
+<p>Therefore the market maker has less freedom to increase the ask without losing order flow.</p>
+<p>So generally:</p>
+<div>\[\boxed{ \gamma\uparrow \Rightarrow \text{optimal ask becomes more constrained} }\]</div>
+</details>
+<details><summary>Q12. What happens if \(\phi\) increases?</summary>
+<p>Recall:</p>
+<div>\[B^m=\beta+b\phi+\epsilon.\]</div>
+<p>Higher \(\phi\) means market sellers respond more strongly to the bid.</p>
+<p>Therefore increasing \(b\) produces a larger increase in seller flow.</p>
+<p>So the bid becomes more sensitive to price.</p>
+</details>
+<details><summary>Q13. What happens if \(\alpha\) increases?</summary>
+<p>From:</p>
+<div>\[A^m=\alpha-a\gamma+\omega.\]</div>
+<p>Higher \(\alpha\) means greater baseline buying demand.</p>
+<p>Therefore the dealer can potentially charge a higher ask.</p>
+<p>From:</p>
+<div>\[a_n\sim\frac{\alpha}{2\gamma},\]</div>
+<p>we get:</p>
+<div>\[\boxed{ \alpha\uparrow \Rightarrow a_n\uparrow }\]</div>
+<p>all else equal.</p>
+</details>
+<details><summary>Q14. What happens if \(\gamma\) doubles?</summary>
+<p>The baseline ask component:</p>
+<div>\[\frac{\alpha}{2\gamma}\]</div>
+<p>becomes half as large.</p>
+<p>Thus:</p>
+<div>\[\boxed{ \gamma\times2 \Rightarrow \frac{\alpha}{2\gamma}\times\frac12 }\]</div>
+<p>holding everything else fixed.</p>
+</details>
+<details><summary>Q15. What happens if the discount factor \(\phi\) approaches 1?</summary>
+<p>If:</p>
+<div>\[\phi\rightarrow1,\]</div>
+<p>future profits become almost as important as current profits.</p>
+<p>Therefore the dealer becomes more forward-looking.</p>
+<p>Inventory carried into the future matters more.</p>
+<p>Thus:</p>
+<div>\[\boxed{ \phi\uparrow \Rightarrow \text{future inventory consequences become more important} }\]</div>
+</details>
+<details><summary>Q16. What happens if \(\phi\rightarrow0\)?</summary>
+<p>Future profits are heavily discounted.</p>
+<p>The dealer behaves more myopically.</p>
+<p>He focuses much more on current-period profit.</p>
+<p>Thus:</p>
+<div>\[\boxed{ \phi\downarrow \Rightarrow \text{future inventory effects matter less} }\]</div>
+</details>
+<details><summary>Q17. What happens if limit-order quantities increase?</summary>
+<p>Suppose more known limit orders are present.</p>
+<p>Then the dealer has more information and more potential trading opportunities.</p>
+<p>The known-limit component of pricing becomes more important.</p>
+</details>
+<details><summary>Q18. What happens if limit-order sensitivity to price increases?</summary>
+<p>Suppose:</p>
+<div>\[\gamma^L\uparrow.\]</div>
+<p>Then limit-order quantity changes more strongly when ask changes.</p>
+<p>Therefore the dealer must be more careful in setting the ask because small price changes cause larger order-flow changes.</p>
+</details>
+<details><summary>Q19. What happens if inventory financing cost \(r\) increases?</summary>
+<p>If the dealer carries inventory overnight, financing/holding becomes more expensive.</p>
+<p>Therefore:</p>
+<div>\[\boxed{ r\uparrow \Rightarrow \text{cost of carrying inventory}\uparrow }\]</div>
+<p>This makes inventory management more important.</p>
+</details>
+<details><summary>Q20. What happens if the dealer has zero inventory?</summary>
+<div>\[I=0.\]</div>
+<p>There is no current inventory financing exposure.</p>
+<p>However, the dealer still faces the possibility of acquiring inventory during the current period.</p>
+<p>Therefore inventory still matters dynamically.</p>
+</details>
+<details><summary>Q21. Why is inventory a state variable?</summary>
+<p>Because:</p>
+<div>\[V(I_n)\]</div>
+<p>depends on ending inventory.</p>
+<p>And current inventory affects:</p>
+<ul><li>financing costs,</li><li>future trading opportunities,</li><li>risk,</li><li>future optimal quotes.</li></ul>
+<p>Therefore:</p>
+<div>\[\boxed{I_n\text{ summarizes information needed for future decisions}}\]</div>
+</details>
+<details><summary>Q22. Why doesn't the model have a fixed liquidation date?</summary>
+<p>Because a market maker is modeled as an ongoing business.</p>
+<p>There is no artificial:</p>
+<div>\[T\]</div>
+<p>where all inventory must suddenly be liquidated.</p>
+<p>Instead:</p>
+<div>\[\boxed{ \text{inventory is carried from one day to the next} }\]</div>
+</details>
+<details><summary>Q23. Why does O'Hara–Oldfield use infinite horizon?</summary>
+<p>Because market making is a repeated activity.</p>
+<p>The dealer expects to operate:</p>
+<div>\[1,2,3,\ldots\]</div>
+<p>rather than stop after a predetermined terminal date.</p>
+</details>
+<details><summary>Q24. Why is utility applied to trading profits?</summary>
+<p>Because the dealer is risk averse.</p>
+<p>Instead of maximizing:</p>
+<div>\[E[\pi],\]</div>
+<p>the dealer maximizes:</p>
+<div>\[E[U(\pi)].\]</div>
+<p>Thus uncertainty affects decisions.</p>
+</details>
+<details><summary>Q25. Why is \(U''&lt;0\)?</summary>
+<p>Because:</p>
+<div>\[U''&lt;0\]</div>
+<p>means utility is concave.</p>
+<p>Concavity represents risk aversion.</p>
+</details>
+<details><summary>Q26. What if \(U''=0\)?</summary>
+<p>Then utility is linear:</p>
+<div>\[U(W)=aW+b.\]</div>
+<p>The dealer is risk neutral.</p>
+<p>Therefore:</p>
+<div>\[\boxed{\text{risk adjustment disappears}}\]</div>
+</details>
+<details><summary>Q27. What if \(U''&gt;0\)?</summary>
+<p>That would represent risk-seeking behavior.</p>
+<p>The model assumes:</p>
+<div>\[U''&lt;0,\]</div>
+<p>so this would violate the model's basic risk-preference assumption.</p>
+</details>
+</div>
+<div class="prob" id="s75"><h3>The most important comparison with Ho-Stoll</h3>
+<p>This is something I strongly recommend memorizing.</p>
+<p>Ho-Stoll:</p>
+<div>\[\boxed{ \text{Dealer maximizes expected utility of terminal wealth} }\]</div>
+<p>with:</p>
+<div>\[W_T=F_T+I_T+Y_T.\]</div>
+<p>There is a terminal liquidation date.</p>
+<p>O'Hara–Oldfield:</p>
+<div>\[\boxed{ \text{Dealer maximizes discounted utility of repeated trading profits} }\]</div>
+<p>over an infinite horizon.</p>
+<p>There is no fixed liquidation date.</p>
+<ul><li>Another crucial difference</li><li>Ho-Stoll:</li></ul>
+<p>Transaction uncertainty is modeled directly through stochastic arrival processes.</p>
+<p>O'Hara–Oldfield:</p>
+<p>They explicitly distinguish:</p>
+<div>\[\boxed{\text{limit orders}}\]</div>
+<p>from</p>
+<div>\[\boxed{\text{market orders}}\]</div>
+<p>and market-order flow has random components:</p>
+<div>\[\tilde\omega_t,\tilde\epsilon_t.\]</div>
+</div>
+<div class="prob" id="s76"><h3>The entire O'Hara–Oldfield model in one diagram</h3>
+<p>Memorize this flow:</p>
+<div>\[\boxed{\text{Limit order book}}\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<p>Known information</p>
+<div>\[\boxed{\alpha^L,\beta^L,\gamma^L,\phi^L}\]</div>
+<div>\[\boxed{\text{Expected market orders}}\]</div>
+<div>\[\boxed{\tilde\omega_t,\tilde\epsilon_t}\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<p>Dealer chooses</p>
+<div>\[\boxed{a_t,b_t}\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<p class="sh">Orders execute</p>
+<p style="text-align:center;margin:0">↓</p>
+<p>Dealer earns</p>
+<div>\[\boxed{\pi_t}\]</div>
+<p>and inventory changes:</p>
+<div>\[\boxed{I_t}\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<p>Inventory creates:</p>
+<div>\[\boxed{\text{financing cost + future risk}}\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<p>Continuation value:</p>
+<div>\[\boxed{V(I_t)}\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<p>Dealer maximizes:</p>
+<div>\[\boxed{ E\left[ \sum_j\phi^j U\left(\sum_t\pi_{jt}\right) \right] }\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<p>Optimal:</p>
+<div>\[\boxed{a_t^*,b_t^*}\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<p>Spread:</p>
+<div>\[\boxed{ a_t^*-b_t^* = \text{known-limit} + \text{risk-neutral} + \text{risk adjustment} }\]</div>
+</div>
+<div class="idea" id="s77"><h3>⭐ The 15 relationships I would memorize</h3>
+<p>Order-flow relationships</p>
+<div>\[\boxed{ a\uparrow\Rightarrow A^m\downarrow }\]</div><div>\[\boxed{ b\uparrow\Rightarrow B^m\uparrow }\]</div>
+<p>Demand sensitivity</p>
+<div>\[\boxed{ \gamma\uparrow \Rightarrow \text{buying becomes more sensitive to ask} }\]</div><div>\[\boxed{ \phi\uparrow \Rightarrow \text{selling becomes more sensitive to bid} }\]</div>
+<p>Risk</p>
+<div>\[\boxed{ U''&lt;0\Rightarrow\text{risk aversion} }\]</div><div>\[\boxed{ U''=0\Rightarrow\text{risk neutrality} }\]</div><div>\[\boxed{ U'=\text{constant} \Rightarrow \operatorname{Cov}(U',X)=0 }\]</div>
+<p>Spread</p>
+<div>\[\boxed{ S=S_{\text{known limit}} +S_{\text{risk neutral}} +S_{\text{risk}} }\]</div><div>\[\boxed{ \operatorname{Cov}(U',\omega)&lt;0 \Rightarrow \text{risk adjustment can narrow spread} }\]</div><div>\[\boxed{ \operatorname{Cov}(U',\omega)&gt;0 \Rightarrow \text{risk adjustment can widen spread} }\]</div>
+<p>Inventory</p>
+<div>\[\boxed{ I&gt;0\Rightarrow\text{dealer is long} }\]</div><div>\[\boxed{ I&lt;0\Rightarrow\text{dealer is short} }\]</div><div>\[\boxed{ I\text{ affects future value }V(I) }\]</div><div>\[\boxed{ I\text{ affects both spread location and size} }\]</div>
+<p>Time</p>
+<div>\[\boxed{ \phi\uparrow \Rightarrow \text{future profits matter more} }\]</div>
+</div>
+<div class="prob" id="s78"><h3>One final conceptual question your professor could easily ask</h3>
+<p>"Why can a risk-averse market maker have a smaller spread than a risk-neutral market maker?"</p>
+<p>A strong answer would be:</p>
+<p>The O'Hara–Oldfield model decomposes the spread into a risk-neutral component and a risk adjustment involving the covariance between marginal utility and unexpected market-order flow. For a risk-neutral market maker, marginal utility is constant, so the covariance term is zero. For a risk-averse market maker, the covariance term need not be zero and can be negative. When it is sufficiently negative, the risk adjustment reduces the risk-neutral spread, so the optimal risk-averse spread can be smaller.</p>
+<p>That is one of the key results of the paper.</p>
+</div>
+<div class="prob" id="s79"><h3>And the one-line difference from your previous Ho-Stoll slides</h3>
+<div>\[\boxed{ \text{Ho-Stoll} \rightarrow \text{terminal wealth + continuous time + portfolio risk} }\]</div>
+<p>whereas</p>
+<div>\[\boxed{ \text{O'Hara-Oldfield} \rightarrow \text{repeated trading profits + discrete time + limit/market orders + inventory continuation value} }\]</div>
+<p>The most important new idea is therefore:</p>
+<div>\[\boxed{ \textbf{Inventory is not just a risk exposure; it is a state variable that determines future trading opportunities.} }\]</div>
+</div>
+<h2 id="crs">3 · Chordia, Roll &amp; Subrahmanyam (2000): commonality in liquidity</h2>
+<div class="idea"><p>These slides are from the topic “Commonality in Liquidity” in market microstructure. The central question throughout is:</p></div>
+<p class="sh">Why do liquidity measures of different stocks move together over time?</p>
+<p>In other words, if liquidity becomes worse for one stock today, why do many other stocks also become less liquid around the same time?</p>
+<p>I’ll explain every slide, every equation, every variable, and what the empirical results mean, and I’ll connect the slides so you understand the entire research argument.</p>
+<div class="prob" id="s80"><h3>Slide 1 — Commonality in Liquidity</h3><img src="slides/liq-2.jpg" alt="Deck liquidity, page 2" loading="lazy"><img src="slides/liq-3.jpg" alt="Deck liquidity, page 3" loading="lazy"><img src="slides/liq-4.jpg" alt="Deck liquidity, page 4" loading="lazy">
+<p class="sh">Main idea</p>
+<p>Commonality in liquidity means that liquidity is not purely stock-specific.</p>
+<p>Suppose:</p>
+<ul><li>Stock A becomes less liquid today.</li><li>Stock B also becomes less liquid.</li><li>Stock C also becomes less liquid.</li></ul>
+<p>If this happens systematically across many stocks, we say there is commonality in liquidity.</p>
+<p>So liquidity has two components:</p>
+<div>\[\boxed{ \text{Liquidity of stock }j = \text{stock-specific component} + \text{common component} }\]</div>
+<p>The common component can come from market-wide or industry-wide factors.</p>
+<p class="sh">Bullet 1: Common determinants of liquidity</p>
+<p>The paper investigates whether different stocks have common determinants of liquidity.</p>
+<p>For example:</p>
+<ul><li>market trading activity</li><li>market volume</li><li>volatility</li><li>interest rates</li><li>institutional trading</li><li>inventory risk</li><li>asymmetric information</li></ul>
+<p>If these factors affect many stocks simultaneously, their liquidity will co-move.</p>
+<p class="sh">Bullet 2: Correlated movements in liquidity</p>
+<p>Suppose:</p>
+<div>\[L_{A,t} = \text{liquidity of stock A}\]</div>
+<p>and</p>
+<div>\[L_{B,t} = \text{liquidity of stock B}\]</div>
+<p>If</p>
+<div>\[Corr(\Delta L_{A,t},\Delta L_{B,t})&gt;0\]</div>
+<p>then their liquidity changes tend to move together.</p>
+<p>This is commonality.</p>
+<p class="sh">Bullet 3: Inventory risk and asymmetric information</p>
+<p>Two major explanations are proposed:</p>
+<p class="sh">1. Inventory risk</p>
+<p>Market makers/dealers hold inventories.</p>
+<p>If trading becomes very active, dealers may accumulate large positions.</p>
+<p>Large inventory → greater risk → dealers demand greater compensation.</p>
+<p>That can appear as:</p>
+<div>\[\boxed{\text{wider bid-ask spread}}\]</div>
+<p class="sh">2. Asymmetric information</p>
+<p>Suppose some traders have better information than dealers.</p>
+<p>The dealer doesn't know whether a customer is:</p>
+<ul><li>an informed trader, or</li><li>an uninformed trader.</li></ul>
+<p>If the dealer thinks the probability of informed trading is high, the dealer protects themselves by increasing the spread.</p>
+<p class="sh">Bullet 4: Trading costs have common determinants</p>
+<p>The paper isn't only interested in liquidity.</p>
+<p>It asks whether different microstructure variables have common underlying causes.</p>
+<p>For example:</p>
+<ul><li>bid-ask spread</li><li>depth</li><li>effective spread</li><li>trading cost</li></ul>
+<p>may all respond to the same market conditions.</p>
+<p class="sh">Big takeaway</p>
+<p>Liquidity is partly a market-wide phenomenon, not purely an individual-stock phenomenon.</p>
+</div>
+<div class="prob" id="s81"><h3>Slide 2 — Plausible Reasons for Commonality</h3><img src="slides/liq-5.jpg" alt="Deck liquidity, page 5" loading="lazy">
+<p>This slide asks:</p>
+<p class="sh">Why should liquidity move together across stocks?</p>
+<p>There are several possible explanations.</p>
+<p class="sh">1. Trading activity</p>
+<p>Trading activity generally displays market-wide response to general price swings.</p>
+<p>Suppose there is a large market movement.</p>
+<p>Many investors react simultaneously.</p>
+<p>For example:</p>
+<div>\[\text{Market shock} \rightarrow \text{many investors trade} \rightarrow \text{many stocks experience higher trading activity}\]</div>
+<p>Therefore liquidity can move together.</p>
+<p class="sh">2. Trading volume → dealer inventory</p>
+<p>The slide says:</p>
+<p>Trading volume is a principal determinant of dealer inventory.</p>
+<p>Suppose a market maker normally has:</p>
+<div>\[1000 \text{ shares}\]</div>
+<p>but suddenly trading volume increases dramatically.</p>
+<p>The dealer may accumulate:</p>
+<div>\[5000,\ 10000,\ 20000\]</div>
+<p>shares depending on order flow.</p>
+<p>Higher inventory means greater exposure to price changes.</p>
+<p>Therefore:</p>
+<div>\[\boxed{ \text{Higher trading volume} \rightarrow \text{higher inventory risk} \rightarrow \text{higher required compensation} }\]</div>
+<p>which can lead to wider spreads.</p>
+<p class="sh">3. Inventory carrying costs</p>
+<p>Dealers don't just face price risk.</p>
+<p>Holding inventory has a financing cost.</p>
+<p>Suppose a dealer has to finance stock positions.</p>
+<p>If interest rates rise:</p>
+<div>\[\text{cost of financing inventory} \uparrow\]</div>
+<p>Therefore:</p>
+<div>\[\boxed{ r\uparrow \Rightarrow \text{inventory carrying cost}\uparrow }\]</div>
+<p>Since interest rates are market-wide, inventory carrying costs can move together across stocks.</p>
+<p>Hence liquidity can have a common component.</p>
+<p class="sh">4. Volatility</p>
+<p>This is extremely important.</p>
+<p>Suppose:</p>
+<div>\[\sigma = \text{volatility}\]</div>
+<p>When volatility rises, holding inventory becomes riskier.</p>
+<p>Imagine a market maker holds 10,000 shares.</p>
+<p>If the stock moves only 0.1%, the risk is relatively small.</p>
+<p>If it can move 5% very quickly, the inventory is much more dangerous.</p>
+<p>Thus:</p>
+<div>\[\boxed{ \sigma\uparrow \Rightarrow \text{inventory risk}\uparrow \Rightarrow \text{spread}\uparrow }\]</div>
+<p>And because market volatility can increase simultaneously across stocks:</p>
+<div>\[\boxed{\text{common volatility shock}\rightarrow\text{common liquidity shock}}\]</div>
+<p class="sh">5. Program trading</p>
+<p>Program trading means computer-driven strategies can submit large numbers of orders simultaneously.</p>
+<p>For example:</p>
+<div>\[\text{Index falls} \rightarrow \text{algorithm sells many stocks}\]</div>
+<p>Therefore dealers may suddenly face large order imbalances across many securities.</p>
+<p>This can create:</p>
+<div>\[\text{common inventory pressure}\]</div>
+<p>and therefore common movements in liquidity.</p>
+<p class="sh">6. Institutional funds</p>
+<p>Suppose several mutual funds have similar investment strategies.</p>
+<p>They may all decide to:</p>
+<div>\[\text{Buy technology stocks}\]</div>
+<p>or</p>
+<div>\[\text{Sell technology stocks}\]</div>
+<p>at approximately the same time.</p>
+<p>That produces correlated order flow.</p>
+<p>Therefore:</p>
+<div>\[\boxed{ \text{similar institutional strategies} \rightarrow \text{correlated trading} \rightarrow \text{correlated liquidity} }\]</div>
+<p class="sh">7. Asymmetric information</p>
+<p>Suppose a small group of large traders receives information.</p>
+<p>If market makers believe informed traders are active, they become more cautious.</p>
+<p>They may increase spreads.</p>
+<p>So:</p>
+<div>\[\boxed{ \text{greater information asymmetry} \rightarrow \text{higher adverse-selection risk} \rightarrow \text{wider spread} }\]</div>
+<p class="sh">Core message of Slide 2</p>
+<p>There are many possible reasons for commonality:</p>
+<div>\[\boxed{ \text{Trading} ,\text{Volume} ,\text{Interest rates} ,\text{Volatility} ,\text{Program trading} ,\text{Institutions} ,\text{Information} }\]</div>
+</div>
+<div class="prob" id="s82"><h3>Slide 3 — Implications of Commonality</h3><img src="slides/liq-6.jpg" alt="Deck liquidity, page 6" loading="lazy">
+<p>Now the paper asks:</p>
+<p class="sh">Why does commonality matter?</p>
+<p class="sh">1. Covariation in liquidity</p>
+<p>If stocks have common liquidity factors:</p>
+<div>\[\Delta L_{A,t}\]</div>
+<p>and</p>
+<div>\[\Delta L_{B,t}\]</div>
+<p>will tend to covary.</p>
+<p>This means investors cannot assume that liquidity risk is completely diversifiable.</p>
+<p class="sh">2. Co-movements in trading costs</p>
+<p>If liquidity changes simultaneously, trading costs can also move simultaneously.</p>
+<p>For example:</p>
+<div>\[\text{Market crisis} \rightarrow \text{spreads widen across many stocks}\]</div>
+<p>So an investor may face high trading costs across their entire portfolio at once.</p>
+<p class="sh">3. Episodic and global crises</p>
+<p>This is particularly important during crises.</p>
+<p>During normal conditions:</p>
+<div>\[\text{Liquidity risk may be moderate}\]</div>
+<p>During a crisis:</p>
+<div>\[\boxed{ \text{Liquidity can deteriorate across many securities simultaneously} }\]</div>
+<p>Examples conceptually include:</p>
+<ul><li>market crashes</li><li>financial crises</li><li>sudden volatility shocks</li></ul>
+<p class="sh">4. Liquidity factor in asset pricing</p>
+<p>The slide references:</p>
+<ul><li>Amihud and Mendelson (1986)</li><li>Brennan and Subrahmanyam (1996)</li></ul>
+<p>The important idea is:</p>
+<p>Investors may require compensation for holding assets that are costly to trade.</p>
+<p>Thus liquidity can become an asset-pricing factor.</p>
+<p class="sh">5. Two channels through which trading costs affect asset prices</p>
+<p>This is very important.</p>
+<p class="sh">Static channel</p>
+<p>Suppose an asset has permanently high trading costs.</p>
+<p>Investors may demand compensation for holding it.</p>
+<p>Conceptually:</p>
+<div>\[\text{High average trading cost} \rightarrow \text{higher required return}\]</div>
+<p>This is the static channel.</p>
+<p class="sh">Dynamic channel</p>
+<p>Now imagine liquidity itself changes over time.</p>
+<p>Suppose:</p>
+<div>\[\text{Liquidity suddenly deteriorates}\]</div>
+<p>Investors may avoid trading because trading is now expensive/risky.</p>
+<p>So:</p>
+<div>\[\text{Liquidity shock} \rightarrow \text{trading becomes expensive} \rightarrow \text{investors avoid trading}\]</div>
+<p>This is the dynamic channel.</p>
+<p class="sh">Exam distinction</p>
+<div class="tw"><table><tr><th>Static</th><th>Dynamic</th></tr><tr><td>Based on average trading cost</td><td>Based on changes in trading conditions</td></tr><tr><td>Persistent liquidity characteristic</td><td>Time-varying liquidity risk</td></tr><tr><td>Compensation for illiquidity</td><td>Investors react to liquidity shocks</td></tr></table></div>
+</div>
+<div class="prob" id="s83"><h3>Slide 4 — Data</h3><img src="slides/liq-7.jpg" alt="Deck liquidity, page 7" loading="lazy">
+<p>Now the paper explains its dataset.</p>
+<p>The researchers use:</p>
+<p class="sh">NYSE transaction data from ISMM for 1992</p>
+<p>ISSM = Institute for the Study of Securities Markets.</p>
+<p class="sh">Sample filtering</p>
+<p>They don't simply use every stock.</p>
+<p class="sh">Condition 1</p>
+<p>Stock must trade on at least:</p>
+<div>\[\boxed{10\text{ trading days}}\]</div>
+<p>during the year.</p>
+<p class="sh">Why?</p>
+<p>Because stocks that barely trade don't provide enough information to calculate reliable liquidity statistics.</p>
+<p class="sh">Condition 2</p>
+<p>Stocks with stock splits or stock dividends are excluded.</p>
+<p class="sh">Why?</p>
+<p>Because splits can mechanically change:</p>
+<ul><li>price</li><li>number of shares</li><li>trading volume</li><li>quoted spread</li></ul>
+<p>without representing an actual economic change in liquidity.</p>
+<p class="sh">Condition 3</p>
+<p>Several special types of securities are excluded:</p>
+<ul><li>certificates</li><li>ADRs</li><li>foreign-incorporated companies</li><li>closed-end funds</li><li>REITs</li><li>etc.</li></ul>
+<p>This makes the sample more homogeneous.</p>
+<p>Final sample</p>
+<div>\[\boxed{1,169\text{ stocks}}\]</div>
+<p>over</p>
+<div>\[\boxed{254\text{ trading days}}\]</div>
+<p>in 1992.</p>
+<p class="sh">Price filter</p>
+<p>A stock is deleted on a day if:</p>
+<div>\[\text{average price}&lt;\$2\]</div>
+<p class="sh">Why?</p>
+<p>Very low-priced stocks can have unusual percentage spreads.</p>
+<p>For example:</p>
+<p>Stock A:</p>
+<div>\[P= \$1\]</div>
+<p>bid = $0.99, ask = $1.01</p>
+<p>Spread:</p>
+<div>\[\$0.02\]</div>
+<p>Percentage spread:</p>
+<div>\[\frac{0.02}{1}=2\%\]</div>
+<p>For a $100 stock, the same $0.02 spread would be only:</p>
+<div>\[0.02\%\]</div>
+<p>So penny/low-priced stocks can distort comparisons.</p>
+</div>
+<div class="prob" id="s84"><h3>Slide 5 — NYSE Features</h3><img src="slides/liq-8.jpg" alt="Deck liquidity, page 8" loading="lazy">
+<p>This slide explains the NYSE trading environment used in the study.</p>
+<p class="sh">Specialist</p>
+<p>At that time, NYSE stocks had a specialist.</p>
+<p>The specialist helped maintain the market and provided quotes.</p>
+<p>The specialist announces:</p>
+<ul><li>bid price</li><li>ask price</li><li>depth</li></ul>
+<p>before transactions.</p>
+<p class="sh">Bid and ask</p>
+<p>Suppose:</p>
+<div>\[P_B = \$99\]</div>
+<p>and</p>
+<div>\[P_A = \$101\]</div>
+<p>Then:</p>
+<div>\[\boxed{ Quoted\ Spread=P_A-P_B }\]</div>
+<p>Therefore:</p>
+<div>\[101-99=\$2\]</div>
+<p class="sh">Depth</p>
+<p>Suppose:</p>
+<p>Bid:</p>
+<div>\[1000\text{ shares at \$99}\]</div>
+<p>Ask:</p>
+<div>\[1500\text{ shares at \$101}\]</div>
+<p>Then depth is:</p>
+<div>\[DEP=\frac{Q_A+Q_B}{2}\]</div>
+<p>so:</p>
+<div>\[DEP=\frac{1500+1000}{2} =1250\]</div>
+<p>shares.</p>
+<p>The averaging is important because we want a representative measure of available liquidity on both sides.</p>
+<p class="sh">Why announcement matters</p>
+<p>The quotes are known to traders before transactions.</p>
+<p>Therefore traders can evaluate:</p>
+<div>\[\text{price available}\]</div>
+<p>and</p>
+<div>\[\text{quantity available}\]</div>
+<p>before trading.</p>
+</div>
+<div class="prob" id="s85"><h3>Slide 6 — Liquidity Variables</h3><img src="slides/liq-9.jpg" alt="Deck liquidity, page 9" loading="lazy">
+<p>This is one of the most important slides.</p>
+<p>There are five liquidity measures.</p>
+<p class="sh">1. Quoted Spread — QSPR</p>
+<p>Formula:</p>
+<div>\[\boxed{ QSPR=P_A-P_B }\]</div>
+<p>where:</p>
+<ul><li>\(P_A\) = ask price</li><li>\(P_B\) = bid price</li></ul>
+<p>Example:</p>
+<div>\[P_A=101,\quad P_B=99\]</div>
+<p>Then:</p>
+<div>\[QSPR=101-99=2\]</div>
+<p class="sh">Interpretation</p>
+<p>Higher QSPR:</p>
+<div>\[\boxed{\text{less liquid}}\]</div>
+<p>Lower QSPR:</p>
+<div>\[\boxed{\text{more liquid}}\]</div>
+<p>because traders pay a larger spread to transact.</p>
+<p class="sh">2. Proportional Quoted Spread — PQSPR</p>
+<p>Formula:</p>
+<div>\[\boxed{ PQSPR=\frac{P_A-P_B}{P_M} }\]</div>
+<p>where \(P_M\) is the midpoint.</p>
+<p>Usually:</p>
+<div>\[P_M=\frac{P_A+P_B}{2}\]</div>
+<p>Example:</p>
+<div>\[P_A=101,\quad P_B=99\]</div>
+<p>Then:</p>
+<div>\[P_M=100\]</div>
+<p>and</p>
+<div>\[PQSPR=\frac{2}{100}=0.02\]</div>
+<p>or:</p>
+<div>\[2\%\]</div>
+<p class="sh">Why normalize?</p>
+<p>A $2 spread means something different for a $10 stock versus a $1000 stock.</p>
+<p>Proportional spread allows comparison across stocks.</p>
+<p class="sh">3. Depth — DEP</p>
+<p>Formula:</p>
+<div>\[\boxed{ DEP=\frac{1}{2}(Q_A+Q_B) }\]</div>
+<p>where:</p>
+<ul><li>\(Q_A\) = ask-side quantity</li><li>\(Q_B\) = bid-side quantity</li></ul>
+<p>Higher depth means more shares are available.</p>
+<p>Therefore:</p>
+<div>\[\boxed{\text{Higher DEP}=\text{greater liquidity}}\]</div>
+<p>Notice the direction is opposite to spreads.</p>
+<p>For spreads:</p>
+<div>\[\uparrow Spread \Rightarrow \downarrow Liquidity\]</div>
+<p>For depth:</p>
+<div>\[\uparrow Depth \Rightarrow \uparrow Liquidity\]</div>
+<p class="sh">4. Effective Spread — ESPR</p>
+<p>Formula:</p>
+<div>\[\boxed{ ESPR=2|P_t-P_M| }\]</div>
+<p>where:</p>
+<ul><li>\(P_t\) = actual transaction price</li><li>\(P_M\) = quoted midpoint</li></ul>
+<p class="sh">Why do we use the absolute value?</p>
+<p>Because a trade can occur:</p>
+<ul><li>above midpoint, or</li><li>below midpoint.</li></ul>
+<p>We care about the distance from midpoint.</p>
+<p class="sh">Example</p>
+<p>Suppose:</p>
+<div>\[P_M=100\]</div>
+<p>and transaction occurs at:</p>
+<div>\[P_t=101\]</div>
+<p>Then:</p>
+<div>\[ESPR=2|101-100|\]</div><div>\[=\boxed{2}\]</div>
+<p class="sh">5. Proportional Effective Spread — PESPR</p>
+<p>Formula:</p>
+<div>\[\boxed{ PESPR=\frac{2|P_t-P_M|}{P_t} }\]</div>
+<p>This normalizes the effective spread relative to price.</p>
+</div>
+<div class="prob" id="s86"><h3>Slide 7 — Cross-sectional Statistics</h3><img src="slides/liq-10.jpg" alt="Deck liquidity, page 10" loading="lazy">
+<p>Now the paper gives summary statistics.</p>
+<p class="sh">Mean and median</p>
+<p>For QSPR:</p>
+<div>\[Mean=0.3162\]</div><div>\[Median=0.2691\]</div><div>\[SD=1.3570\]</div>
+<p>Notice:</p>
+<div>\[Mean &gt; Median\]</div>
+<p>This suggests some stocks have very large spreads, pulling the mean upward.</p>
+<p>DEP</p>
+<div>\[Mean=3776\]</div><div>\[Median=2661\]</div><div>\[SD=3790\]</div>
+<p>Again:</p>
+<div>\[Mean &gt; Median\]</div>
+<p>so depth has substantial cross-sectional dispersion.</p>
+<p class="sh">Why do they report both mean and median?</p>
+<p>Because liquidity variables can be highly skewed.</p>
+<p>For example, imagine five spreads:</p>
+<div>\[1,\ 1,\ 1,\ 1,\ 20\]</div>
+<p>Mean:</p>
+<div>\[4.8\]</div>
+<p>Median:</p>
+<div>\[1\]</div>
+<p>The mean is heavily affected by the outlier.</p>
+<p>Therefore median gives a better picture of the "typical" stock.</p>
+</div>
+<div class="prob" id="s87"><h3>Slide 7 — Panel C: Correlation Between Liquidity Measures</h3>
+<p>This is also very important.</p>
+<p>The table shows correlations.</p>
+<p>For example:</p>
+<div>\[Corr(QSPR,PQSPR)=0.844\]</div>
+<p>This is very high.</p>
+<p class="sh">Why?</p>
+<p>Because both measure spread.</p>
+<p>QSPR and DEP</p>
+<div>\[Corr(QSPR,DEP)=-0.396\]</div>
+<p>Negative.</p>
+<p class="sh">Why?</p>
+<p>Because when spreads increase, liquidity generally deteriorates, while depth tends to decrease.</p>
+<p>So:</p>
+<div>\[\boxed{ Spread\uparrow \quad\Longleftrightarrow\quad Depth\downarrow }\]</div>
+<p>QSPR and ESPR</p>
+<div>\[Corr(QSPR,ESPR)=0.665\]</div>
+<p>Positive.</p>
+<p>Both are spread-related measures.</p>
+<p>ESPR and PESPR</p>
+<div>\[Corr(ESPR,PESPR)=0.871\]</div>
+<p>Very high because PESPR is basically a normalized version of ESPR.</p>
+<p class="sh">Main lesson</p>
+<p>The liquidity measures aren't independent.</p>
+<p>They capture related aspects of the same underlying market condition.</p>
+</div>
+<div class="prob" id="s88"><h3>Slide 8 — Absolute Daily Proportional Changes</h3><img src="slides/liq-11.jpg" alt="Deck liquidity, page 11" loading="lazy">
+<p>This slide changes the focus.</p>
+<p>Previously we studied the level of liquidity.</p>
+<p>Now we study:</p>
+<p class="sh">How much does liquidity change from one day to the next?</p>
+<p>They define:</p>
+<div>\[\boxed{ DL_t=\frac{L_t-L_{t-1}}{L_{t-1}} }\]</div>
+<p>This is the proportional change.</p>
+<p class="sh">Example</p>
+<p>Suppose yesterday:</p>
+<div>\[L_{t-1}=0.01\]</div>
+<p>and today:</p>
+<div>\[L_t=0.012\]</div>
+<p>Then:</p>
+<div>\[DL_t= \frac{0.012-0.01}{0.01}\]</div><div>\[=0.20\]</div>
+<p>So liquidity measure increased by:</p>
+<div>\[20\%\]</div>
+<p class="sh">What does \(|DL_t|\) mean?</p>
+<p>They take:</p>
+<div>\[\boxed{|DL_t|}\]</div>
+<p>because they want to measure the magnitude of change, regardless of direction.</p>
+<p>For example:</p>
+<div>\[DL=+30\%\]</div>
+<p>and</p>
+<div>\[DL=-30\%\]</div>
+<p>both have:</p>
+<div>\[|DL|=30\%\]</div>
+<p class="sh">Why is this useful?</p>
+<p>Because they want to know:</p>
+<p class="sh">How volatile or unstable is liquidity?</p>
+<p>The table shows:</p>
+<div>\[|DDEP|\]</div>
+<p>has mean:</p>
+<div>\[0.7828\]</div>
+<p>which is substantially larger than many of the spread measures.</p>
+<p>So depth can change dramatically from day to day.</p>
+<svg class="fig" viewBox="0 0 520 200" role="img" aria-label="Mean absolute daily change: depth 0.78, spreads 0.24 to 0.32">
+<text x="110" y="36" text-anchor="end">|DQSPR|</text>
+<rect class="rg" x="120" y="20" width="99" height="22"/>
+<text x="225" y="36" text-anchor="start">0.2396</text>
+<text x="110" y="68" text-anchor="end">|DPQSPR|</text>
+<rect class="rg" x="120" y="52" width="99" height="22"/>
+<text x="225" y="68" text-anchor="start">0.2408</text>
+<text x="110" y="100" text-anchor="end">|DDEP|</text>
+<rect class="bad" x="120" y="84" width="323" height="22"/>
+<text x="449" y="100" text-anchor="start">0.7828</text>
+<text x="110" y="132" text-anchor="end">|DESPR|</text>
+<rect class="rg" x="120" y="116" width="130" height="22"/>
+<text x="256" y="132" text-anchor="start">0.3148</text>
+<text x="110" y="164" text-anchor="end">|DPESPR|</text>
+<rect class="rg" x="120" y="148" width="132" height="22"/>
+<text x="258" y="164" text-anchor="start">0.3196</text>
+<text class="m" x="285" y="196" text-anchor="middle">mean |daily % change|, 1169 NYSE stocks, 1992</text>
+</svg>
+<p><b>Figure (deck p. 11 data).</b> Depth moves about 78% a day on average, roughly three times as much as any spread measure. Quoted spreads move least (about 24%).</p>
+</div>
+<div class="prob" id="s89"><h3>Slide 9 — Empirical Commonality in Liquidity</h3><img src="slides/liq-12.jpg" alt="Deck liquidity, page 12" loading="lazy">
+<p>This is the central empirical model.</p>
+<p>The equation is:</p>
+<div>\[\boxed{ DL_{j,t} = \alpha_j + \beta_j DL_{M,t} + \epsilon_{j,t} }\]</div>
+<p>Let's understand every component.</p>
+<p>\(DL_{j,t}\)</p>
+<p>Change in liquidity of stock \(j\) on day \(t\).</p>
+<p>For example:</p>
+<div>\[DL_{j,t}=10\%\]</div>
+<p>means the liquidity measure changed by 10%.</p>
+<p>\(DL_{M,t}\)</p>
+<p>Change in the market-wide average liquidity measure.</p>
+<p>Suppose we have 1000 stocks.</p>
+<p>We calculate average liquidity:</p>
+<div>\[L_{M,t} = \frac{1}{N}\sum_{j=1}^{N}L_{j,t}\]</div>
+<p>Then:</p>
+<div>\[DL_{M,t} = \frac{L_{M,t}-L_{M,t-1}}{L_{M,t-1}}\]</div>
+<p>\(\beta_j\)</p>
+<p>This is the key parameter.</p>
+<p>It tells us how sensitive stock \(j\)'s liquidity is to the market liquidity movement.</p>
+<p>Suppose:</p>
+<div>\[\beta_j=0.7\]</div>
+<p>Then approximately:</p>
+<div>\[1\%\text{ market liquidity change} \rightarrow 0.7\%\text{ stock liquidity change}\]</div>
+<p class="sh">Interpretation</p>
+<p>If:</p>
+<div>\[\beta_j&gt;0\]</div>
+<p>then stock liquidity moves in the same direction as market liquidity.</p>
+<p>This is evidence of commonality.</p>
+<p>\(\alpha_j\)</p>
+<p>Stock-specific average component.</p>
+<p>It captures systematic change in stock \(j\)'s liquidity that isn't explained by market liquidity.</p>
+<p>\(\epsilon_{j,t}\)</p>
+<p>Idiosyncratic component.</p>
+<p>This is the stock-specific shock.</p>
+<p>The conceptual decomposition</p>
+<div>\[\boxed{ \text{Stock liquidity change} = \text{market liquidity effect} + \text{stock-specific effect} }\]</div>
+<p>This is essentially a liquidity-factor model.</p>
+</div>
+<div class="prob" id="s90"><h3>Slide 10 — Results of Commonality Regression</h3><img src="slides/liq-13.jpg" alt="Deck liquidity, page 13" loading="lazy">
+<p>The table gives estimated \(\beta\)'s.</p>
+<p>Let's take:</p>
+<p class="sh">DQSPR</p>
+<p>Concurrent:</p>
+<div>\[\beta=0.690\]</div>
+<p>with:</p>
+<div>\[t=28.29\]</div>
+<p>This is extremely strong evidence of positive contemporaneous commonality.</p>
+<p>Interpretation:</p>
+<p>When market-wide quoted spread changes, an individual stock's quoted spread tends to change in the same direction.</p>
+<p>% positive</p>
+<p>For DQSPR:</p>
+<div>\[84.86\%\]</div>
+<p>This means approximately 85% of individual-stock slope coefficients are positive.</p>
+<p>So commonality is not coming from just a few stocks.</p>
+<p>% + significant</p>
+<div>\[34.65\%\]</div>
+<p>This means around 35% of the individual stock coefficients are significantly positive according to the specified one-tailed 5% criterion.</p>
+<p class="sh">Lag</p>
+<p>For DQSPR:</p>
+<div>\[\beta=0.123\]</div>
+<p>This asks:</p>
+<p class="sh">Does yesterday's market liquidity change affect today's stock liquidity change?</p>
+<p>The positive coefficient suggests some persistence.</p>
+<p>But notice it is much smaller than the concurrent coefficient:</p>
+<div>\[0.123 &lt; 0.690\]</div>
+<p>So the strongest relationship is contemporaneous.</p>
+<p class="sh">Lead</p>
+<p>For DQSPR:</p>
+<div>\[\beta=0.053\]</div>
+<p>This asks:</p>
+<p class="sh">Does tomorrow's market liquidity change relate to today's stock liquidity change?</p>
+<p>The positive relationship is smaller.</p>
+<p class="sh">Why do they examine Concurrent, Lag and Lead?</p>
+<p>This is extremely important for interpreting causality.</p>
+<p>They examine:</p>
+<p>Concurrent</p>
+<div>\[DL_{M,t} \rightarrow DL_{j,t}\]</div>
+<p>Lag</p>
+<div>\[DL_{M,t-1} \rightarrow DL_{j,t}\]</div>
+<p>Lead</p>
+<div>\[DL_{M,t+1} \rightarrow DL_{j,t}\]</div>
+<p>If only concurrent effects are strong, commonality is largely happening at the same time.</p>
+<svg class="fig" viewBox="0 0 540 300" role="img" aria-label="Commonality betas: concurrent betas 0.28 to 1.37 dominate; lag and lead betas are near zero">
+<line class="ln" x1="50" y1="200" x2="530" y2="200"/>
+<line class="mu dsh" x1="50" y1="140" x2="530" y2="140"/><text class="m" x="44" y="145" text-anchor="end">0.5</text>
+<line class="mu dsh" x1="50" y1="80" x2="530" y2="80"/><text class="m" x="44" y="85" text-anchor="end">1.0</text>
+<text class="m" x="44" y="205" text-anchor="end">0</text>
+<rect class="rg" x="64" y="117" width="22" height="83"/>
+<rect class="sol" x="88" y="185" width="22" height="15"/>
+<rect class="bad" x="112" y="194" width="22" height="6"/>
+<text x="100" y="260" text-anchor="middle">DQSPR</text>
+<rect class="rg" x="159" y="105" width="22" height="95"/>
+<rect class="sol" x="183" y="180" width="22" height="20"/>
+<rect class="bad" x="207" y="194" width="22" height="6"/>
+<text x="195" y="260" text-anchor="middle">DPQSPR</text>
+<rect class="rg" x="254" y="35" width="22" height="165"/>
+<rect class="sol" x="278" y="200" width="22" height="6"/>
+<rect class="bad" x="302" y="160" width="22" height="40"/>
+<text x="290" y="260" text-anchor="middle">DDEP</text>
+<rect class="rg" x="349" y="166" width="22" height="34"/>
+<rect class="sol" x="373" y="193" width="22" height="7"/>
+<rect class="bad" x="397" y="195" width="22" height="5"/>
+<text x="385" y="260" text-anchor="middle">DESPR</text>
+<rect class="rg" x="444" y="107" width="22" height="93"/>
+<rect class="sol" x="468" y="179" width="22" height="21"/>
+<rect class="bad" x="492" y="200" width="22" height="19"/>
+<text x="480" y="260" text-anchor="middle">DPESPR</text>
+<text x="265" y="29" text-anchor="middle">1.373</text>
+<rect class="rg" x="60" y="276" width="14" height="14"/>
+<text x="80" y="288" text-anchor="start">concurrent</text>
+<rect class="sol" x="180" y="276" width="14" height="14"/>
+<text x="200" y="288" text-anchor="start">lag</text>
+<rect class="bad" x="300" y="276" width="14" height="14"/>
+<text x="320" y="288" text-anchor="start">lead</text>
+</svg>
+<p><b>Figure (deck p. 13 data).</b> Cross-sectional average \(\beta\) from \(DL_{j,t} = \alpha_j + \beta_j DL_{M,t} + \varepsilon_{j,t}\). The concurrent bars tower over lag and lead for every measure: commonality happens the <i>same day</i>. About 69–85% of individual concurrent betas are positive.</p>
+</div>
+<div class="prob" id="s91"><h3>Slide 11 — Sources of Commonality</h3><img src="slides/liq-14.jpg" alt="Deck liquidity, page 14" loading="lazy">
+<p>Now they make the model more sophisticated.</p>
+<p>Previously:</p>
+<div>\[DL_{j,t} = \alpha_j+ \beta_{j,M}DL_{M,t} +\epsilon_{j,t}\]</div>
+<p>Now they add industry liquidity:</p>
+<div>\[\boxed{ DL_{j,t} = \alpha_j+ \beta_{j,M}DL_{M,t} + \beta_{j,I}DL_{I,t} + \epsilon_{j,t} }\]</div>
+<p class="sh">Why add industry?</p>
+<p>Suppose technology stocks all become illiquid.</p>
+<p>That might not be a market-wide phenomenon.</p>
+<p>It could be because:</p>
+<div>\[\text{Technology industry shock}\]</div>
+<p>affects all technology stocks.</p>
+<p>Therefore commonality can have two sources:</p>
+<div>\[\boxed{ \text{Commonality} = \text{Market component} + \text{Industry component} }\]</div>
+<p>\(DL_{M,t}\)</p>
+<p>Market-wide change in liquidity.</p>
+<p>\(DL_{I,t}\)</p>
+<p>Industry-specific change in liquidity.</p>
+<p>For example, if stock \(j\) belongs to banking:</p>
+<div>\[DL_{I,t} = \text{average liquidity change of other banking stocks}\]</div>
+<p>Importantly, the stock itself is excluded from the industry average.</p>
+<p class="sh">Why?</p>
+<p>To avoid mechanically correlating a stock with itself.</p>
+</div>
+<div class="prob" id="s92"><h3>Slide 12 — Commonality, Inventory Risk and Asymmetric Information</h3><img src="slides/liq-15.jpg" alt="Deck liquidity, page 15" loading="lazy">
+<p>This slide proposes mechanisms behind commonality.</p>
+<p>Two important explanations:</p>
+<div>\[\boxed{\text{Inventory risk}}\]</div>
+<p>and</p>
+<div>\[\boxed{\text{Asymmetric information}}\]</div>
+<p class="sh">Number of trades as an information proxy</p>
+<p>The paper uses the number of trades as an indicator of information asymmetry.</p>
+<p class="sh">Why might trade frequency contain information?</p>
+<p>Suppose there is a group of informed traders.</p>
+<p>They know something important and therefore trade more actively.</p>
+<p>So:</p>
+<div>\[\text{Information advantage} \rightarrow \text{more trading}\]</div>
+<p>Therefore number of trades can act as a proxy.</p>
+<p class="sh">Informed traders break up orders</p>
+<p>Large informed traders generally don't want to reveal their information by submitting one enormous order.</p>
+<p>Instead, they may split:</p>
+<div>\[10,000\text{ shares}\]</div>
+<p>into:</p>
+<div>\[1000+1000+1000+\cdots\]</div>
+<p>smaller transactions.</p>
+<p>This is called order splitting.</p>
+<p>Therefore the number of trades may increase even if total volume isn't proportionally huge.</p>
+<p class="sh">Trading frequency</p>
+<p>Trading frequency is affected by:</p>
+<ul><li>market conditions</li><li>industry conditions</li><li>stock-specific factors</li></ul>
+<p>Therefore it can potentially generate commonality.</p>
+</div>
+<div class="prob" id="s93"><h3>Slide 13 — Individual, Market and Industry Transaction Frequencies</h3><img src="slides/liq-16.jpg" alt="Deck liquidity, page 16" loading="lazy">
+<p>This is one of the most important equations in the slides.</p>
+<p>The model is:</p>
+<div>\[\boxed{ DL_{j,t} = \alpha_j + \beta_{j,S}DS_{j,t} + \beta_{j,T}DT_{j,t} + \beta_{j,M}DV_{M,t} + \beta_{j,I}DV_{I,t} + \epsilon_{j,t} }\]</div>
+<p>Let's decode everything.</p>
+<p>\(DL_{j,t}\)</p>
+<p>Change in liquidity of stock \(j\).</p>
+<p>\(DS_{j,t}\)</p>
+<p>Percentage change in the average dollar size of an individual transaction in stock \(j\).</p>
+<p>Suppose yesterday average trade size was:</p>
+<div>\[\$10,000\]</div>
+<p>today:</p>
+<div>\[\$12,000\]</div>
+<p>Then:</p>
+<div>\[DS_{j,t} = \frac{12,000-10,000}{10,000} =20\%\]</div>
+<p>\(DT_{j,t}\)</p>
+<p>Percentage change in the number of trades in stock \(j\).</p>
+<p>Suppose:</p>
+<p>Yesterday:</p>
+<div>\[100\text{ trades}\]</div>
+<p>Today:</p>
+<div>\[120\text{ trades}\]</div>
+<p>Then:</p>
+<div>\[DT_{j,t}=20\%\]</div>
+<p>\(DV_{M,t}\)</p>
+<p>Change in aggregate dollar trading volume of the entire market.</p>
+<p>Importantly:</p>
+<p>stock \(j\) is excluded.</p>
+<p class="sh">Why?</p>
+<p>Again, to prevent mechanical correlation.</p>
+<p>\(DV_{I,t}\)</p>
+<p>Change in dollar trading volume of stock \(j\)'s industry.</p>
+<p>Again, stock \(j\) itself is excluded.</p>
+<p class="sh">Why use all four variables?</p>
+<p>Because the researchers want to separate different sources of trading activity.</p>
+<p>Individual stock activity</p>
+<div>\[DS_{j,t},DT_{j,t}\]</div>
+<p>Market-wide activity</p>
+<div>\[DV_{M,t}\]</div>
+<p>Industry-wide activity</p>
+<div>\[DV_{I,t}\]</div>
+<p>This helps determine whether liquidity changes are driven by:</p>
+<ul><li>stock-specific trading</li><li>market-wide trading</li><li>industry-wide trading</li></ul>
+</div>
+<div class="prob" id="s94"><h3>Slide 14 — Observations</h3><img src="slides/liq-17.jpg" alt="Deck liquidity, page 17" loading="lazy"><img src="slides/liq-18.jpg" alt="Deck liquidity, page 18" loading="lazy">
+<p>This slide summarizes the empirical findings.</p>
+<p>Let's go through each one carefully.</p>
+<p class="sh">1. "More trading should reduce the spreads"</p>
+<p>Basic intuition:</p>
+<p>More trading can increase market liquidity.</p>
+<p>More buyers and sellers means:</p>
+<div>\[\text{greater market participation}\]</div>
+<p>which can allow dealers to trade more easily.</p>
+<p>Thus:</p>
+<div>\[\boxed{ \text{more market trading} \rightarrow \text{lower spreads} }\]</div>
+<p>But there is a complication.</p>
+<p class="sh">2. Informed traders can increase spreads</p>
+<p>If more trades are coming from informed traders, dealers face greater adverse-selection risk.</p>
+<p>Suppose a dealer quotes:</p>
+<div>\[Bid=99,\quad Ask=101\]</div>
+<p>An informed trader knows the asset is actually worth:</p>
+<div>\[\$110\]</div>
+<p>The informed trader buys at $101.</p>
+<p>The dealer loses.</p>
+<p>Therefore dealers protect themselves by increasing spreads.</p>
+<p>So:</p>
+<div>\[\boxed{ \text{more informed trading} \rightarrow \text{higher adverse-selection risk} \rightarrow \text{wider spread} }\]</div>
+<p>This explains why more trades do not automatically mean better liquidity.</p>
+<p class="sh">3. Individual trading frequency has a strong positive influence on spreads</p>
+<p>The slide says:</p>
+<div>\[T_{j,t}\uparrow \Rightarrow Spread\uparrow\]</div>
+<p class="sh">Why?</p>
+<p>Because a high number of trades may indicate increased informed trading.</p>
+<p>So this is consistent with:</p>
+<div>\[\text{trading frequency} \rightarrow \text{information asymmetry} \rightarrow \text{adverse selection} \rightarrow \text{higher spread}\]</div>
+<p class="sh">4. Market-wide volume has a negative marginal influence on quoted spread</p>
+<p>This is interesting.</p>
+<p>The individual stock's trading frequency can increase spreads, while aggregate market volume can reduce them.</p>
+<p class="sh">Why?</p>
+<p>Because market-wide volume can represent greater overall market activity and liquidity.</p>
+<p>So:</p>
+<div>\[\boxed{ \text{Market volume}\uparrow \rightarrow \text{greater market liquidity} \rightarrow \text{quoted spread}\downarrow }\]</div>
+<p>while:</p>
+<div>\[\boxed{ \text{Individual trade frequency}\uparrow \rightarrow \text{possible informed trading}\uparrow \rightarrow \text{spread}\uparrow }\]</div>
+<p>The two effects are not contradictory because they measure different things.</p>
+<p class="sh">5. Individual trade size has a strong positive influence on quoted spreads and depth</p>
+<p>Suppose the average trade size increases.</p>
+<p>Large orders create greater inventory pressure for market makers.</p>
+<p>For example:</p>
+<div>\[\$10,000 \rightarrow \$100,000\]</div>
+<p>orders expose the dealer to greater risk.</p>
+<p>Therefore:</p>
+<div>\[\text{Trade size}\uparrow \rightarrow \text{inventory risk}\uparrow\]</div>
+<p>which can cause:</p>
+<div>\[\text{spread}\uparrow\]</div>
+<p>At the same time, dealers may provide more depth to accommodate larger trades.</p>
+<p>Thus the relationship with depth can be positive.</p>
+<p class="sh">6. Industry volume has an insignificant negative influence on depth</p>
+<p>The coefficient is negative, but statistically insignificant.</p>
+<p>This distinction is important.</p>
+<p class="sh">Negative coefficient</p>
+<p>The estimated relationship is:</p>
+<div>\[\beta&lt;0\]</div>
+<p class="sh">Insignificant</p>
+<p>But the evidence isn't strong enough to conclude that the relationship differs reliably from zero under the study's statistical criterion.</p>
+<p>So don't say:</p>
+<p>"Industry volume decreases depth."</p>
+<p>Instead say:</p>
+<p>The estimated effect is negative but statistically insignificant.</p>
+<p>That is the proper empirical interpretation.</p>
+</div>
+<div class="prob" id="s95"><h3>THE ENTIRE STORY OF THESE SLIDES</h3>
+<p>Now let's connect everything.</p>
+<p>The paper begins with the observation:</p>
+<div>\[\boxed{ \text{Liquidity of different stocks moves together} }\]</div>
+<p>Then asks:</p>
+<p class="sh">Why?</p>
+<p>Possible reasons:</p>
+<div>\[\boxed{ \begin{aligned} &amp;\text{Market trading}\\ &amp;\text{Market volume}\\ &amp;\text{Volatility}\\ &amp;\text{Interest rates}\\ &amp;\text{Program trading}\\ &amp;\text{Institutional trading}\\ &amp;\text{Inventory risk}\\ &amp;\text{Information asymmetry} \end{aligned} }\]</div>
+<p>Then they measure liquidity using:</p>
+<div>\[\boxed{ QSPR,\ PQSPR,\ DEP,\ ESPR,\ PESPR }\]</div>
+<p>Then calculate daily proportional changes:</p>
+<div>\[\boxed{ DL_t=\frac{L_t-L_{t-1}}{L_{t-1}} }\]</div>
+<p>Then estimate:</p>
+<div>\[\boxed{ DL_{j,t} = \alpha_j+\beta_jDL_{M,t}+\epsilon_{j,t} }\]</div>
+<p>to test market-wide commonality.</p>
+<p>Then add industry:</p>
+<div>\[\boxed{ DL_{j,t} = \alpha_j+ \beta_{j,M}DL_{M,t} + \beta_{j,I}DL_{I,t} + \epsilon_{j,t} }\]</div>
+<p>to separate:</p>
+<div>\[\boxed{\text{Market commonality}}\]</div>
+<p>from</p>
+<div>\[\boxed{\text{Industry commonality}}\]</div>
+<p>Finally, they investigate why these common movements occur by examining:</p>
+<ul><li>number of trades</li><li>trade size</li><li>market volume</li><li>industry volume</li></ul>
+<p>to distinguish between:</p>
+<div>\[\boxed{\text{Inventory-risk channel}}\]</div>
+<p>and</p>
+<div>\[\boxed{\text{Asymmetric-information channel}}\]</div>
+</div>
+<div class="prob" id="s96"><h3>Very Important Exam Concepts</h3>
+<p>You should be able to answer these immediately.</p>
+<details><summary>1. What is commonality in liquidity?</summary>
+<p>Liquidity measures of different securities exhibit correlated movements because they respond to common market/industry factors.</p>
+</details>
+<details><summary>2. What is QSPR?</summary>
+<div>\[\boxed{QSPR=P_A-P_B}\]</div>
+<p>Quoted bid-ask spread.</p>
+<p>Higher QSPR → lower liquidity.</p>
+</details>
+<details><summary>3. What is PQSPR?</summary>
+<div>\[\boxed{ PQSPR=\frac{P_A-P_B}{P_M} }\]</div>
+<p>Normalized quoted spread.</p>
+</details>
+<details><summary>4. What is DEP?</summary>
+<div>\[\boxed{ DEP=\frac{Q_A+Q_B}{2} }\]</div>
+<p>Average quoted depth.</p>
+<p>Higher DEP → greater liquidity.</p>
+</details>
+<details><summary>5. What is ESPR?</summary>
+<div>\[\boxed{ ESPR=2|P_t-P_M| }\]</div>
+<p>Effective spread.</p>
+<p>It measures how far the actual transaction price is from the midpoint.</p>
+</details>
+<details><summary>6. Why multiply by 2?</summary>
+<p>Because the transaction is approximately:</p>
+<div>\[P_t=P_M\pm\frac{Spread}{2}\]</div>
+<p>Therefore:</p>
+<div>\[Spread=2|P_t-P_M|\]</div>
+</details>
+<details><summary>7. What is PESPR?</summary>
+<div>\[\boxed{ PESPR=\frac{2|P_t-P_M|}{P_t} }\]</div>
+<p>Normalized effective spread.</p>
+</details>
+<details><summary>8. Why use proportional changes?</summary>
+<p>Because stocks have very different scales.</p>
+<div>\[\boxed{ DL_t=\frac{L_t-L_{t-1}}{L_{t-1}} }\]</div>
+<p>makes changes comparable across stocks.</p>
+</details>
+<details><summary>9. What does \(\beta_j\) represent?</summary>
+<p>Sensitivity of stock \(j\)'s liquidity to the common market liquidity factor.</p>
+<div>\[\boxed{ \beta_j&gt;0 \Rightarrow \text{positive commonality} }\]</div>
+</details>
+<details><summary>10. Why use lag and lead?</summary>
+<p>To investigate the timing of commonality:</p>
+<div>\[\text{Lag}=\text{previous day's market liquidity}\]</div><div>\[\text{Concurrent}=\text{same day's market liquidity}\]</div><div>\[\text{Lead}=\text{next day's market liquidity}\]</div>
+</details>
+<details><summary>11. Why introduce industry liquidity?</summary>
+<p>To determine whether commonality is:</p>
+<div>\[\text{market-wide}\]</div>
+<p>or</p>
+<div>\[\text{industry-specific}\]</div>
+</details>
+<details><summary>12. What are the two major mechanisms?</summary>
+<div>\[\boxed{\text{Inventory risk}}\]</div>
+<p>and</p>
+<div>\[\boxed{\text{Asymmetric information}}\]</div>
+</details>
+<details><summary>13. Why can volatility increase spreads?</summary>
+<div>\[Volatility\uparrow \Rightarrow Inventory\ risk\uparrow \Rightarrow Dealer\ compensation\uparrow \Rightarrow Spread\uparrow\]</div>
+</details>
+<details><summary>14. Why can informed trading increase spreads?</summary>
+<div>\[Informed\ trading\uparrow \Rightarrow Adverse\ selection\uparrow \Rightarrow Dealer\ expected\ loss\uparrow \Rightarrow Spread\uparrow\]</div>
+</details>
+<details><summary>15. Why is market volume different from individual trading frequency?</summary>
+<p>Market volume can represent broad market participation/liquidity.</p>
+<p>Individual trading frequency can also capture the presence of informed traders.</p>
+<p>Therefore their effects on spreads can differ.</p>
+</details>
+</div>
+<div class="prob" id="s97"><h3>One final mental picture</h3>
+<p>Think of a market maker standing in the middle:</p>
+<p>Normal market</p>
+<div>\[\text{Many buyers + sellers}\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<div>\[\text{Easy to trade}\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<div>\[\boxed{\text{Low spread + high depth}}\]</div>
+<p>Market-wide shock</p>
+<div>\[\text{Volatility}\uparrow\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<div>\[\text{Inventory risk}\uparrow\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<div>\[\text{Dealer risk}\uparrow\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<div>\[\boxed{\text{Spreads}\uparrow,\quad \text{Depth}\downarrow}\]</div>
+<p>This happens across many stocks simultaneously.</p>
+<p>That's commonality in liquidity.</p>
+<p>Information shock</p>
+<div>\[\text{Informed traders}\uparrow\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<div>\[\text{Adverse selection}\uparrow\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<div>\[\text{Dealer expected loss}\uparrow\]</div>
+<p style="text-align:center;margin:0">↓</p>
+<div>\[\boxed{\text{Spread}\uparrow}\]</div>
+<p>And that explains why the paper studies trade frequency, trade size, market volume and industry volume after establishing that liquidity has common movements.</p>
+</div>
+</div>
+<a id="top" href="#start">↑ top</a>

@@ -1,0 +1,76 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Model World against Real World}
+
+Figure~\ref{fig:modelreal} sets the two worlds side by side. For each risk measure it shows how many
+times smaller AS makes it, first in the Monte Carlo (open diamonds) and then on real NSE minutes
+(dots). The reductions are of the same order in both worlds: three to fourteen times, depending on
+the measure. The model's promise about \emph{risk} is kept on real data even though several of its
+assumptions bend or break. The reason is that the risk result needs only one assumption that does
+hold: that a quote closer to the mid is filled more often (A1). Given that, skewing quotes towards
+the side that unloads inventory must pull inventory back towards zero, whatever the price does.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{summary_model_vs_reality}
+\caption{How many times AS reduces each risk measure relative to the symmetric dealer, in the
+model's world (open diamonds) and on real NSE minutes (dots). Log scale; 1 means no reduction.}
+\label{fig:modelreal}
+\end{figure}
+
+The model's promise about \emph{profit} is not kept, because profit needs A6, no adverse selection,
+and that is the assumption real order flow violates. In the Monte Carlo a fill carries no information
+about the next price move, so the dealer keeps all the spread it captures. On the exchange, fills
+cluster when prices move, as in the information models of Glosten and Milgrom~\cite{glosten1985}, and
+the dealer gives the spread back. Inventory models explain why spreads are \emph{shaped} the way they
+are; information explains why they must be wide enough to pay for adverse selection.
+
+\subsection{The Market's Spread against the Model's}
+
+Figure~\ref{fig:spreads} compares the spread the model would quote with the spread the market charges.
+At midday the AS spread is \RELIANCESpreadMid{} rupees for RELIANCE and \KSCLSpreadMid{} for KSCL,
+roughly three times the Roll~\cite{roll1984} spread of \RELIANCERoll{} and \KSCLRoll{}. Even the edge
+term alone, which ignores inventory, is wider than the market's spread.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{summary_market_vs_model_spread}
+\caption{The market's spread (Roll estimator, and the average one-minute high--low range as an
+upper reference) against the Avellaneda--Stoikov optimal spread at midday and at the open.}
+\label{fig:spreads}
+\end{figure}
+
+This is the gap one expects between a single dealer and a competitive market. The model describes a
+dealer who faces the whole fill curve $Ae^{-k\delta}$ alone and sets a price on it, like Garman's
+monopolist~\cite{garman1976}. NSE is a limit order book with many liquidity providers, and
+competition among them pushes the quoted spread down to about what adverse selection and inventory
+costs require. A dealer who quoted the AS spread there would sit behind better prices and be filled
+mainly when the price runs through the whole book, which is exactly the adverse-selection pattern
+of Section~\ref{sec:replay}.
+
+\subsection{Limitations}
+
+\begin{enumerate}
+\item \textbf{Bars, not the order book.} Fills are inferred from one-minute highs and lows. The proxy
+  ignores queue position, so it is optimistic about how often a quote is filled. It also measures
+  adverse selection over the same minute as the fill, which may overstate it compared with a
+  tick-level simulation. Tick or order-book data would remove both problems.
+\item \textbf{Short sample.} Yahoo keeps about 30 days of one-minute history, so the test window has
+  nine days per stock. The risk results are large enough to be clear at this size; the mean-PnL
+  results are not, as the KSCL counterexample shows.
+\item \textbf{Frictions.} Quotes are not rounded to the tick, and there are no fees, securities
+  transaction tax or exchange charges. Every one of these would lower PnL further, which strengthens
+  the conclusion that the model is not a stand-alone source of profit.
+\item \textbf{Constant parameters.} The quotes use one $\sigma$ for the whole day, which
+  Section~\ref{sec:assumptions} shows is wrong by a factor of about three at the open.
+\end{enumerate}
+
+\subsection{Extensions}
+
+Three extensions follow directly from the findings. First, a time-of-day volatility $\sigma(t)$ would
+fix the assumption that breaks, widening the open and tightening midday. Second, the exact solution
+of Gu\'eant, Lehalle and Fern\'andez-Tapia~\cite{gueant2013} removes the asymptotic approximation and
+bounds inventory explicitly. Third, and most important, an adverse-selection term, for example making
+fill intensity depend on recent order flow, would address the one assumption whose failure costs the
+dealer money.

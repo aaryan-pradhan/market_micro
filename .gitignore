@@ -2,4 +2,9 @@
 # course slides are the instructor's; group sheet has classmates' emails
 *.pdf
 *.xlsx
-course/Links.txt
+pre-midsem/course/Links.txt
+slides/
+
+# project build artefacts
+__pycache__/
+project/code/.cache/

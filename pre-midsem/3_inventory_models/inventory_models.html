@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Inventory Models Ledger</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false})"></script>
+<style>
+:root{
+  --bg:#f6f7f9; --ink:#171b24; --muted:#5a6273; --rule:#d9dee6; --card:#ffffff;
+  --accent:#2346a0; --gap:#8a4b00; --gapbg:#fdf1de; --idea:#eef2fb;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0f1218; --ink:#e4e7ee; --muted:#98a1b3; --rule:#283042; --card:#161a22;
+    --accent:#93abff; --gap:#f0b35a; --gapbg:#2a2010; --idea:#1a2033;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0f1218; --ink:#e4e7ee; --muted:#98a1b3; --rule:#283042; --card:#161a22;
+  --accent:#93abff; --gap:#f0b35a; --gapbg:#2a2010; --idea:#1a2033;
+}
+body{background:var(--bg);color:var(--ink);font:20px/1.75 "MesloLGS Nerd Font Propo","MesloLGS NF","MesloLGS Nerd Font",ui-monospace,monospace;padding-inline:16px;padding-block:24px 64px}
+.wrap{max-width:52rem;margin:0 auto}
+h1,h2,h3{font-family:"MesloLGS Nerd Font Propo","MesloLGS NF","MesloLGS Nerd Font",ui-monospace,monospace;font-weight:700;text-wrap:balance;line-height:1.2}
+h1{font-size:2.4rem;margin:0 0 .25rem}
+h2{font-size:1.7rem;margin:3rem 0 .75rem;padding-top:1rem;border-top:1px solid var(--rule)}
+h3{font-size:1.2rem;margin:0 0 .4rem}
+.sub{color:var(--muted);margin:0 0 1.25rem}
+.bar{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-bottom:1rem}
+button{font:inherit;font-size:.9rem;color:var(--accent);background:transparent;border:1px solid var(--rule);border-radius:6px;padding:.3rem .8rem;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+nav.toc{font-size:.92rem;columns:2 14rem;column-gap:2rem;margin:0 0 1rem;padding:0}
+nav.toc a{display:block;color:var(--muted);text-decoration:none;padding:.1rem 0;break-inside:avoid}
+nav.toc a:hover{color:var(--accent)}
+a{color:var(--accent)}
+.idea{background:var(--idea);border-radius:8px;padding:.8rem 1rem;margin:.5rem 0 1.25rem}
+.idea p,.idea ol,.idea ul{margin:.3rem 0}
+.prob{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem;margin:1rem 0}
+.prob > p{margin:.2rem 0 .6rem}
+.ans{font-weight:600}
+.sec{border-top:1px solid var(--rule);padding:.45rem 0}
+.sh{color:var(--accent);font-weight:600;font-size:.95rem;margin:0}
+.sec > *:not(.sh){margin-top:.5rem}
+ol.pf{padding-left:1.6rem;margin:.4rem 0}
+ol.pf li{margin:.2rem 0}
+.why{color:var(--muted);font-size:.85em;white-space:nowrap}
+.qed{float:right;color:var(--muted)}
+.claim{margin:.3rem 0}
+.gap{background:var(--gapbg);color:var(--gap);border-radius:6px;padding:.5rem .8rem;font-size:.92rem}
+table{border-collapse:collapse;font-size:.92rem}
+.tw{overflow-x:auto}
+td,th{border:1px solid var(--rule);padding:.25rem .6rem;text-align:center;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+@media print{body{font-size:11pt;padding:0;background:#fff}nav.toc,#q{display:none}h2{break-before:page;margin-top:0}h1+p+nav+h2,h1+p+h2{break-before:auto}.idea,.gap,tr,li{break-inside:avoid}a{color:inherit;text-decoration:none}}
+</style>
+<style>.katex{font-size:1.15em}.katex-display{overflow-x:auto;overflow-y:hidden;padding:.2rem 0}</style>
+<style>
+pre{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:.6rem .8rem;font-size:.85rem;overflow-x:auto}
+.fig{display:block;margin:.8rem auto;max-width:100%;height:auto;font-size:13px}
+.fig text{fill:var(--ink);font-family:inherit}
+.fig .m{fill:var(--muted)} .fig .a{fill:var(--accent)} .fig .g{fill:var(--gap)}
+.fig .ln{stroke:var(--ink);fill:none;stroke-width:1.5}
+.fig .mu{stroke:var(--muted);fill:none;stroke-width:1}
+.fig .ac{stroke:var(--accent);fill:none;stroke-width:2.5}
+.fig .rg{fill:var(--accent);fill-opacity:.22;stroke:var(--accent);stroke-width:1.5}
+.fig .bad{fill:var(--gap);fill-opacity:.28;stroke:var(--gap);stroke-width:1.5}
+.fig .nd{fill:var(--card);stroke:var(--ink);stroke-width:1.5}
+.fig .dot{fill:var(--ink)} .fig .adot{fill:var(--accent)}
+.fig .dsh{stroke-dasharray:5 4} .fig .gl{stroke:var(--gap);fill:none;stroke-width:2.5} .fig .ink{fill:var(--ink)} .fig .bg{fill:var(--bg);stroke:var(--rule)} .fig .thk{stroke-width:4.5;stroke-linecap:round} .fig .sol{fill:var(--ink);fill-opacity:.55;stroke:var(--ink);stroke-width:1}
+.pf li{margin:.55rem 0} .pf .r{display:block;margin-top:.15rem;font-size:.93em} .pf .r > b:first-child{color:var(--accent)} .setup{margin:.3rem 0 .5rem}
+.prob > p.stmt{margin:.35rem 0 .5rem}
+.ahp{fill:var(--ink)} .ahpa{fill:var(--accent)}
+</style>
+<style>.brute td{text-align:left}.brute td:first-child{color:var(--muted);white-space:nowrap}.brute tr.dies td:first-child{color:var(--gap)}.brute tr.therefore td:first-child{color:var(--accent)}</style>
+<div class="wrap">
+<h1>Inventory Models</h1>
+<p class="sub"><a href="../index.html">← Index</a> · BM51002 · 5 models · midsem 29 Sep 2026. Source: <code>2 Inventory model Full.pdf</code> (slide numbers below = PDF pages).</p>
+<nav class="toc">
+<a href="#basics">0 · Words used on this page</a>
+<a href="#garman">1 · Garman (1976)</a>
+<a href="#am">2 · Amihud &amp; Mendelson (1980)</a>
+<a href="#stoll">3 · Stoll (1978)</a>
+<a href="#hs">4 · Ho &amp; Stoll (1981)</a>
+<a href="#oo">5 · O'Hara &amp; Oldfield (1986)</a>
+<a href="#chain">6 · The chain in one table</a>
+</nav>
+
+<!-- ============ ENTRY 0: basics ============ -->
+<h2 id="basics">0 · Words used on this page</h2>
+<div class="idea"><ol>
+<li><b>Dealer</b> (= market maker, specialist). A trader who always stands ready to trade with the public from his own stock of shares and cash. In all five models there is <b>one</b> dealer (a monopolist): nobody can trade except through him.</li>
+<li><b>Public buy / public sell.</b> A <i>public buy</i> is a member of the public buying from the dealer, so the dealer <i>sells</i> a share. A <i>public sell</i> is the public selling to the dealer, so the dealer <i>buys</i> a share. Keep the two points of view apart; every model below is written from the dealer's side.</li>
+<li><b>Ask</b> (\(p_a\)) = the price at which the dealer sells (the public buys). <b>Bid</b> (\(p_b\)) = the price at which the dealer buys (the public sells). <b>Spread</b> = ask − bid. <b>Mid</b> = (ask + bid)/2. Example: bid 99, ask 101 → spread 2, mid 100.</li>
+<li><b>Inventory.</b> What the dealer holds right now: a <i>stock inventory</i> (number or value of shares) and a <i>cash inventory</i>. A public sell raises his stock by one and lowers his cash by the bid; a public buy does the opposite at the ask.</li>
+<li><b>Order flow / arrival rate.</b> Orders from the public arrive over time. The <i>arrival rate</i> \(\lambda\) is the average number of orders per unit of time (e.g. 12 per hour).</li>
+<li><b>Expected value</b> \(E[X]\) = the probability-weighted average of a random quantity \(X\). <b>Variance</b> \(\text{Var}(X) = E[(X - E X)^2]\) = the average squared distance from the mean; its square root is the <b>standard deviation</b> \(\sigma\). <b>Covariance</b> \(\text{Cov}(X,Y) = E[(X-EX)(Y-EY)]\): positive if \(X\) and \(Y\) tend to be above their means together. Two random quantities are <b>independent</b> if knowing one tells you nothing about the other; then their covariance is 0.</li>
+<li><b>Drift</b> of a quantity = its expected change per unit of time. Inventory with zero drift has no tendency to rise or fall.</li>
+<li><b>Why inventory matters</b> (slide 2): the dealer's wealth is limited; buys and sells arrive at different moments (<i>asynchronously</i>), so he must hold inventory to bridge the gap; holding inventory costs money and carries risk; trading with better-informed people loses money. The five models add these features one at a time.</li>
+</ol></div>
+
+<!-- ============ ENTRY 1: Garman ============ -->
+<h2 id="garman">1 · Garman (1976): fixed quotes and the risk of ruin</h2>
+<div class="idea"><ol>
+<li><b>Poisson arrivals.</b> Orders arrive one at a time at random moments. "Poisson with rate \(\lambda\)" means: in a tiny interval of length \(\Delta t\), one order arrives with probability \(\lambda\Delta t\), none arrives with probability \(1 - \lambda\Delta t\), and two or more arrive with a probability so small that it vanishes even after dividing by \(\Delta t\). What happens in different intervals is independent. Consequence: the expected number of orders in time \(t\) is \(\lambda t\). Example: \(\lambda = 12\) per hour, \(\Delta t = 1\) second \(= 1/3600\) hour → chance of an order in that second = \(12/3600 = 0.0033\).</li>
+<li><b>Price-dependent rates.</b> \(\lambda_a(p_a)\) = rate of public buys when the ask is \(p_a\); it falls when \(p_a\) rises (dearer → fewer buyers). \(\lambda_b(p_b)\) = rate of public sells when the bid is \(p_b\); it rises when \(p_b\) rises (the dealer pays more → more sellers).</li>
+<li><b>Walrasian equilibrium.</b> The textbook market: one price \(p^*\) at which the buying rate equals the selling rate (slide 9, where the two curves cross). It silently assumes buyers and sellers are present at the same moment.</li>
+<li><b>Failure</b> (slide 10, D-4). The dealer cannot borrow cash or shares. If his cash would go below zero (<i>bankruptcy</i>) or his shares would go below zero (<i>running out of stock</i>), he cannot continue. Garman calls either one failure.</li>
+<li><b>Random walk.</b> A quantity that at each event moves one step up or one step down at random. <b>Gambler's ruin</b> = the probability that a random walk that starts at \(N_0\) ever reaches 0.</li>
+<li><b>Notation map</b> (the slides use two sets of letters for the same things):
+  <div class="tw"><table>
+  <tr><th>Meaning</th><th>slides 16–19</th><th>slides 10, 20</th></tr>
+  <tr><td>public buy rate (stock goes out, cash comes in at the ask)</td><td>\(\lambda_a(p_a)\)</td><td>\(\lambda_B(p_B)\)</td></tr>
+  <tr><td>public sell rate (stock comes in, cash goes out at the bid)</td><td>\(\lambda_b(p_b)\)</td><td>\(\lambda_S(p_S)\)</td></tr>
+  <tr><td>ask / bid</td><td>\(p_a\) / \(p_b\)</td><td>\(p_B\) / \(p_S\)</td></tr>
+  </table></div>
+  This page uses \(\lambda_a, \lambda_b, p_a, p_b\) throughout.</li>
+</ol></div>
+<div class="prob"><h3>Garman's monopolist dealer</h3>
+<p class="stmt">One dealer is the only place to trade. At time 0 he posts an ask \(p_a\) and a bid \(p_b\) and never changes them. Every order is for one share. Public buys arrive as a Poisson process with rate \(\lambda_a(p_a)\), public sells as an independent Poisson process with rate \(\lambda_b(p_b)\). He starts with cash \(I_c(0)\) and \(I_s(0)\) shares and fails if either runs out.</p>
+<p class="stmt"><b>Question:</b> (i) Which fixed quotes avoid <i>certain</i> failure? (ii) Among quotes that keep inventory balanced, which maximise expected profit per unit time, and what spread do they give?</p>
+<div class="sec"><p class="sh">Key idea</p><p><b>With fixed quotes, inventory is a random walk, and a random walk reaches zero for sure unless it drifts away from zero.</b> Surviving needs the share inventory to drift up (more sells than buys) and the cash to drift up (more cash in than out) at the same time. Those two conditions together force ask &gt; bid, so part of the spread exists to avoid ruin.</p></div>
+<div class="sec"><p class="sh">Previous model → why it falls short</p><div class="tw"><table class="brute">
+<tr><td>before</td><td>Walrasian auction: everyone trades at the single price \(p^*\) where supply equals demand.</td></tr>
+<tr><td>assumes</td><td>Buyers and sellers are present at the same instant (synchronous orders).</td></tr>
+<tr class="dies"><td>fails at</td><td>Real orders arrive one by one at random moments. A buyer who arrives at 10:01 finds no seller, so the trade at \(p^*\) cannot happen.</td></tr>
+<tr class="therefore"><td>therefore</td><td>Put a dealer in the middle. He holds cash and shares to bridge the time gaps and quotes two prices. Study how his inventory moves over time ("temporal microstructure", slide 4).</td></tr>
+</table></div></div>
+<div class="sec"><p class="sh">Solution</p><p class="setup"><b>Setup.</b> \(\lambda_a = \lambda_a(p_a)\), \(\lambda_b = \lambda_b(p_b)\): constants, because the quotes never change. \(N_B(t)\), \(N_S(t)\) = number of public buys and public sells executed by time \(t\). \(I_s(t)\), \(I_c(t)\) = shares and cash at time \(t\). \(R_k(t)\) = probability that \(I_s(t) = k\). Assumptions (slide 10): (A1) buys and sells are independent Poisson processes (D-1). (A2) All trades go through the dealer (D-2). (A3) The dealer sets \(p_a, p_b\) once at time 0 and never changes them (D-3 and slide 11). (A4) No borrowing; negative cash or stock = failure (D-4). (A5) He maximises expected profit per unit time, subject to avoiding certain failure (D-5). (A6) No transaction costs (D-6). (A7) Every order is for one share.</p>
+<p class="claim"><b>Claim.</b> (a) Stock-failure probability \(= (\lambda_a/\lambda_b)^{I_s(0)}\) if \(\lambda_b &gt; \lambda_a\), and 1 otherwise. Cash-failure probability \(\approx (\lambda_b p_b / \lambda_a p_a)^{I_c(0)/\bar p}\) if \(\lambda_a p_a &gt; \lambda_b p_b\), and 1 otherwise. (b) Avoiding certain failure needs \(\lambda_a p_a &gt; \lambda_b p_b\) and \(\lambda_b &gt; \lambda_a\), and these force \(p_a &gt; p_b\). (c) With linear rates \(\lambda_b(p) = \alpha + \beta p\), \(\lambda_a(p) = \gamma - \delta p\) and balanced flows, expected profit is maximised at \(\bar\lambda = \frac{\gamma\beta + \alpha\delta}{2(\beta+\delta)}\).</p>
+<p><b>Part A: inventory bookkeeping (slide 12).</b></p><ol class="pf">
+<li>\(I_s(t) = I_s(0) + N_S(t) - N_B(t)\).<span class="r"><b>Why:</b> each public sell hands the dealer one share and each public buy takes one away (A7). This is slide eq. (3.2).</span></li>
+<li>\(I_c(t) = I_c(0) + p_a N_B(t) - p_b N_S(t)\).<span class="r"><b>Why:</b> each public buy pays him \(p_a\); each public sell costs him \(p_b\) (A3). This is slide eq. (3.1).</span></li>
+<li>\(E[I_s(t)] = I_s(0) + (\lambda_b - \lambda_a)t\) and \(E[I_c(t)] = I_c(0) + (\lambda_a p_a - \lambda_b p_b)t\). So the stock drift is \(\lambda_b - \lambda_a\) and the cash drift is \(\lambda_a p_a - \lambda_b p_b\).<span class="r"><b>Why:</b> steps 1–2, and \(E[N] = \text{rate} \times t\) for a Poisson count (primer 1).</span></li>
+</ol>
+<p><b>Part B: how the probability of holding \(k\) shares changes (slides 14–16).</b></p><ol class="pf" start="4">
+<li>Look at the tiny interval from \(t - \Delta t\) to \(t\). The dealer ends with exactly \(k\) shares in one of three ways: (1) he had \(k-1\), a sell arrived and no buy; (2) he had \(k+1\), a buy arrived and no sell; (3) he had \(k\) and nothing arrived.<span class="r"><b>Why:</b> any other path needs two or more orders in \(\Delta t\), which has vanishing probability (primer 1).</span></li>
+<li>Their probabilities are \(R_{k-1}(t-\Delta t)\,\lambda_b\Delta t\,(1 - \lambda_a\Delta t)\), \(R_{k+1}(t-\Delta t)\,\lambda_a\Delta t\,(1-\lambda_b\Delta t)\) and \(R_k(t-\Delta t)\,(1-\lambda_a\Delta t)(1-\lambda_b\Delta t)\).<span class="r"><b>Why:</b> primer 1 gives each factor; the two flows are independent (A1), so the probabilities multiply.</span></li>
+<li>\(R_k(t) = \) the sum of the three.<span class="r"><b>Why:</b> the three ways cannot happen together, and together they cover everything (step 4).</span></li>
+<li>Multiply out: \((1-\lambda_a\Delta t)(1-\lambda_b\Delta t) = 1 - (\lambda_a+\lambda_b)\Delta t + \lambda_a\lambda_b\Delta t^2\), \(\lambda_b\Delta t(1-\lambda_a\Delta t) = \lambda_b\Delta t - \lambda_a\lambda_b\Delta t^2\), \(\lambda_a\Delta t(1-\lambda_b\Delta t) = \lambda_a\Delta t - \lambda_a\lambda_b\Delta t^2\).<span class="r"><b>Why:</b> expand the brackets.</span></li>
+<li>Subtract \(R_k(t-\Delta t)\) from both sides of step 6 and divide by \(\Delta t\): \(\frac{R_k(t)-R_k(t-\Delta t)}{\Delta t} = \lambda_b R_{k-1} + \lambda_a R_{k+1} - (\lambda_a+\lambda_b)R_k + (\text{terms with a factor } \Delta t)\).<span class="r"><b>Why:</b> step 7; the \(\Delta t^2\) terms become \(\Delta t\) terms after dividing by \(\Delta t\).</span></li>
+<li>Let \(\Delta t \to 0\): \(\dfrac{dR_k}{dt} = \lambda_b R_{k-1}(t) + \lambda_a R_{k+1}(t) - (\lambda_a + \lambda_b) R_k(t)\).<span class="r"><b>Why:</b> the left side becomes the derivative; the leftover terms go to 0. This is the stock version of slide eq. (2.4).</span></li>
+</ol>
+<p><b>Part C: probability of running out of shares (gambler's ruin, slides 17–18).</b></p><ol class="pf" start="10">
+<li>Look only at the moments when an order arrives. Each arrival is a sell (shares +1) with probability \(q = \frac{\lambda_b}{\lambda_a+\lambda_b}\) and a buy (shares −1) with probability \(1-q = \frac{\lambda_a}{\lambda_a+\lambda_b}\), independent of the past.<span class="r"><b>Why:</b> given that exactly one order arrives in a tiny interval, the chance it is a sell is \(\frac{\lambda_b\Delta t}{\lambda_a\Delta t + \lambda_b\Delta t}\) (primer 1, A1); the \(\Delta t\) cancels.</span></li>
+<li>Let \(r_k\) = probability that the share count ever hits 0, starting from \(k\). Add a temporary ceiling \(M\) (stop if shares reach \(M\)). Then \(r_0 = 1\), \(r_M = 0\), and \(r_k = q\,r_{k+1} + (1-q)\,r_{k-1}\) for \(0 &lt; k &lt; M\).<span class="r"><b>Why:</b> the first order moves the count to \(k+1\) or \(k-1\) (step 10), and from there the walk starts afresh, because the orders are independent.</span></li>
+<li>Write \(r_k = q\,r_k + (1-q)\,r_k\) on the left and rearrange: \(q\,(r_{k+1} - r_k) = (1-q)\,(r_k - r_{k-1})\).<span class="r"><b>Why:</b> \(q + (1-q) = 1\); move terms across.</span></li>
+<li>Put \(d_k = r_k - r_{k-1}\) and \(\rho = \frac{1-q}{q} = \frac{\lambda_a}{\lambda_b}\). Step 12 says \(d_{k+1} = \rho\, d_k\), so \(d_k = \rho^{k-1} d_1\).<span class="r"><b>Why:</b> divide step 12 by \(q\); apply it repeatedly. \(\frac{1-q}{q} = \frac{\lambda_a}{\lambda_b}\) by step 10.</span></li>
+<li>\(r_k = r_0 + d_1 + d_2 + \dots + d_k = 1 + d_1(1 + \rho + \dots + \rho^{k-1}) = 1 + d_1\frac{1-\rho^k}{1-\rho}\) (for \(\rho \ne 1\)).<span class="r"><b>Why:</b> the sum telescopes; step 13; the geometric series formula.</span></li>
+<li>Use \(r_M = 0\): \(d_1 = -\frac{1-\rho}{1-\rho^M}\). Substitute: \(r_k = 1 - \frac{1-\rho^k}{1-\rho^M} = \frac{\rho^k - \rho^M}{1 - \rho^M}\).<span class="r"><b>Why:</b> step 14 at \(k = M\), then step 14 again with this \(d_1\).</span></li>
+<li>Now remove the ceiling, \(M \to \infty\). If \(\rho &lt; 1\): \(\rho^M \to 0\), so \(r_k \to \rho^k\). If \(\rho &gt; 1\): divide top and bottom by \(\rho^M\) to get \(\frac{\rho^{k-M} - 1}{\rho^{-M} - 1} \to \frac{-1}{-1} = 1\). If \(\rho = 1\): every \(d_k = d_1\), so \(r_k = 1 - k/M \to 1\).<span class="r"><b>Why:</b> step 15; for \(\rho = 1\), step 13 makes all \(d_k\) equal and \(r_M = 0\) gives \(d_1 = -1/M\).</span></li>
+<li><span class="ans">Stock-failure probability \(= \left(\lambda_a/\lambda_b\right)^{I_s(0)}\) if \(\lambda_b &gt; \lambda_a\), and \(= 1\) if \(\lambda_b \le \lambda_a\)</span>, which is slide eq. (2.9).<span class="r"><b>Why:</b> step 16 with \(k = I_s(0)\) and \(\rho = \lambda_a/\lambda_b\).</span></li>
+<li>Cash works the same way, except that a buy adds \(p_a\) and a sell removes \(p_b\), not ±1. Garman counts cash in units of the average price \(\bar p = (p_a+p_b)/2\), so the start is \(I_c(0)/\bar p\) units, and he weights the odds by money: \(\rho_c = \frac{\lambda_b p_b}{\lambda_a p_a}\). Result, slide eq. (2.8): cash-failure probability \(\approx \left(\frac{\lambda_b p_b}{\lambda_a p_a}\right)^{I_c(0)/\bar p}\) if \(\lambda_a p_a &gt; \lambda_b p_b\), and 1 otherwise.<span class="r"><b>Why:</b> the slide-17 rule \(\left(\frac{\text{odds of losing}\times\text{loss}}{\text{odds of winning}\times\text{gain}}\right)^{\text{initial wealth}}\), applied to cash. It is an approximation (see the ⚠ box).</span></li>
+</ol>
+<p><b>Part D: what the dealer must do (slide 19).</b></p><ol class="pf" start="19">
+<li>Both failure probabilities are below 1 only if \(\lambda_a p_a &gt; \lambda_b p_b\) (3.8) and \(\lambda_b &gt; \lambda_a\) (3.9).<span class="r"><b>Why:</b> steps 17 and 18.</span></li>
+<li>Divide (3.8) by \(\lambda_a\): \(p_a &gt; p_b \cdot \frac{\lambda_b}{\lambda_a}\). By (3.9), \(\frac{\lambda_b}{\lambda_a} &gt; 1\), so \(p_b\cdot\frac{\lambda_b}{\lambda_a} &gt; p_b\). Hence <span class="ans">\(p_a &gt; p_b\): a dealer who avoids certain failure must quote a positive spread</span>.<span class="r"><b>Why:</b> chain the two inequalities; all rates and prices are positive.</span></li>
+<li>Even then the failure probability is positive (a "possible failure"). At zero drift, \(\lambda_a = \lambda_b\), the stock-failure probability is exactly 1 (a "sure failure").<span class="r"><b>Why:</b> step 16: \(\rho^{I_s(0)} &gt; 0\); at \(\rho = 1\) the limit is 1.</span></li>
+</ol>
+<p><b>Part E: profit maximisation (slide 20).</b></p><ol class="pf" start="22">
+<li>Garman compares quotes that balance the flows, \(\lambda_a(p_a) = \lambda_b(p_b) = \lambda\) (zero stock drift). Then expected profit per unit time is \(\pi = p_a\lambda - p_b\lambda = (p_a - p_b)\lambda\).<span class="r"><b>Why:</b> step 3: with zero stock drift the share count does not change on average, so the cash drift is pure profit.</span></li>
+<li>With linear rates \(\lambda_b(p) = \alpha + \beta p\) and \(\lambda_a(p) = \gamma - \delta p\) (\(\gamma &gt; \alpha \ge 0\), \(\beta,\delta &gt; 0\)), the quotes that give rate \(\lambda\) are \(p_b = \frac{\lambda - \alpha}{\beta}\) and \(p_a = \frac{\gamma - \lambda}{\delta}\).<span class="r"><b>Why:</b> solve \(\lambda = \alpha + \beta p_b\) and \(\lambda = \gamma - \delta p_a\) for the prices.</span></li>
+<li>So \(\pi(\lambda) = \frac{\lambda(\gamma - \lambda)}{\delta} - \frac{\lambda(\lambda - \alpha)}{\beta}\).<span class="r"><b>Why:</b> substitute step 23 into step 22.</span></li>
+<li>\(\pi'(\lambda) = \frac{\gamma - 2\lambda}{\delta} - \frac{2\lambda - \alpha}{\beta}\).<span class="r"><b>Why:</b> \(\frac{d}{d\lambda}[\lambda\gamma - \lambda^2] = \gamma - 2\lambda\) and \(\frac{d}{d\lambda}[\lambda^2 - \lambda\alpha] = 2\lambda - \alpha\).</span></li>
+<li>Set \(\pi'(\lambda) = 0\) and multiply by \(\beta\delta\): \(\beta(\gamma - 2\lambda) = \delta(2\lambda - \alpha)\), so \(\beta\gamma + \alpha\delta = 2\lambda(\beta + \delta)\).<span class="r"><b>Why:</b> the first-order condition for a maximum; collect the \(\lambda\) terms on the right.</span></li>
+<li><span class="ans">\(\bar\lambda = \dfrac{\gamma\beta + \alpha\delta}{2(\beta+\delta)}\), \(\bar p_b = \dfrac{\bar\lambda - \alpha}{\beta}\), \(\bar p_a = \dfrac{\gamma - \bar\lambda}{\delta}\), \(\bar s = \bar p_a - \bar p_b\), \(\bar\pi = \bar s\,\bar\lambda\)</span>. It is a maximum because \(\pi''(\lambda) = -\frac{2}{\delta} - \frac{2}{\beta} &lt; 0\).<span class="r"><b>Why:</b> divide step 26 by \(2(\beta+\delta)\); step 23 gives the prices; step 22 gives the profit; differentiate step 25 again.</span></li>
+</ol><p><b>Conclusion.</b> With quotes fixed forever, the dealer faces a trade-off. Balanced flow (zero drift) is what maximises profit, but it means certain ruin in shares. Keeping the ruin probability below 1 needs drift away from zero in both shares and cash, and that forces a positive spread. The spread therefore comes partly from monopoly profit and partly from avoiding failure. ∎</p></div>
+<div class="sec"><p class="sh">Numerical example</p>
+<p><b>Profit.</b> Let \(\lambda_b(p) = 2p\) (\(\alpha = 0, \beta = 2\)) and \(\lambda_a(p) = 120 - 2p\) (\(\gamma = 120, \delta = 2\)) orders per hour.</p>
+<ol class="pf">
+<li>Walrasian price: \(2p = 120 - 2p \Rightarrow p^* = 30\), with 60 trades per hour.<span class="r"><b>Why:</b> primer 3: where the two rates are equal.</span></li>
+<li>\(\bar\lambda = \frac{120\cdot 2 + 0\cdot 2}{2(2+2)} = \frac{240}{8} = 30\) trades per hour.<span class="r"><b>Why:</b> Part E, step 27.</span></li>
+<li>\(\bar p_b = \frac{30 - 0}{2} = 15\), \(\bar p_a = \frac{120 - 30}{2} = 45\), \(\bar s = 30\), \(\bar\pi = 30 \times 30 = 900\) per hour.<span class="r"><b>Why:</b> step 27.</span></li>
+<li>Check: at \(\lambda = 29\), \(p_b = 14.5\), \(p_a = 45.5\), \(\pi = 29 \times 31 = 899\); at \(\lambda = 31\), \(\pi = 31 \times 29 = 899\). Both are below 900.<span class="r"><b>Why:</b> step 24 at nearby rates.</span></li>
+</ol>
+<p>So the monopolist halves the volume (30 instead of 60 trades per hour) and quotes 15 / 45 around the Walrasian price 30.</p>
+<p><b>Ruin.</b> Suppose the quotes give \(\lambda_a = 10\) buys and \(\lambda_b = 12\) sells per hour, and the dealer starts with \(I_s(0) = 5\) shares. Shares drift <i>up</i> by 2 per hour on average, yet the chance of ever running out is \((10/12)^5 = 0.402\). With 20 shares it is \((10/12)^{20} = 0.026\). A 20,000-path simulation gives 0.398, which matches.</p>
+<p><b>The trade-off.</b> At the profit-maximising quotes above, \(\lambda_a = \lambda_b = 30\), so \(\rho = 1\) and share failure is certain. Cash is safe: inflow \(30\times45 = 1350\) per hour against outflow \(30 \times 15 = 450\), so with \(I_c(0) = 300\) and \(\bar p = 30\) the cash-failure probability is \((450/1350)^{10} = (1/3)^{10} = 0.000017\). The danger is running out of shares, not cash.</p></div>
+<div class="sec"><p class="sh">Exam</p><p><b>Gotcha:</b> zero drift is <i>not</i> safe. At \(\lambda_a = \lambda_b\) the random walk is certain to hit 0 eventually (\(\rho = 1\)). Also, profit is \(\bar s \times \bar\lambda\), the spread times the <i>matched</i> rate, not times the total rate \(\lambda_a + \lambda_b\).</p><p><b>Recognize:</b> "fixed bid and ask", "Poisson buy and sell arrivals", "asynchronous orders", "cannot borrow", "failure / bankruptcy / gambler's ruin", "temporal microstructure" → Garman.</p>
+<p><b>Findings / contribution</b> (slide 23):</p><ul>
+<li>Shows the dealer's problem when buy and sell orders arrive at different times.</li>
+<li>A dealer market is imperfect: the dealer's inventory, not a single clearing price, is what makes trading happen.</li>
+<li>Inventory matters to the dealer, because he fails if it runs out.</li>
+<li>The positive spread arises partly to reduce the failure probability, and it reflects the dealer's effort to maximise profit.</li>
+<li>Dealer vs auction market (slide 22): a dealer market fills orders from the dealer's inventory and gives a Poisson stream of trades. A double auction matches the best bid with the best offer and gives a non-Poisson stream.</li>
+</ul><p>Past papers: <a href="../papers/midsem_2025.html#q4">Midsem 2025 Q4</a>, <a href="../papers/midsem_2024.html#q4">Midsem 2024 Q4</a>.</p></div>
+<p class="gap">⚠ Slide gap. (1) Slide eq. (2.3) treats a cash inflow of \(p_a\) as a one-unit step with probability \(\lambda_a p_a \Delta t\). That is only exact if cash moves in units of 1 and \(p_a\Delta t\) stays small. Garman's cash result (2.8) is an approximation, which is why it has \(\approx\) and the exponent \(I_c(0)/\bar p\). The stock result (2.9) is exact (Part C above). (2) The slides use \(\lambda_a/\lambda_b\) on slides 16–19 and \(\lambda_B/\lambda_S\) on slides 10 and 20 for the same two flows (see primer 6).</p>
+</div>
+
+<!-- ============ ENTRY 2: Amihud & Mendelson ============ -->
+<h2 id="am">2 · Amihud &amp; Mendelson (1980): quotes that depend on inventory</h2>
+<div class="idea"><ol>
+<li><b>Inventory-dependent quotes.</b> The dealer may change his quotes after every trade. At inventory level \(j\) he posts an ask \(P_{aj}\) and a bid \(P_{bj}\). A <b>policy</b> is the full list of quote pairs, one pair per level.</li>
+<li><b>Demand and supply rates</b> (slide 26). \(D(P_a)\) = public buy orders per unit time at ask \(P_a\), with \(D' &lt; 0\) (Garman's \(\lambda_a\)). \(S(P_b)\) = public sell orders per unit time at bid \(P_b\), with \(S' &gt; 0\) (Garman's \(\lambda_b\)).</li>
+<li><b>Choosing rates is the same as choosing prices.</b> \(D\) is strictly decreasing, so each buy rate \(\mu\) matches exactly one ask, \(P_a = D^{-1}(\mu)\). \(S\) is strictly increasing, so each sell rate \(\lambda\) matches one bid, \(P_b = S^{-1}(\lambda)\). ⚠ Letters: A–M write \(\mu\) for the <i>buy</i> rate and \(\lambda\) for the <i>sell</i> rate (slide 30).</li>
+<li><b>Revenue and cost.</b> \(R(\mu) = \mu\,D^{-1}(\mu)\) = money per unit time from selling at the ask. \(C(\lambda) = \lambda\,S^{-1}(\lambda)\) = money per unit time spent buying at the bid. \(R'\) is <b>marginal revenue</b> (extra money from one more buy per unit time); \(C'\) is <b>marginal cost</b>.</li>
+<li><b>Concave / convex.</b> \(R'' &lt; 0\) (concave): each extra buyer brings less revenue than the last, because to attract him the ask must fall for everyone. \(C'' &gt; 0\) (convex): each extra seller costs more than the last.</li>
+<li><b>Exponential waiting time.</b> A waiting time \(T\) with \(P(T &gt; t) = e^{-ct}\); its mean is \(1/c\). Between Poisson arrivals with total rate \(c\), waiting times are exponential.</li>
+<li><b>Birth–death process.</b> A quantity that moves only one step up ("birth") or one step down ("death") at a time, with rates that depend on its current level. Here: birth = public sell (rate \(\lambda_j\)), death = public buy (rate \(\mu_j\)).</li>
+<li><b>Long-run average profit</b> \(g\) = expected profit per unit time over a very long horizon. <b>Relative value</b> \(h_j\) = how much more money in total the dealer expects if he starts at level \(j\) rather than at level 0. <b>Marginal value of a share</b> \(\Delta_j = h_j - h_{j-1}\) = what the \(j\)-th share is worth to the dealer.</li>
+<li><b>Preferred position</b> = the inventory level toward which the quotes push inventory. Below it he tends to buy more than he sells; above it, to sell more than he buys.</li>
+</ol></div>
+<div class="prob"><h3>Market-making with inventory</h3>
+<p class="stmt">Same market as Garman: a monopolist, independent Poisson orders of one share, rates \(D(P_a)\) and \(S(P_b)\), no transaction costs. The one change: the quotes may depend on the current inventory \(j\). Inventory stays between 0 and a ceiling \(K\): at \(j = 0\) he does not sell, at \(j = K\) he does not buy, so he never fails.</p>
+<p class="stmt"><b>Question:</b> How do the optimal quotes \(P_{aj}, P_{bj}\) depend on inventory \(j\)? Is there a preferred inventory level, and is the spread positive?</p>
+<div class="sec"><p class="sh">Key idea</p><p><b>Prices are the dealer's steering wheel.</b> Each extra share is worth less to him than the one before. He buys only at a bid below that worth and sells only at an ask above it. When inventory is high, both quotes fall: he sells more and buys less. When inventory is low, both rise. Inventory is pulled toward a preferred level, and bid &lt; ask at every level.</p></div>
+<div class="sec"><p class="sh">Previous model → why it falls short</p><div class="tw"><table class="brute">
+<tr><td>before</td><td>Garman (1976): one fixed pair of quotes forever, chosen at time 0.</td></tr>
+<tr><td>assumes</td><td>The dealer cannot react when his inventory gets dangerously high or low.</td></tr>
+<tr class="dies"><td>fails at</td><td>Every inventory-independent policy leads to sure failure (drift ≤ 0) or possible failure (drift &gt; 0, ruin probability still &gt; 0). The profit-maximising zero-drift quotes fail for sure (slide 25).</td></tr>
+<tr class="therefore"><td>therefore</td><td>Let the quotes depend on inventory. Inventory then follows a birth–death process that the dealer controls, and failure disappears.</td></tr>
+</table></div></div>
+<div class="sec"><p class="sh">Solution</p><p class="setup"><b>Setup.</b> Level \(j \in \{0, 1, \dots, K\}\). At level \(j\) the dealer chooses a buy rate \(\mu_j\) (ask \(P_{aj} = D^{-1}(\mu_j)\)) and a sell rate \(\lambda_j\) (bid \(P_{bj} = S^{-1}(\lambda_j)\)). Assumptions (slides 26–28): (A1) One monopolist dealer; no direct trades between the public (A). (A2) He fills one-unit orders at his quotes (B). (A3) The next order is a buy with probability \(\frac{D}{D+S}\); the wait until it is exponential with mean \(\frac{1}{D+S}\) (C′). Inventory is therefore a birth–death process. (A4) He maximises expected average profit per unit time, where profit = net cash inflow (D). (A5) \(R\) is strictly concave, \(C\) strictly convex, \(R'(0) &gt; C'(0)\), \(R'(\infty) &lt; C'(\infty)\) (F). (A6) No transaction costs (G). (A7) \(\mu_0 = 0\) and \(\lambda_K = 0\) (no selling when empty, no buying when full).</p>
+<p class="claim"><b>Claim.</b> The optimal rates satisfy \(R'(\mu_j) = \Delta_j\) and \(C'(\lambda_j) = \Delta_{j+1}\), the slide-30 condition \(C'(\lambda_k) = R'(\mu_{k+1})\). Because \(\Delta_j\) falls as \(j\) rises (A–M's theorem), (i) both quotes fall as inventory rises, (ii) \(P_{bj} &lt; \Delta_{j+1} &lt; \Delta_j &lt; P_{aj}\), so the spread is positive, and (iii) there is a preferred inventory level.</p><ol class="pf">
+<li>At level \(j\), profit per unit time is \(R(\mu_j) - C(\lambda_j)\).<span class="r"><b>Why:</b> A4 and primer 4: \(\mu_j\) sales per unit time at \(D^{-1}(\mu_j)\) minus \(\lambda_j\) purchases at \(S^{-1}(\lambda_j)\).</span></li>
+<li>Over a long horizon \(T\), the best expected total money from level \(j\) is \(gT + h_j\). Split off the first tiny interval \(\Delta t\): \(gT + h_j = \max_{\mu,\lambda}\big[(R(\mu) - C(\lambda))\Delta t + g(T - \Delta t) + \lambda\Delta t\,h_{j+1} + \mu\Delta t\,h_{j-1} + (1 - \lambda\Delta t - \mu\Delta t)\,h_j\big]\).<span class="r"><b>Why:</b> primer 8; in \(\Delta t\) he earns step 1 times \(\Delta t\). Then he is at \(j+1\) (a sell, probability \(\lambda\Delta t\)), at \(j-1\) (a buy, probability \(\mu\Delta t\)) or still at \(j\) (primer 1 of entry 1), and he carries on optimally.</span></li>
+<li>Cancel \(gT\) and \(h_j\), divide by \(\Delta t\): \(g = \max_\mu\big[R(\mu) - \mu\,(h_j - h_{j-1})\big] + \max_\lambda\big[\lambda\,(h_{j+1} - h_j) - C(\lambda)\big]\).<span class="r"><b>Why:</b> algebra on step 2. The \(\mu\)-terms and the \(\lambda\)-terms are separate, so each is maximised on its own.</span></li>
+<li>In words: selling one share at level \(j\) brings revenue but gives up the share's worth \(\Delta_j = h_j - h_{j-1}\). Buying one costs money but gains \(\Delta_{j+1} = h_{j+1} - h_j\).<span class="r"><b>Why:</b> step 3 with primer 8.</span></li>
+<li>First-order conditions: \(R'(\mu_j) = \Delta_j\) and \(C'(\lambda_j) = \Delta_{j+1}\). Writing the second at \(k\) and the first at \(k+1\) gives \(C'(\lambda_k) = \Delta_{k+1} = R'(\mu_{k+1})\), the condition in the slide-30 figure.<span class="r"><b>Why:</b> set the derivative of each bracket in step 3 to 0. A5 makes each bracket strictly concave, so the solution is the unique maximum.</span></li>
+<li>Marginal revenue lies below the ask: \(R'(\mu) = D^{-1}(\mu) + \mu\,(D^{-1})'(\mu) &lt; D^{-1}(\mu) = P_a\). Marginal cost lies above the bid: \(C'(\lambda) = S^{-1}(\lambda) + \lambda\,(S^{-1})'(\lambda) &gt; S^{-1}(\lambda) = P_b\).<span class="r"><b>Why:</b> product rule. \((D^{-1})' &lt; 0\) because \(D' &lt; 0\); \((S^{-1})' &gt; 0\) because \(S' &gt; 0\); rates are positive.</span></li>
+<li>So \(P_{bj} &lt; \Delta_{j+1}\) and \(P_{aj} &gt; \Delta_j\).<span class="r"><b>Why:</b> steps 5 and 6.</span></li>
+<li>A–M prove that \(\Delta_{j+1} &lt; \Delta_j\): each extra share is worth less than the one before. (This is the hard part of the paper; the slides do not show it.) Then <span class="ans">\(P_{bj} &lt; \Delta_{j+1} &lt; \Delta_j &lt; P_{aj}\): the spread is positive at every level</span>.<span class="r"><b>Why:</b> step 7 and A–M's theorem.</span></li>
+<li>As \(j\) rises, \(\Delta_j\) falls, so \(R'(\mu_j)\) falls, so \(\mu_j\) rises (\(R'\) is decreasing, A5), so \(P_{aj} = D^{-1}(\mu_j)\) falls (\(D^{-1}\) is decreasing). And \(\Delta_{j+1}\) falls, so \(C'(\lambda_j)\) falls, so \(\lambda_j\) falls (\(C'\) is increasing), so \(P_{bj} = S^{-1}(\lambda_j)\) falls. <span class="ans">Both quotes are decreasing in inventory.</span><span class="r"><b>Why:</b> steps 5 and 8, followed one link at a time.</span></li>
+<li>The drift \(\lambda_j - \mu_j\) is decreasing in \(j\). It is \(\lambda_0 &gt; 0\) at \(j = 0\) and \(-\mu_K &lt; 0\) at \(j = K\). So there is a level \(J\) where the drift changes sign: below \(J\) inventory tends to rise, above \(J\) it tends to fall. <span class="ans">\(J\) is the preferred position.</span><span class="r"><b>Why:</b> step 9 (\(\lambda_j\) falls, \(\mu_j\) rises) and A7.</span></li>
+<li>Only \(D\), \(S\) and the bounds enter steps 1–10. The preferred position depends on the order-arrival rates, not on any "value" of the asset.<span class="r"><b>Why:</b> no asset value appears in A1–A7 or in the equation of step 3.</span></li>
+</ol><p><b>Conclusion.</b> Letting the quotes depend on inventory turns inventory into a controlled birth–death process. Both quotes fall as inventory rises, the spread stays positive, and inventory is pulled toward a preferred level fixed by the order-flow rates. ∎</p></div>
+<div class="sec"><p class="sh">Numerical example</p>
+<p>Use the same order flow as the Garman example: \(D(P_a) = 120 - 2P_a\) and \(S(P_b) = 2P_b\). Then \(P_a = 60 - \mu/2\) and \(P_b = \lambda/2\), so \(R(\mu) = \mu(60 - \mu/2)\) with \(R'(\mu) = 60 - \mu\), and \(C(\lambda) = \lambda^2/2\) with \(C'(\lambda) = \lambda\).</p>
+<ol class="pf">
+<li>Garman's single optimum: \(R'(r) = C'(r) \Rightarrow 60 - r = r \Rightarrow r^* = 30\), ask 45, bid 15, profit 900 per unit time (slide 30: "\(r^*\) chosen by Garman's monopolist").<span class="r"><b>Why:</b> maximise \(R(r) - C(r)\); the same answer as Part E of Garman.</span></li>
+<li>A–M with ceiling \(K = 8\): the first-order conditions give \(P_{aj} = 60 - \mu_j/2 = 30 + \Delta_j/2\) and \(P_{bj} = \lambda_j/2 = \Delta_{j+1}/2\).<span class="r"><b>Why:</b> step 5: \(\mu_j = 60 - \Delta_j\) and \(\lambda_j = \Delta_{j+1}\).</span></li>
+<li>Solving step 3 numerically for all nine levels (policy iteration, a Python script) gives:<span class="r"><b>Why:</b> the \(\Delta\)'s depend on each other through step 3, so they are found together.</span></li>
+</ol>
+<div class="tw"><table>
+<tr><th>inventory \(j\)</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th></tr>
+<tr><td>bid \(P_{bj}\)</td><td>20.47</td><td>18.11</td><td>16.66</td><td>15.53</td><td>14.47</td><td>13.34</td><td>11.89</td><td>9.53</td><td>—</td></tr>
+<tr><td>ask \(P_{aj}\)</td><td>—</td><td>50.47</td><td>48.11</td><td>46.66</td><td>45.53</td><td>44.47</td><td>43.34</td><td>41.89</td><td>39.53</td></tr>
+<tr><td>spread</td><td>—</td><td>32.36</td><td>31.45</td><td>31.14</td><td>31.05</td><td>31.14</td><td>31.45</td><td>32.36</td><td>—</td></tr>
+<tr><td>sells \(\lambda_j\) − buys \(\mu_j\)</td><td>+40.9</td><td>+17.2</td><td>+9.6</td><td>+4.4</td><td>0</td><td>−4.4</td><td>−9.6</td><td>−17.2</td><td>−40.9</td></tr>
+</table></div>
+<svg class="fig" viewBox="0 0 520 300" role="img" aria-label="Bid and ask against inventory: both fall from left to right; the preferred position is inventory 4">
+<line class="ln" x1="60" y1="260" x2="500" y2="260"/><line class="ln" x1="60" y1="260" x2="60" y2="20"/>
+<text x="280" y="292" text-anchor="middle">inventory j</text><text x="20" y="140" text-anchor="middle" transform="rotate(-90 20 140)">price</text>
+<g class="m"><text x="60" y="276" text-anchor="middle">0</text><text x="160" y="276" text-anchor="middle">2</text><text x="260" y="276" text-anchor="middle">4</text><text x="360" y="276" text-anchor="middle">6</text><text x="460" y="276" text-anchor="middle">8</text>
+<text x="52" y="224" text-anchor="end">10</text><text x="52" y="144" text-anchor="end">30</text><text x="52" y="64" text-anchor="end">50</text></g>
+<line class="mu dsh" x1="260" y1="30" x2="260" y2="260"/><text class="a" x="268" y="40">preferred J = 4</text>
+<g class="ac"><line x1="110" y1="58" x2="110" y2="188"/><line x1="160" y1="68" x2="160" y2="193"/><line x1="210" y1="73" x2="210" y2="198"/><line x1="260" y1="78" x2="260" y2="202"/><line x1="310" y1="82" x2="310" y2="207"/><line x1="360" y1="87" x2="360" y2="212"/><line x1="410" y1="92" x2="410" y2="222"/></g>
+<circle class="adot" cx="60" cy="178" r="4"/><circle class="adot" cx="460" cy="102" r="4"/>
+<text x="118" y="54">ask 50.5</text><text x="118" y="214">bid 18.1</text><text x="418" y="84">ask 41.9</text><text x="418" y="230">bid 9.5</text>
+</svg>
+<p>Each bar runs from the bid (bottom) to the ask (top). Both ends fall as inventory rises. The drift row shows the pull toward \(j = 4\): positive below, negative above. The long-run probability of being at level 4 is the highest of all levels (0.173). Check of step 8 at \(j = 4\): bid 14.47 &lt; \(\Delta_5 = 26.67\) &lt; \(\Delta_4 = 28.95\) &lt; ask 45.53. Long-run profit is 837.9 per unit time, below Garman's 900. The difference is the price of never failing, since Garman's 900 comes with certain eventual ruin.</p></div>
+<div class="sec"><p class="sh">Exam</p><p><b>Gotcha:</b> both quotes move in the <i>same</i> direction as inventory changes; the spread does not simply widen. And the A–M dealer maximises expected profit, so he is risk-neutral. The inventory effect comes from the inventory bounds, not from risk aversion (see ⚠).</p><p><b>Recognize:</b> "prices depend on the dealer's inventory", "birth–death process", "preferred inventory position", "bid and ask monotone decreasing in inventory", "extension of Garman" → Amihud–Mendelson.</p>
+<p><b>Findings</b> (slide 31):</p><ul>
+<li>Optimal bid and ask are monotone decreasing functions of the dealer's inventory: higher inventory lowers both, lower inventory raises both.</li>
+<li>The dealer has a preferred inventory position.</li>
+<li>The optimal quotes have a positive spread.</li>
+<li>The preferred position depends on the order arrival rates, not on the asset's value.</li>
+</ul><p>Past paper: <a href="../papers/midsem_2025.html#q5">Midsem 2025 Q5</a>.</p></div>
+<p class="gap">⚠ Slide gap. (1) Slide 24 says A–M "dealers are risk-averse", but their objective (assumption D, slide 26) is expected average profit, which is risk-neutral. The Biais–Glosten–Spatt slides say the same: "dealers are risk neutral, and set prices to manage their inventory positions, because they face constraints on the maximum inventory". (2) The slides give only the findings. The derivation above (steps 2–10) rebuilds the argument behind the slide-30 figure. The one step taken from the paper without proof is \(\Delta_{j+1} &lt; \Delta_j\). (3) Slide 24's title says 1980 and slide 3 says 1978; the course outline uses 1980.</p>
+</div>
+
+<!-- ============ ENTRY 3: Stoll ============ -->
+<h2 id="stoll">3 · Stoll (1978): the risk-averse dealer's cost of immediacy</h2>
+<div class="idea"><ol>
+<li><b>Utility function</b> \(U(W)\): a number measuring how happy wealth \(W\) makes the dealer. \(U' &gt; 0\): more wealth is better. \(U'' &lt; 0\) (concave): each extra rupee adds less happiness than the last.</li>
+<li><b>Expected utility</b> \(E[U(\tilde W)]\); a tilde \(\tilde{\ }\) marks a random quantity. A dealer with concave \(U\) is <b>risk-averse</b>: he prefers a sure 100 to a 50/50 gamble between 50 and 150, even though both average 100. A <b>risk-neutral</b> dealer has a straight-line \(U\) and cares only about the average.</li>
+<li><b>Relative risk aversion</b> (Pratt index), slide 37: \(z = -U''(\bar W)\,W_0/U'(\bar W)\). Larger \(z\) = more risk-averse. Dividing by wealth gives the <b>absolute risk aversion</b> \(z/W_0 = -U''/U'\).</li>
+<li><b>Second-order Taylor expansion:</b> \(U(\bar W + x) \approx U(\bar W) + U'(\bar W)\,x + \tfrac12 U''(\bar W)\,x^2\) when \(x\) is small.</li>
+<li><b>Returns.</b> \(\tilde R_i\) = rate of return on stock \(i\) over the period; \(\bar R_i = E[\tilde R_i]\); \(\sigma_i^2 = \text{Var}(\tilde R_i)\). \(R_f\) = risk-free rate.</li>
+<li><b>Two accounts.</b> The <i>investment account</i> is the dealer's own long-run portfolio: fraction \(k\) of wealth in the efficient risky portfolio \(E\) (the market portfolio), the rest risk-free. The <i>trading account</i> is the inventory he has picked up by serving customers, with "true" dollar value \(Q_p\) and return \(\tilde R_p\). \(\sigma_{ip} = \text{Cov}(\tilde R_i, \tilde R_p)\) and \(\sigma_{ie} = \text{Cov}(\tilde R_i, \tilde R_e)\).</li>
+<li><b>CAPM / beta</b> (slide 42): \(\bar R_i - R_f = \beta_i(\bar R_e - R_f)\), with \(\beta_i = \sigma_{ie}/\sigma_e^2\). A stock's normal expected return pays only for its market risk.</li>
+<li><b>True price</b> \(P^*\): the dealer's estimate of what the stock is worth, ignoring transaction costs (slide 34). <b>Price of immediacy</b>: the discount (at the bid) or premium (at the ask) relative to \(P^*\) that a customer pays to trade <i>now</i>.</li>
+<li><b>Holding cost</b>: compensation for carrying risky inventory. <b>Order cost</b>: a fixed dollar cost \(M\) per transaction (paperwork, clearing). <b>Information cost</b> (adverse selection): the loss from trading with customers who know more than the dealer.</li>
+<li><b>Indifference</b>: the dealer accepts a trade exactly when it leaves his expected utility unchanged (slide 37). The smallest price concession that achieves this is his cost.</li>
+</ol></div>
+<div class="prob"><h3>Stoll's price of immediacy</h3>
+<p class="stmt">A dealer with wealth \(W_0\) holds his investment account and a trading account \(Q_p\). A customer wants to sell him stock \(i\) with true value \(Q_i &gt; 0\) (or buy, \(Q_i &lt; 0\)). Purchases are financed by borrowing at \(R_f\) and short-sale proceeds earn \(R_f\). There are two dates (now and end of period), one trade per interval, the price is fixed during the interval, and bankruptcy is impossible (slide 34).</p>
+<p class="stmt"><b>Question:</b> What minimum percentage cost \(c_i\) makes the dealer willing to trade, and what bid–ask spread follows?</p>
+<div class="sec"><p class="sh">Key idea</p><p><b>Taking the customer's shares adds risk to the dealer's wealth, and a risk-averse dealer must be paid for that risk.</b> The discount has to restore his expected utility. To second order, it equals the absolute risk aversion times the extra risk: the stock's own variance plus its covariance with what he already holds.</p></div>
+<div class="sec"><p class="sh">Previous model → why it falls short</p><div class="tw"><table class="brute">
+<tr><td>before</td><td>Garman; Amihud–Mendelson: a risk-neutral dealer who maximises expected profit.</td></tr>
+<tr><td>assumes</td><td>The dealer cares only about average cash, not about how risky the stock he holds is.</td></tr>
+<tr class="dies"><td>fails at</td><td>It cannot explain why spreads are wider for more volatile stocks, for bigger trades, and for dealers with less capital.</td></tr>
+<tr class="therefore"><td>therefore</td><td>Give the dealer a concave utility over terminal wealth and price each trade by indifference. The spread becomes compensation for bearing risk, plus order and information costs.</td></tr>
+</table></div></div>
+<div class="sec"><p class="sh">Solution</p><p class="setup"><b>Setup</b> (slides 35–36). Before the trade: \(\tilde W^* = W_0(1 + \tilde R^*)\), where \(\tilde R^* = k\tilde R_e + \frac{Q_p}{W_0}\tilde R_p + \left(1 - k - \frac{Q_p}{W_0}\right)R_f\). After the trade: \(\tilde W = W_0(1+\tilde R^*) + (1+\tilde R_i)Q_i - (1+R_f)(Q_i - C_i)\). \(C_i\) = dollar cost (the discount he gets). Assumptions: (A1) \(R_f = 0\) (slide 37). (A2) \(k\) was chosen optimally, so the investment account balances return against risk: \(\bar R_e = z\,k\,\sigma_e^2\). This is the first-order condition for \(k\), taken to second order. (A3) The CAPM holds for stock \(i\) (primer 7). (A4) Expand to second order (primer 4), and drop the square of the small amount \(Q_i\bar R_i + C_i\). (A5) \(z = -U''W_0/U'\), evaluated at \(\bar W^* = E[\tilde W^*]\).</p>
+<p class="claim"><b>Claim.</b> \(c_i = \dfrac{C_i}{Q_i} = \dfrac{z}{W_0}\sigma_{ip}Q_p + \dfrac12\dfrac{z}{W_0}\sigma_i^2 Q_i\) (slide eq. 2.14), and the spread is \(s_i = \dfrac{z}{W_0}\sigma_i^2|Q_i|\) (2.16).</p><ol class="pf">
+<li>With \(R_f = 0\): \(\tilde W = \tilde W^* + Q_i\tilde R_i + C_i\).<span class="r"><b>Why:</b> A1: \((1+\tilde R_i)Q_i - (Q_i - C_i) = Q_i\tilde R_i + C_i\). In words: he pays \(Q_i - C_i\) (borrowed) for shares worth \(Q_i\), ends with \(Q_i(1+\tilde R_i)\), and repays \(Q_i - C_i\).</span></li>
+<li>Indifference (slide eq. 2.13): \(E\,U(\tilde W^*) = E\,U(\tilde W^* + \tilde X)\), with \(\tilde X = Q_i\tilde R_i + C_i\).<span class="r"><b>Why:</b> primer 10 and step 1.</span></li>
+<li>Left side: \(E\,U(\tilde W^*) \approx U(\bar W^*) + \tfrac12 U''\,\text{Var}(\tilde W^*)\).<span class="r"><b>Why:</b> primer 4 with \(x = \tilde W^* - \bar W^*\), then take \(E\): \(E[x] = 0\) and \(E[x^2] = \text{Var}(\tilde W^*)\).</span></li>
+<li>Right side: \(E\,U(\tilde W^* + \tilde X) \approx U(\bar W^*) + U'\,E[\tilde X] + \tfrac12 U''\,E[(\tilde W^* - \bar W^* + \tilde X)^2]\).<span class="r"><b>Why:</b> primer 4 with \(x = \tilde W^* - \bar W^* + \tilde X\), and \(E[\tilde W^* - \bar W^*] = 0\).</span></li>
+<li>\(E[(\tilde W^* - \bar W^* + \tilde X)^2] = \text{Var}(\tilde W^*) + 2\,\text{Cov}(\tilde W^*, \tilde X) + Q_i^2\sigma_i^2 + (Q_i\bar R_i + C_i)^2\).<span class="r"><b>Why:</b> expand the square. \(E[(\tilde W^*-\bar W^*)\tilde X] = \text{Cov}(\tilde W^*,\tilde X)\) because the first factor has mean 0. \(E[\tilde X^2] = \text{Var}(\tilde X) + (E\tilde X)^2\), with \(\text{Var}(\tilde X) = Q_i^2\sigma_i^2\) since \(C_i\) is a constant.</span></li>
+<li>\(\text{Cov}(\tilde W^*, \tilde X) = Q_iW_0\,\text{Cov}(\tilde R^*, \tilde R_i) = Q_iW_0k\,\sigma_{ie} + Q_iQ_p\,\sigma_{ip}\).<span class="r"><b>Why:</b> \(\tilde W^* = W_0(1+\tilde R^*)\); \(\tilde R^* = k\tilde R_e + \frac{Q_p}{W_0}\tilde R_p\) when \(R_f = 0\); covariance is linear in each argument.</span></li>
+<li>Set step 3 equal to step 4 and cancel \(U(\bar W^*)\) and \(\tfrac12U''\text{Var}(\tilde W^*)\): \(0 = U'(Q_i\bar R_i + C_i) + \tfrac12U''\big[2Q_iW_0k\sigma_{ie} + 2Q_iQ_p\sigma_{ip} + Q_i^2\sigma_i^2 + (Q_i\bar R_i + C_i)^2\big]\).<span class="r"><b>Why:</b> steps 5 and 6.</span></li>
+<li>Drop \((Q_i\bar R_i + C_i)^2\), divide by \(U'\), and use \(U''/U' = -z/W_0\): \(0 = Q_i\bar R_i + C_i - \frac{z}{W_0}\big[Q_iW_0k\sigma_{ie} + Q_iQ_p\sigma_{ip} + \tfrac12Q_i^2\sigma_i^2\big]\).<span class="r"><b>Why:</b> A4 and A5.</span></li>
+<li>The market-risk terms cancel: \(\bar R_i = \beta_i\bar R_e = \frac{\sigma_{ie}}{\sigma_e^2}\,z k\sigma_e^2 = zk\sigma_{ie}\), so \(Q_i\bar R_i - \frac{z}{W_0}Q_iW_0k\sigma_{ie} = Q_izk\sigma_{ie} - Q_izk\sigma_{ie} = 0\).<span class="r"><b>Why:</b> A3 (CAPM with \(R_f = 0\)) and A2. In words: the stock's normal return exactly pays for its market risk, so only the dealer's <i>extra</i> risk needs a discount.</span></li>
+<li>What is left: \(C_i = \frac{z}{W_0}\big[Q_iQ_p\sigma_{ip} + \tfrac12Q_i^2\sigma_i^2\big]\). Divide by \(Q_i\): <span class="ans">\(c_i = \dfrac{z}{W_0}\sigma_{ip}Q_p + \dfrac12\dfrac{z}{W_0}\sigma_i^2Q_i\)</span> (2.14).<span class="r"><b>Why:</b> steps 8 and 9.</span></li>
+<li>Bid (slide eq. 2.15): the dealer buys, \(Q_i^b = |Q| &gt; 0\), and \(\frac{P^* - P_b}{P^*} = c_i(Q_i^b)\).<span class="r"><b>Why:</b> \(c_i\) is the discount per rupee of true value (step 10).</span></li>
+<li>Ask: the dealer sells, \(Q_i^a = -|Q|\). He must receive \(|Q| + C_i\), so \(\frac{P_a - P^*}{P^*} = \frac{C_i}{|Q|} = -c_i(Q_i^a)\).<span class="r"><b>Why:</b> for \(Q_i &lt; 0\), "paying \(Q_i - C_i\)" means receiving \(|Q| + C_i\); and \(C_i = c_iQ_i = -c_i|Q|\).</span></li>
+<li>Spread: \(s_i = \frac{P_a - P_b}{P^*} = c_i(Q^b) - c_i(Q^a) = \big[\tfrac{z}{W_0}\sigma_{ip}Q_p + \tfrac12\tfrac{z}{W_0}\sigma_i^2|Q|\big] - \big[\tfrac{z}{W_0}\sigma_{ip}Q_p - \tfrac12\tfrac{z}{W_0}\sigma_i^2|Q|\big]\) \(= \) <span class="ans">\(\dfrac{z}{W_0}\sigma_i^2|Q|\)</span> (2.16).<span class="r"><b>Why:</b> steps 10–12; the \(Q_p\) terms are identical and cancel.</span></li>
+<li>So the spread is linear in risk aversion \(z\), trade size \(|Q|\) and variance \(\sigma_i^2\), and independent of inventory \(Q_p\). Inventory still moves <i>both</i> quotes: if \(Q_p\sigma_{ip} &gt; 0\) (long in stocks that move with \(i\)), the bid discount grows and the ask premium shrinks, so both quotes fall.<span class="r"><b>Why:</b> step 13; the term \(\frac{z}{W_0}\sigma_{ip}Q_p\) sits in both \(c_i(Q^b)\) and \(c_i(Q^a)\).</span></li>
+<li>Adding the other costs (slide 41): \(c_i = \frac{z}{W_0}\sigma_{ip}Q_p + \frac12\frac{z}{W_0}\sigma_i^2Q_i + \gamma a_i + \frac{M}{Q_i}\), where \(\gamma = +1\) if the dealer buys and \(-1\) if he sells, and \(a_i\) is the expected return on the information of the people trading with him. The spread becomes <span class="ans">\(s_i = \dfrac{z\sigma_i^2}{W_0}|Q_i| + 2a_i + \dfrac{2M}{|Q_i|}\)</span> (slide 44).<span class="r"><b>Why:</b> step 13 with the extra terms: \(a_i - (-a_i) = 2a_i\) and \(\frac{M}{|Q|} - \frac{M}{-|Q|} = \frac{2M}{|Q|}\). Informed sellers mean the stock's expected return is lower by \(a_i\) when the dealer buys: \(\bar R_i - R_f = \beta_i(\bar R_e - R_f) - \gamma a_i\) (slide 42).</span></li>
+<li>This spread is U-shaped in trade size: the order cost \(2M/|Q|\) falls with size and the holding cost \(z\sigma_i^2|Q|/W_0\) rises with it.<span class="r"><b>Why:</b> step 15.</span></li>
+<li>Optimal scale (slide 43): minimise the average cost \(f(Q) = \tfrac12\frac{z}{W_0}\sigma_i^2Q + \frac{M}{Q}\) (the other terms do not depend on \(Q\)). \(f'(Q) = \tfrac12\frac{z}{W_0}\sigma_i^2 - \frac{M}{Q^2} = 0 \Rightarrow\) <span class="ans">\(Q_i^* = \pm\sqrt{\dfrac{2MW_0}{z\sigma_i^2}}\)</span>. \(f''(Q) = 2M/Q^3 &gt; 0\) for \(Q &gt; 0\), so it is a minimum. The information cost \(a_i\) does not affect the scale because it does not depend on size.<span class="r"><b>Why:</b> differentiate step 15's \(c_i\) with respect to \(Q_i\).</span></li>
+<li>Number of dealers (slide 45): if the public trades \(|D_i|\) dollars in stock \(i\) and every dealer works at minimum average cost, <span class="ans">\(d_i^* = \dfrac{|D_i|}{|Q_i^*|} = |D_i|\sqrt{\dfrac{z\sigma_i^2}{2MW_0}}\)</span>.<span class="r"><b>Why:</b> total volume divided by each dealer's optimal volume; step 17.</span></li>
+</ol><p><b>Conclusion.</b> A risk-averse dealer charges a holding cost that grows with his risk aversion, the stock's variance and the trade size, plus order and information costs. The spread does not depend on his inventory, but the placement of both quotes does. ∎</p></div>
+<div class="sec"><p class="sh">Numerical example</p>
+<p>\(P^* = 100\), \(W_0 = \$1{,}000{,}000\), \(z = 2\) (so \(z/W_0 = 2\times10^{-6}\)), \(\sigma_i^2 = 0.04\) (20% s.d.), \(|Q| = \$50{,}000\), trading account \(Q_p = \$200{,}000\), \(\sigma_{ip} = 0.02\).</p><ol class="pf">
+<li>Inventory term: \(\frac{z}{W_0}\sigma_{ip}Q_p = 2\times10^{-6}\times0.02\times200{,}000 = 0.008\).<span class="r"><b>Why:</b> first term of (2.14).</span></li>
+<li>Size term: \(\tfrac12\frac{z}{W_0}\sigma_i^2|Q| = \tfrac12\times2\times10^{-6}\times0.04\times50{,}000 = 0.002\).<span class="r"><b>Why:</b> second term of (2.14).</span></li>
+<li>\(c(Q^b) = 0.008 + 0.002 = 0.010\), so bid \(= 100(1 - 0.010) = 99.00\). \(c(Q^a) = 0.008 - 0.002 = 0.006\), so ask \(= 100(1 - 0.006) = 99.40\).<span class="r"><b>Why:</b> steps 11 and 12 (ask premium \(= -c(Q^a) = -0.006\)).</span></li>
+<li>Spread \(= 0.40 = 0.4\%\) of \(P^*\), matching \(\frac{z}{W_0}\sigma_i^2|Q| = 2\times10^{-6}\times0.04\times50{,}000 = 0.004\).<span class="r"><b>Why:</b> step 13.</span></li>
+<li>With an empty trading account (\(Q_p = 0\)): bid 99.80, ask 100.20. The spread is still 0.40. Being long $200,000 moved both quotes down by 0.80, so the ask is even below \(P^*\): he is keen to sell.<span class="r"><b>Why:</b> step 14.</span></li>
+<li>Add order cost \(M = \$50\) and information cost \(a_i = 0.0005\): spread \(= 0.004 + 2(0.0005) + 2(50/50{,}000) = 0.004 + 0.001 + 0.002 = 0.007\) (0.70).<span class="r"><b>Why:</b> step 15.</span></li>
+<li>Optimal size \(Q^* = \sqrt{2\times50\times10^6/(2\times0.04)} = \sqrt{1.25\times10^9} = \$35{,}355\). If the public trades \(|D_i| = \$1{,}000{,}000\), then \(d^* = 10^6/35{,}355 = 28.3\), about 28 dealers.<span class="r"><b>Why:</b> steps 17 and 18.</span></li>
+</ol><p>Check: with exponential utility and normal returns (where the second-order formula is exact) the cost is again \(c = 0.010\).</p></div>
+<div class="sec"><p class="sh">Exam</p><p><b>Gotcha:</b> "independent of inventory" is true for the <i>spread</i> (2.16), not for the <i>quotes</i>: \(Q_p\) shifts bid and ask together. Greater wealth \(W_0\) lowers costs; greater risk aversion \(z\) raises them (slide 39). The information cost adds \(2a_i\) to the spread but does not change the optimal scale.</p><p><b>Recognize:</b> "risk-averse dealer", "utility of terminal wealth", "two-period", "holding / order / information cost", "cost of immediacy", "optimal scale / number of dealers" → Stoll (1978).</p>
+<p><b>Findings</b> (slides 39, 46):</p><ul>
+<li>The dealer's cost function is made of holding costs, order costs and information costs.</li>
+<li>The cost of immediacy depends on the dealer's wealth and risk preference (more wealth → lower cost; more risk aversion → higher cost), on the transaction size, and on the stock's variance and its covariance with his inventory.</li>
+<li>The spread is linear in risk aversion, trade size and variance, and independent of the initial inventory.</li>
+<li>There is an optimal scale \(Q^*\) and an equilibrium number of dealers \(d^*\).</li>
+<li>The model highlights the role of the dealer's risk aversion and expected utility.</li>
+</ul><p>Past papers: <a href="../papers/midsem_2025.html#q6">Midsem 2025 Q6</a>, <a href="../papers/midsem_2024.html#q7">Midsem 2024 Q7</a>.</p></div>
+<p class="gap">⚠ Slide gap. (1) Slide 38 calls \(\sigma_{ip}\) "the correlation between the return on stock \(i\) and the optimal efficient portfolio". Step 6 shows it is the <i>covariance</i> of stock \(i\) with the <i>trading account</i> \(p\). It multiplies \(Q_p\), and a correlation would give the wrong units. (2) The slides skip the derivation of (2.14) ("refer to page 1137–1141 of paper"). Steps 1–10 give it, including the CAPM cancellation (step 9) that removes the market-risk terms.</p>
+</div>
+
+<!-- ============ ENTRY 4: Ho & Stoll ============ -->
+<h2 id="hs">4 · Ho &amp; Stoll (1981): many periods, random orders and random returns</h2>
+<div class="idea"><ol>
+<li><b>Continuous time.</b> Time runs smoothly; \(dt\) is a tiny interval. The horizon is \(T\) and the <b>time left</b> is \(\tau = T - t\).</li>
+<li><b>Jump processes for trades</b> (slide 48). In each \(dt\), a public buy of size \(Q\) (a dealer sale, \(dq_a = Q\)) happens with probability \(\lambda_a dt\), and a public sell of size \(Q\) (a dealer purchase, \(dq_b = Q\)) with probability \(\lambda_b dt\). These are Poisson arrivals, as in Garman.</li>
+<li><b>Fees</b> (slide 49). The dealer's true price is \(p\). He sells at \(p_a = p + a\) and buys at \(p_b = p - b\); \(a\) and \(b\) are his fees. A higher \(b\) (lower bid) means fewer public sells; a lower \(a\) (lower ask) means more public buys. Below, fees are taken as fractions of \(p\), so a fee of 0.003 means 0.3%.</li>
+<li><b>Linear demand</b> (slide 50): \(\lambda_a = \alpha - \beta a\) and \(\lambda_b = \alpha - \beta b\). Each unit of fee drives away \(\beta\) orders per unit time.</li>
+<li><b>Wiener process</b> (Brownian motion) \(dZ\): a random shock with mean 0 and variance \(\sigma^2dt\) over \(dt\), independent over time. The <b>stochastic differential equation</b> \(dX = r_XX\,dt + X\,dZ_X\) (slide 51) means: \(X\) grows at mean rate \(r_X\) (the <b>drift</b>) plus a random part (the <b>diffusion</b>). Over a time \(\tau\), the random part of \(X\) has variance \(X^2\sigma_X^2\tau\).</li>
+<li><b>Three accounts</b> (slides 52–55): cash \(F\), inventory \(I\) (the value of the shares at the true price \(p\)), and base wealth \(Y\) (a diversified portfolio used as collateral). Total wealth is \(W = F + I + Y\).</li>
+<li><b>Value function</b> \(J(\tau, F, I, Y)\) = the highest expected utility of \(W_T\) the dealer can reach from the current state (slide 56). <b>Dynamic programming</b>: pick today's action assuming you will also act optimally later, and solve backward from the horizon.</li>
+<li><b>Absolute risk aversion</b> \(R = -U''/U'\) (the same idea as Stoll's \(z/W_0\)).</li>
+<li><b>Closed form</b> = an explicit formula. Ho–Stoll find none for \(J\), so they expand \(J\) as a Taylor series in \(\tau\) around \(\tau = 0\) (slide 56, eq. 20).</li>
+</ol></div>
+<div class="prob"><h3>Optimal dealer pricing under transaction and return uncertainty</h3>
+<p class="stmt">A monopolist dealer in one stock chooses fees \(a\) and \(b\) at every moment. Orders of size \(Q\) arrive at Poisson rates \(\lambda_a(a)\) and \(\lambda_b(b)\). Inventory value moves as \(dI = r_II\,dt + p\,dq_b - p\,dq_a + I\,dZ_I\) (slide 54); cash earns \(r\) (slide 53); base wealth follows \(dY = r_YY\,dt + Y\,dZ_Y\). He maximises \(E\,U(W_T)\), and there is no bankruptcy.</p>
+<p class="stmt"><b>Question:</b> What are the optimal fees and the spread \(a + b\), and how do they depend on inventory and on the time left?</p>
+<div class="sec"><p class="sh">Key idea</p><p><b>The spread has two parts.</b> One is the monopoly part a risk-neutral dealer would charge to maximise expected fee income. The other is a risk premium for carrying the new shares until the horizon, proportional to risk aversion × variance × trade size × time left. Inventory shifts the two fees in opposite directions by equal amounts, so it cancels out of the spread.</p></div>
+<div class="sec"><p class="sh">Previous model → why it falls short</p><div class="tw"><table class="brute">
+<tr><td>before</td><td>Stoll (1978): one period, one given trade; the only risk is the stock's return.</td></tr>
+<tr><td>assumes</td><td>The trade has already arrived; there is no uncertainty about when the next order comes, and nothing to plan beyond one trade.</td></tr>
+<tr class="dies"><td>fails at</td><td>A real dealer does not know when the next order will arrive, and must price today knowing that many more trades (and more return risk) will follow before he can unwind.</td></tr>
+<tr class="therefore"><td>therefore</td><td>A multi-period dynamic programme with both uncertainties: Poisson order arrival (transactions) and Brownian inventory value (returns).</td></tr>
+</table></div></div>
+<div class="sec"><p class="sh">Solution</p><p class="setup"><b>Setup.</b> State \((\tau, W, I)\) with \(W = F + I + Y\). Assumptions: (A1) Each trade has size \(Q\) dollars at the true price \(p\), and \(p\) does not jump when a trade happens. (A2) \(\lambda_a = \alpha - \beta a\), \(\lambda_b = \alpha - \beta b\). (A3) To keep the algebra short: \(r = 0\), \(r_I = 0\), and inventory is uncorrelated with base wealth. The ⚠ box says what these add back. (A4) First order in \(\tau\): \(J(\tau, W, I) \approx U(W) - \tfrac12R\,U'\sigma^2I^2\tau + (\text{terms that do not depend on } I)\), where \(\sigma^2\) is the variance rate of \(dZ_I\). The middle term is the utility cost of carrying \(I\) for the time left. (A5) Fees are small: in \(U(W + bQ) - U(W) \approx U'bQ\), drop the \(\tfrac12U''b^2Q^2\) term.</p>
+<p class="claim"><b>Claim.</b> \(b^* = \dfrac{\alpha}{2\beta} + \dfrac{R\sigma^2\tau}{4}(2I + Q)\), \(a^* = \dfrac{\alpha}{2\beta} + \dfrac{R\sigma^2\tau}{4}(Q - 2I)\), and the spread is \(s = a^* + b^* = \dfrac{\alpha}{\beta} + \dfrac12R\sigma^2Q\tau\).</p><ol class="pf">
+<li>A dealer purchase at fee \(b\) raises wealth by \(bQ\) and inventory from \(I\) to \(I + Q\). A dealer sale at fee \(a\) raises wealth by \(aQ\) and lowers inventory to \(I - Q\).<span class="r"><b>Why:</b> buying shares worth \(Q\) for \(Q(1-b)\) gains \(bQ\); selling for \(Q(1+a)\) gains \(aQ\) (A1, primer 3).</span></li>
+<li>Carrying inventory \(I\) for time \(\tau\) costs \(\tfrac12R\,U'\sigma^2I^2\tau\) in utility.<span class="r"><b>Why:</b> primer 5: the value change has mean 0 (A3) and variance \(\sigma^2I^2\tau\). Primer 4 of entry 3 gives \(E\,U \approx U + \tfrac12U''\,\text{Var}\), and \(\tfrac12U'' = -\tfrac12RU'\). This is A4.</span></li>
+<li>Gain in \(J\) from a purchase: \(U'bQ - \tfrac12RU'\sigma^2\tau\big[(I+Q)^2 - I^2\big] = U'bQ - \tfrac12RU'\sigma^2\tau(2IQ + Q^2)\).<span class="r"><b>Why:</b> steps 1–2, A4, A5; \((I+Q)^2 - I^2 = 2IQ + Q^2\).</span></li>
+<li>Gain from a sale: \(U'aQ - \tfrac12RU'\sigma^2\tau(Q^2 - 2IQ)\).<span class="r"><b>Why:</b> steps 1–2 with \(I - Q\): \((I-Q)^2 - I^2 = Q^2 - 2IQ\).</span></li>
+<li>In the next \(dt\), a purchase happens with probability \(\lambda_b(b)dt\). So the dealer picks \(b\) to maximise \(G(b) = (\alpha - \beta b)\big[U'bQ - \tfrac12RU'\sigma^2\tau(2IQ + Q^2)\big]\), and picks \(a\) the same way from step 4.<span class="r"><b>Why:</b> primer 2 and A2. The \(b\)-part and the \(a\)-part of the dynamic programme are separate, as in A–M step 3.</span></li>
+<li>\(G'(b) = -\beta\big[U'bQ - \tfrac12RU'\sigma^2\tau(2IQ+Q^2)\big] + (\alpha - \beta b)\,U'Q = 0\).<span class="r"><b>Why:</b> product rule; set to 0 for the maximum.</span></li>
+<li>Divide by \(U'Q\): \(-\beta b + \tfrac12\beta R\sigma^2\tau(2I + Q) + \alpha - \beta b = 0\), so \(2\beta b = \alpha + \tfrac12\beta R\sigma^2\tau(2I + Q)\), and <span class="ans">\(b^* = \dfrac{\alpha}{2\beta} + \dfrac{R\sigma^2\tau}{4}(2I + Q)\)</span>.<span class="r"><b>Why:</b> algebra on step 6; \((2IQ + Q^2)/Q = 2I + Q\).</span></li>
+<li>Repeat steps 5–7 for the sale, with \((Q^2 - 2IQ)\) from step 4: <span class="ans">\(a^* = \dfrac{\alpha}{2\beta} + \dfrac{R\sigma^2\tau}{4}(Q - 2I)\)</span>.<span class="r"><b>Why:</b> the only change is the inventory after the trade.</span></li>
+<li>Spread: \(a^* + b^* = \dfrac{\alpha}{\beta} + \dfrac{R\sigma^2\tau}{4}\big[(2I + Q) + (Q - 2I)\big] = \) <span class="ans">\(\dfrac{\alpha}{\beta} + \dfrac12R\sigma^2Q\tau\)</span>.<span class="r"><b>Why:</b> add steps 7 and 8; the \(\pm2I\) cancel.</span></li>
+<li>Reading the result: (i) \(\alpha/\beta\) is the risk-neutral spread (set \(R = 0\): a monopolist maximising \((\alpha - \beta b)bQ\) picks \(b = \alpha/2\beta\)). (ii) The risk adjustment \(\tfrac12R\sigma^2Q\tau\) grows with risk aversion, return variance and trade size, and shrinks to 0 as the horizon approaches (\(\tau \to 0\)). (iii) \(I\) cancels, so the spread is independent of inventory. (iv) \(b^*\) rises and \(a^*\) falls with \(I\): a long dealer lowers both quotes (\(p - b\) and \(p + a\) both fall).<span class="r"><b>Why:</b> steps 7–9.</span></li>
+</ol><p><b>Conclusion.</b> Spread = risk-neutral monopoly spread + a risk adjustment for transaction size, return variance and risk aversion, scaled by the time left. Inventory moves where the quotes sit, not how far apart they are. ∎</p></div>
+<div class="sec"><p class="sh">Numerical example</p>
+<p>\(\alpha = 20\) orders per day on each side at zero fee; \(\beta = 4000\) (each 0.1% of fee drives away 4 orders per day); \(R = 0.0001\) per dollar; \(\sigma^2 = 0.0004\) per day (2% daily s.d.); \(Q = \$50{,}000\); \(\tau = 1\) day; \(p = 100\).</p><ol class="pf">
+<li>Risk-neutral fee \(\alpha/2\beta = 20/8000 = 0.25\%\); risk-neutral spread \(\alpha/\beta = 0.50\%\).<span class="r"><b>Why:</b> step 10 (i).</span></li>
+<li>Risk adjustment \(\tfrac12\times0.0001\times0.0004\times50{,}000\times1 = 0.001 = 0.10\%\). Total spread 0.60%.<span class="r"><b>Why:</b> step 9.</span></li>
+<li>Flat inventory (\(I = 0\)): \(\frac{R\sigma^2\tau}{4} = 10^{-8}\), so \(a^* = b^* = 0.25\% + 10^{-8}\times50{,}000 = 0.30\%\). Bid 99.70, ask 100.30.<span class="r"><b>Why:</b> steps 7–8.</span></li>
+<li>Long \(I = \$100{,}000\): \(b^* = 0.25\% + 10^{-8}\times250{,}000 = 0.50\%\), \(a^* = 0.25\% + 10^{-8}\times(-150{,}000) = 0.10\%\). Bid 99.50, ask 100.10: both lower, and the spread is still 0.60%.<span class="r"><b>Why:</b> steps 7–10.</span></li>
+<li>Near the close (\(\tau = 0.1\) day): the risk adjustment falls to 0.01%, and the spread to 0.51%.<span class="r"><b>Why:</b> step 10 (ii).</span></li>
+</ol><p>Check: maximising \(G(b)\) numerically with exponential utility (keeping the \(b^2\) term) gives \(b^* = 0.2996\%\) at \(I = 0\), and 0.503% / 0.099% at \(I = 100{,}000\).</p></div>
+<div class="sec"><p class="sh">Exam</p><p><b>Gotcha:</b> "the spread does not depend on inventory, but the dealer's price adjustment does" (slide 57). Also, the risk part depends on the <i>time left</i>: it vanishes at the end of trading. In an inactive stock (small \(\alpha\)), a dealer forced to trade a minimum amount may earn too little to cover the risk.</p><p><b>Recognize:</b> "multi-period", "dynamic programming", "Poisson order flow + Brownian / Wiener returns", "time horizon", "no closed form", "extends Stoll 1978" → Ho–Stoll.</p>
+<p><b>Findings</b> (slide 57):</p><ul>
+<li>The dealer's risk depends on the time horizon and decreases as the end of trading approaches.</li>
+<li>Spread = risk-neutral spread + an adjustment for uncertainty.</li>
+<li>The risk adjustment depends on transaction size, return variance and the dealer's attitude to risk.</li>
+<li>The spread does not depend on the inventory position, but the dealer's price adjustment (quote placement) does.</li>
+<li>In an inactive stock, when the dealer must trade a minimum amount, expected trading profit may not offset the risk.</li>
+<li>No closed-form solution; the solution is an approximation (Taylor series in \(\tau\)).</li>
+</ul><p>Past paper: <a href="../papers/midsem_2024.html#q3">Midsem 2024 Q3</a>.</p></div>
+<p class="gap">⚠ Slide gap. The slides stop at the dynamic-programming statement (slide 56) and list findings, with no formula. The derivation above is the first-order-in-\(\tau\) approximation under A3. Adding back the inventory drift \(r_I\) or a correlation \(\sigma_{IY}\) between inventory and base wealth shifts \(a^*\) and \(b^*\) by equal and opposite amounts, so the spread formula in step 9 is unchanged.</p>
+</div>
+
+<!-- ============ ENTRY 5: O'Hara & Oldfield ============ -->
+<h2 id="oo">5 · O'Hara &amp; Oldfield (1986): limit orders, market orders and risk aversion</h2>
+<div class="idea"><ol>
+<li><b>Limit order</b>: an order to trade at a stated price or better; it waits until that price is available. <b>Market order</b>: an order to trade immediately at the current quote. In this model the market maker sees the limit orders for a period <i>before</i> he quotes, but the market orders arrive during the period and are random.</li>
+<li><b>Discrete time.</b> Each trading day is split into \(n\) intervals \(t = 1, \dots, n\), and days \(j = 0, 1, 2, \dots\) go on forever (an infinite horizon, slide 60).</li>
+<li><b>Discount factor</b> \(\phi\) with \(0 \le \phi &lt; 1\) in slide eq. (2.35): utility \(j\) days away counts \(\phi^j\) times as much as today's. ⚠ The slides also use \(\phi\) for the slope of the sell-order function (below). They are two different numbers.</li>
+<li><b>Order functions</b> (slides 64–65). Limit buys filled at ask \(a_t\): \(A_t^L = \alpha^L - a_t\gamma^L\). Limit sells filled at bid \(b_t\): \(B_t^L = \beta^L + b_t\phi^L\). Market orders: \(\tilde A_t^m = \alpha^m - a_t\gamma^m + \tilde\omega_t\) and \(\tilde B_t^m = \beta^m + b_t\phi^m + \tilde\varepsilon_t\), where \(\tilde\omega_t, \tilde\varepsilon_t\) are random. Total buys \(A = \alpha - a\gamma + \tilde\omega\) and total sells \(B = \beta + b\phi + \tilde\varepsilon\), with \(\alpha = \alpha^L + \alpha^m\), \(\gamma = \gamma^L + \gamma^m\), \(\beta = \beta^L + \beta^m\), \(\phi = \phi^L + \phi^m\).</li>
+<li><b>Inventory</b> after period \(t\): \(I_t = I_{t-1} + B_t - A_t\) (sells to him add, buys from him subtract).</li>
+<li><b>Overnight repurchase (repo) market</b> (slide 66). All trades settle at the end of the day. A short dealer borrows shares overnight and pays \(r\tilde pI_n\); a long dealer lends them and receives it. \(\tilde p\) = the random overnight price, \(r\) = the repo rate.</li>
+<li><b>Derived value function</b> \(V(\tilde I_n)\): the expected utility from all future days if he starts tomorrow with inventory \(I_n\) and acts optimally (slide 67). \(V' = \partial V/\partial I_n\) = what one more share tonight is worth to him in future utility.</li>
+<li><b>Marginal utility</b> \(U' = \partial U/\partial\pi_n\). For any random \(X\): \(E(U'X) = E(U')E(X) + \text{Cov}(U', X)\). Because \(U'' &lt; 0\), \(U'\) is high when profit is low and low when profit is high.</li>
+</ol></div>
+<div class="prob"><h3>The microeconomics of market making</h3>
+<p class="stmt">A single market maker sets \(a_t\) and \(b_t\) each period to maximise \(E\big[\sum_{j=0}^\infty\phi^jU\big(\sum_{t=1}^n\tilde\pi_{jt}\big)\big]\) (2.35), the discounted expected utility of daily trading profits. At the start of each period he knows the limit orders; he has expectations about the market orders. He fills all orders at his quotes, then inventory is updated (slide 63).</p>
+<p class="stmt"><b>Question:</b> What are the optimal ask and bid in the last period of a day, and what is the spread made of?</p>
+<div class="sec"><p class="sh">Key idea</p><p><b>Each quote trades off today's cash against the value of the inventory he ends the day with.</b> For a risk-neutral dealer, the spread = a part fixed by the known limit orders + a part for the expected market orders. A risk-averse dealer adds a covariance term. He dislikes order flow that hurts profit when his marginal utility is high, and that term can be negative, so risk aversion can <i>shrink</i> the spread. Inventory enters every quote through \(V'\) and the repo term.</p></div>
+<div class="sec"><p class="sh">Previous model → why it falls short</p><div class="tw"><table class="brute">
+<tr><td>before</td><td>Ho–Stoll (1981): continuous time, market orders only, a fixed horizon at which inventory is liquidated, and the dealer's whole portfolio.</td></tr>
+<tr><td>assumes</td><td>Every order is a random market order; the world ends at \(T\); payoff comes once at the end.</td></tr>
+<tr class="dies"><td>fails at</td><td>A real specialist sees a book of limit orders before quoting, gets paid every day, settles daily, and has no liquidation date.</td></tr>
+<tr class="therefore"><td>therefore</td><td>Discrete time, limit + market orders, an infinite horizon with daily payoff and overnight settlement, and the trading account only (slides 59–60).</td></tr>
+</table></div></div>
+<div class="sec"><p class="sh">Solution</p><p class="setup"><b>Setup.</b> Solve the last period \(n\) of a day (slide 68: "working backward"); earlier profits \(\sum_{t&lt;n}\tilde\pi_t\) are already fixed. Assumptions: (A1) The limit-order parameters are known at the start of the period. (A2) Market orders are linear in the quotes plus noise (primer 4). (A3) \(U\) is concave (\(U'' &lt; 0\)) and \(V\) is differentiable. (A4) The limit-order quantities stay positive, (2.42)–(2.43): \(\alpha^L - a_n\gamma^L \ge 0\) and \(\beta^L + b_n\phi^L \ge 0\); take these as not binding. (A5) Overnight settlement at repo rate \(r\) and price \(\tilde p\) (primer 6). Profit (2.44): \(\pi_n = a_n(\alpha - a_n\gamma + \tilde\omega_n) - b_n(\beta + b_n\phi + \tilde\varepsilon_n) + r\tilde p\,I_n\).</p>
+<p class="claim"><b>Claim.</b> The optimal quotes are (2.45)–(2.46) below, and the spread is
+\[a_n - b_n = \frac{\alpha\phi + \beta\gamma}{2\phi\gamma} + \frac{\phi E(\tilde\omega_n) + \gamma E(\tilde\varepsilon_n)}{2\phi\gamma} + \frac{\phi\,\text{cov}(U', \tilde\omega_n) + \gamma\,\text{cov}(U', \tilde\varepsilon_n)}{2\phi\gamma E(U')}. \quad (2.47)\]</p><ol class="pf">
+<li>\(I_n = I_{n-1} + \beta + b_n\phi + \tilde\varepsilon_n - \alpha + a_n\gamma - \tilde\omega_n\).<span class="r"><b>Why:</b> primer 5 with the totals of primer 4.</span></li>
+<li>The objective is \(\Psi(a_n, b_n) = E\big[U\big(\sum_{t&lt;n}\tilde\pi_t + \pi_n\big) + V(I_n)\big]\), slide eq. (2.40)/(2.41).<span class="r"><b>Why:</b> today's utility plus the value of the inventory carried into tomorrow (primer 7).</span></li>
+<li>\(\dfrac{\partial\pi_n}{\partial a_n} = \alpha - 2a_n\gamma + \tilde\omega_n + r\tilde p\gamma\) and \(\dfrac{\partial I_n}{\partial a_n} = \gamma\).<span class="r"><b>Why:</b> differentiate (2.44) and step 1; \(a_n(\alpha - a_n\gamma)\) gives \(\alpha - 2a_n\gamma\), and \(I_n\) contains \(+a_n\gamma\).</span></li>
+<li>First-order condition in \(a_n\): \(E\big[U'(\alpha - 2a_n\gamma + \tilde\omega_n + r\tilde p\gamma)\big] + \gamma E[V'] = 0\).<span class="r"><b>Why:</b> chain rule on step 2 using step 3 (A3).</span></li>
+<li>\(a_n\) is not random, so \(E[U'\cdot2a_n\gamma] = 2a_n\gamma E[U']\). Move it across and divide by \(2\gamma E(U')\): <span class="ans">\(a_n = \dfrac{\alpha}{2\gamma} + \dfrac{E(U'\tilde\omega_n)}{2\gamma E(U')} + \dfrac{rE(U'\tilde p)}{2E(U')} + \dfrac{E(V')}{2E(U')}\)</span> (2.45).<span class="r"><b>Why:</b> algebra on step 4.</span></li>
+<li>\(\dfrac{\partial\pi_n}{\partial b_n} = -\beta - 2b_n\phi - \tilde\varepsilon_n + r\tilde p\phi\) and \(\dfrac{\partial I_n}{\partial b_n} = \phi\). First-order condition: \(E\big[U'(-\beta - 2b_n\phi - \tilde\varepsilon_n + r\tilde p\phi)\big] + \phi E[V'] = 0\).<span class="r"><b>Why:</b> differentiate (2.44) and step 1 with respect to \(b_n\).</span></li>
+<li>Solve for \(b_n\): <span class="ans">\(b_n = -\dfrac{\beta}{2\phi} - \dfrac{E(U'\tilde\varepsilon_n)}{2\phi E(U')} + \dfrac{rE(U'\tilde p)}{2E(U')} + \dfrac{E(V')}{2E(U')}\)</span> (2.46).<span class="r"><b>Why:</b> move \(2b_n\phi E[U']\) across and divide by \(2\phi E(U')\).</span></li>
+<li>Reading (slide 70): in each quote, the first two terms are the known limit orders and the expected market orders. The last two terms carry the effect of inventory; they are the <i>same</i> in \(a_n\) and \(b_n\), so they move both quotes together (placement).<span class="r"><b>Why:</b> compare steps 5 and 7.</span></li>
+<li>Spread: subtract step 7 from step 5. The two shared terms cancel: \(a_n - b_n = \dfrac{\alpha}{2\gamma} + \dfrac{\beta}{2\phi} + \dfrac{E(U'\tilde\omega_n)}{2\gamma E(U')} + \dfrac{E(U'\tilde\varepsilon_n)}{2\phi E(U')}\).<span class="r"><b>Why:</b> algebra.</span></li>
+<li>Split each expectation: \(\dfrac{E(U'\tilde\omega)}{E(U')} = E(\tilde\omega) + \dfrac{\text{cov}(U',\tilde\omega)}{E(U')}\), and the same for \(\tilde\varepsilon\).<span class="r"><b>Why:</b> primer 8.</span></li>
+<li>Put everything over the common denominator \(2\phi\gamma\) to get <span class="ans">(2.47)</span>: limit-order part \(\frac{\alpha\phi+\beta\gamma}{2\phi\gamma}\) + risk-neutral expected-market-order part \(\frac{\phi E(\tilde\omega)+\gamma E(\tilde\varepsilon)}{2\phi\gamma}\) + risk adjustment \(\frac{\phi\,\text{cov}(U',\tilde\omega)+\gamma\,\text{cov}(U',\tilde\varepsilon)}{2\phi\gamma E(U')}\).<span class="r"><b>Why:</b> steps 9–10; \(\frac{\alpha}{2\gamma} = \frac{\alpha\phi}{2\phi\gamma}\) and \(\frac{\beta}{2\phi} = \frac{\beta\gamma}{2\phi\gamma}\).</span></li>
+<li>Risk-neutral dealer: \(U'\) is a constant, so both covariances are 0 and the risk adjustment vanishes.<span class="r"><b>Why:</b> a constant has zero covariance with anything.</span></li>
+<li>Risk-averse dealer: the sign is ambiguous. Extra market buys (\(\tilde\omega\) high) usually raise today's profit, by \(a_n - r\tilde p\) per share, which lowers \(U'\), so \(\text{cov}(U',\tilde\omega) &lt; 0\) and the spread narrows. Extra market sells (\(\tilde\varepsilon\) high) use cash today, changing profit by \(-b_n + r\tilde p\) per share, which raises \(U'\), so \(\text{cov}(U',\tilde\varepsilon) &gt; 0\) and the spread widens. <span class="ans">The net sign depends on the sizes, so a risk-averse spread can be smaller than the risk-neutral one.</span><span class="r"><b>Why:</b> \(\partial\pi_n/\partial\tilde\omega = a_n - r\tilde p\) and \(\partial\pi_n/\partial\tilde\varepsilon = -b_n + r\tilde p\) from (2.44); \(U'' &lt; 0\) makes \(U'\) move opposite to profit (primer 8).</span></li>
+<li>Inventory \(I_{n-1}\) enters \(\pi_n\) and \(I_n\), hence \(U'\) and \(V'\). So it moves the shared terms (placement) and the covariance terms (size of the spread).<span class="r"><b>Why:</b> step 1 and (2.44).</span></li>
+</ol><p><b>Conclusion.</b> The spread = a known-limit-order part + a risk-neutral part for expected market orders + a risk adjustment for market-order and inventory-value uncertainty. The last part can have either sign, and inventory affects both where the quotes sit and how far apart they are. ∎</p></div>
+<div class="sec"><p class="sh">Numerical example</p>
+<p>Total order flow: buys \(A = 150 - 10a + \tilde\omega\) (\(\alpha = 150, \gamma = 10\)) and sells \(B = -50 + 10b + \tilde\varepsilon\) (\(\beta = -50, \phi = 10\): nobody sells to him below $5). \(E(\tilde\omega) = E(\tilde\varepsilon) = 0\), \(r = 0\), and a share carried into tomorrow is worth \(E(V')/E(U') = \$10\).</p><ol class="pf">
+<li>Risk-neutral: \(a = \frac{150}{20} + \frac{10}{2} = 7.5 + 5 = 12.50\) and \(b = \frac{50}{20} + \frac{10}{2} = 2.5 + 5 = 7.50\).<span class="r"><b>Why:</b> steps 5 and 7 with zero covariances.</span></li>
+<li>Spread \(= 5.00 = \frac{150\cdot10 + (-50)\cdot10}{2\cdot10\cdot10} = \frac{1000}{200}\). Expected buys \(150 - 125 = 25\) equal expected sells \(-50 + 75 = 25\).<span class="r"><b>Why:</b> step 11; primer 4.</span></li>
+<li>A heavier inventory makes one more share worth less, say \(E(V')/E(U') = 8\): \(a = 11.50\), \(b = 6.50\), the spread is still 5.00, and expected buys 35 &gt; sells 15, so inventory falls.<span class="r"><b>Why:</b> step 8: the shared term moves both quotes by −1.</span></li>
+<li>Risk-averse with \(\text{cov}(U',\tilde\omega)/E(U') = -2\) and \(\text{cov}(U',\tilde\varepsilon)/E(U') = +1\): \(a = 12.50 - 2/20 = 12.40\), \(b = 7.50 - 1/20 = 7.45\), spread \(= 4.95\).<span class="r"><b>Why:</b> steps 5, 7, 10; the risk adjustment is \(\frac{10(-2) + 10(1)}{200} = -0.05\), below the risk-neutral spread (step 13).</span></li>
+</ol></div>
+<div class="sec"><p class="sh">Exam</p><p><b>Gotcha:</b> the limit-order part is <i>known</i> and the market-order part is <i>expected</i>. Risk aversion can make the spread <i>smaller</i>. The inventory terms cancel out of the formula for \(a_n - b_n\), yet inventory still changes the spread through \(U'\) inside the covariances.</p><p><b>Recognize:</b> "limit and market orders", "discrete time, \(n\) intervals per day", "infinite horizon / daily payoff", "overnight repurchase market", "three components of the spread" → O'Hara–Oldfield.</p>
+<p><b>Findings</b> (slides 58, 61, 72):</p><ul>
+<li>The spread splits into a portion for known limit orders, a risk-neutral adjustment for expected market orders, and a risk adjustment for market-order and inventory-value uncertainty.</li>
+<li>Risk aversion affects both the spread and the individual bid and ask, and the risk-averse spread may be smaller than the risk-neutral spread.</li>
+<li>Inventory has a pervasive influence on pricing: it affects both the size and the placement of the spread.</li>
+<li>New: both limit and market orders; a discrete-time multi-period framework; daily payoff; no presumed liquidation date and no fixed stock value.</li>
+</ul><p>Past paper: <a href="../papers/midsem_2024.html#q5">Midsem 2024 Q5</a>.</p></div>
+<p class="gap">⚠ Slide gap. (1) \(\phi\) means two things: the discount factor in (2.35) and the slope of the sell-order function in (2.37)–(2.47). (2) In (2.41)–(2.47), \(\alpha, \gamma, \beta, \phi\) are the <i>totals</i> of the limit and market parameters (primer 4); the slides do not say so. (3) Slide 58 says the risk-averse spread may be smaller than "a risk-taker person's". The comparison in the paper, and on slide 61, is with a <i>risk-neutral</i> market maker.</p>
+</div>
+
+<!-- ============ ENTRY 6: chain ============ -->
+<h2 id="chain">6 · The chain in one table</h2>
+<div class="idea"><p>Each model fixes the previous one (the "before" rows above). Read the table top to bottom.</p></div>
+<div class="tw"><table>
+<tr><th>Model</th><th>Dealer</th><th>Time</th><th>What is random</th><th>Spread depends on inventory?</th><th>Quote placement depends on inventory?</th><th>Spread result</th></tr>
+<tr><td>Garman 1976</td><td>risk-neutral, monopolist</td><td>continuous, quotes fixed forever</td><td>order arrival (Poisson)</td><td>no (fixed)</td><td>no (fixed)</td><td>\(p_a &gt; p_b\) needed to avoid ruin; \(\bar\lambda = \frac{\gamma\beta+\alpha\delta}{2(\beta+\delta)}\)</td></tr>
+<tr><td>Amihud–Mendelson 1980</td><td>risk-neutral, inventory bounds</td><td>continuous, quotes per level</td><td>order arrival</td><td>yes (varies with \(j\))</td><td>yes: both quotes fall as \(j\) rises</td><td>\(P_b &lt; \Delta_{j+1} &lt; \Delta_j &lt; P_a\); preferred position</td></tr>
+<tr><td>Stoll 1978</td><td>risk-averse</td><td>two dates, one trade</td><td>stock return</td><td>no</td><td>yes (via \(Q_p\))</td><td>\(\frac{z}{W_0}\sigma^2|Q| + 2a + \frac{2M}{|Q|}\)</td></tr>
+<tr><td>Ho–Stoll 1981</td><td>risk-averse</td><td>continuous, horizon \(T\), DP</td><td>order arrival + return (Brownian)</td><td>no</td><td>yes</td><td>\(\frac{\alpha}{\beta} + \frac12R\sigma^2Q\tau\)</td></tr>
+<tr><td>O'Hara–Oldfield 1986</td><td>risk-averse</td><td>discrete, infinite horizon</td><td>market orders + inventory value</td><td>yes (via covariances)</td><td>yes</td><td>limit part + expected-market part + risk adjustment (either sign)</td></tr>
+</table></div>
+</div>

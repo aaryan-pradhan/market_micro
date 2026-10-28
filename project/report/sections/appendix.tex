@@ -1,0 +1,50 @@
+\section{Reproducibility}
+\label{app:code}
+
+Everything in this paper is produced by the code in \texttt{project/code}. No number or figure is
+edited by hand: the text cites numbers through macros written by the code.
+
+\paragraph{Data.} \texttt{data/RELIANCE\_1m.csv} and \texttt{data/KSCL\_1m.csv} hold the raw
+one-minute bars exactly as downloaded (columns: \texttt{timestamp} in IST, \texttt{Open},
+\texttt{High}, \texttt{Low}, \texttt{Close}, \texttt{Volume}). They were downloaded on
+28 October 2026 by \texttt{code/fetch\_data.py}. Because Yahoo keeps only about 30 days of
+one-minute history, these files, not the script, are the dataset of record.
+
+\paragraph{Code.} The package \texttt{code/asmm} has one module per step of the paper:
+\begin{center}
+\small
+\begin{tabular}{ll}
+\toprule
+Module & Role \\
+\midrule
+\texttt{config.py} & every constant: session, horizon, split, $\gamma$, Monte Carlo settings \\
+\texttt{data.py} & load bars, build the complete minute grid, split calibration/test days \\
+\texttt{model.py} & Avellaneda--Stoikov formulas, equations \eqref{eq:lambda}--\eqref{eq:spread} \\
+\texttt{calibration.py} & fill proxy and fit of $A$, $k$, equation \eqref{eq:fit}; $\sigma$ \\
+\texttt{diagnostics.py} & assumption tests, intraday profiles, Amihud and Roll measures \\
+\texttt{simulate.py} & Monte Carlo with common random numbers; certainty equivalent; bootstrap \\
+\texttt{replay.py} & historical replay and the PnL decomposition, equation \eqref{eq:decomp} \\
+\texttt{pipeline.py} & runs every computation for one stock \\
+\texttt{style.py}, \texttt{figures.py} & one visual style; one function per figure \\
+\texttt{tables.py} & LaTeX tables and the \texttt{numbers.tex} macros \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Commands.}
+\begin{center}
+\small
+\begin{tabular}{ll}
+\toprule
+\texttt{pip install -r code/requirements.txt} & dependencies \\
+\texttt{python code/tests/test\_asmm.py} & five checks against known results \\
+\texttt{python code/run\_all.py} & all figures, tables and numbers (about one minute) \\
+\texttt{tectonic report/main.tex} & this PDF \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent The checks confirm that the reservation price equals the mid at zero inventory, that the
+quotes move against inventory, that the fill-curve fit recovers known $A$ and $k$, that the simulated
+symmetric inventory variance matches its Poisson formula, and that the three parts of the PnL
+decomposition sum exactly to the PnL.

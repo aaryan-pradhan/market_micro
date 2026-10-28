@@ -1,0 +1,85 @@
+\section{Introduction}
+
+\subsection{The Question}
+
+A market maker earns the bid--ask spread, but the two sides of a trade do not arrive together.
+A dealer who is filled on the bid first is long the stock until someone lifts the ask, and every
+minute spent holding that position is exposed to the price. The inventory models of
+Garman~\cite{garman1976}, Amihud and Mendelson~\cite{amihudmendelson1980}, Stoll~\cite{stoll1978} and
+Ho and Stoll~\cite{hostoll1981} all answer the same question: how should a dealer set prices when
+inventory is risky? Avellaneda and Stoikov~\cite{avellaneda2008} restate the answer for a modern
+limit order book. Their dealer shifts both quotes away from the side it is already heavy on, and
+the size of the shift grows with inventory, risk aversion, volatility and the time left in the
+session.
+
+The working paper this project builds on~\cite{amargos2026} derives the model in full and confirms
+in a Monte Carlo study that this skew cuts terminal-inventory variance by about an order of
+magnitude. Its own scope section is explicit about what it does not do: it \emph{``does not
+calibrate or backtest the model against live order-book data''}. That gap is the starting point
+here. We ask one question:
+
+\begin{center}
+\emph{Does the Avellaneda--Stoikov model survive contact with the National Stock Exchange of India?}
+\end{center}
+
+\noindent ``Survive'' has three concrete meanings, and the paper answers them in order.
+\begin{enumerate}
+\item \textbf{Do its assumptions hold on NSE data?} We test each one and sort it into
+  \emph{holds}, \emph{bends} or \emph{breaks}.
+\item \textbf{Does its risk control carry over?} We compare the optimal quotes with a symmetric
+  dealer quoting the same average spread, first in the model's own world, then on real minutes.
+\item \textbf{Does its profit carry over, and is its spread close to the market's?} We split the
+  dealer's real PnL into spread capture, adverse selection and inventory carry, and we compare the
+  model's spread with the Roll~\cite{roll1984} spread the market actually charges.
+\end{enumerate}
+
+\subsection{What We Find}
+
+Figure~\ref{fig:roadmap} summarises the argument. The model's core assumption, that fills
+arrive at a rate $Ae^{-k\delta}$ decaying exponentially in the quote distance $\delta$, holds
+remarkably well for both stocks. Its picture of the mid-price bends for the illiquid stock,
+which shows the bid--ask bounce Roll described, and breaks on intraday volatility, which is
+U-shaped rather than constant. In the model's world the optimal quotes beat the symmetric
+dealer on every risk measure. On real NSE minutes the risk result survives almost intact, but
+the profit result does not: fills on a real exchange carry information, so the price tends to
+keep moving against the dealer after each fill, and this adverse selection eats all of the
+spread income. The market's own spread is far narrower than the model's, which is what one
+expects when a single dealer's optimum is set against a book full of competing liquidity
+providers.
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}[
+  box/.style={draw=ink2, rounded corners=3pt, align=center, font=\small, minimum height=1.25cm,
+              text width=2.75cm, fill=white, line width=0.5pt},
+  arr/.style={-{Stealth[length=2.2mm]}, ink2, line width=0.6pt},
+  node distance=0.55cm]
+  \node[box] (data) {\textbf{NSE data}\\ 1-min bars,\\ liquid + illiquid};
+  \node[box, right=of data] (test) {\textbf{Assumptions}\\
+    {\color{holds}holds} / {\color{symorange}bends} /\\ {\color{breaks}breaks}};
+  \node[box, right=of test] (cal) {\textbf{Calibrate}\\ $\sigma$, $A$, $k$\\ (first \CalibDays{} days)};
+  \node[box, right=of cal, yshift=0.85cm] (mc) {\textbf{Model world}\\ Monte Carlo,\\ \Paths{} paths};
+  \node[box, right=of cal, yshift=-0.85cm] (rp) {\textbf{Real world}\\ replay on the\\ last 9 days};
+  \node[box, below=1.15cm of test, xshift=1.55cm, text width=9.6cm, minimum height=1.0cm, draw=asblue, line width=0.8pt] (verdict)
+    {\textbf{Verdict:} inventory control survives; profit does not\\[1pt]
+     {\footnotesize adverse selection eats the spread, and the market's spread is narrower than the model's}};
+  \draw[arr] (data) -- (test);
+  \draw[arr] (test) -- (cal);
+  \draw[arr] (cal.east) -- ++(0.25,0) |- (mc.west);
+  \draw[arr] (cal.east) -- ++(0.25,0) |- (rp.west);
+  \draw[arr] (mc.east) -- ++(0.3,0) |- (verdict.east);
+  \draw[arr] (rp.east) -- ++(0.3,0) |- (verdict.east);
+\end{tikzpicture}
+\caption{The argument of the paper. Each box is a section; each arrow is a result the next step needs.}
+\label{fig:roadmap}
+\end{figure}
+
+\subsection{Organization}
+
+Section~\ref{sec:model} states the model and the closed-form quotes we test.
+Section~\ref{sec:data} describes the data and the two stocks. Section~\ref{sec:assumptions}
+tests the assumptions and calibrates the parameters. Section~\ref{sec:nse} shows what the
+optimal quotes look like at NSE parameters. Section~\ref{sec:mc} runs the model in its own world
+and Section~\ref{sec:replay} runs it on real minutes. Section~\ref{sec:discussion} compares the
+two and sets the model's spread against the market's, and Section~\ref{sec:conclusion}
+concludes. The appendix documents the code and data needed to reproduce every figure.

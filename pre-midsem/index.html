@@ -46,6 +46,7 @@ a{color:var(--accent)}
 <p class="sub">BM51002 · IIT KGP · Autumn 2026. Grey headings = ledger not written yet.</p>
 <nav class="toc">
 <a href="#midsem">Mid Term · 29 Sep</a>
+<a href="#explained">Slides explained</a>
 <a href="#papers">Past midsem papers</a>
 <a href="#inventory">Inventory models</a>
 <a href="#roll">Roll (1984)</a>
@@ -56,20 +57,24 @@ a{color:var(--accent)}
 <input id="q" type="search" placeholder="Filter sections / topics…" aria-label="Filter">
 <h2 id="midsem">Mid Term · Tue 29 Sep 2026 · 25%</h2>
 <div class="idea"><ol><li>Five theories under inventory-based models</li><li>Roll (1984)</li><li>Liquidity measures: Chordia, Roll &amp; Subrahmanyam (2000), Amihud (2002)</li></ol></div>
+<div class="sec"><a href="cheatsheet.html">Final formula sheet: every formula, trap and finding on one page</a></div>
+<h2 id="explained">Slides explained</h2>
+<div class="sec"><a href="simplified.html">Plain-language walk-through, with redrawn graphs</a><ul><li><a href="simplified.html#hs">Ho &amp; Stoll (1981) · demand curves, quote skew, 40 what-ifs</a></li><li><a href="simplified.html#oo">O'Hara &amp; Oldfield (1986) · slide by slide, spread decomposition</a></li><li><a href="simplified.html#crs">Chordia, Roll &amp; Subrahmanyam (2000) · commonality, betas chart</a></li></ul></div>
 <h2 id="papers">Past midsem papers</h2>
 <div class="sec"><a href="papers/midsem_2025.html">Midsem 2025 · 40 marks</a><ul><li><a href="papers/midsem_2025.html#q1">Q1 · Four dimensions of liquidity; monopolistic market maker</a></li><li><a href="papers/midsem_2025.html#q2">Q2 · Trader categories, competition, Madhavan (2000)</a></li><li><a href="papers/midsem_2025.html#q3">Q3 · Liquidity, transaction costs, transitory volatility</a></li><li><a href="papers/midsem_2025.html#q4">Q4 · Garman: bid for target profit, spread, inventory</a></li><li><a href="papers/midsem_2025.html#q5">Q5 · Amihud–Mendelson: transaction rate, zero-drift bid</a></li><li><a href="papers/midsem_2025.html#q6">Q6 · Stoll: spread components, competition, vs A–M</a></li></ul></div>
 <div class="sec"><a href="papers/midsem_2024.html">Midsem 2024 · 50 marks</a><ul><li><a href="papers/midsem_2024.html#q1">Q1 · Participants, buy vs sell side, liquidity, price discovery</a></li><li><a href="papers/midsem_2024.html#q2">Q2 · Liquidity and its dimensions</a></li><li><a href="papers/midsem_2024.html#q3">Q3 · Ho–Stoll: spread profit and inventory loss</a></li><li><a href="papers/midsem_2024.html#q4">Q4 · Garman: Poisson buys vs sells, binomial</a></li><li><a href="papers/midsem_2024.html#q5">Q5 · O'Hara–Oldfield: risk aversion, limit orders</a></li><li><a href="papers/midsem_2024.html#q6">Q6 · Volatility types, Roll estimator, limitations</a></li><li><a href="papers/midsem_2024.html#q7">Q7 · Market design and efficiency; Stoll dealers</a></li></ul></div>
 <h2 id="inventory">Inventory-based models</h2>
-<div class="sec"><span>1 · Garman (1976)</span><ul><li>Monopolist dealer, Poisson order arrivals</li><li>Gambler's ruin, failure probability</li><li>Profit-maximising bid / ask, linear order rates</li></ul></div>
-<div class="sec"><span>2 · Amihud &amp; Mendelson (1980)</span><ul><li>Inventory-dependent prices, birth–death process</li><li>Preferred inventory position</li></ul></div>
-<div class="sec"><span>3 · Stoll (1978)</span><ul><li>Risk-averse dealer, holding / order / information costs</li><li>Optimal scale, number of dealers</li></ul></div>
-<div class="sec"><span>4 · Ho &amp; Stoll (1981)</span><ul><li>Multi-period DP, Poisson flow + Brownian returns</li><li>Risk-neutral spread + risk adjustment</li></ul></div>
-<div class="sec"><span>5 · O'Hara &amp; Oldfield (1986)</span><ul><li>Limit + market orders, discrete time</li><li>Three-part spread decomposition</li></ul></div>
+<div class="sec"><a href="3_inventory_models/inventory_models.html">Ledger: all five models</a><ul><li><a href="3_inventory_models/inventory_models.html#chain">The chain in one table</a></li></ul></div>
+<div class="sec"><a href="3_inventory_models/inventory_models.html#garman">1 · Garman (1976)</a><ul><li>Monopolist dealer, Poisson order arrivals</li><li>Gambler's ruin, failure probability</li><li>Profit-maximising bid / ask, linear order rates</li></ul></div>
+<div class="sec"><a href="3_inventory_models/inventory_models.html#am">2 · Amihud &amp; Mendelson (1980)</a><ul><li>Inventory-dependent prices, birth–death process</li><li>Preferred inventory position</li></ul></div>
+<div class="sec"><a href="3_inventory_models/inventory_models.html#stoll">3 · Stoll (1978)</a><ul><li>Risk-averse dealer, holding / order / information costs</li><li>Optimal scale, number of dealers</li></ul></div>
+<div class="sec"><a href="3_inventory_models/inventory_models.html#hs">4 · Ho &amp; Stoll (1981)</a><ul><li>Multi-period DP, Poisson flow + Brownian returns</li><li>Risk-neutral spread + risk adjustment</li></ul></div>
+<div class="sec"><a href="3_inventory_models/inventory_models.html#oo">5 · O'Hara &amp; Oldfield (1986)</a><ul><li>Limit + market orders, discrete time</li><li>Three-part spread decomposition</li></ul></div>
 <h2 id="roll">Roll (1984)</h2>
-<div class="sec"><a href="_template.html#roll">Roll's serial-covariance spread estimator</a><ul><li>Bid–ask bounce</li><li>\(s = 2\sqrt{-\text{Cov}(\Delta p_t, \Delta p_{t-1})}\)</li></ul></div>
+<div class="sec"><a href="4_volatility/roll_1984.html#roll">Roll's serial-covariance spread estimator</a><ul><li>Bid–ask bounce</li><li>Var(ΔP) = σ² + S²/2: fundamental vs transitory</li><li>\(s = 2\sqrt{-\text{Cov}(\Delta p_t, \Delta p_{t-1})}\)</li></ul></div>
 <h2 id="liquidity">Liquidity measures</h2>
-<div class="sec"><span>Chordia, Roll &amp; Subrahmanyam (2000)</span><ul><li>Commonality in liquidity</li><li>Market / industry regressions, inventory vs information</li></ul></div>
-<div class="sec"><span>Amihud (2002)</span><ul><li>ILLIQ = average |return| / dollar volume</li><li>Illiquidity premium, Fama–MacBeth</li></ul></div>
+<div class="sec"><a href="2_liquidity/liquidity_measures.html#crs">Chordia, Roll &amp; Subrahmanyam (2000)</a><ul><li><a href="2_liquidity/liquidity_measures.html#crsm">Five measures: QSPR, PQSPR, DEP, ESPR, PESPR</a></li><li>Commonality in liquidity</li><li>Market / industry regressions, inventory vs information</li></ul></div>
+<div class="sec"><a href="2_liquidity/liquidity_measures.html#amihud">Amihud (2002)</a><ul><li>ILLIQ = average |return| / dollar volume</li><li>Illiquidity premium, Fama–MacBeth</li></ul></div>
 <div class="sec"><span>Also in the deck</span><ul><li>Ince (2022) liquidity components</li><li>Stoll (2000) friction</li></ul></div>
 <h2 id="structure">Market structure (not in midsem)</h2>
 <div class="sec"><span>Introduction, exchanges, orders &amp; trades</span><ul><li>Larry Harris ch 1–6</li></ul></div>

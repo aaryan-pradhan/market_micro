@@ -1,0 +1,23 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+We asked whether the Avellaneda--Stoikov model survives contact with the National Stock Exchange of
+India, and answered in three steps on a liquid and an illiquid stock.
+
+\begin{enumerate}
+\item \textbf{Assumptions.} The foundation holds: fill intensity decays exponentially in the
+  quote distance, with $R^2$ above 0.98 for both stocks and both sides of the book. The description
+  of the mid-price bends, mostly through the bid--ask bounce of the illiquid stock, and constant
+  intraday volatility breaks.
+\item \textbf{Risk.} The model's inventory control survives almost untouched. On held-out real
+  minutes it cuts the standard deviation of daily PnL by a factor of \RELIANCEReplaySdFactor{}
+  (RELIANCE) and \KSCLReplaySdFactor{} (KSCL), about the same as it does in its own simulated world.
+\item \textbf{Profit.} The model's profit does not survive. Adverse selection, which the model assumes
+  away, absorbs the whole spread income, and the model's spread is about three times wider than
+  the market's, as one expects of a single dealer in a competitive order book.
+\end{enumerate}
+
+\noindent The practical reading is simple. On NSE, the Avellaneda--Stoikov rule is a sound way for a
+liquidity provider to \emph{manage inventory}. It is not, on its own, a way to \emph{make money}. To
+do that a market maker has to price the information in order flow, which is the problem the
+information-based models of microstructure were built to solve.

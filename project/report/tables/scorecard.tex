@@ -1,0 +1,14 @@
+\begin{tabular}{llrrl}
+\toprule
+Assumption & Statistic & RELIANCE & KSCL & Verdict \\
+\midrule
+Fill intensity is $Ae^{-k\delta}$ & min $R^2$ & 0.984 & 0.992 & Holds \\
+One curve for both sides & $k_{\text{bid}}/k_{\text{ask}}$ & 1.10 & 1.07 & Holds \\
+Mid has no drift & $t$-stat of mean change & -0.26 & -0.43 & Holds \\
+Independent increments & lag-1 autocorrelation & -0.014 & -0.123 & Bends (illiquid) \\
+Random-walk scaling & VR(15) & 0.90 & 0.65 & Bends (illiquid) \\
+Gaussian increments & excess kurtosis & 10.9 & 99.4 & Bends \\
+Constant $\sigma$ through the day & max/min 15-min $\sigma$ & 3.1 & 3.2 & Breaks \\
+Constant $k$ across days & coef.\ of variation of daily $k$ & 0.17 & 0.18 & Bends \\
+\bottomrule
+\end{tabular}

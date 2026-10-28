@@ -1,0 +1,5385 @@
+Absolutely. These slides are describing the Ho and Stoll (1981) optimal dealer pricing model, which is one of the important foundations for understanding how a market maker chooses bid/ask prices when there is both transaction uncertainty and inventory/return uncertainty.
+
+I’ll go slide-by-slide, explain every equation, then give you a large set of “what happens if this variable increases/decreases?” questions with answers, including the kind of conceptual questions an examiner can ask.
+
+1. Big picture: What is Ho and Stoll (1981) trying to solve?
+
+The central question is:
+
+How should a dealer choose bid and ask prices when he does not know when the next customer will arrive and is also uncertain about the return on the inventory he is holding?
+
+A dealer is continuously facing two risks:
+
+Risk 1: Transaction uncertainty
+
+The dealer doesn't know:
+
+when the next customer arrives,
+whether the customer wants to buy or sell,
+how many transactions will occur.
+
+This is modeled using a Poisson jump process.
+
+Risk 2: Inventory return uncertainty
+
+Suppose the dealer is holding 1,000 shares.
+
+The stock price can move unexpectedly.
+
+So the value of his inventory is uncertain.
+
+This is modeled using a Brownian motion.
+
+Therefore:
+
+$$ \boxed{\text{Ho-Stoll model}= \text{Poisson transaction uncertainty} + \text{Brownian return uncertainty}} $$
+
+This is the key idea to remember.
+
+2. What does the dealer actually do?
+
+Suppose the dealer believes the stock's current true/intrinsic value is
+
+$$ p. $$
+
+He quotes:
+
+$$ \boxed{p_b=p-b} $$
+
+and
+
+$$ \boxed{p_a=p+a} $$
+
+where:
+
+\(p_b\) = bid price
+\(p_a\) = ask price
+\(p\) = dealer's estimate of intrinsic/fair value
+\(b\) = distance of bid from \(p\)
+\(a\) = distance of ask from \(p\)
+
+Therefore the spread is
+
+$$ p_a-p_b = (p+a)-(p-b) $$
+
+so
+
+$$ \boxed{\text{Spread}=a+b} $$
+3. Why are \(a\) and \(b\) called prices of immediacy?
+
+This is important.
+
+A customer who wants to trade immediately does not have to wait for a better price.
+
+Instead, they trade with the dealer.
+
+For example:
+
+Suppose
+
+$$ p=100. $$
+
+If
+
+$$ a=2,\qquad b=1, $$
+
+then
+
+$$ p_a=102 $$
+
+and
+
+$$ p_b=99. $$
+
+So:
+
+customer wants to buy → pays ₹102
+customer wants to sell → receives ₹99
+
+The dealer earns compensation for providing immediacy/liquidity.
+
+4. Very important: \(a\) and \(b\) have opposite effects on demand
+
+This is one of the most likely conceptual exam questions.
+
+Ask side
+
+Dealer sells to public at
+
+$$ p_a=p+a. $$
+
+If dealer increases \(a\),
+
+$$ a\uparrow \Rightarrow p_a\uparrow $$
+
+The stock becomes more expensive for buyers.
+
+Therefore:
+
+$$ \boxed{a\uparrow\Rightarrow \lambda_a\downarrow} $$
+
+where \(\lambda_a\) is the rate of dealer sales.
+
+Bid side
+
+Dealer buys from public at
+
+$$ p_b=p-b. $$
+
+If dealer increases \(b\),
+
+$$ b\uparrow \Rightarrow p_b\downarrow $$
+
+The customer receives a lower price when selling to the dealer.
+
+Therefore fewer customers want to sell to him.
+
+So:
+
+$$ \boxed{b\uparrow\Rightarrow\lambda_b\downarrow} $$
+
+This is extremely important.
+
+5. Transaction uncertainty: Poisson process
+
+The model assumes transactions arrive randomly.
+
+For a small interval \(dt\):
+
+Dealer sale
+$$ dq_a= \begin{cases} Q & \text{with probability }\lambda_a dt\\ 0 & \text{with probability }1-\lambda_a dt \end{cases} $$
+
+Here:
+
+$$ Q=\text{number of shares per transaction} $$
+
+and
+
+$$ \lambda_a=\text{arrival intensity of dealer sales}. $$
+
+So:
+
+$$ \boxed{P(dq_a=Q)=\lambda_a dt} $$
+Dealer purchase
+
+Similarly,
+
+$$ dq_b= \begin{cases} Q & \text{with probability }\lambda_bdt\\ 0 & \text{with probability }1-\lambda_bdt \end{cases} $$
+
+where
+
+$$ \lambda_b=\text{arrival intensity of dealer purchases}. $$
+
+Thus:
+
+$$ \boxed{P(dq_b=Q)=\lambda_bdt} $$
+6. What exactly is a dealer sale?
+
+This terminology can be confusing.
+
+Dealer sale
+
+A customer comes and buys from the dealer.
+
+Therefore:
+
+$$ \text{Dealer sells shares} $$
+
+and receives cash.
+
+This occurs at the ask price.
+
+$$ \boxed{p_a=p+a} $$
+Dealer purchase
+
+A customer comes and sells to the dealer.
+
+Therefore:
+
+$$ \text{Dealer buys shares} $$
+
+and pays cash.
+
+This occurs at the bid price.
+
+$$ \boxed{p_b=p-b} $$
+7. Linear demand curve
+
+The slide shows two demand curves.
+
+Public buyers
+
+They buy from dealer.
+
+Their arrival rate is
+
+$$ \lambda_a. $$
+
+As the ask price increases:
+
+$$ p_a\uparrow $$
+
+fewer people buy.
+
+Therefore:
+
+$$ \boxed{\frac{\partial\lambda_a}{\partial p_a}<0} $$
+Public sellers
+
+They sell to dealer.
+
+Their arrival rate is
+
+$$ \lambda_b. $$
+
+As the bid price increases:
+
+$$ p_b\uparrow $$
+
+more people are willing to sell.
+
+Therefore:
+
+$$ \boxed{\frac{\partial\lambda_b}{\partial p_b}>0} $$
+
+Equivalently, since
+
+$$ p_b=p-b, $$
+
+increasing \(b\) decreases \(p_b\), so:
+
+$$ \boxed{b\uparrow\Rightarrow\lambda_b\downarrow} $$
+8. Why are there two different prices \(p\) and \(p^*\)?
+
+This is subtle and important.
+
+The dealer has his own estimate:
+
+$$ p $$
+
+of the true value.
+
+The public has an opinion:
+
+$$ p^*. $$
+
+The model allows:
+
+$$ \boxed{p\neq p^*} $$
+
+For example:
+
+Dealer thinks:
+
+$$ p=100 $$
+
+but public thinks:
+
+$$ p^*=105. $$
+
+Then the public may consider the stock undervalued relative to their belief and may be more willing to buy.
+
+The dealer therefore has to account for the difference between:
+
+$$ \boxed{\text{dealer's valuation }p} $$
+
+and
+
+$$ \boxed{\text{public valuation }p^*}. $$
+9. Interpretation of the graph
+
+The graph has:
+
+\(p^*\) = public opinion of true price
+\(p\) = dealer's opinion
+\(p_a\) = ask price
+\(p_b\) = bid price
+
+The intersection of the two demand curves occurs around the public valuation \(p^*\).
+
+The dealer chooses bid and ask around his own valuation \(p\).
+
+This means the dealer can adjust prices to influence:
+
+$$ \lambda_a,\lambda_b. $$
+
+That is the fundamental control mechanism.
+
+10. Portfolio uncertainty
+
+Now comes the second major component.
+
+The dealer has an existing portfolio.
+
+Its value changes according to:
+
+$$ \boxed{ dX=r_X Xdt+X\,dZ_X } $$
+
+This is essentially a geometric-Brownian-motion-type process.
+
+Meaning of every term
+\(X\)
+
+Current portfolio value.
+
+\(r_X\)
+
+Mean return per unit time.
+
+\(r_XXdt\)
+
+Expected/average growth of the portfolio.
+
+\(dZ_X\)
+
+Random component.
+
+The slide says:
+
+$$ E[dZ_X]=0 $$
+
+and instantaneous variance is
+
+$$ \sigma_X^2dt. $$
+
+You can equivalently think of
+
+$$ dZ_X=\sigma_XdW_X $$
+
+if \(dW_X\) is a standard Wiener process.
+
+Then:
+
+$$ dX=r_XXdt+\sigma_XXdW_X. $$
+11. Why is portfolio uncertainty important?
+
+Suppose the dealer holds:
+
+$$ X=\$10\text{ million}. $$
+
+Even if there are no transactions, the value of this portfolio can change.
+
+For example:
+
+$$ X\rightarrow 9.5\text{ million} $$
+
+or
+
+$$ X\rightarrow10.5\text{ million}. $$
+
+Therefore the dealer faces inventory/portfolio risk.
+
+This gives him another reason to adjust his prices.
+
+12. Dealer wealth has three components
+
+The dealer's total wealth is composed of:
+
+$$ \boxed{\text{Cash}+\text{Inventory}+\text{Base wealth}} $$
+
+or:
+
+$$ \boxed{ W=F+I+Y } $$
+
+where:
+
+\(F\) = cash
+\(I\) = inventory value
+\(Y\) = base wealth
+
+At terminal time \(T\):
+
+$$ \boxed{ W_T=F_T+I_T+Y_T } $$
+
+The dealer wants to maximize:
+
+$$ \boxed{ EU(W_T) } $$
+
+That means:
+
+Choose prices \(a,b\) so that expected utility of final wealth is maximized.
+
+13. Cash equation
+
+The cash equation is:
+
+$$ \boxed{ dF=rFdt-(p-b)dq_b+(p+a)dq_a } $$
+
+Let's understand every term.
+
+Term 1
+$$ rFdt $$
+
+Cash earns interest.
+
+If the dealer has ₹100,000 and risk-free rate is 5%:
+
+$$ rFdt $$
+
+represents the interest earned during \(dt\).
+
+Term 2
+$$ -(p-b)dq_b $$
+
+This occurs when dealer buys shares.
+
+The dealer pays:
+
+$$ p-b $$
+
+per share.
+
+Therefore cash decreases.
+
+Hence the negative sign:
+
+$$ \boxed{-(p-b)dq_b} $$
+Term 3
+$$ +(p+a)dq_a $$
+
+This occurs when dealer sells shares.
+
+He receives:
+
+$$ p+a $$
+
+per share.
+
+Therefore cash increases:
+
+$$ \boxed{+(p+a)dq_a} $$
+14. Example of cash equation
+
+Suppose:
+
+$$ p=100 $$ $$ a=2,\quad b=1 $$
+
+so:
+
+$$ p_a=102 $$
+
+and
+
+$$ p_b=99. $$
+
+Suppose one transaction of \(Q=100\) shares occurs.
+
+Dealer buys
+
+Cash change:
+
+$$ -99(100)=-9900. $$
+Dealer sells
+
+Cash change:
+
+$$ +102(100)=+10200. $$
+
+So the spread provides:
+
+$$ 10200-9900=300 $$
+
+of trading revenue across the two sides.
+
+15. Inventory equation
+
+The inventory equation is:
+
+$$ \boxed{ dI=r_IIdt+p\,dq_b-p\,dq_a+I\,dZ_I } $$
+
+This is extremely important.
+
+Why \(+p\,dq_b\)?
+
+When dealer buys shares:
+
+$$ dq_b>0. $$
+
+Inventory increases.
+
+Since inventory is valued at \(p\):
+
+$$ +p\,dq_b. $$
+Why \(-p\,dq_a\)?
+
+When dealer sells:
+
+$$ dq_a>0. $$
+
+Inventory decreases.
+
+Therefore:
+
+$$ -p\,dq_a. $$
+16. Why is inventory valued at \(p\), not \(p-b\) or \(p+a\)?
+
+This is a very likely exam question.
+
+The model treats \(p\) as the intrinsic/reference value of the stock.
+
+The transaction prices are:
+
+$$ p-b $$
+
+and
+
+$$ p+a. $$
+
+The difference between transaction price and intrinsic value captures the dealer's spread compensation.
+
+Therefore inventory accounting uses:
+
+$$ \boxed{p} $$
+
+rather than the bid or ask.
+
+17. The strange-looking but important point
+
+The slide says:
+
+Value of inventory does not change due to change in transaction size \(q_a,q_b\).
+
+Why?
+
+Because the transaction itself changes the composition:
+
+cash decreases/increases,
+inventory increases/decreases.
+
+The valuation of the existing inventory is driven by:
+
+$$ r_IIdt+I\,dZ_I. $$
+
+The transaction itself is accounted for separately.
+
+This distinction is very important.
+
+18. Why does \(dI\) contain \(p\,dq_b-p\,dq_a\)?
+
+Let's derive it.
+
+Suppose the dealer owns \(N\) shares.
+
+Inventory value:
+
+$$ I=pN. $$
+
+If he buys \(Q\) shares:
+
+$$ N\rightarrow N+Q. $$
+
+Therefore:
+
+$$ I\rightarrow p(N+Q) $$
+
+so the inventory value increases by:
+
+$$ pQ. $$
+
+Hence:
+
+$$ +p\,dq_b. $$
+
+If he sells \(Q\):
+
+$$ N\rightarrow N-Q $$
+
+and inventory decreases by:
+
+$$ pQ. $$
+
+Hence:
+
+$$ -p\,dq_a. $$
+19. Inventory return uncertainty
+
+The terms
+
+$$ r_IIdt $$
+
+and
+
+$$ I\,dZ_I $$
+
+represent uncertainty in the value of the inventory.
+
+Expected component
+$$ r_IIdt. $$
+Random component
+$$ I\,dZ_I. $$
+
+The larger \(I\) is, the larger the exposure to the random price movement.
+
+Therefore:
+
+$$ \boxed{|I|\uparrow\Rightarrow\text{inventory risk}\uparrow} $$
+
+assuming the same volatility.
+
+20. Base wealth \(Y\)
+
+The dealer also has wealth outside the market-making inventory.
+
+The model calls this:
+
+$$ Y. $$
+
+It follows:
+
+$$ \boxed{ dY=r_YYdt+YdZ_Y } $$
+
+So base wealth itself is stochastic.
+
+Why?
+
+Because the dealer may have other investments/assets.
+
+21. Why does the model include base wealth?
+
+Because the dealer's willingness to take risk depends on his overall wealth, not just his trading portfolio.
+
+For example:
+
+Dealer A has:
+
+$$ Y=\$100\text{ million} $$
+
+while Dealer B has:
+
+$$ Y=\$100,000. $$
+
+A $1 million inventory loss is much more significant for B than A.
+
+Thus wealth influences the dealer's effective risk-bearing capacity.
+
+22. No-bankruptcy assumption
+
+The slide says:
+
+Model assumes no bankruptcy as time horizon is short and sufficient collateral is available.
+
+This is an assumption that simplifies the problem.
+
+The dealer is assumed to have sufficient wealth/collateral to continue operating over the horizon.
+
+So we don't need to explicitly model:
+
+default,
+bankruptcy,
+forced liquidation before \(T\).
+23. Terminal wealth
+
+At time \(T\):
+
+$$ \boxed{ W_T=F_T+I_T+Y_T } $$
+
+The dealer's objective is:
+
+$$ \boxed{ \max_{a,b} E[U(W_T)] } $$
+
+This is the core optimization problem.
+
+24. Why expected utility instead of expected wealth?
+
+This is a major conceptual point.
+
+Suppose two strategies give:
+
+Strategy A
+$$ E(W_T)=100 $$
+
+with almost no risk.
+
+Strategy B
+$$ E(W_T)=105 $$
+
+but huge volatility.
+
+A risk-averse dealer may prefer A.
+
+Expected wealth alone would choose B.
+
+Expected utility incorporates risk preferences.
+
+Thus:
+
+$$ \boxed{\text{Expected utility captures both return and risk}} $$
+25. Risk aversion
+
+Suppose the dealer has a concave utility function:
+
+$$ U'(W)>0 $$
+
+and
+
+$$ U''(W)<0. $$
+
+Then:
+
+more wealth is preferred,
+but the dealer is risk averse.
+
+For example, under CARA utility:
+
+$$ U(W)=-e^{-\gamma W} $$
+
+where
+
+$$ \gamma>0 $$
+
+is the coefficient of absolute risk aversion.
+
+Higher \(\gamma\) means more risk aversion.
+
+26. Dynamic programming
+
+Now we reach the mathematical heart of the model.
+
+Define:
+
+$$ \boxed{ J(t,F,I,Y) = \max_{a,b} E[U(W_T)\mid t,F,I,Y] } $$
+
+This means:
+
+Starting at time \(t\), with current cash \(F\), inventory \(I\), and base wealth \(Y\), what is the maximum expected utility of terminal wealth that the dealer can obtain by choosing optimal \(a\) and \(b\)?
+
+27. Why is \(J\) called the value/performance function?
+
+Because it tells us the best achievable expected utility from the current state.
+
+For example:
+
+$$ J(t,F,I,Y)=50. $$
+
+means:
+
+Given the current state, the maximum achievable expected utility is 50.
+
+The dealer chooses:
+
+$$ a^*,b^* $$
+
+to maximize \(J\).
+
+28. State variables
+
+The model uses:
+
+$$ \boxed{(t,F,I,Y)} $$
+
+as the state.
+
+Why these?
+
+Because to decide optimal prices, the dealer needs to know:
+
+Time
+$$ t $$
+
+How much time remains?
+
+Cash
+$$ F $$
+
+How much cash does he have?
+
+Inventory
+$$ I $$
+
+How much stock exposure does he have?
+
+Base wealth
+$$ Y $$
+
+How much outside wealth does he have?
+
+29. Why does time matter?
+
+Suppose there are:
+
+6 hours left
+
+The dealer has plenty of time to execute future trades.
+
+5 minutes left
+
+He has little opportunity to correct an inventory imbalance.
+
+Therefore:
+
+$$ \boxed{\text{Inventory risk depends on time remaining}} $$
+
+This leads directly to one of the major findings.
+
+30. Why does risk decrease near the end?
+
+Suppose:
+
+$$ \tau=T-t $$
+
+is time remaining.
+
+When:
+
+$$ \tau\rightarrow0, $$
+
+there is almost no time left for future uncertainty.
+
+Therefore the dealer's exposure to future transaction and return uncertainty becomes smaller.
+
+Thus:
+
+$$ \boxed{ \tau\downarrow \Rightarrow \text{future risk adjustment}\downarrow } $$
+
+This is why the model says dealer risk is a function of time horizon.
+
+31. Taylor expansion
+
+The model doesn't have a convenient closed-form solution.
+
+So the authors approximate:
+
+$$ J(\tau,F,I,Y) $$
+
+using a Taylor expansion around:
+
+$$ \tau=0. $$
+
+They write:
+
+$$ \boxed{ J(\tau,F,I,Y) = \phi^0(F,I,Y) + \phi^1(F,I,Y)\tau + \phi^2(F,I,Y)\tau^2 +\cdots } $$
+32. What is \(\phi^0\)?
+
+At:
+
+$$ \tau=0 $$
+
+we are at the terminal date.
+
+Therefore:
+
+$$ J(0,F,I,Y)=\phi^0(F,I,Y). $$
+
+At the terminal date:
+
+$$ W=F+I+Y. $$
+
+Therefore:
+
+$$ \boxed{ \phi^0(F,I,Y)=U(F+I+Y) } $$
+
+essentially represents terminal utility.
+
+33. What does \(\phi^1\) mean?
+$$ \phi^1(F,I,Y) $$
+
+captures the first-order effect of having some additional time before the terminal date.
+
+Similarly:
+
+$$ \phi^2(F,I,Y) $$
+
+captures second-order effects.
+
+Adding more terms gives a more accurate approximation.
+
+34. Why does dynamic programming help?
+
+Instead of optimizing the entire trading path simultaneously, we solve the problem recursively.
+
+The principle is:
+
+An optimal strategy from today onward must also be optimal from tomorrow onward, conditional on the state reached tomorrow.
+
+This is the Bellman principle.
+
+35. The most important finding: spread has two components
+
+The slide says:
+
+Spread = risk-neutral spread + adjustment for uncertainty.
+
+Conceptually:
+
+$$ \boxed{ \text{Spread} = \text{compensation for providing liquidity} + \text{compensation for bearing risk} } $$
+
+This is extremely important.
+
+The dealer isn't charging a spread only because he wants profit.
+
+Part of the spread compensates him for uncertainty.
+
+36. Risk-neutral spread
+
+Imagine the dealer is completely risk neutral.
+
+Then he only cares about expected profit.
+
+He chooses prices based primarily on:
+
+transaction arrival probabilities,
+transaction size,
+expected trading revenue.
+
+This gives the risk-neutral component.
+
+37. Risk adjustment
+
+A risk-averse dealer additionally considers:
+
+"If I execute this trade, how much additional risk am I taking?"
+
+Therefore:
+
+$$ \boxed{\text{Risk adjustment}\uparrow \Rightarrow \text{spread adjustment}\uparrow} $$
+
+under the model's risk-averse setting.
+
+38. Why transaction size \(Q\) affects spread
+
+Suppose every customer trade is:
+
+$$ Q=10 $$
+
+shares.
+
+Now suppose:
+
+$$ Q=10,000. $$
+
+One transaction can massively change the dealer's inventory.
+
+Therefore:
+
+$$ Q\uparrow \Rightarrow |\Delta I|\uparrow \Rightarrow \text{inventory risk}\uparrow. $$
+
+Hence the dealer needs more compensation for risk.
+
+So generally:
+
+$$ \boxed{ Q\uparrow \Rightarrow \text{risk adjustment to spread}\uparrow } $$
+39. Why return variance affects spread
+
+Suppose inventory has volatility:
+
+$$ \sigma_I. $$
+
+If:
+
+$$ \sigma_I\uparrow, $$
+
+the dealer faces greater uncertainty in inventory value.
+
+Therefore:
+
+$$ \boxed{ \sigma_I\uparrow \Rightarrow \text{inventory risk}\uparrow \Rightarrow \text{risk compensation}\uparrow } $$
+
+Hence spread tends to increase.
+
+40. Why dealer risk aversion affects spread
+
+Let:
+
+$$ \gamma=\text{risk aversion}. $$
+
+If:
+
+$$ \gamma\uparrow, $$
+
+the dealer dislikes inventory risk more.
+
+Therefore he demands greater compensation.
+
+Thus:
+
+$$ \boxed{ \gamma\uparrow \Rightarrow \text{risk adjustment}\uparrow \Rightarrow \text{spread generally widens} } $$
+41. Very important distinction: Spread vs price adjustment
+
+The slide says:
+
+Spread does not depend on inventory position, however, dealer's price adjustment depends on inventory level.
+
+This is subtle.
+
+Suppose the dealer's inventory is:
+
+$$ I=0. $$
+
+He may quote:
+
+$$ p_b=99,\quad p_a=101. $$
+
+Now suppose:
+
+$$ I=+10,000. $$
+
+He owns too many shares.
+
+He wants to reduce inventory.
+
+So he wants:
+
+more customers to buy from him,
+fewer customers to sell to him.
+
+Therefore he can shift his quotes.
+
+For example, conceptually:
+
+$$ p_a\downarrow $$
+
+makes customers more willing to buy.
+
+And:
+
+$$ p_b\downarrow $$
+
+makes customers less willing to sell to him.
+
+Thus both prices can move downward.
+
+42. Inventory skew
+
+This is often called inventory-induced quote skew.
+
+If:
+
+$$ I>0 $$
+
+the dealer is long.
+
+He wants to sell inventory.
+
+Therefore:
+
+$$ \boxed{\text{quote prices shift to encourage sales}} $$
+
+If:
+
+$$ I<0 $$
+
+the dealer is short.
+
+He wants to buy inventory.
+
+Therefore:
+
+$$ \boxed{\text{quote prices shift to encourage purchases}} $$
+43. Very important: Inventory affects midpoint, not necessarily spread
+
+Think of:
+
+$$ p_b=p-b $$ $$ p_a=p+a. $$
+
+The spread is:
+
+$$ a+b. $$
+
+Inventory may change the location of both prices relative to \(p\), while the width can remain determined by risk/transaction considerations.
+
+So:
+
+$$ \boxed{\text{Inventory}\rightarrow\text{quote skew}} $$
+
+while:
+
+$$ \boxed{\text{risk/transaction uncertainty}\rightarrow\text{spread}} $$
+
+This is one of the most important conclusions from the slides.
+
+44. Complete intuition of the model
+
+Think of the dealer as constantly balancing three objectives:
+
+Objective 1 — Earn spread
+
+He wants:
+
+$$ a,b $$
+
+large enough to compensate him.
+
+Objective 2 — Attract customers
+
+If he makes prices too unattractive:
+
+$$ \lambda_a,\lambda_b $$
+
+fall.
+
+Then he gets fewer trades.
+
+Objective 3 — Control inventory risk
+
+If he accumulates too much inventory, he changes quotes to encourage the desired direction of trade.
+
+Therefore:
+
+$$ \boxed{ \text{Optimal quote} = \text{profit} + \text{execution probability} + \text{inventory-risk management} } $$
+45. Now let's do the examiner-style "what if?" questions
+
+This is probably the most useful part for your viva/exam.
+
+Q1. What happens if \(a\) increases?
+
+Recall:
+
+$$ p_a=p+a. $$
+
+Therefore:
+
+$$ a\uparrow \Rightarrow p_a\uparrow. $$
+
+The dealer's ask becomes more expensive.
+
+Public buyers are less willing to buy.
+
+Therefore:
+
+$$ \boxed{\lambda_a\downarrow} $$
+
+and expected dealer sales decrease.
+
+Final answer:
+
+Increasing \(a\) increases the ask price, reduces the probability/intensity of public purchases, and therefore reduces dealer sales.
+
+46. Q2. What happens if \(b\) increases?
+$$ p_b=p-b. $$
+
+So:
+
+$$ b\uparrow \Rightarrow p_b\downarrow. $$
+
+Customers receive a lower price for selling.
+
+Therefore:
+
+$$ \boxed{\lambda_b\downarrow} $$
+
+Dealer purchases become less frequent.
+
+47. Q3. What happens if \(a\) decreases?
+$$ a\downarrow \Rightarrow p_a\downarrow. $$
+
+The dealer's ask becomes cheaper.
+
+More customers want to buy.
+
+Therefore:
+
+$$ \boxed{\lambda_a\uparrow} $$
+
+and dealer sales increase.
+
+48. Q4. What happens if \(b\) decreases?
+$$ b\downarrow \Rightarrow p_b\uparrow. $$
+
+Customers get a better selling price.
+
+Therefore:
+
+$$ \boxed{\lambda_b\uparrow} $$
+
+Dealer purchases increase.
+
+49. Q5. What happens if transaction size \(Q\) increases?
+
+Each transaction changes inventory by more.
+
+Therefore:
+
+$$ Q\uparrow \Rightarrow |\Delta I|\uparrow $$
+
+and inventory risk increases.
+
+Therefore:
+
+$$ \boxed{\text{risk compensation increases}} $$
+
+and the dealer has stronger incentives to control trade flow.
+
+50. Q6. What happens if inventory volatility \(\sigma_I\) increases?
+
+Inventory becomes more risky.
+
+$$ \sigma_I\uparrow $$
+
+means:
+
+$$ I\,dZ_I $$
+
+becomes more volatile.
+
+Therefore:
+
+$$ \boxed{\text{risk adjustment}\uparrow} $$
+
+and generally the dealer requires a larger spread.
+
+51. Q7. What happens if the dealer becomes more risk averse?
+
+Let:
+
+$$ \gamma\uparrow. $$
+
+He dislikes uncertain terminal wealth more.
+
+Therefore:
+
+$$ \boxed{\text{risk adjustment}\uparrow} $$
+
+and the dealer will generally demand more compensation for taking inventory risk.
+
+52. Q8. What happens if the dealer becomes risk neutral?
+
+Then:
+
+$$ U(W)=W $$
+
+approximately.
+
+Risk itself does not directly reduce utility.
+
+Therefore the inventory-risk adjustment disappears or becomes much smaller.
+
+The dealer focuses mainly on:
+
+$$ \boxed{\text{expected trading profit}} $$
+
+rather than risk compensation.
+
+53. Q9. What happens if inventory \(I\) becomes very positive?
+
+The dealer is heavily long.
+
+He owns too many shares.
+
+If prices remain unchanged, he wants to sell them.
+
+Therefore he adjusts quotes to increase customer purchases and reduce customer sales.
+
+Conceptually:
+
+$$ \boxed{ I\uparrow \Rightarrow \text{dealer encourages selling to customers} } $$
+
+So the dealer tends to skew quotes downward.
+
+54. Q10. What happens if inventory \(I\) becomes very negative?
+
+The dealer is short.
+
+He wants to acquire shares.
+
+Therefore he makes his bid more attractive and/or ask less attractive in a way that encourages customer selling to him and discourages further customer buying from him.
+
+Conceptually:
+
+$$ \boxed{ I\downarrow \Rightarrow \text{dealer encourages customer sales to dealer} } $$
+
+So quote skew moves upward.
+
+55. Q11. What happens if \(I=0\)?
+
+There is no inventory imbalance.
+
+Therefore there is no inventory-driven reason to skew the quotes.
+
+The dealer's pricing is then driven mainly by:
+
+transaction economics,
+risk,
+return uncertainty,
+time horizon,
+public/dealer valuation differences.
+56. Q12. What happens if time remaining \(T-t\) increases?
+
+There is more time during which:
+
+inventory can remain exposed,
+prices can move,
+future transactions can arrive.
+
+Therefore:
+
+$$ \boxed{ T-t\uparrow \Rightarrow \text{future uncertainty}\uparrow } $$
+
+The risk-related pricing adjustment generally becomes more important.
+
+57. Q13. What happens as \(t\rightarrow T\)?
+
+Time remaining goes to zero:
+
+$$ T-t\rightarrow0. $$
+
+There is little time for additional uncertainty.
+
+Therefore the dealer's future inventory risk decreases.
+
+This is why:
+
+$$ \boxed{ \text{risk adjustment tends to decline near the horizon} } $$
+
+This is one of the paper's main findings.
+
+58. Q14. What happens if the risk-free rate \(r\) increases?
+
+Look at:
+
+$$ dF=rFdt-(p-b)dq_b+(p+a)dq_a. $$
+
+If:
+
+$$ r\uparrow, $$
+
+the cash balance earns more interest.
+
+Therefore:
+
+$$ rFdt\uparrow. $$
+
+However, the direct effect on optimal bid/ask spreads is more subtle because it depends on the complete optimization problem.
+
+Exam answer:
+
+A higher \(r\) increases the growth of the cash account, but its effect on optimal quotes is indirect and depends on the dealer's wealth and dynamic optimization.
+
+Do not automatically say "spread increases" just from this equation.
+
+59. Q15. What happens if \(r_I\) increases?
+
+From:
+
+$$ dI=r_II dt+p\,dq_b-p\,dq_a+I\,dZ_I. $$
+
+A higher \(r_I\) increases the expected growth of inventory value.
+
+Thus:
+
+$$ r_I\uparrow \Rightarrow E[dI]\uparrow $$
+
+holding other things constant.
+
+But its effect on optimal quotes depends on the entire model.
+
+60. Q16. What happens if \(r_Y\) increases?
+
+From:
+
+$$ dY=r_YYdt+YdZ_Y. $$
+
+Higher \(r_Y\) means higher expected growth of base wealth.
+
+Thus:
+
+$$ \boxed{E[dY]\uparrow} $$
+
+Again, the effect on optimal bid/ask quotes is indirect through the dealer's total wealth and utility.
+
+61. Q17. What happens if \(\lambda_a\) increases?
+$$ \lambda_a\uparrow $$
+
+means customers are buying from the dealer more frequently.
+
+Therefore:
+
+$$ dq_a $$
+
+occurs more often.
+
+The dealer:
+
+sells more inventory,
+receives more cash,
+earns more transaction/spread revenue.
+
+But if the dealer is already short, more sales could worsen the short position.
+
+Therefore the effect depends on current inventory.
+
+This is a very good viva answer:
+
+Higher \(\lambda_a\) increases the expected frequency of dealer sales, but whether this is desirable depends on the dealer's current inventory.
+
+62. Q18. What happens if \(\lambda_b\) increases?
+
+Similarly:
+
+$$ \lambda_b\uparrow $$
+
+means more customers sell to the dealer.
+
+Dealer:
+
+$$ \boxed{\text{buys more shares}} $$
+
+Therefore inventory tends to increase.
+
+If the dealer is already long, this is undesirable.
+
+If he is short, it helps him reduce his short position.
+
+63. Q19. What happens if public valuation \(p^*\) rises?
+
+Suppose:
+
+$$ p^*\uparrow. $$
+
+The public believes the stock is worth more.
+
+Therefore the demand for buying from the dealer can shift.
+
+The dealer needs to account for the difference:
+
+$$ p^*-p. $$
+
+If public valuation is much higher than dealer valuation, public buyers may be more willing to purchase.
+
+Therefore dealer sales can become more likely.
+
+64. Q20. What happens if dealer valuation \(p\) rises?
+
+Since:
+
+$$ p_b=p-b $$
+
+and
+
+$$ p_a=p+a, $$
+
+an increase in \(p\) shifts both quotes upward if \(a,b\) are held fixed.
+
+Thus:
+
+$$ p\uparrow \Rightarrow p_b\uparrow,\quad p_a\uparrow. $$
+
+But again, optimal \(a,b\) may themselves change after optimization.
+
+So distinguish:
+
+Mechanical effect: both quotes rise.
+
+from
+
+Optimal response: requires solving the model.
+
+65. Q21. What happens if spread \(a+b\) increases?
+
+The dealer gets more compensation per transaction.
+
+But customers face worse prices.
+
+Therefore:
+
+$$ \boxed{ a+b\uparrow \Rightarrow \text{profit per trade}\uparrow } $$
+
+but generally:
+
+$$ \boxed{ \text{trade arrival rate}\downarrow } $$
+
+This is the fundamental trade-off.
+
+66. Q22. What happens if spread becomes extremely large?
+
+Suppose:
+
+$$ a,b\rightarrow\text{very large}. $$
+
+The dealer earns a lot if a trade occurs.
+
+But customers may stop trading.
+
+Therefore:
+
+$$ \lambda_a,\lambda_b\rightarrow\text{small}. $$
+
+Hence the dealer can actually reduce total expected trading profit.
+
+This is why the optimal spread isn't simply "as large as possible."
+
+67. Q23. What happens if spread is extremely small?
+
+Then:
+
+$$ a,b\approx0. $$
+
+The dealer gets little compensation per trade.
+
+But:
+
+$$ \lambda_a,\lambda_b $$
+
+may be high.
+
+So:
+
+$$ \boxed{ \text{low spread} \Rightarrow \text{high trading frequency but low revenue per trade} } $$
+
+Again, optimal pricing balances both.
+
+68. Q24. What happens if transaction arrival is deterministic rather than Poisson?
+
+The model's transaction uncertainty disappears.
+
+Under Poisson:
+
+$$ dq_a,dq_b $$
+
+are random jumps.
+
+If transaction timing were deterministic, one major source of uncertainty would disappear.
+
+Therefore the dealer's uncertainty about future cash/inventory flows would decrease.
+
+This would generally reduce the need for compensation for transaction uncertainty.
+
+69. Q25. What happens if inventory return volatility is zero?
+
+Suppose:
+
+$$ \sigma_I=0. $$
+
+Then:
+
+$$ dZ_I=0 $$
+
+for the stochastic component.
+
+Inventory no longer experiences random return fluctuations.
+
+Thus inventory risk from price uncertainty disappears.
+
+The dealer's pricing would then rely more on:
+
+transaction uncertainty,
+inventory effects,
+spread revenue.
+70. Q26. What happens if \(I=0\) in the stochastic term?
+
+The inventory diffusion term is:
+
+$$ I\,dZ_I. $$
+
+If:
+
+$$ I=0, $$
+
+then:
+
+$$ I\,dZ_I=0. $$
+
+So the dealer has no exposure to stochastic inventory return at that instant.
+
+Very intuitive:
+
+No shares held → no inventory-price exposure.
+
+71. Q27. What happens if \(I\) doubles?
+
+Suppose:
+
+$$ I\rightarrow2I. $$
+
+The diffusion exposure becomes:
+
+$$ 2I\,dZ_I. $$
+
+Therefore the absolute magnitude of inventory exposure doubles.
+
+Variance of the diffusion component scales approximately with:
+
+$$ I^2. $$
+
+So:
+
+$$ I\rightarrow2I $$
+
+can make variance exposure roughly:
+
+$$ 4\times $$
+
+larger, holding volatility constant.
+
+This is an excellent quantitative viva question.
+
+72. Q28. What happens if volatility doubles?
+
+Suppose:
+
+$$ \sigma_I\rightarrow2\sigma_I. $$
+
+Since variance is proportional to:
+
+$$ \sigma_I^2, $$
+
+variance becomes:
+
+$$ 4\sigma_I^2. $$
+
+Therefore:
+
+$$ \boxed{ \text{volatility}\times2 \Rightarrow \text{variance}\times4 } $$
+
+This is a very common exam trap.
+
+73. Q29. What happens if transaction size doubles?
+
+Suppose:
+
+$$ Q\rightarrow2Q. $$
+
+Each transaction causes twice as much inventory movement.
+
+Thus inventory exposure per transaction doubles.
+
+Under many quadratic risk approximations, the variance impact associated with inventory change can grow roughly with:
+
+$$ Q^2. $$
+
+So doubling \(Q\) can produce approximately four times the squared exposure.
+
+74. Q30. What happens if the dealer has very high base wealth \(Y\)?
+
+A large \(Y\) means a given trading loss represents a smaller fraction of total wealth.
+
+For a risk-averse dealer, this can reduce the marginal impact of a given inventory risk.
+
+So the dealer may have greater capacity to bear inventory risk.
+
+Conceptually:
+
+$$ \boxed{ Y\uparrow \Rightarrow \text{relative importance of a given trading risk}\downarrow } $$
+
+although the exact optimal quote response depends on the utility function.
+
+75. Q31. What happens if the dealer is extremely risk averse?
+
+Suppose:
+
+$$ \gamma\rightarrow\infty. $$
+
+Even small inventory risk becomes very painful.
+
+Therefore the dealer strongly wants to avoid unwanted inventory.
+
+He will place greater emphasis on:
+
+$$ \boxed{\text{inventory control}} $$
+
+and risk compensation.
+
+76. Q32. What happens if the dealer is risk neutral?
+
+If:
+
+$$ U(W)=W, $$
+
+then:
+
+$$ E[U(W)]=E[W]. $$
+
+Variance doesn't directly enter utility.
+
+Therefore risk aversion no longer generates a risk premium in the same way.
+
+This gives:
+
+$$ \boxed{ \text{Risk-neutral dealer} \Rightarrow \text{focus on expected profit} } $$
+77. Q33. What happens if the stock is very volatile?
+
+Higher stock volatility means:
+
+$$ \sigma_I\uparrow. $$
+
+Inventory becomes more dangerous.
+
+Therefore the dealer needs greater compensation for holding inventory.
+
+Hence generally:
+
+$$ \boxed{ \text{volatility}\uparrow \Rightarrow \text{risk component of spread}\uparrow } $$
+78. Q34. What happens in an extremely inactive stock?
+
+Suppose transaction arrival rates are very low:
+
+$$ \lambda_a,\lambda_b\approx0. $$
+
+The dealer receives very few trades.
+
+Therefore the expected spread income may be insufficient to compensate for the risk of being a market maker.
+
+This is exactly what the final finding says:
+
+In an inactive stock, required trading may not generate enough expected profit to offset risk.
+
+79. Q35. Why doesn't the dealer simply set a huge spread in an inactive stock?
+
+Because:
+
+$$ \text{huge spread} \Rightarrow \lambda_a,\lambda_b\downarrow. $$
+
+But the stock is already inactive.
+
+Therefore the dealer could end up with almost no trades.
+
+So widening the spread does not automatically solve the problem.
+
+80. Q36. What happens if the dealer is long and increases \(b\)?
+
+Recall:
+
+$$ p_b=p-b. $$
+
+Increasing \(b\):
+
+$$ b\uparrow\Rightarrow p_b\downarrow. $$
+
+Customers become less willing to sell to the dealer.
+
+That is useful because the dealer is already long.
+
+Therefore:
+
+$$ \boxed{ I>0,\quad b\uparrow \Rightarrow \lambda_b\downarrow } $$
+
+and further inventory accumulation is discouraged.
+
+81. Q37. What happens if the dealer is long and decreases \(a\)?
+$$ a\downarrow \Rightarrow p_a\downarrow. $$
+
+Customers find it cheaper to buy.
+
+Therefore:
+
+$$ \lambda_a\uparrow. $$
+
+The dealer sells more inventory.
+
+Thus:
+
+$$ \boxed{ I>0,\quad a\downarrow \Rightarrow \text{inventory decreases} } $$
+
+This is exactly how inventory management works.
+
+82. Q38. What happens if the dealer is short and increases \(b\)?
+
+Increasing \(b\) lowers:
+
+$$ p_b. $$
+
+Customers are less willing to sell to him.
+
+But the dealer is short and wants customers to sell to him.
+
+Therefore increasing \(b\) is counterproductive for inventory correction.
+
+Instead, he would generally want to make the bid more attractive:
+
+$$ b\downarrow \Rightarrow p_b\uparrow \Rightarrow \lambda_b\uparrow. $$
+83. Q39. What happens if dealer inventory is positive but return variance increases?
+
+Two effects reinforce each other:
+
+$$ I>0 $$
+
+means the dealer is already exposed to inventory risk.
+
+Higher variance means:
+
+$$ \sigma_I^2\uparrow. $$
+
+Therefore:
+
+$$ \boxed{ \text{long inventory} + \text{high volatility} = \text{higher risk pressure} } $$
+
+The dealer has stronger incentive to reduce inventory.
+
+84. Q40. What happens as maturity approaches?
+
+Let:
+
+$$ \tau=T-t. $$
+
+As:
+
+$$ \tau\rightarrow0, $$
+
+future transaction opportunities disappear.
+
+Therefore the dealer has less time to:
+
+earn spread,
+rebalance inventory,
+experience additional price shocks.
+
+The model therefore predicts a changing risk adjustment as the terminal date approaches.
+
+85. A very important conceptual distinction
+
+You should remember these three mechanisms separately:
+
+Variable	Main effect
+\(a\)	Controls ask price and dealer-sale intensity
+\(b\)	Controls bid price and dealer-purchase intensity
+\(I\)	Controls inventory exposure and quote skew
+\(Q\)	Controls inventory change per transaction
+\(\sigma_I\)	Controls inventory return uncertainty
+\(\gamma\)	Controls sensitivity to risk
+\(T-t\)	Controls time available for future uncertainty
+\(\lambda_a\)	Frequency of dealer sales
+\(\lambda_b\)	Frequency of dealer purchases
+\(p\)	Dealer's valuation
+\(p^*\)	Public's valuation
+\(F\)	Cash
+\(Y\)	Base/outside wealth
+86. One complete example
+
+Suppose:
+
+$$ p=100 $$ $$ a=2,\quad b=1 $$
+
+so:
+
+$$ p_a=102 $$
+
+and
+
+$$ p_b=99. $$
+
+Suppose dealer currently has:
+
+$$ I=+10,000. $$
+
+He is long.
+
+Now suppose stock volatility increases substantially.
+
+The dealer now thinks:
+
+"I already have 10,000 shares, and those shares are now more risky."
+
+Therefore he wants to reduce inventory.
+
+He can:
+
+Increase \(b\)
+$$ b\uparrow \Rightarrow p_b\downarrow \Rightarrow \lambda_b\downarrow $$
+
+so fewer people sell shares to him.
+
+And/or:
+
+Decrease \(a\)
+$$ a\downarrow \Rightarrow p_a\downarrow \Rightarrow \lambda_a\uparrow $$
+
+so more people buy shares from him.
+
+Therefore:
+
+$$ \boxed{ \text{Long inventory} \Rightarrow \text{discourage purchases by dealer} + \text{encourage sales by dealer} } $$
+
+That is the core inventory-management mechanism.
+
+87. How all equations fit together
+
+You can visualize the entire model as:
+
+$$ \boxed{ (a,b) } $$
+
+↓
+
+determine
+
+$$ \boxed{ p_a=p+a,\qquad p_b=p-b } $$
+
+↓
+
+determine customer arrival rates
+
+$$ \boxed{ \lambda_a,\lambda_b } $$
+
+↓
+
+determine random transactions
+
+$$ \boxed{ dq_a,dq_b } $$
+
+↓
+
+transactions change:
+
+$$ \boxed{ F,\ I } $$
+
+↓
+
+inventory is exposed to:
+
+$$ \boxed{ r_IIdt+IdZ_I } $$
+
+and cash earns:
+
+$$ \boxed{ rFdt } $$
+
+while base wealth follows:
+
+$$ \boxed{ dY=r_YYdt+YdZ_Y } $$
+
+↓
+
+terminal wealth:
+
+$$ \boxed{ W_T=F_T+I_T+Y_T } $$
+
+↓
+
+dealer maximizes:
+
+$$ \boxed{ E[U(W_T)] } $$
+
+↓
+
+dynamic programming gives:
+
+$$ \boxed{ J(t,F,I,Y) } $$
+
+↓
+
+optimal:
+
+$$ \boxed{ a^*,b^* } $$
+
+This is the entire Ho-Stoll framework.
+
+88. Exam/viva questions you should definitely prepare
+Basic
+Q1. What are the two major sources of uncertainty?
+
+Answer:
+
+Transaction timing/order-flow uncertainty → Poisson process.
+Return on inventory/portfolio uncertainty → Brownian motion.
+Q2. Why does the dealer use bid and ask prices?
+
+Answer:
+
+To provide immediate liquidity while earning compensation for execution and bearing inventory/transaction risk.
+
+Q3. What is the spread?
+$$ \boxed{S=p_a-p_b=a+b} $$
+Q4. What is \(Q\)?
+
+Number of shares in each transaction.
+
+Q5. What are \(\lambda_a,\lambda_b\)?
+
+Transaction arrival intensities.
+
+$$ \lambda_a=\text{dealer sales} $$ $$ \lambda_b=\text{dealer purchases}. $$
+Q6. Why Poisson?
+
+Because transactions are modeled as discrete random arrivals in continuous time.
+
+Q7. Why Brownian motion?
+
+Because inventory value can change continuously and randomly due to asset returns.
+
+89. Intermediate viva questions
+Q8. Why does increasing \(a\) reduce \(\lambda_a\)?
+
+Because:
+
+$$ a\uparrow \Rightarrow p_a\uparrow $$
+
+making the stock more expensive to public buyers.
+
+Q9. Why does increasing \(b\) reduce \(\lambda_b\)?
+
+Because:
+
+$$ b\uparrow \Rightarrow p_b\downarrow $$
+
+making the price received by public sellers less attractive.
+
+Q10. Why does inventory risk depend on \(I\)?
+
+Because:
+
+$$ I\,dZ_I $$
+
+is the stochastic exposure.
+
+Q11. Why does inventory risk increase quadratically with inventory under a variance measure?
+
+Because:
+
+$$ \operatorname{Var}(I\,dZ_I) = I^2\sigma_I^2dt. $$
+
+Therefore:
+
+$$ \boxed{\text{inventory variance}\propto I^2} $$
+Q12. Why does transaction size matter?
+
+Because each transaction changes inventory by \(Q\).
+
+Larger \(Q\) means larger inventory exposure.
+
+90. Advanced viva questions
+Q13. Why can spread increase with volatility?
+
+Because the dealer requires greater compensation for holding risky inventory.
+
+Q14. Why can the spread be independent of inventory while quotes depend on inventory?
+
+Because inventory can change the center/skew of the quotes, while uncertainty determines the width of the quotes.
+
+Q15. Why does risk adjustment decrease near \(T\)?
+
+Because there is less time remaining for uncertain returns and future transactions.
+
+Q16. Why is there no closed-form solution?
+
+Because the optimization simultaneously involves:
+
+continuous state variables,
+stochastic diffusion,
+discrete jumps,
+nonlinear utility,
+endogenous transaction arrival rates,
+bid/ask controls.
+
+This produces a difficult dynamic programming/HJB-type problem.
+
+91. A particularly tricky question
+Q: If the dealer is long, should he increase or decrease the ask price?
+
+Answer:
+
+Generally, he wants to encourage customers to buy from him.
+
+Since:
+
+$$ p_a=p+a, $$
+
+lowering \(a\) lowers the ask:
+
+$$ a\downarrow \Rightarrow p_a\downarrow \Rightarrow \lambda_a\uparrow. $$
+
+Thus he encourages dealer sales and reduces inventory.
+
+$$ \boxed{I>0\Rightarrow a\downarrow\text{ as an inventory-control incentive}} $$
+92. Another tricky one
+Q: If the dealer is long, should he increase or decrease \(b\)?
+
+He wants to discourage customers from selling to him.
+
+Since:
+
+$$ b\uparrow \Rightarrow p_b\downarrow \Rightarrow \lambda_b\downarrow. $$
+
+Thus:
+
+$$ \boxed{I>0\Rightarrow b\uparrow} $$
+
+as an inventory-control incentive.
+
+93. Therefore, for a long dealer
+
+Remember this table:
+
+Inventory	\(a\)	\(b\)	Effect
+\(I>0\), long	↓	↑	Encourage sales, discourage purchases
+\(I<0\), short	↑	↓	Discourage sales, encourage purchases
+
+This is very important for your exam.
+
+94. One subtle point about "spread does not depend on inventory"
+
+Don't interpret this as:
+
+"Inventory doesn't matter."
+
+That is wrong.
+
+Inventory matters enormously.
+
+The statement means:
+
+$$ \boxed{ \text{inventory affects quote location/skew rather than the fundamental spread component} } $$
+
+under the particular Ho-Stoll result described on your slide.
+
+95. Final mental model to memorize
+
+If you remember only this, remember:
+
+Dealer chooses:
+$$ \boxed{a,b} $$
+These determine:
+$$ \boxed{p_a=p+a,\quad p_b=p-b} $$
+Prices determine:
+$$ \boxed{\lambda_a,\lambda_b} $$
+Arrival rates determine:
+$$ \boxed{dq_a,dq_b} $$
+Transactions change:
+$$ \boxed{F,I} $$
+Inventory is risky because:
+$$ \boxed{dI=r_IIdt+IdZ_I+\text{transaction effects}} $$
+Cash evolves through:
+$$ \boxed{ dF=rFdt-(p-b)dq_b+(p+a)dq_a } $$
+Base wealth evolves through:
+$$ \boxed{ dY=r_YYdt+YdZ_Y } $$
+Final wealth:
+$$ \boxed{ W_T=F_T+I_T+Y_T } $$
+Objective:
+$$ \boxed{ \max_{a,b}E[U(W_T)] } $$
+Dynamic programming:
+$$ \boxed{ J(t,F,I,Y) = \max_{a,b}E[U(W_T)\mid t,F,I,Y] } $$
+Main economic result:
+$$ \boxed{ \text{Spread} = \text{risk-neutral compensation} + \text{risk compensation} } $$
+
+and
+
+$$ \boxed{ \text{Inventory} \rightarrow \text{quote skew} } $$
+
+while
+
+$$ \boxed{ Q,\sigma_I,\gamma,T-t \rightarrow \text{risk adjustment} } $$
+⭐ The 10 relationships I'd memorize for your exam
+$$ \boxed{a\uparrow\Rightarrow p_a\uparrow\Rightarrow\lambda_a\downarrow} $$ $$ \boxed{a\downarrow\Rightarrow\lambda_a\uparrow} $$ $$ \boxed{b\uparrow\Rightarrow p_b\downarrow\Rightarrow\lambda_b\downarrow} $$ $$ \boxed{b\downarrow\Rightarrow\lambda_b\uparrow} $$ $$ \boxed{Q\uparrow\Rightarrow\text{inventory risk}\uparrow} $$ $$ \boxed{\sigma_I\uparrow\Rightarrow\text{risk adjustment}\uparrow} $$ $$ \boxed{\gamma\uparrow\Rightarrow\text{risk adjustment}\uparrow} $$ $$ \boxed{I>0\Rightarrow\text{encourage dealer sales}} $$ $$ \boxed{I<0\Rightarrow\text{encourage dealer purchases}} $$ $$ \boxed{T-t\downarrow\Rightarrow\text{future risk adjustment}\downarrow} $$
+
+And the one sentence summary:
+
+Ho and Stoll (1981) models a dealer who chooses bid and ask prices to maximize expected utility of terminal wealth, balancing spread revenue and transaction arrival against the risk created by uncertain order flow and uncertain returns on inventory.
+
+
+
+Yes. These slides are about O’Hara and Oldfield (1986), “The Microeconomics of Market Making.” This paper is especially important because it extends the earlier dealer-pricing literature by explicitly incorporating both limit orders and market orders, and it shows how risk aversion and inventory affect both the size and location of the spread.
+
+I’ll go slide by slide, explain the equations from scratch, and then give you the “if this variable increases/decreases, what happens?” interpretation for the important equations.
+
+0. First: Where does O’Hara–Oldfield fit relative to Ho–Stoll?
+
+Before the individual slides, understand this comparison:
+
+Feature	Ho & Stoll (1981)	O’Hara & Oldfield (1986)
+Time	Continuous time	Discrete time
+Horizon	Finite horizon	Infinite horizon
+Orders	Mainly stochastic market/order arrivals	Limit + market orders
+Inventory	Important	Very important
+Risk aversion	Yes	Explicitly important
+Inventory liquidation	At terminal \(T\)	No fixed liquidation date
+Objective	Expected utility of terminal wealth	Expected discounted utility of trading profits
+State variable	Cash, inventory, wealth	Mainly inventory
+Main result	Spread + inventory effects	Spread decomposed into limit-order component + risk-neutral component + risk adjustment
+
+The biggest conceptual difference is:
+
+$$ \boxed{\text{Ho-Stoll: terminal wealth problem}} $$
+
+whereas
+
+$$ \boxed{\text{O'Hara-Oldfield: repeated/infinite trading-profit problem}} $$
+SLIDE 1 — O'HARA AND OLDFIELD (1986)
+"The Microeconomics of Market Making"
+
+The paper asks:
+
+How should a market maker set bid and ask prices when he is risk averse, faces uncertain market orders, and has an inventory position?
+
+There are three important sources of economics here:
+
+1. Limit orders
+
+These are orders already sitting in the order book.
+
+For example:
+
+"I will buy 500 shares if price reaches ₹99."
+
+or
+
+"I will sell 300 shares if price reaches ₹101."
+
+The market maker can observe these orders.
+
+2. Market orders
+
+These arrive later and demand immediate execution.
+
+For example:
+
+"Buy 500 shares now at the current ask."
+
+The market maker doesn't know exactly how many market orders will arrive.
+
+Therefore:
+
+$$ \boxed{\text{market-order flow is uncertain}} $$
+3. Inventory
+
+Suppose the market maker has accumulated:
+
+$$ I=10,000 $$
+
+shares.
+
+If the stock price falls, his inventory loses value.
+
+Therefore:
+
+$$ \boxed{\text{inventory creates risk}} $$
+Main contribution of the paper
+
+The slide says:
+
+Bid-ask spread can be decomposed into three portions.
+
+Conceptually:
+
+$$ \boxed{ \text{Spread} = \text{known-limit component} + \text{risk-neutral market-order component} + \text{risk adjustment} } $$
+
+This is the central result of the paper.
+
+Why is the risk-averse spread potentially smaller?
+
+This is one of the most counterintuitive results.
+
+You might initially think:
+
+"If the dealer is more risk averse, shouldn't he charge a larger spread?"
+
+Not necessarily.
+
+A risk-averse dealer may prefer to trade less aggressively, and depending on the covariance between order flow and marginal utility, the optimal spread can actually be smaller than the risk-neutral spread.
+
+So:
+
+$$ \boxed{ \text{Risk aversion does NOT mechanically imply a larger spread} } $$
+
+This is a very important difference from simplistic inventory-risk intuition.
+
+SLIDE 2 — UNIQUE CONTRIBUTION
+
+This slide explains exactly what O'Hara and Oldfield added.
+
+1. Both limit and market orders
+
+Earlier models often focused primarily on market-order arrivals.
+
+O'Hara–Oldfield says:
+
+Let's also explicitly model the limit order book.
+
+Therefore the market maker knows something about the existing order book before choosing quotes.
+
+This creates an important information advantage.
+
+2. Order-flow uncertainty
+
+Market orders are uncertain.
+
+For example, the market maker might expect:
+
+$$ 500 $$
+
+shares of buying pressure, but actual market demand could be:
+
+$$ 800 $$
+
+or
+
+$$ 200. $$
+
+This uncertainty affects optimal prices.
+
+3. Inventory-value uncertainty
+
+Suppose:
+
+$$ I=10,000. $$
+
+If stock price changes unexpectedly, the value of the inventory changes.
+
+Thus:
+
+$$ \boxed{\text{Inventory value is uncertain}} $$
+4. Discrete-time model
+
+Unlike Ho-Stoll's continuous-time formulation, O'Hara–Oldfield divides time into discrete periods.
+
+For example:
+
+$$ \text{Day 1} \rightarrow \text{Day 2} \rightarrow \text{Day 3} \rightarrow\cdots $$
+
+And each trading day is itself divided into:
+
+$$ n $$
+
+trading intervals.
+
+So:
+
+$$ \boxed{ \text{Day }j = t=1,2,\ldots,n } $$
+5. Infinite number of trading days
+
+The dealer does not optimize only until some terminal date \(T\).
+
+Instead:
+
+$$ j=0,1,2,\ldots,\infty. $$
+
+This is why the model has an infinite horizon.
+
+The idea is:
+
+A market maker is continuously operating rather than planning to shut down at some predetermined liquidation date.
+
+6. Payoff occurs every day
+
+This is another major difference from Ho-Stoll.
+
+The dealer receives trading profits repeatedly.
+
+So there isn't necessarily:
+
+$$ \boxed{\text{one final payoff at }T} $$
+
+Instead:
+
+$$ \boxed{ \pi_1,\pi_2,\pi_3,\ldots } $$
+
+are earned through time.
+
+7. No presumed inventory liquidation date
+
+This is important.
+
+In Ho-Stoll, there is a terminal date where inventory is liquidated.
+
+Here:
+
+$$ \boxed{\text{No fixed liquidation date}} $$
+
+The dealer can carry inventory from one period into the next.
+
+Therefore inventory itself becomes a state variable.
+
+SLIDE 3 — HOW IS THE MODEL DIFFERENT?
+
+This slide summarizes the previous one.
+
+1. Discrete time
+
+The market maker makes decisions at:
+
+$$ t=1,2,\ldots,n $$
+
+rather than continuously.
+
+2. Both limit and market orders
+
+This is perhaps the most important modeling extension.
+
+The dealer sees:
+
+Existing limit orders
+
+Known at the beginning of the interval.
+
+Future market orders
+
+Not known exactly, only expected.
+
+So:
+
+$$ \boxed{ \text{Known limit order flow} + \text{uncertain market order flow} } $$
+4. Overnight settlement
+
+This is an interesting feature.
+
+Suppose the dealer finishes today with:
+
+$$ I_n=+10,000 $$
+
+shares.
+
+Those shares need financing overnight.
+
+The dealer can borrow/lend through a repurchase market.
+
+The slide says:
+
+If the dealer is short, he pays \(r\tilde p I_n\), and if long, he receives it.
+
+So the overnight financing/stock-lending cost depends on inventory.
+
+If dealer is long
+$$ I_n>0. $$
+
+He owns shares.
+
+The model gives him the corresponding overnight amount.
+
+If dealer is short
+$$ I_n<0. $$
+
+He has borrowed/sold shares short.
+
+There is a financing/stock-borrow cost.
+
+Why is this important?
+
+Because inventory doesn't just create price risk.
+
+It also creates:
+
+$$ \boxed{\text{financing/holding cost}} $$
+
+between trading days.
+
+So inventory affects future profitability.
+
+SLIDE 4 — CONTRIBUTION
+
+The spread is decomposed into three components.
+
+This is probably the most important slide conceptually.
+
+$$ \boxed{ \text{Spread} = \text{Known-limit component} + \text{Risk-neutral adjustment} + \text{Risk adjustment} } $$
+
+Let's understand each.
+
+Component 1: Known-limit orders
+
+The dealer already knows the limit order book.
+
+For example:
+
+Price	Limit orders
+₹101	Sell 500
+₹100.5	Sell 300
+₹99.5	Buy 200
+₹99	Buy 600
+
+This information tells the market maker something about potential trading opportunities.
+
+Therefore some portion of the optimal quote comes from the existing limit-order book.
+
+Component 2: Risk-neutral adjustment
+
+Suppose the dealer is risk neutral.
+
+Then he only cares about expected profit.
+
+He asks:
+
+At what price should I quote so that expected trading profit is maximized?
+
+This creates the risk-neutral adjustment.
+
+Component 3: Risk adjustment
+
+Now suppose the dealer is risk averse.
+
+He additionally asks:
+
+"What happens to my utility if this trade increases my inventory risk?"
+
+Therefore the optimal quote contains a risk adjustment.
+
+The surprising part
+
+The slide says:
+
+A risk-averse market maker may set a smaller spread than a risk-neutral specialist.
+
+Why?
+
+Because the risk adjustment term can be negative.
+
+This will become clear when we reach equation (2.47).
+
+Inventory affects both:
+$$ \boxed{\text{size of spread}} $$
+
+and
+
+$$ \boxed{\text{location of spread}} $$
+
+This is stronger than simply saying inventory shifts the midpoint.
+
+In this model, inventory can affect both:
+
+how wide the spread is,
+where the bid and ask are located.
+SLIDE 5 — MODEL
+
+Now we reach the central objective function.
+
+The dealer chooses:
+
+$$ a_t,b_t $$
+
+where:
+
+\(a_t\) = ask price
+\(b_t\) = bid price
+
+to maximize:
+
+$$ \boxed{ E\left[ \sum_{j=0}^{\infty} \phi^j U \left( \sum_{t=1}^{n}\tilde{\pi}_{jt} \right) \right] } $$
+
+Let's break this down.
+
+What is \(j\)?
+$$ j=0,1,2,\ldots $$
+
+is the trading-day index.
+
+What is \(t\)?
+
+Within each day:
+
+$$ t=1,\ldots,n. $$
+
+So:
+
+$$ \tilde{\pi}_{jt} $$
+
+is the trading profit during interval \(t\) of day \(j\).
+
+What is \(\phi\)?
+$$ \boxed{0\leq\phi<1} $$
+
+is the discount factor.
+
+It tells us how much the dealer values future profits relative to current profits.
+
+For example:
+
+$$ \phi=0.95. $$
+
+Then next year's/day's profits are discounted.
+
+What happens if \(\phi\) increases?
+
+Suppose:
+
+$$ \phi=0.5. $$
+
+The dealer heavily discounts future profits.
+
+Now:
+
+$$ \phi=0.99. $$
+
+Future profits matter much more.
+
+Thus:
+
+$$ \boxed{ \phi\uparrow \Rightarrow \text{future profits become more important} } $$
+
+This can affect inventory decisions because carrying inventory into future periods becomes more relevant.
+
+What is \(U\)?
+
+\(U\) is a concave utility function.
+
+The slide says:
+
+$$ U''<0. $$
+
+This means:
+
+$$ \boxed{\text{dealer is risk averse}} $$
+
+because marginal utility decreases as wealth/profit increases.
+
+Why does \(U''<0\) imply risk aversion?
+
+Suppose:
+
+$$ U(x)=\sqrt{x}. $$
+
+Then:
+
+$$ U''(x)<0. $$
+
+The dealer prefers a smoother payoff to a highly uncertain payoff with the same expected value.
+
+This is why risk enters the optimal pricing.
+
+SLIDE 6 — HOW DOES THE MARKET MAKER TRADE?
+
+At the beginning of every trading interval, the market maker knows the limit order book.
+
+For example:
+
+$$ \boxed{ \text{Buy limits} + \text{Sell limits} } $$
+
+with:
+
+quantities,
+prices.
+
+This information is known.
+
+But market orders are uncertain
+
+The dealer doesn't know exactly how many market orders will arrive.
+
+He has an expectation.
+
+For example:
+
+$$ E[\text{market buys}]=500. $$
+
+But actual market buys could be:
+
+$$ 300,\;500,\;700,\ldots $$
+
+Therefore:
+
+$$ \boxed{\text{market-order uncertainty}} $$
+Dealer's decision sequence
+
+This is extremely important.
+
+Step 1
+
+Observe limit order book.
+
+Step 2
+
+Form expectations about future market orders.
+
+Step 3
+
+Choose:
+
+$$ a_t,b_t. $$
+Step 4
+
+Execute relevant limit orders and market orders.
+
+Step 5
+
+Calculate ending inventory.
+
+Step 6
+
+Move to next trading interval.
+
+So:
+
+$$ \boxed{ \text{Observe} \rightarrow \text{Expect} \rightarrow \text{Quote} \rightarrow \text{Trade} \rightarrow \text{Update inventory} } $$
+SLIDE 7 — LIMIT ORDERS: ASK AND BID
+
+Now the equations become more detailed.
+
+The limit buy orders are:
+
+$$ \boxed{ A_t^L = \alpha^L-a_t\gamma^L = \int_{a_t}^{\bar a}q_a(a_t)\,da_t } $$
+
+and limit sell orders:
+
+$$ \boxed{ B_t^L = \beta^L+b_t\phi^L = \int_{\underline b}^{b_t}q_b(b_t)\,db_t } $$
+
+Don't get scared by these equations.
+
+The economic idea is simple.
+
+Understanding \(A_t^L\)
+
+\(A_t^L\) represents the quantity of limit orders to buy from the dealer.
+
+It depends on the dealer's ask price.
+
+The model writes:
+
+$$ A_t^L=\alpha^L-a_t\gamma^L. $$
+
+Therefore:
+
+$$ \boxed{ \frac{\partial A_t^L}{\partial a_t} = -\gamma^L } $$
+
+assuming:
+
+$$ \gamma^L>0. $$
+
+So:
+
+$$ \boxed{ a_t\uparrow \Rightarrow A_t^L\downarrow } $$
+Economic interpretation
+
+If the dealer increases his ask:
+
+$$ a_t\uparrow $$
+
+customers must pay more.
+
+Therefore fewer limit buy orders are willing to trade with him.
+
+Understanding \(B_t^L\)
+
+Similarly:
+
+$$ B_t^L=\beta^L+b_t\phi^L. $$
+
+Therefore:
+
+$$ \frac{\partial B_t^L}{\partial b_t} = \phi^L. $$
+
+If:
+
+$$ \phi^L>0, $$
+
+then:
+
+$$ \boxed{ b_t\uparrow \Rightarrow B_t^L\uparrow } $$
+
+Why?
+
+Because a higher bid gives sellers a better price.
+
+Important difference from the previous notation
+
+Here \(a_t\) and \(b_t\) are being used as actual ask and bid prices, rather than the \(a,b\) price offsets used in your previous Ho-Stoll slide.
+
+So don't confuse:
+
+$$ \text{Ho-Stoll }a,b $$
+
+with
+
+$$ \text{O'Hara-Oldfield actual }a_t,b_t. $$
+What are \(\alpha^L,\beta^L\)?
+
+They represent baseline components of limit-order demand/supply.
+
+And:
+
+$$ \gamma^L,\phi^L $$
+
+represent sensitivities of limit-order quantities to prices.
+
+SLIDE 8 — MARKET ORDER FLOW
+
+The model now introduces market orders.
+
+The equations are:
+
+$$ \boxed{ \tilde A_t^m = \alpha^m-a_t\gamma^m+\tilde\omega_t } $$
+
+and
+
+$$ \boxed{ \tilde B_t^m = \beta^m+b_t\phi^m+\tilde\epsilon_t } $$
+What does the tilde mean?
+
+A tilde means the quantity is random.
+
+For example:
+
+$$ \tilde A_t^m $$
+
+is random market-buy order flow.
+
+Market buy orders
+$$ \tilde A_t^m = \alpha^m-a_t\gamma^m+\tilde\omega_t. $$
+
+There are three parts.
+
+Expected/base component
+$$ \alpha^m $$
+Price effect
+$$ -a_t\gamma^m $$
+Random component
+$$ \tilde\omega_t. $$
+Why is the price coefficient negative?
+$$ -a_t\gamma^m. $$
+
+If:
+
+$$ a_t\uparrow, $$
+
+the ask price becomes more expensive.
+
+Therefore market buyers demand less.
+
+So:
+
+$$ \boxed{ a_t\uparrow \Rightarrow \tilde A_t^m\downarrow } $$
+
+in expectation.
+
+Market sell orders
+$$ \tilde B_t^m = \beta^m+b_t\phi^m+\tilde\epsilon_t. $$
+
+If:
+
+$$ b_t\uparrow, $$
+
+the dealer offers a better price to sellers.
+
+Therefore more sellers are willing to sell.
+
+Thus:
+
+$$ \boxed{ b_t\uparrow \Rightarrow \tilde B_t^m\uparrow } $$
+
+in expectation.
+
+What are \(\tilde\omega_t\) and \(\tilde\epsilon_t\)?
+
+These are random variables.
+
+They capture unexpected market-order flow.
+
+For example:
+
+Expected buying:
+
+$$ 500. $$
+
+Actual:
+
+$$ 700. $$
+
+Then the surprise is:
+
+$$ \tilde\omega_t=200. $$
+
+Similarly, if expected selling is 400 but actual selling is 250:
+
+$$ \tilde\epsilon_t=-150. $$
+Why are these random terms important?
+
+Because the dealer doesn't know future market-order flow exactly.
+
+Thus:
+
+$$ \boxed{ \text{uncertain order flow} \rightarrow \text{inventory uncertainty} } $$
+SLIDE 9 — ORDER CLEARING
+
+Now we ask:
+
+What happens after all these orders arrive?
+
+The dealer must clear all relevant orders at his quoted prices.
+
+Therefore he can end up with:
+
+$$ \boxed{I_n>0} $$
+
+or:
+
+$$ \boxed{I_n<0}. $$
+Positive inventory
+$$ I_n>0. $$
+
+Dealer is long.
+
+He owns shares.
+
+Negative inventory
+$$ I_n<0. $$
+
+Dealer is short.
+
+He owes/has borrowed shares.
+
+End-of-day settlement
+
+At the end of the day, all transactions are settled.
+
+But inventory may remain.
+
+So the dealer needs overnight financing.
+
+Repurchase market
+
+The overnight market establishes:
+
+$$ \tilde p $$
+
+and
+
+$$ r. $$
+
+Here:
+
+\(\tilde p\) = random/market value used for overnight transaction
+\(r\) = interest/financing rate
+
+If dealer is short, he pays a financing/borrowing cost.
+
+If dealer is long, he receives the corresponding amount.
+
+This creates another inventory-related cash-flow effect.
+
+SLIDE 10 — INVENTORY AND DEALER'S PROBLEM
+
+This is one of the most important slides.
+
+The paper says:
+
+Inventory affects both current cash flow and future operations.
+
+Therefore:
+
+$$ \boxed{ I_n=\text{state variable} } $$
+
+Why?
+
+Because what you hold today affects what you can do tomorrow.
+
+Dynamic programming equation
+
+The problem is:
+
+$$ \boxed{ \max E \left[ U\left( \sum_{t=1}^{n}\tilde\pi_t \right) + V(\tilde I_n) \right] } $$
+
+Let's understand it.
+
+First part
+$$ U\left( \sum_{t=1}^{n}\tilde\pi_t \right) $$
+
+is the utility of today's trading profits.
+
+Second part
+$$ V(\tilde I_n) $$
+
+is the continuation value of ending the day with inventory \(I_n\).
+
+This is crucial.
+
+What does \(V(I_n)\) mean?
+
+Suppose you finish today with:
+
+$$ I_n=5000. $$
+
+That inventory affects tomorrow's opportunities.
+
+So the value function asks:
+
+Given that I carry 5,000 shares into tomorrow, how much future expected utility can I obtain if I behave optimally tomorrow and thereafter?
+
+That's:
+
+$$ V(5000). $$
+Therefore
+$$ \boxed{ V(I) = \text{value of future trading opportunities given inventory }I } $$
+
+This is why inventory is a state variable.
+
+SLIDE 11 — OPTIMAL PRICING
+
+This slide says:
+
+Work backward.
+
+This is the dynamic programming approach.
+
+You first solve the final/last decision, then use that information to solve the previous decision.
+
+Why work backward?
+
+Suppose there are three intervals:
+
+$$ 1\rightarrow2\rightarrow3. $$
+
+At interval 3, you know what happens after interval 3: essentially nothing within the day.
+
+So you can solve:
+
+$$ a_3^*,b_3^*. $$
+
+Then use that solution to determine:
+
+$$ a_2^*,b_2^*. $$
+
+Then:
+
+$$ a_1^*,b_1^*. $$
+
+Thus:
+
+$$ \boxed{ \text{Backward induction} } $$
+Equation (2.41)
+
+The objective contains:
+
+1. Previous accumulated profits
+$$ \sum_{t=1}^{n-1}\tilde\pi_t $$
+2. Current ask-side trading
+$$ a_n(\alpha-a_n\gamma+\tilde\omega_n) $$
+3. Current bid-side trading
+$$ -b_n(\beta+b_n\phi+\tilde\epsilon_n) $$
+4. Inventory financing cost/benefit
+$$ r\tilde p(\cdots) $$
+5. Continuation value
+$$ V(\cdots) $$
+
+So the dealer isn't merely maximizing today's spread revenue.
+
+He is maximizing:
+
+$$ \boxed{ \text{current profit} + \text{inventory consequences} + \text{future value} } $$
+SLIDE 12 — DEALER'S PROFIT
+
+The profit equation is:
+
+$$ \boxed{ \pi_n= a_n(\alpha-a_n\gamma+\tilde\omega_n) - b_n(\beta+b_n\phi+\tilde\epsilon_n) + r\tilde p ( I_{n-1} +\beta+b_n\phi+\tilde\epsilon_n -\alpha+a_n\gamma-\tilde\omega_n ) } $$
+
+This looks complicated, but it has a very intuitive structure.
+
+First term
+$$ \boxed{ a_n(\alpha-a_n\gamma+\tilde\omega_n) } $$
+
+This is the ask-side cash-flow effect.
+
+The dealer sells to buyers.
+
+Revenue depends on:
+
+$$ \text{ask price}\times\text{quantity sold}. $$
+Second term
+$$ \boxed{ -b_n(\beta+b_n\phi+\tilde\epsilon_n) } $$
+
+This is the bid-side cash-flow effect.
+
+The dealer buys from sellers.
+
+Buying costs money, hence the negative sign.
+
+Third term
+$$ \boxed{ r\tilde p(\text{ending inventory}) } $$
+
+This represents the financing/lending cost or benefit associated with carrying inventory overnight.
+
+Important economic trade-off
+
+Suppose ask price \(a_n\) increases.
+
+Then:
+
+Revenue per share increases
+
+but:
+
+Quantity sold decreases.
+
+Because:
+
+$$ Q_a=\alpha-a_n\gamma+\omega_n. $$
+
+So:
+
+$$ a_n\uparrow \Rightarrow \text{price per share}\uparrow $$
+
+but
+
+$$ a_n\uparrow \Rightarrow \text{quantity sold}\downarrow. $$
+
+Therefore the dealer needs an optimal price.
+
+SLIDE 13 — OPTIMAL ASK AND BID
+
+This is one of the most important mathematical slides.
+
+The optimal ask:
+
+$$ \boxed{ a_n= \frac{\alpha}{2\gamma} + \frac{E(U'\tilde\omega_n)}{2\gamma E(U')} + \frac{E(U'\tilde p)}{2E(U')} + \frac{E(V')}{2E(U')} } $$
+
+And optimal bid:
+
+$$ \boxed{ b_n= -\frac{\beta}{2\phi} - \frac{E(U'\tilde\epsilon_n)} {2\phi E(U')} + \frac{rE(U'\tilde p)} {2E(U')} + \frac{E(V')} {2E(U')} } $$
+
+The slide groups these terms into:
+
+known limit orders,
+expected market orders,
+inventory/risk effects.
+
+Let's unpack.
+
+ASK PRICE — first term
+$$ \boxed{ \frac{\alpha}{2\gamma} } $$
+
+This is related to the baseline demand for buying from the dealer.
+
+If:
+
+$$ \alpha\uparrow $$
+
+then:
+
+$$ a_n\uparrow. $$
+
+Why?
+
+Because stronger baseline demand allows the dealer to charge more.
+
+ASK PRICE — denominator \(\gamma\)
+$$ \frac{\alpha}{2\gamma}. $$
+
+Here \(\gamma\) measures how strongly market buying responds to ask price.
+
+If:
+
+$$ \gamma\uparrow, $$
+
+buyers become more price sensitive.
+
+Therefore the dealer cannot increase ask too much without losing quantity.
+
+Thus:
+
+$$ \boxed{ \gamma\uparrow \Rightarrow \text{optimal ask component}\downarrow } $$
+ASK PRICE — random-order-flow term
+$$ \frac{E(U'\tilde\omega_n)} {2\gamma E(U')}. $$
+
+This is where risk aversion enters.
+
+If unexpected buying is associated with high marginal utility states, the dealer values those outcomes differently.
+
+Therefore the covariance between:
+
+$$ U' $$
+
+and
+
+$$ \tilde\omega_n $$
+
+matters.
+
+ASK PRICE — inventory/value term
+$$ \frac{E(U'\tilde p)} {2E(U')}. $$
+
+This captures the interaction between utility and the value of inventory/financing.
+
+Again:
+
+$$ \boxed{ \text{risk and inventory affect optimal ask} } $$
+ASK PRICE — continuation-value term
+$$ \frac{E(V')}{2E(U')}. $$
+
+This says:
+
+The value of ending the period with inventory affects today's ask.
+
+That is dynamic programming.
+
+BID PRICE
+
+The first term is:
+
+$$ -\frac{\beta}{2\phi}. $$
+
+Because \(\beta\) represents baseline selling pressure to the dealer.
+
+The negative sign reflects the fact that a bid is a cash outflow: the dealer pays to acquire shares.
+
+What happens if \(\beta\) increases?
+
+Ignoring the other terms:
+
+$$ b_n=-\frac{\beta}{2\phi}+\cdots $$
+
+so:
+
+$$ \boxed{ \beta\uparrow \Rightarrow b_n\downarrow } $$
+
+under this parameterization.
+
+Interpretation:
+
+Higher baseline selling/order flow affects the optimal bid because the dealer faces more potential inventory accumulation.
+
+Why is \(b_n\) written with a negative first term?
+
+Because of the particular definition/normalization of \(b_n\) in this paper.
+
+Don't try to interpret the sign without looking at the whole equation.
+
+The important economic relationship is:
+
+$$ \boxed{ \text{optimal bid balances purchase profitability against inventory consequences} } $$
+SLIDE 14 — MARKET MAKER'S SPREAD
+
+Now we get the key result.
+
+The spread is:
+
+$$ \boxed{ a_n-b_n } $$
+
+and the paper obtains:
+
+$$ \boxed{ a_n-b_n = \frac{\alpha\phi+\beta\gamma} {2\phi\gamma} + \frac{ \phi E(\tilde\omega_n)+ \gamma E(\tilde\epsilon_n) } {2\phi\gamma} + \frac{ \phi\operatorname{Cov}(U',\tilde\omega_n) + \gamma\operatorname{Cov}(U',\tilde\epsilon_n) } {2\phi\gamma E(U')} } $$
+
+This is the equation you really need to understand.
+
+Break it into three pieces
+
+Write:
+
+$$ \boxed{ S=S_{KN}+S_{RN}+S_R } $$
+
+where:
+
+\(S_{KN}\)
+
+Known-limit component.
+
+\(S_{RN}\)
+
+Risk-neutral expected-order-flow component.
+
+\(S_R\)
+
+Risk adjustment.
+
+First term
+$$ \boxed{ \frac{\alpha\phi+\beta\gamma} {2\phi\gamma} } $$
+
+This reflects the known/expected structure of order flow.
+
+Second term
+$$ \boxed{ \frac{ \phi E(\tilde\omega_n)+ \gamma E(\tilde\epsilon_n) } {2\phi\gamma} } $$
+
+This incorporates expected market-order flow.
+
+Third term
+$$ \boxed{ \frac{ \phi\operatorname{Cov}(U',\tilde\omega_n) + \gamma\operatorname{Cov}(U',\tilde\epsilon_n) } {2\phi\gamma E(U')} } $$
+
+This is the risk adjustment.
+
+This is where risk aversion enters the spread.
+
+Why does covariance appear?
+
+This is extremely important.
+
+Recall:
+
+$$ U'=U'(\pi) $$
+
+is marginal utility.
+
+If an unexpected order arrives, it changes the dealer's profit/inventory.
+
+The effect on utility depends on whether that unexpected order occurs when marginal utility is high or low.
+
+Therefore we need:
+
+$$ \boxed{ \operatorname{Cov}(U',\text{order shock}) } $$
+
+rather than merely:
+
+$$ \operatorname{Var}(\text{order shock}). $$
+Why can the risk adjustment be negative?
+
+Suppose:
+
+$$ \operatorname{Cov}(U',\tilde\omega_n)<0 $$
+
+and/or
+
+$$ \operatorname{Cov}(U',\tilde\epsilon_n)<0. $$
+
+Then the numerator of the risk term can be negative.
+
+Therefore:
+
+$$ S_R<0. $$
+
+Hence:
+
+$$ \boxed{ S_{\text{risk-averse}} < S_{\text{risk-neutral}} } $$
+
+can occur.
+
+This is the surprising O'Hara–Oldfield result shown on the slide.
+
+Risk-neutral dealer
+
+If the dealer is risk neutral:
+
+$$ U(W)=W. $$
+
+Then:
+
+$$ U'=\text{constant}. $$
+
+Therefore:
+
+$$ \operatorname{Cov}(U',X)=0 $$
+
+for any random variable \(X\).
+
+Hence:
+
+$$ \boxed{S_R=0} $$
+
+and the spread reduces to the risk-neutral components.
+
+This is an excellent exam question
+Q: Why does the covariance term disappear under risk neutrality?
+
+Because:
+
+$$ U'=\text{constant}. $$
+
+The covariance of a constant with any random variable is zero:
+
+$$ \operatorname{Cov}(c,X)=0. $$
+
+Therefore:
+
+$$ \boxed{\text{risk adjustment}=0}. $$
+SLIDE 15 — FINDINGS
+
+The final slide gives two major conclusions.
+
+Finding 1: Risk aversion affects both spread and individual prices
+
+Risk aversion can change:
+
+$$ a_n $$
+
+and:
+
+$$ b_n. $$
+
+Therefore it changes both:
+
+spread size,
+spread location.
+Finding 2: Risk-averse spread can be smaller
+
+Again:
+
+$$ S=S_{RN}+S_R. $$
+
+If:
+
+$$ S_R<0, $$
+
+then:
+
+$$ S<S_{RN}. $$
+
+So:
+
+$$ \boxed{ \text{Risk aversion can narrow the spread} } $$
+
+under this model.
+
+Finding 3: Inventory has a pervasive influence
+
+Inventory affects:
+
+$$ \boxed{\text{where the spread is located}} $$
+
+and:
+
+$$ \boxed{\text{how large the spread is}} $$
+
+This is stronger than the earlier simple idea:
+
+"Inventory only shifts the midpoint."
+
+Here inventory interacts with future value and risk.
+
+VERY IMPORTANT: Why can inventory affect spread size?
+
+Suppose the dealer is heavily long.
+
+Then future inventory exposure becomes undesirable.
+
+The dealer may modify both sides of the quote.
+
+Because both optimal:
+
+$$ a_n $$
+
+and:
+
+$$ b_n $$
+
+depend on the continuation value:
+
+$$ V(I_n). $$
+
+Therefore their difference:
+
+$$ a_n-b_n $$
+
+can also depend on inventory.
+
+Now let's build your "WHAT IF?" exam questions
+
+These are particularly useful for this paper.
+
+Q1. What happens if risk aversion increases?
+
+Let risk aversion increase.
+
+Then marginal utility becomes more sensitive to uncertainty.
+
+Therefore the covariance terms become more important.
+
+The key point:
+
+$$ \boxed{ \text{Spread does not necessarily increase} } $$
+
+because the risk adjustment can be positive or negative.
+
+Q2. What happens if the dealer becomes risk neutral?
+
+Then:
+
+$$ U'=\text{constant}. $$
+
+Therefore:
+
+$$ \operatorname{Cov}(U',\tilde\omega) = \operatorname{Cov}(U',\tilde\epsilon) =0. $$
+
+Thus:
+
+$$ \boxed{ S_R=0 } $$
+
+and only risk-neutral components remain.
+
+Q3. What happens if unexpected market buying increases?
+
+Suppose:
+
+$$ \tilde\omega_n\uparrow. $$
+
+The dealer receives more unexpected buying pressure.
+
+He sells more inventory.
+
+If he is already long, this may actually help him reduce inventory.
+
+If he is short, it can make his position worse.
+
+Therefore the effect depends on inventory and the covariance structure.
+
+Q4. What happens if unexpected market selling increases?
+$$ \tilde\epsilon_n\uparrow. $$
+
+The dealer buys more shares.
+
+Thus inventory increases.
+
+If dealer is already long:
+
+$$ \boxed{\text{inventory risk increases}} $$
+
+If dealer is short:
+
+$$ \boxed{\text{short position may be reduced}} $$
+Q5. What happens if inventory \(I\) increases?
+
+The dealer becomes more long.
+
+He has greater exposure to future stock-price movements.
+
+Therefore he generally wants to encourage customers to buy from him and discourage further sales to him.
+
+Thus:
+
+$$ \boxed{ I\uparrow \Rightarrow \text{quote skew toward reducing inventory} } $$
+
+But unlike simpler models, the inventory effect can also change spread width.
+
+Q6. What happens if inventory becomes very negative?
+
+Dealer is very short.
+
+He wants to acquire shares.
+
+Therefore he adjusts quotes to encourage trades that increase inventory.
+
+So:
+
+$$ \boxed{ I\downarrow \Rightarrow \text{dealer wants more purchases} } $$
+Q7. What happens if order-flow uncertainty increases?
+
+Suppose:
+
+$$ \operatorname{Var}(\omega) \uparrow. $$
+
+The dealer becomes less certain about future order flow.
+
+The exact effect on the spread is not determined by variance alone because the relevant term is:
+
+$$ \operatorname{Cov}(U',\omega). $$
+
+Therefore the correct answer is:
+
+Higher order-flow uncertainty increases the importance of the risk adjustment, but the direction of the spread change depends on the covariance structure.
+
+This is a very good exam answer.
+
+Q8. What happens if \(\operatorname{Cov}(U',\omega)<0\)?
+
+Then the corresponding risk term is negative:
+
+$$ \frac{\phi\operatorname{Cov}(U',\omega)} {2\phi\gamma E(U')} <0. $$
+
+Therefore it pushes the spread downward.
+
+Q9. What happens if covariance becomes positive?
+
+Then:
+
+$$ S_R>0 $$
+
+assuming the other covariance term doesn't dominate negatively.
+
+Therefore:
+
+$$ \boxed{ \text{risk adjustment widens the spread} } $$
+Q10. What happens if covariance is zero?
+
+If:
+
+$$ \operatorname{Cov}(U',\omega) = \operatorname{Cov}(U',\epsilon) =0, $$
+
+then:
+
+$$ \boxed{S_R=0}. $$
+
+The risk-averse spread equals the risk-neutral spread.
+
+Q11. What happens if market-order sensitivity \(\gamma\) increases?
+
+From:
+
+$$ A^m=\alpha-a\gamma+\omega. $$
+
+Higher \(\gamma\) means customers are more sensitive to the ask price.
+
+Thus:
+
+$$ a\uparrow $$
+
+causes a larger decrease in demand.
+
+Therefore the market maker has less freedom to increase the ask without losing order flow.
+
+So generally:
+
+$$ \boxed{ \gamma\uparrow \Rightarrow \text{optimal ask becomes more constrained} } $$
+Q12. What happens if \(\phi\) increases?
+
+Recall:
+
+$$ B^m=\beta+b\phi+\epsilon. $$
+
+Higher \(\phi\) means market sellers respond more strongly to the bid.
+
+Therefore increasing \(b\) produces a larger increase in seller flow.
+
+So the bid becomes more sensitive to price.
+
+Q13. What happens if \(\alpha\) increases?
+
+From:
+
+$$ A^m=\alpha-a\gamma+\omega. $$
+
+Higher \(\alpha\) means greater baseline buying demand.
+
+Therefore the dealer can potentially charge a higher ask.
+
+From:
+
+$$ a_n\sim\frac{\alpha}{2\gamma}, $$
+
+we get:
+
+$$ \boxed{ \alpha\uparrow \Rightarrow a_n\uparrow } $$
+
+all else equal.
+
+Q14. What happens if \(\gamma\) doubles?
+
+The baseline ask component:
+
+$$ \frac{\alpha}{2\gamma} $$
+
+becomes half as large.
+
+Thus:
+
+$$ \boxed{ \gamma\times2 \Rightarrow \frac{\alpha}{2\gamma}\times\frac12 } $$
+
+holding everything else fixed.
+
+Q15. What happens if the discount factor \(\phi\) approaches 1?
+
+If:
+
+$$ \phi\rightarrow1, $$
+
+future profits become almost as important as current profits.
+
+Therefore the dealer becomes more forward-looking.
+
+Inventory carried into the future matters more.
+
+Thus:
+
+$$ \boxed{ \phi\uparrow \Rightarrow \text{future inventory consequences become more important} } $$
+Q16. What happens if \(\phi\rightarrow0\)?
+
+Future profits are heavily discounted.
+
+The dealer behaves more myopically.
+
+He focuses much more on current-period profit.
+
+Thus:
+
+$$ \boxed{ \phi\downarrow \Rightarrow \text{future inventory effects matter less} } $$
+Q17. What happens if limit-order quantities increase?
+
+Suppose more known limit orders are present.
+
+Then the dealer has more information and more potential trading opportunities.
+
+The known-limit component of pricing becomes more important.
+
+Q18. What happens if limit-order sensitivity to price increases?
+
+Suppose:
+
+$$ \gamma^L\uparrow. $$
+
+Then limit-order quantity changes more strongly when ask changes.
+
+Therefore the dealer must be more careful in setting the ask because small price changes cause larger order-flow changes.
+
+Q19. What happens if inventory financing cost \(r\) increases?
+
+If the dealer carries inventory overnight, financing/holding becomes more expensive.
+
+Therefore:
+
+$$ \boxed{ r\uparrow \Rightarrow \text{cost of carrying inventory}\uparrow } $$
+
+This makes inventory management more important.
+
+Q20. What happens if the dealer has zero inventory?
+$$ I=0. $$
+
+There is no current inventory financing exposure.
+
+However, the dealer still faces the possibility of acquiring inventory during the current period.
+
+Therefore inventory still matters dynamically.
+
+Q21. Why is inventory a state variable?
+
+Because:
+
+$$ V(I_n) $$
+
+depends on ending inventory.
+
+And current inventory affects:
+
+financing costs,
+future trading opportunities,
+risk,
+future optimal quotes.
+
+Therefore:
+
+$$ \boxed{I_n\text{ summarizes information needed for future decisions}} $$
+Q22. Why doesn't the model have a fixed liquidation date?
+
+Because a market maker is modeled as an ongoing business.
+
+There is no artificial:
+
+$$ T $$
+
+where all inventory must suddenly be liquidated.
+
+Instead:
+
+$$ \boxed{ \text{inventory is carried from one day to the next} } $$
+Q23. Why does O'Hara–Oldfield use infinite horizon?
+
+Because market making is a repeated activity.
+
+The dealer expects to operate:
+
+$$ 1,2,3,\ldots $$
+
+rather than stop after a predetermined terminal date.
+
+Q24. Why is utility applied to trading profits?
+
+Because the dealer is risk averse.
+
+Instead of maximizing:
+
+$$ E[\pi], $$
+
+the dealer maximizes:
+
+$$ E[U(\pi)]. $$
+
+Thus uncertainty affects decisions.
+
+Q25. Why is \(U''<0\)?
+
+Because:
+
+$$ U''<0 $$
+
+means utility is concave.
+
+Concavity represents risk aversion.
+
+Q26. What if \(U''=0\)?
+
+Then utility is linear:
+
+$$ U(W)=aW+b. $$
+
+The dealer is risk neutral.
+
+Therefore:
+
+$$ \boxed{\text{risk adjustment disappears}} $$
+Q27. What if \(U''>0\)?
+
+That would represent risk-seeking behavior.
+
+The model assumes:
+
+$$ U''<0, $$
+
+so this would violate the model's basic risk-preference assumption.
+
+The most important comparison with Ho-Stoll
+
+This is something I strongly recommend memorizing.
+
+Ho-Stoll:
+$$ \boxed{ \text{Dealer maximizes expected utility of terminal wealth} } $$
+
+with:
+
+$$ W_T=F_T+I_T+Y_T. $$
+
+There is a terminal liquidation date.
+
+O'Hara–Oldfield:
+$$ \boxed{ \text{Dealer maximizes discounted utility of repeated trading profits} } $$
+
+over an infinite horizon.
+
+There is no fixed liquidation date.
+
+Another crucial difference
+Ho-Stoll:
+
+Transaction uncertainty is modeled directly through stochastic arrival processes.
+
+O'Hara–Oldfield:
+
+They explicitly distinguish:
+
+$$ \boxed{\text{limit orders}} $$
+
+from
+
+$$ \boxed{\text{market orders}} $$
+
+and market-order flow has random components:
+
+$$ \tilde\omega_t,\tilde\epsilon_t. $$
+The entire O'Hara–Oldfield model in one diagram
+
+Memorize this flow:
+
+$$ \boxed{\text{Limit order book}} $$
+
+↓
+
+Known information
+
+$$ \boxed{\alpha^L,\beta^L,\gamma^L,\phi^L} $$
+$$ \boxed{\text{Expected market orders}} $$
+$$ \boxed{\tilde\omega_t,\tilde\epsilon_t} $$
+
+↓
+
+Dealer chooses
+
+$$ \boxed{a_t,b_t} $$
+
+↓
+
+Orders execute
+
+↓
+
+Dealer earns
+
+$$ \boxed{\pi_t} $$
+
+and inventory changes:
+
+$$ \boxed{I_t} $$
+
+↓
+
+Inventory creates:
+
+$$ \boxed{\text{financing cost + future risk}} $$
+
+↓
+
+Continuation value:
+
+$$ \boxed{V(I_t)} $$
+
+↓
+
+Dealer maximizes:
+
+$$ \boxed{ E\left[ \sum_j\phi^j U\left(\sum_t\pi_{jt}\right) \right] } $$
+
+↓
+
+Optimal:
+
+$$ \boxed{a_t^*,b_t^*} $$
+
+↓
+
+Spread:
+
+$$ \boxed{ a_t^*-b_t^* = \text{known-limit} + \text{risk-neutral} + \text{risk adjustment} } $$
+⭐ The 15 relationships I would memorize
+Order-flow relationships
+$$ \boxed{ a\uparrow\Rightarrow A^m\downarrow } $$ $$ \boxed{ b\uparrow\Rightarrow B^m\uparrow } $$
+Demand sensitivity
+$$ \boxed{ \gamma\uparrow \Rightarrow \text{buying becomes more sensitive to ask} } $$ $$ \boxed{ \phi\uparrow \Rightarrow \text{selling becomes more sensitive to bid} } $$
+Risk
+$$ \boxed{ U''<0\Rightarrow\text{risk aversion} } $$ $$ \boxed{ U''=0\Rightarrow\text{risk neutrality} } $$ $$ \boxed{ U'=\text{constant} \Rightarrow \operatorname{Cov}(U',X)=0 } $$
+Spread
+$$ \boxed{ S=S_{\text{known limit}} +S_{\text{risk neutral}} +S_{\text{risk}} } $$ $$ \boxed{ \operatorname{Cov}(U',\omega)<0 \Rightarrow \text{risk adjustment can narrow spread} } $$ $$ \boxed{ \operatorname{Cov}(U',\omega)>0 \Rightarrow \text{risk adjustment can widen spread} } $$
+Inventory
+$$ \boxed{ I>0\Rightarrow\text{dealer is long} } $$ $$ \boxed{ I<0\Rightarrow\text{dealer is short} } $$ $$ \boxed{ I\text{ affects future value }V(I) } $$ $$ \boxed{ I\text{ affects both spread location and size} } $$
+Time
+$$ \boxed{ \phi\uparrow \Rightarrow \text{future profits matter more} } $$
+One final conceptual question your professor could easily ask
+"Why can a risk-averse market maker have a smaller spread than a risk-neutral market maker?"
+
+A strong answer would be:
+
+The O'Hara–Oldfield model decomposes the spread into a risk-neutral component and a risk adjustment involving the covariance between marginal utility and unexpected market-order flow. For a risk-neutral market maker, marginal utility is constant, so the covariance term is zero. For a risk-averse market maker, the covariance term need not be zero and can be negative. When it is sufficiently negative, the risk adjustment reduces the risk-neutral spread, so the optimal risk-averse spread can be smaller.
+
+That is one of the key results of the paper.
+
+And the one-line difference from your previous Ho-Stoll slides
+$$ \boxed{ \text{Ho-Stoll} \rightarrow \text{terminal wealth + continuous time + portfolio risk} } $$
+
+whereas
+
+$$ \boxed{ \text{O'Hara-Oldfield} \rightarrow \text{repeated trading profits + discrete time + limit/market orders + inventory continuation value} } $$
+
+The most important new idea is therefore:
+
+$$ \boxed{ \textbf{Inventory is not just a risk exposure; it is a state variable that determines future trading opportunities.} } $$
+
+
+
+Absolutely. These slides are from the topic “Commonality in Liquidity” in market microstructure. The central question throughout is:
+
+Why do liquidity measures of different stocks move together over time?
+
+In other words, if liquidity becomes worse for one stock today, why do many other stocks also become less liquid around the same time?
+
+I’ll explain every slide, every equation, every variable, and what the empirical results mean, and I’ll connect the slides so you understand the entire research argument.
+
+Slide 1 — Commonality in Liquidity
+Main idea
+
+Commonality in liquidity means that liquidity is not purely stock-specific.
+
+Suppose:
+
+Stock A becomes less liquid today.
+Stock B also becomes less liquid.
+Stock C also becomes less liquid.
+
+If this happens systematically across many stocks, we say there is commonality in liquidity.
+
+So liquidity has two components:
+
+$$ \boxed{ \text{Liquidity of stock }j = \text{stock-specific component} + \text{common component} } $$
+
+The common component can come from market-wide or industry-wide factors.
+
+Bullet 1: Common determinants of liquidity
+
+The paper investigates whether different stocks have common determinants of liquidity.
+
+For example:
+
+market trading activity
+market volume
+volatility
+interest rates
+institutional trading
+inventory risk
+asymmetric information
+
+If these factors affect many stocks simultaneously, their liquidity will co-move.
+
+Bullet 2: Correlated movements in liquidity
+
+Suppose:
+
+$$ L_{A,t} = \text{liquidity of stock A} $$
+
+and
+
+$$ L_{B,t} = \text{liquidity of stock B} $$
+
+If
+
+$$ Corr(\Delta L_{A,t},\Delta L_{B,t})>0 $$
+
+then their liquidity changes tend to move together.
+
+This is commonality.
+
+Bullet 3: Inventory risk and asymmetric information
+
+Two major explanations are proposed:
+
+1. Inventory risk
+
+Market makers/dealers hold inventories.
+
+If trading becomes very active, dealers may accumulate large positions.
+
+Large inventory → greater risk → dealers demand greater compensation.
+
+That can appear as:
+
+$$ \boxed{\text{wider bid-ask spread}} $$
+2. Asymmetric information
+
+Suppose some traders have better information than dealers.
+
+The dealer doesn't know whether a customer is:
+
+an informed trader, or
+an uninformed trader.
+
+If the dealer thinks the probability of informed trading is high, the dealer protects themselves by increasing the spread.
+
+Bullet 4: Trading costs have common determinants
+
+The paper isn't only interested in liquidity.
+
+It asks whether different microstructure variables have common underlying causes.
+
+For example:
+
+bid-ask spread
+depth
+effective spread
+trading cost
+
+may all respond to the same market conditions.
+
+Big takeaway
+
+Liquidity is partly a market-wide phenomenon, not purely an individual-stock phenomenon.
+
+Slide 2 — Plausible Reasons for Commonality
+
+This slide asks:
+
+Why should liquidity move together across stocks?
+
+There are several possible explanations.
+
+1. Trading activity
+
+Trading activity generally displays market-wide response to general price swings.
+
+Suppose there is a large market movement.
+
+Many investors react simultaneously.
+
+For example:
+
+$$ \text{Market shock} \rightarrow \text{many investors trade} \rightarrow \text{many stocks experience higher trading activity} $$
+
+Therefore liquidity can move together.
+
+2. Trading volume → dealer inventory
+
+The slide says:
+
+Trading volume is a principal determinant of dealer inventory.
+
+Suppose a market maker normally has:
+
+$$ 1000 \text{ shares} $$
+
+but suddenly trading volume increases dramatically.
+
+The dealer may accumulate:
+
+$$ 5000,\ 10000,\ 20000 $$
+
+shares depending on order flow.
+
+Higher inventory means greater exposure to price changes.
+
+Therefore:
+
+$$ \boxed{ \text{Higher trading volume} \rightarrow \text{higher inventory risk} \rightarrow \text{higher required compensation} } $$
+
+which can lead to wider spreads.
+
+3. Inventory carrying costs
+
+Dealers don't just face price risk.
+
+Holding inventory has a financing cost.
+
+Suppose a dealer has to finance stock positions.
+
+If interest rates rise:
+
+$$ \text{cost of financing inventory} \uparrow $$
+
+Therefore:
+
+$$ \boxed{ r\uparrow \Rightarrow \text{inventory carrying cost}\uparrow } $$
+
+Since interest rates are market-wide, inventory carrying costs can move together across stocks.
+
+Hence liquidity can have a common component.
+
+4. Volatility
+
+This is extremely important.
+
+Suppose:
+
+$$ \sigma = \text{volatility} $$
+
+When volatility rises, holding inventory becomes riskier.
+
+Imagine a market maker holds 10,000 shares.
+
+If the stock moves only 0.1%, the risk is relatively small.
+
+If it can move 5% very quickly, the inventory is much more dangerous.
+
+Thus:
+
+$$ \boxed{ \sigma\uparrow \Rightarrow \text{inventory risk}\uparrow \Rightarrow \text{spread}\uparrow } $$
+
+And because market volatility can increase simultaneously across stocks:
+
+$$ \boxed{\text{common volatility shock}\rightarrow\text{common liquidity shock}} $$
+5. Program trading
+
+Program trading means computer-driven strategies can submit large numbers of orders simultaneously.
+
+For example:
+
+$$ \text{Index falls} \rightarrow \text{algorithm sells many stocks} $$
+
+Therefore dealers may suddenly face large order imbalances across many securities.
+
+This can create:
+
+$$ \text{common inventory pressure} $$
+
+and therefore common movements in liquidity.
+
+6. Institutional funds
+
+Suppose several mutual funds have similar investment strategies.
+
+They may all decide to:
+
+$$ \text{Buy technology stocks} $$
+
+or
+
+$$ \text{Sell technology stocks} $$
+
+at approximately the same time.
+
+That produces correlated order flow.
+
+Therefore:
+
+$$ \boxed{ \text{similar institutional strategies} \rightarrow \text{correlated trading} \rightarrow \text{correlated liquidity} } $$
+7. Asymmetric information
+
+Suppose a small group of large traders receives information.
+
+If market makers believe informed traders are active, they become more cautious.
+
+They may increase spreads.
+
+So:
+
+$$ \boxed{ \text{greater information asymmetry} \rightarrow \text{higher adverse-selection risk} \rightarrow \text{wider spread} } $$
+Core message of Slide 2
+
+There are many possible reasons for commonality:
+
+$$ \boxed{ \text{Trading} ,\text{Volume} ,\text{Interest rates} ,\text{Volatility} ,\text{Program trading} ,\text{Institutions} ,\text{Information} } $$
+Slide 3 — Implications of Commonality
+
+Now the paper asks:
+
+Why does commonality matter?
+
+1. Covariation in liquidity
+
+If stocks have common liquidity factors:
+
+$$ \Delta L_{A,t} $$
+
+and
+
+$$ \Delta L_{B,t} $$
+
+will tend to covary.
+
+This means investors cannot assume that liquidity risk is completely diversifiable.
+
+2. Co-movements in trading costs
+
+If liquidity changes simultaneously, trading costs can also move simultaneously.
+
+For example:
+
+$$ \text{Market crisis} \rightarrow \text{spreads widen across many stocks} $$
+
+So an investor may face high trading costs across their entire portfolio at once.
+
+3. Episodic and global crises
+
+This is particularly important during crises.
+
+During normal conditions:
+
+$$ \text{Liquidity risk may be moderate} $$
+
+During a crisis:
+
+$$ \boxed{ \text{Liquidity can deteriorate across many securities simultaneously} } $$
+
+Examples conceptually include:
+
+market crashes
+financial crises
+sudden volatility shocks
+4. Liquidity factor in asset pricing
+
+The slide references:
+
+Amihud and Mendelson (1986)
+Brennan and Subrahmanyam (1996)
+
+The important idea is:
+
+Investors may require compensation for holding assets that are costly to trade.
+
+Thus liquidity can become an asset-pricing factor.
+
+5. Two channels through which trading costs affect asset prices
+
+This is very important.
+
+Static channel
+
+Suppose an asset has permanently high trading costs.
+
+Investors may demand compensation for holding it.
+
+Conceptually:
+
+$$ \text{High average trading cost} \rightarrow \text{higher required return} $$
+
+This is the static channel.
+
+Dynamic channel
+
+Now imagine liquidity itself changes over time.
+
+Suppose:
+
+$$ \text{Liquidity suddenly deteriorates} $$
+
+Investors may avoid trading because trading is now expensive/risky.
+
+So:
+
+$$ \text{Liquidity shock} \rightarrow \text{trading becomes expensive} \rightarrow \text{investors avoid trading} $$
+
+This is the dynamic channel.
+
+Exam distinction
+Static	Dynamic
+Based on average trading cost	Based on changes in trading conditions
+Persistent liquidity characteristic	Time-varying liquidity risk
+Compensation for illiquidity	Investors react to liquidity shocks
+Slide 4 — Data
+
+Now the paper explains its dataset.
+
+The researchers use:
+
+NYSE transaction data from ISMM for 1992
+
+ISSM = Institute for the Study of Securities Markets.
+
+Sample filtering
+
+They don't simply use every stock.
+
+Condition 1
+
+Stock must trade on at least:
+
+$$ \boxed{10\text{ trading days}} $$
+
+during the year.
+
+Why?
+
+Because stocks that barely trade don't provide enough information to calculate reliable liquidity statistics.
+
+Condition 2
+
+Stocks with stock splits or stock dividends are excluded.
+
+Why?
+
+Because splits can mechanically change:
+
+price
+number of shares
+trading volume
+quoted spread
+
+without representing an actual economic change in liquidity.
+
+Condition 3
+
+Several special types of securities are excluded:
+
+certificates
+ADRs
+foreign-incorporated companies
+closed-end funds
+REITs
+etc.
+
+This makes the sample more homogeneous.
+
+Final sample
+$$ \boxed{1,169\text{ stocks}} $$
+
+over
+
+$$ \boxed{254\text{ trading days}} $$
+
+in 1992.
+
+Price filter
+
+A stock is deleted on a day if:
+
+$$ \text{average price}<\$2 $$
+
+Why?
+
+Very low-priced stocks can have unusual percentage spreads.
+
+For example:
+
+Stock A:
+
+$$ P= \$1 $$
+
+bid = $0.99, ask = $1.01
+
+Spread:
+
+$$ \$0.02 $$
+
+Percentage spread:
+
+$$ \frac{0.02}{1}=2\% $$
+
+For a $100 stock, the same $0.02 spread would be only:
+
+$$ 0.02\% $$
+
+So penny/low-priced stocks can distort comparisons.
+
+Slide 5 — NYSE Features
+
+This slide explains the NYSE trading environment used in the study.
+
+Specialist
+
+At that time, NYSE stocks had a specialist.
+
+The specialist helped maintain the market and provided quotes.
+
+The specialist announces:
+
+bid price
+ask price
+depth
+
+before transactions.
+
+Bid and ask
+
+Suppose:
+
+$$ P_B = \$99 $$
+
+and
+
+$$ P_A = \$101 $$
+
+Then:
+
+$$ \boxed{ Quoted\ Spread=P_A-P_B } $$
+
+Therefore:
+
+$$ 101-99=\$2 $$
+Depth
+
+Suppose:
+
+Bid:
+
+$$ 1000\text{ shares at \$99} $$
+
+Ask:
+
+$$ 1500\text{ shares at \$101} $$
+
+Then depth is:
+
+$$ DEP=\frac{Q_A+Q_B}{2} $$
+
+so:
+
+$$ DEP=\frac{1500+1000}{2} =1250 $$
+
+shares.
+
+The averaging is important because we want a representative measure of available liquidity on both sides.
+
+Why announcement matters
+
+The quotes are known to traders before transactions.
+
+Therefore traders can evaluate:
+
+$$ \text{price available} $$
+
+and
+
+$$ \text{quantity available} $$
+
+before trading.
+
+Slide 6 — Liquidity Variables
+
+This is one of the most important slides.
+
+There are five liquidity measures.
+
+1. Quoted Spread — QSPR
+
+Formula:
+
+$$ \boxed{ QSPR=P_A-P_B } $$
+
+where:
+
+\(P_A\) = ask price
+\(P_B\) = bid price
+
+Example:
+
+$$ P_A=101,\quad P_B=99 $$
+
+Then:
+
+$$ QSPR=101-99=2 $$
+Interpretation
+
+Higher QSPR:
+
+$$ \boxed{\text{less liquid}} $$
+
+Lower QSPR:
+
+$$ \boxed{\text{more liquid}} $$
+
+because traders pay a larger spread to transact.
+
+2. Proportional Quoted Spread — PQSPR
+
+Formula:
+
+$$ \boxed{ PQSPR=\frac{P_A-P_B}{P_M} } $$
+
+where \(P_M\) is the midpoint.
+
+Usually:
+
+$$ P_M=\frac{P_A+P_B}{2} $$
+
+Example:
+
+$$ P_A=101,\quad P_B=99 $$
+
+Then:
+
+$$ P_M=100 $$
+
+and
+
+$$ PQSPR=\frac{2}{100}=0.02 $$
+
+or:
+
+$$ 2\% $$
+Why normalize?
+
+A $2 spread means something different for a $10 stock versus a $1000 stock.
+
+Proportional spread allows comparison across stocks.
+
+3. Depth — DEP
+
+Formula:
+
+$$ \boxed{ DEP=\frac{1}{2}(Q_A+Q_B) } $$
+
+where:
+
+\(Q_A\) = ask-side quantity
+\(Q_B\) = bid-side quantity
+
+Higher depth means more shares are available.
+
+Therefore:
+
+$$ \boxed{\text{Higher DEP}=\text{greater liquidity}} $$
+
+Notice the direction is opposite to spreads.
+
+For spreads:
+
+$$ \uparrow Spread \Rightarrow \downarrow Liquidity $$
+
+For depth:
+
+$$ \uparrow Depth \Rightarrow \uparrow Liquidity $$
+4. Effective Spread — ESPR
+
+Formula:
+
+$$ \boxed{ ESPR=2|P_t-P_M| } $$
+
+where:
+
+\(P_t\) = actual transaction price
+\(P_M\) = quoted midpoint
+
+Why do we use the absolute value?
+
+Because a trade can occur:
+
+above midpoint, or
+below midpoint.
+
+We care about the distance from midpoint.
+
+Example
+
+Suppose:
+
+$$ P_M=100 $$
+
+and transaction occurs at:
+
+$$ P_t=101 $$
+
+Then:
+
+$$ ESPR=2|101-100| $$ $$ =\boxed{2} $$
+5. Proportional Effective Spread — PESPR
+
+Formula:
+
+$$ \boxed{ PESPR=\frac{2|P_t-P_M|}{P_t} } $$
+
+This normalizes the effective spread relative to price.
+
+Slide 7 — Cross-sectional Statistics
+
+Now the paper gives summary statistics.
+
+Mean and median
+
+For QSPR:
+
+$$ Mean=0.3162 $$ $$ Median=0.2691 $$ $$ SD=1.3570 $$
+
+Notice:
+
+$$ Mean > Median $$
+
+This suggests some stocks have very large spreads, pulling the mean upward.
+
+DEP
+$$ Mean=3776 $$ $$ Median=2661 $$ $$ SD=3790 $$
+
+Again:
+
+$$ Mean > Median $$
+
+so depth has substantial cross-sectional dispersion.
+
+Why do they report both mean and median?
+
+Because liquidity variables can be highly skewed.
+
+For example, imagine five spreads:
+
+$$ 1,\ 1,\ 1,\ 1,\ 20 $$
+
+Mean:
+
+$$ 4.8 $$
+
+Median:
+
+$$ 1 $$
+
+The mean is heavily affected by the outlier.
+
+Therefore median gives a better picture of the "typical" stock.
+
+Slide 7 — Panel C: Correlation Between Liquidity Measures
+
+This is also very important.
+
+The table shows correlations.
+
+For example:
+
+$$ Corr(QSPR,PQSPR)=0.844 $$
+
+This is very high.
+
+Why?
+
+Because both measure spread.
+
+QSPR and DEP
+$$ Corr(QSPR,DEP)=-0.396 $$
+
+Negative.
+
+Why?
+
+Because when spreads increase, liquidity generally deteriorates, while depth tends to decrease.
+
+So:
+
+$$ \boxed{ Spread\uparrow \quad\Longleftrightarrow\quad Depth\downarrow } $$
+QSPR and ESPR
+$$ Corr(QSPR,ESPR)=0.665 $$
+
+Positive.
+
+Both are spread-related measures.
+
+ESPR and PESPR
+$$ Corr(ESPR,PESPR)=0.871 $$
+
+Very high because PESPR is basically a normalized version of ESPR.
+
+Main lesson
+
+The liquidity measures aren't independent.
+
+They capture related aspects of the same underlying market condition.
+
+Slide 8 — Absolute Daily Proportional Changes
+
+This slide changes the focus.
+
+Previously we studied the level of liquidity.
+
+Now we study:
+
+How much does liquidity change from one day to the next?
+
+They define:
+
+$$ \boxed{ DL_t=\frac{L_t-L_{t-1}}{L_{t-1}} } $$
+
+This is the proportional change.
+
+Example
+
+Suppose yesterday:
+
+$$ L_{t-1}=0.01 $$
+
+and today:
+
+$$ L_t=0.012 $$
+
+Then:
+
+$$ DL_t= \frac{0.012-0.01}{0.01} $$ $$ =0.20 $$
+
+So liquidity measure increased by:
+
+$$ 20\% $$
+What does \(|DL_t|\) mean?
+
+They take:
+
+$$ \boxed{|DL_t|} $$
+
+because they want to measure the magnitude of change, regardless of direction.
+
+For example:
+
+$$ DL=+30\% $$
+
+and
+
+$$ DL=-30\% $$
+
+both have:
+
+$$ |DL|=30\% $$
+Why is this useful?
+
+Because they want to know:
+
+How volatile or unstable is liquidity?
+
+The table shows:
+
+$$ |DDEP| $$
+
+has mean:
+
+$$ 0.7828 $$
+
+which is substantially larger than many of the spread measures.
+
+So depth can change dramatically from day to day.
+
+Slide 9 — Empirical Commonality in Liquidity
+
+This is the central empirical model.
+
+The equation is:
+
+$$ \boxed{ DL_{j,t} = \alpha_j + \beta_j DL_{M,t} + \epsilon_{j,t} } $$
+
+Let's understand every component.
+
+\(DL_{j,t}\)
+
+Change in liquidity of stock \(j\) on day \(t\).
+
+For example:
+
+$$ DL_{j,t}=10\% $$
+
+means the liquidity measure changed by 10%.
+
+\(DL_{M,t}\)
+
+Change in the market-wide average liquidity measure.
+
+Suppose we have 1000 stocks.
+
+We calculate average liquidity:
+
+$$ L_{M,t} = \frac{1}{N}\sum_{j=1}^{N}L_{j,t} $$
+
+Then:
+
+$$ DL_{M,t} = \frac{L_{M,t}-L_{M,t-1}}{L_{M,t-1}} $$
+\(\beta_j\)
+
+This is the key parameter.
+
+It tells us how sensitive stock \(j\)'s liquidity is to the market liquidity movement.
+
+Suppose:
+
+$$ \beta_j=0.7 $$
+
+Then approximately:
+
+$$ 1\%\text{ market liquidity change} \rightarrow 0.7\%\text{ stock liquidity change} $$
+Interpretation
+
+If:
+
+$$ \beta_j>0 $$
+
+then stock liquidity moves in the same direction as market liquidity.
+
+This is evidence of commonality.
+
+\(\alpha_j\)
+
+Stock-specific average component.
+
+It captures systematic change in stock \(j\)'s liquidity that isn't explained by market liquidity.
+
+\(\epsilon_{j,t}\)
+
+Idiosyncratic component.
+
+This is the stock-specific shock.
+
+The conceptual decomposition
+$$ \boxed{ \text{Stock liquidity change} = \text{market liquidity effect} + \text{stock-specific effect} } $$
+
+This is essentially a liquidity-factor model.
+
+Slide 10 — Results of Commonality Regression
+
+The table gives estimated \(\beta\)'s.
+
+Let's take:
+
+DQSPR
+
+Concurrent:
+
+$$ \beta=0.690 $$
+
+with:
+
+$$ t=28.29 $$
+
+This is extremely strong evidence of positive contemporaneous commonality.
+
+Interpretation:
+
+When market-wide quoted spread changes, an individual stock's quoted spread tends to change in the same direction.
+
+% positive
+
+For DQSPR:
+
+$$ 84.86\% $$
+
+This means approximately 85% of individual-stock slope coefficients are positive.
+
+So commonality is not coming from just a few stocks.
+
+% + significant
+$$ 34.65\% $$
+
+This means around 35% of the individual stock coefficients are significantly positive according to the specified one-tailed 5% criterion.
+
+Lag
+
+For DQSPR:
+
+$$ \beta=0.123 $$
+
+This asks:
+
+Does yesterday's market liquidity change affect today's stock liquidity change?
+
+The positive coefficient suggests some persistence.
+
+But notice it is much smaller than the concurrent coefficient:
+
+$$ 0.123 < 0.690 $$
+
+So the strongest relationship is contemporaneous.
+
+Lead
+
+For DQSPR:
+
+$$ \beta=0.053 $$
+
+This asks:
+
+Does tomorrow's market liquidity change relate to today's stock liquidity change?
+
+The positive relationship is smaller.
+
+Why do they examine Concurrent, Lag and Lead?
+
+This is extremely important for interpreting causality.
+
+They examine:
+
+Concurrent
+$$ DL_{M,t} \rightarrow DL_{j,t} $$
+Lag
+$$ DL_{M,t-1} \rightarrow DL_{j,t} $$
+Lead
+$$ DL_{M,t+1} \rightarrow DL_{j,t} $$
+
+If only concurrent effects are strong, commonality is largely happening at the same time.
+
+Slide 11 — Sources of Commonality
+
+Now they make the model more sophisticated.
+
+Previously:
+
+$$ DL_{j,t} = \alpha_j+ \beta_{j,M}DL_{M,t} +\epsilon_{j,t} $$
+
+Now they add industry liquidity:
+
+$$ \boxed{ DL_{j,t} = \alpha_j+ \beta_{j,M}DL_{M,t} + \beta_{j,I}DL_{I,t} + \epsilon_{j,t} } $$
+Why add industry?
+
+Suppose technology stocks all become illiquid.
+
+That might not be a market-wide phenomenon.
+
+It could be because:
+
+$$ \text{Technology industry shock} $$
+
+affects all technology stocks.
+
+Therefore commonality can have two sources:
+
+$$ \boxed{ \text{Commonality} = \text{Market component} + \text{Industry component} } $$
+\(DL_{M,t}\)
+
+Market-wide change in liquidity.
+
+\(DL_{I,t}\)
+
+Industry-specific change in liquidity.
+
+For example, if stock \(j\) belongs to banking:
+
+$$ DL_{I,t} = \text{average liquidity change of other banking stocks} $$
+
+Importantly, the stock itself is excluded from the industry average.
+
+Why?
+
+To avoid mechanically correlating a stock with itself.
+
+Slide 12 — Commonality, Inventory Risk and Asymmetric Information
+
+This slide proposes mechanisms behind commonality.
+
+Two important explanations:
+
+$$ \boxed{\text{Inventory risk}} $$
+
+and
+
+$$ \boxed{\text{Asymmetric information}} $$
+Number of trades as an information proxy
+
+The paper uses the number of trades as an indicator of information asymmetry.
+
+Why might trade frequency contain information?
+
+Suppose there is a group of informed traders.
+
+They know something important and therefore trade more actively.
+
+So:
+
+$$ \text{Information advantage} \rightarrow \text{more trading} $$
+
+Therefore number of trades can act as a proxy.
+
+Informed traders break up orders
+
+Large informed traders generally don't want to reveal their information by submitting one enormous order.
+
+Instead, they may split:
+
+$$ 10,000\text{ shares} $$
+
+into:
+
+$$ 1000+1000+1000+\cdots $$
+
+smaller transactions.
+
+This is called order splitting.
+
+Therefore the number of trades may increase even if total volume isn't proportionally huge.
+
+Trading frequency
+
+Trading frequency is affected by:
+
+market conditions
+industry conditions
+stock-specific factors
+
+Therefore it can potentially generate commonality.
+
+Slide 13 — Individual, Market and Industry Transaction Frequencies
+
+This is one of the most important equations in the slides.
+
+The model is:
+
+$$ \boxed{ DL_{j,t} = \alpha_j + \beta_{j,S}DS_{j,t} + \beta_{j,T}DT_{j,t} + \beta_{j,M}DV_{M,t} + \beta_{j,I}DV_{I,t} + \epsilon_{j,t} } $$
+
+Let's decode everything.
+
+\(DL_{j,t}\)
+
+Change in liquidity of stock \(j\).
+
+\(DS_{j,t}\)
+
+Percentage change in the average dollar size of an individual transaction in stock \(j\).
+
+Suppose yesterday average trade size was:
+
+$$ \$10,000 $$
+
+today:
+
+$$ \$12,000 $$
+
+Then:
+
+$$ DS_{j,t} = \frac{12,000-10,000}{10,000} =20\% $$
+\(DT_{j,t}\)
+
+Percentage change in the number of trades in stock \(j\).
+
+Suppose:
+
+Yesterday:
+
+$$ 100\text{ trades} $$
+
+Today:
+
+$$ 120\text{ trades} $$
+
+Then:
+
+$$ DT_{j,t}=20\% $$
+\(DV_{M,t}\)
+
+Change in aggregate dollar trading volume of the entire market.
+
+Importantly:
+
+stock \(j\) is excluded.
+
+Why?
+
+Again, to prevent mechanical correlation.
+
+\(DV_{I,t}\)
+
+Change in dollar trading volume of stock \(j\)'s industry.
+
+Again, stock \(j\) itself is excluded.
+
+Why use all four variables?
+
+Because the researchers want to separate different sources of trading activity.
+
+Individual stock activity
+$$ DS_{j,t},DT_{j,t} $$
+Market-wide activity
+$$ DV_{M,t} $$
+Industry-wide activity
+$$ DV_{I,t} $$
+
+This helps determine whether liquidity changes are driven by:
+
+stock-specific trading
+market-wide trading
+industry-wide trading
+Slide 14 — Observations
+
+This slide summarizes the empirical findings.
+
+Let's go through each one carefully.
+
+1. "More trading should reduce the spreads"
+
+Basic intuition:
+
+More trading can increase market liquidity.
+
+More buyers and sellers means:
+
+$$ \text{greater market participation} $$
+
+which can allow dealers to trade more easily.
+
+Thus:
+
+$$ \boxed{ \text{more market trading} \rightarrow \text{lower spreads} } $$
+
+But there is a complication.
+
+2. Informed traders can increase spreads
+
+If more trades are coming from informed traders, dealers face greater adverse-selection risk.
+
+Suppose a dealer quotes:
+
+$$ Bid=99,\quad Ask=101 $$
+
+An informed trader knows the asset is actually worth:
+
+$$ \$110 $$
+
+The informed trader buys at $101.
+
+The dealer loses.
+
+Therefore dealers protect themselves by increasing spreads.
+
+So:
+
+$$ \boxed{ \text{more informed trading} \rightarrow \text{higher adverse-selection risk} \rightarrow \text{wider spread} } $$
+
+This explains why more trades do not automatically mean better liquidity.
+
+3. Individual trading frequency has a strong positive influence on spreads
+
+The slide says:
+
+$$ T_{j,t}\uparrow \Rightarrow Spread\uparrow $$
+
+Why?
+
+Because a high number of trades may indicate increased informed trading.
+
+So this is consistent with:
+
+$$ \text{trading frequency} \rightarrow \text{information asymmetry} \rightarrow \text{adverse selection} \rightarrow \text{higher spread} $$
+4. Market-wide volume has a negative marginal influence on quoted spread
+
+This is interesting.
+
+The individual stock's trading frequency can increase spreads, while aggregate market volume can reduce them.
+
+Why?
+
+Because market-wide volume can represent greater overall market activity and liquidity.
+
+So:
+
+$$ \boxed{ \text{Market volume}\uparrow \rightarrow \text{greater market liquidity} \rightarrow \text{quoted spread}\downarrow } $$
+
+while:
+
+$$ \boxed{ \text{Individual trade frequency}\uparrow \rightarrow \text{possible informed trading}\uparrow \rightarrow \text{spread}\uparrow } $$
+
+The two effects are not contradictory because they measure different things.
+
+5. Individual trade size has a strong positive influence on quoted spreads and depth
+
+Suppose the average trade size increases.
+
+Large orders create greater inventory pressure for market makers.
+
+For example:
+
+$$ \$10,000 \rightarrow \$100,000 $$
+
+orders expose the dealer to greater risk.
+
+Therefore:
+
+$$ \text{Trade size}\uparrow \rightarrow \text{inventory risk}\uparrow $$
+
+which can cause:
+
+$$ \text{spread}\uparrow $$
+
+At the same time, dealers may provide more depth to accommodate larger trades.
+
+Thus the relationship with depth can be positive.
+
+6. Industry volume has an insignificant negative influence on depth
+
+The coefficient is negative, but statistically insignificant.
+
+This distinction is important.
+
+Negative coefficient
+
+The estimated relationship is:
+
+$$ \beta<0 $$
+Insignificant
+
+But the evidence isn't strong enough to conclude that the relationship differs reliably from zero under the study's statistical criterion.
+
+So don't say:
+
+"Industry volume decreases depth."
+
+Instead say:
+
+The estimated effect is negative but statistically insignificant.
+
+That is the proper empirical interpretation.
+
+THE ENTIRE STORY OF THESE SLIDES
+
+Now let's connect everything.
+
+The paper begins with the observation:
+
+$$ \boxed{ \text{Liquidity of different stocks moves together} } $$
+
+Then asks:
+
+Why?
+
+Possible reasons:
+
+$$ \boxed{ \begin{aligned} &\text{Market trading}\\ &\text{Market volume}\\ &\text{Volatility}\\ &\text{Interest rates}\\ &\text{Program trading}\\ &\text{Institutional trading}\\ &\text{Inventory risk}\\ &\text{Information asymmetry} \end{aligned} } $$
+
+Then they measure liquidity using:
+
+$$ \boxed{ QSPR,\ PQSPR,\ DEP,\ ESPR,\ PESPR } $$
+
+Then calculate daily proportional changes:
+
+$$ \boxed{ DL_t=\frac{L_t-L_{t-1}}{L_{t-1}} } $$
+
+Then estimate:
+
+$$ \boxed{ DL_{j,t} = \alpha_j+\beta_jDL_{M,t}+\epsilon_{j,t} } $$
+
+to test market-wide commonality.
+
+Then add industry:
+
+$$ \boxed{ DL_{j,t} = \alpha_j+ \beta_{j,M}DL_{M,t} + \beta_{j,I}DL_{I,t} + \epsilon_{j,t} } $$
+
+to separate:
+
+$$ \boxed{\text{Market commonality}} $$
+
+from
+
+$$ \boxed{\text{Industry commonality}} $$
+
+Finally, they investigate why these common movements occur by examining:
+
+number of trades
+trade size
+market volume
+industry volume
+
+to distinguish between:
+
+$$ \boxed{\text{Inventory-risk channel}} $$
+
+and
+
+$$ \boxed{\text{Asymmetric-information channel}} $$
+Very Important Exam Concepts
+
+You should be able to answer these immediately.
+
+1. What is commonality in liquidity?
+
+Liquidity measures of different securities exhibit correlated movements because they respond to common market/industry factors.
+
+2. What is QSPR?
+$$ \boxed{QSPR=P_A-P_B} $$
+
+Quoted bid-ask spread.
+
+Higher QSPR → lower liquidity.
+
+3. What is PQSPR?
+$$ \boxed{ PQSPR=\frac{P_A-P_B}{P_M} } $$
+
+Normalized quoted spread.
+
+4. What is DEP?
+$$ \boxed{ DEP=\frac{Q_A+Q_B}{2} } $$
+
+Average quoted depth.
+
+Higher DEP → greater liquidity.
+
+5. What is ESPR?
+$$ \boxed{ ESPR=2|P_t-P_M| } $$
+
+Effective spread.
+
+It measures how far the actual transaction price is from the midpoint.
+
+6. Why multiply by 2?
+
+Because the transaction is approximately:
+
+$$ P_t=P_M\pm\frac{Spread}{2} $$
+
+Therefore:
+
+$$ Spread=2|P_t-P_M| $$
+7. What is PESPR?
+$$ \boxed{ PESPR=\frac{2|P_t-P_M|}{P_t} } $$
+
+Normalized effective spread.
+
+8. Why use proportional changes?
+
+Because stocks have very different scales.
+
+$$ \boxed{ DL_t=\frac{L_t-L_{t-1}}{L_{t-1}} } $$
+
+makes changes comparable across stocks.
+
+9. What does \(\beta_j\) represent?
+
+Sensitivity of stock \(j\)'s liquidity to the common market liquidity factor.
+
+$$ \boxed{ \beta_j>0 \Rightarrow \text{positive commonality} } $$
+10. Why use lag and lead?
+
+To investigate the timing of commonality:
+
+$$ \text{Lag}=\text{previous day's market liquidity} $$ $$ \text{Concurrent}=\text{same day's market liquidity} $$ $$ \text{Lead}=\text{next day's market liquidity} $$
+11. Why introduce industry liquidity?
+
+To determine whether commonality is:
+
+$$ \text{market-wide} $$
+
+or
+
+$$ \text{industry-specific} $$
+12. What are the two major mechanisms?
+$$ \boxed{\text{Inventory risk}} $$
+
+and
+
+$$ \boxed{\text{Asymmetric information}} $$
+13. Why can volatility increase spreads?
+$$ Volatility\uparrow \Rightarrow Inventory\ risk\uparrow \Rightarrow Dealer\ compensation\uparrow \Rightarrow Spread\uparrow $$
+14. Why can informed trading increase spreads?
+$$ Informed\ trading\uparrow \Rightarrow Adverse\ selection\uparrow \Rightarrow Dealer\ expected\ loss\uparrow \Rightarrow Spread\uparrow $$
+15. Why is market volume different from individual trading frequency?
+
+Market volume can represent broad market participation/liquidity.
+
+Individual trading frequency can also capture the presence of informed traders.
+
+Therefore their effects on spreads can differ.
+
+One final mental picture
+
+Think of a market maker standing in the middle:
+
+Normal market
+
+$$ \text{Many buyers + sellers} $$
+
+↓
+
+$$ \text{Easy to trade} $$
+
+↓
+
+$$ \boxed{\text{Low spread + high depth}} $$
+
+Market-wide shock
+
+$$ \text{Volatility}\uparrow $$
+
+↓
+
+$$ \text{Inventory risk}\uparrow $$
+
+↓
+
+$$ \text{Dealer risk}\uparrow $$
+
+↓
+
+$$ \boxed{\text{Spreads}\uparrow,\quad \text{Depth}\downarrow} $$
+
+This happens across many stocks simultaneously.
+
+That's commonality in liquidity.
+
+Information shock
+
+$$ \text{Informed traders}\uparrow $$
+
+↓
+
+$$ \text{Adverse selection}\uparrow $$
+
+↓
+
+$$ \text{Dealer expected loss}\uparrow $$
+
+↓
+
+$$ \boxed{\text{Spread}\uparrow} $$
+
+And that explains why the paper studies trade frequency, trade size, market volume and industry volume after establishing that liquidity has common movements.
+

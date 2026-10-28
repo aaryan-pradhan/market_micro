@@ -1,0 +1,93 @@
+\section{The Avellaneda--Stoikov Model}
+\label{sec:model}
+
+This section restates only what the empirical work needs. Full derivations are in
+\cite{avellaneda2008} and \cite{amargos2026}.
+
+\subsection{Setup}
+
+Time runs over one trading session $t\in[0,T]$. We measure time in minutes, so $T=\Horizon$.
+The mid-price is an arithmetic Brownian motion with no drift,
+\begin{equation}
+dS_t = \sigma\, dW_t ,
+\label{eq:mid}
+\end{equation}
+where $\sigma$ is in rupees per $\sqrt{\text{minute}}$. The dealer posts a bid at $S_t-\delta^b_t$
+and an ask at $S_t+\delta^a_t$, with distances $\delta^b,\delta^a\ge 0$. Market orders hit the
+bid and lift the ask as two independent Poisson processes whose intensity depends only on the
+distance of the quote from the mid,
+\begin{equation}
+\lambda(\delta) = A\,e^{-k\delta}.
+\label{eq:lambda}
+\end{equation}
+$A$ is the fill rate of a quote sitting at the mid; $k$ is how fast that rate falls as the quote
+moves away. Each fill is one share. Inventory $q_t$ is bids filled minus asks filled, cash $X_t$
+moves by the fill prices, and the dealer maximises expected CARA utility of terminal wealth,
+$\mathbb{E}\big[-e^{-\gamma(X_T+q_TS_T)}\big]$, with absolute risk aversion $\gamma$ in $1/\text{INR}$.
+
+\subsection{The Optimal Quotes}
+
+Solving the Hamilton--Jacobi--Bellman equation with the CARA ansatz gives two closed-form
+objects~\cite{avellaneda2008}. The first is the \emph{reservation price}, the price at which the
+dealer is indifferent to holding one more share,
+\begin{equation}
+r(s,q,t) = s - q\,\gamma\sigma^2 (T-t).
+\label{eq:reservation}
+\end{equation}
+A long dealer ($q>0$) values the stock below the mid, a short dealer above it. The second is
+the optimal \emph{total spread}, centred on $r$ rather than on $s$,
+\begin{equation}
+\delta^a+\delta^b = \underbrace{\gamma\sigma^2(T-t)}_{\text{inventory-risk premium}}
+ \;+\; \underbrace{\frac{2}{\gamma}\ln\!\Big(1+\frac{\gamma}{k}\Big)}_{\text{market-making edge}} .
+\label{eq:spread}
+\end{equation}
+The first term pays for carrying inventory risk over the time left and shrinks to zero at the
+close. The second is what a dealer charges for liquidity alone; it depends only on how fast the
+order book thins out ($k$). Figure~\ref{fig:schematic} draws both objects. Together they are the
+whole strategy: quote $r\pm\frac12(\delta^a+\delta^b)$, floored so that neither quote crosses the
+mid.
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm,font=\small]
+  \foreach \xo/\rr/\ttl in {0/2.9/{(a) Flat dealer, $q=0$}, 7.9/2.05/{(b) Long dealer, $q>0$}} {
+    \begin{scope}[xshift=\xo cm]
+      \node[anchor=west] at (-0.1,5.0) {\ttl};
+      \draw[ink2, -{Stealth[length=2mm]}] (0,0.2) -- (0,4.6) node[above left, font=\footnotesize] {price};
+      \draw[ink, line width=0.9pt] (0,2.9) -- (6.0,2.9) node[right, font=\footnotesize] {$s$};
+      \draw[asdark, dashed, line width=0.8pt] (0,\rr) -- (6.0,\rr) node[right, font=\footnotesize] {$r$};
+      \fill[asblue, opacity=0.13] (0.9,\rr-1.05) rectangle (4.4,\rr+1.05);
+      \draw[asblue, line width=1.3pt] (0.9,\rr+1.05) -- (4.4,\rr+1.05) node[right, font=\footnotesize] {ask};
+      \draw[asblue, line width=1.3pt] (0.9,\rr-1.05) -- (4.4,\rr-1.05) node[right, font=\footnotesize] {bid};
+      \draw[decorate, decoration={brace, amplitude=4pt}, ink2] (0.75,2.9) -- (0.75,\rr+1.05)
+        node[midway, left=4pt, font=\footnotesize] {$\delta^a$};
+      \draw[decorate, decoration={brace, amplitude=4pt, mirror}, ink2] (0.75,2.9) -- (0.75,\rr-1.05)
+        node[midway, left=4pt, font=\footnotesize] {$\delta^b$};
+    \end{scope}
+  }
+  \draw[ink2, -{Stealth[length=2mm]}] (7.9+5.3,2.9) -- (7.9+5.3,2.05)
+    node[midway, right, font=\footnotesize, align=left] {skew\\$q\gamma\sigma^2(T-t)$};
+\end{tikzpicture}
+\caption{How the optimal quotes move with inventory. (a) A flat dealer quotes symmetrically
+around the mid. (b) A long dealer's reservation price falls below the mid, so the ask moves closer
+(it sells more often) and the bid moves away (it buys less often). The width of the band is the
+spread of equation~\eqref{eq:spread} and does not depend on $q$; only its position does.}
+\label{fig:schematic}
+\end{figure}
+
+\subsection{Assumption Ledger}
+\label{sec:ledger}
+
+The base paper lists the assumptions behind these formulas. We restate the ones that real data can
+test, numbered so that Section~\ref{sec:assumptions} can check each one.
+\begin{enumerate}
+\item[\textbf{A1}] \textbf{Exponential fill intensity:} $\lambda(\delta)=Ae^{-k\delta}$, equation~\eqref{eq:lambda}.
+\item[\textbf{A2}] \textbf{Symmetric book:} the same $A$ and $k$ on the bid and the ask side.
+\item[\textbf{A3}] \textbf{Driftless mid:} no predictable trend in $S_t$ over a session.
+\item[\textbf{A4}] \textbf{Independent Gaussian increments:} $S_t$ is a Brownian motion, so its
+  changes are uncorrelated, scale linearly in variance with the horizon, and are normal.
+\item[\textbf{A5}] \textbf{Constant parameters:} $\sigma$, $A$ and $k$ do not change within
+  a session or across sessions.
+\item[\textbf{A6}] \textbf{No adverse selection:} a fill tells the dealer nothing about where the
+  price goes next. This cannot be tested on its own; Section~\ref{sec:replay} measures its cost.
+\end{enumerate}

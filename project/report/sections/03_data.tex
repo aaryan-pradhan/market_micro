@@ -1,0 +1,71 @@
+\section{Data}
+\label{sec:data}
+
+\subsection{Source and Sample}
+
+We use one-minute OHLCV bars (open, high, low, close, volume) from Yahoo Finance for
+\RELIANCEDays{} NSE trading days, 30 September to 28 October 2026. Yahoo keeps one-minute
+history for about 30 days, so this is the full window available. Two cleaning steps matter:
+\begin{enumerate}
+\item \textbf{Session window.} Yahoo drops the 15:16--15:27 bars and then prints a single
+  catch-up bar at 15:28. Keeping that bar would create a fake volatility spike at the close.
+  We use the clean window 09:15--15:14, which gives exactly $T=\Horizon$ one-minute bars per day.
+\item \textbf{Minutes with no trade.} A missing bar inside the window means nobody traded that
+  minute. We carry the last close forward (the mid did not move), leave the high and low empty
+  (no quote could have been filled) and set volume to zero. Nothing is interpolated.
+\end{enumerate}
+The first \CalibDays{} days are the \emph{calibration window}; the remaining
+\RELIANCETestDays{} days are held out as the \emph{test window} (Figure~\ref{fig:prices}).
+
+\subsection{Choosing a Liquid and an Illiquid Stock}
+
+The model's predictions depend on liquidity: a thin book means fewer fills per unit of price risk,
+so inventory control should matter more. We therefore study a contrasting pair. RELIANCE is the
+most heavily traded NSE large-cap. For the illiquid stock we screened twelve small-caps by
+Amihud's~\cite{amihud2002} illiquidity ratio and by the share of minutes with no trade, and chose
+KSCL (Kaveri Seed). It is among the most illiquid names screened, it still trades in most
+minutes, and its price level is close enough to RELIANCE's that spreads in rupees are comparable.
+Table~\ref{tab:descriptive} and Figure~\ref{fig:liquidity} show how far apart the two are: KSCL's
+Amihud ratio is about 300 times RELIANCE's, and \KSCLNoTrade\% of its minutes have no trade.
+
+\begin{table}[!htbp]
+\centering
+\caption{Descriptive statistics, all \RELIANCEDays{} days, 09:15--15:14.}
+\label{tab:descriptive}
+\small
+\input{tables/descriptive}
+\end{table}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{data_price_paths}
+\caption{One-minute closing prices, all sessions placed end to end (thin vertical lines separate
+days). The shaded part is the calibration window; the model is tested only on the unshaded days.}
+\label{fig:prices}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{data_liquidity}
+\caption{Daily liquidity. (a) Amihud~\cite{amihud2002} illiquidity, $|R_d|$ per crore of traded
+value (log scale): KSCL is two to three orders of magnitude less liquid. (b) Roll~\cite{roll1984}
+spread, $2\sqrt{-\mathrm{Cov}(\Delta p_t,\Delta p_{t-1})}$; the measure is undefined (gaps) on days
+when the covariance is positive, which happens often for RELIANCE. (c) Share of minutes with no
+trade.}
+\label{fig:liquidity}
+\end{figure}
+
+\subsection{The Trading Day Is Not Uniform}
+
+Figure~\ref{fig:volume} shows the familiar intraday U-shape~\cite{admati1988}: trading is heaviest
+at the open and in the last half hour. KSCL's curve is noisier and has bursts in the middle of the
+day, typical of a stock where a few large orders dominate volume. This pattern matters for the
+model, which assumes order flow and volatility are constant through the session (A5).
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{data_intraday_volume}
+\caption{Average share of daily volume traded in each minute (thin: raw; thick: 9-minute moving
+average). The dashed line is a perfectly uniform day.}
+\label{fig:volume}
+\end{figure}

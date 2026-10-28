@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Midsem Formula Sheet</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false})"></script>
+<style>
+:root{
+  --bg:#f6f7f9; --ink:#171b24; --muted:#5a6273; --rule:#d9dee6; --card:#ffffff;
+  --accent:#2346a0; --gap:#8a4b00; --gapbg:#fdf1de; --idea:#eef2fb;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0f1218; --ink:#e4e7ee; --muted:#98a1b3; --rule:#283042; --card:#161a22;
+    --accent:#93abff; --gap:#f0b35a; --gapbg:#2a2010; --idea:#1a2033;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0f1218; --ink:#e4e7ee; --muted:#98a1b3; --rule:#283042; --card:#161a22;
+  --accent:#93abff; --gap:#f0b35a; --gapbg:#2a2010; --idea:#1a2033;
+}
+body{background:var(--bg);color:var(--ink);font:20px/1.75 "MesloLGS Nerd Font Propo","MesloLGS NF","MesloLGS Nerd Font",ui-monospace,monospace;padding-inline:16px;padding-block:24px 64px}
+.wrap{max-width:52rem;margin:0 auto}
+h1,h2,h3{font-family:"MesloLGS Nerd Font Propo","MesloLGS NF","MesloLGS Nerd Font",ui-monospace,monospace;font-weight:700;text-wrap:balance;line-height:1.2}
+h1{font-size:2.4rem;margin:0 0 .25rem}
+h2{font-size:1.7rem;margin:3rem 0 .75rem;padding-top:1rem;border-top:1px solid var(--rule)}
+h3{font-size:1.2rem;margin:0 0 .4rem}
+.sub{color:var(--muted);margin:0 0 1.25rem}
+.bar{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-bottom:1rem}
+button{font:inherit;font-size:.9rem;color:var(--accent);background:transparent;border:1px solid var(--rule);border-radius:6px;padding:.3rem .8rem;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+nav.toc{font-size:.92rem;columns:2 14rem;column-gap:2rem;margin:0 0 1rem;padding:0}
+nav.toc a{display:block;color:var(--muted);text-decoration:none;padding:.1rem 0;break-inside:avoid}
+nav.toc a:hover{color:var(--accent)}
+a{color:var(--accent)}
+.idea{background:var(--idea);border-radius:8px;padding:.8rem 1rem;margin:.5rem 0 1.25rem}
+.idea p,.idea ol,.idea ul{margin:.3rem 0}
+.prob{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem;margin:1rem 0}
+.prob > p{margin:.2rem 0 .6rem}
+.ans{font-weight:600}
+.sec{border-top:1px solid var(--rule);padding:.45rem 0}
+.sh{color:var(--accent);font-weight:600;font-size:.95rem;margin:0}
+.sec > *:not(.sh){margin-top:.5rem}
+ol.pf{padding-left:1.6rem;margin:.4rem 0}
+ol.pf li{margin:.2rem 0}
+.why{color:var(--muted);font-size:.85em;white-space:nowrap}
+.qed{float:right;color:var(--muted)}
+.claim{margin:.3rem 0}
+.gap{background:var(--gapbg);color:var(--gap);border-radius:6px;padding:.5rem .8rem;font-size:.92rem}
+table{border-collapse:collapse;font-size:.92rem}
+.tw{overflow-x:auto}
+td,th{border:1px solid var(--rule);padding:.25rem .6rem;text-align:center;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+@media print{body{font-size:11pt;padding:0;background:#fff}nav.toc,#q{display:none}h2{break-before:page;margin-top:0}h1+p+nav+h2,h1+p+h2{break-before:auto}.idea,.gap,tr,li{break-inside:avoid}a{color:inherit;text-decoration:none}}
+</style>
+<style>.katex{font-size:1.15em}.katex-display{overflow-x:auto;overflow-y:hidden;padding:.2rem 0}</style>
+<style>
+pre{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:.6rem .8rem;font-size:.85rem;overflow-x:auto}
+.fig{display:block;margin:.8rem auto;max-width:100%;height:auto;font-size:13px}
+.fig text{fill:var(--ink);font-family:inherit}
+.fig .m{fill:var(--muted)} .fig .a{fill:var(--accent)} .fig .g{fill:var(--gap)}
+.fig .ln{stroke:var(--ink);fill:none;stroke-width:1.5}
+.fig .mu{stroke:var(--muted);fill:none;stroke-width:1}
+.fig .ac{stroke:var(--accent);fill:none;stroke-width:2.5}
+.fig .rg{fill:var(--accent);fill-opacity:.22;stroke:var(--accent);stroke-width:1.5}
+.fig .bad{fill:var(--gap);fill-opacity:.28;stroke:var(--gap);stroke-width:1.5}
+.fig .nd{fill:var(--card);stroke:var(--ink);stroke-width:1.5}
+.fig .dot{fill:var(--ink)} .fig .adot{fill:var(--accent)}
+.fig .dsh{stroke-dasharray:5 4} .fig .gl{stroke:var(--gap);fill:none;stroke-width:2.5} .fig .ink{fill:var(--ink)} .fig .bg{fill:var(--bg);stroke:var(--rule)} .fig .thk{stroke-width:4.5;stroke-linecap:round} .fig .sol{fill:var(--ink);fill-opacity:.55;stroke:var(--ink);stroke-width:1}
+.pf li{margin:.55rem 0} .pf .r{display:block;margin-top:.15rem;font-size:.93em} .pf .r > b:first-child{color:var(--accent)} .setup{margin:.3rem 0 .5rem}
+.prob > p.stmt{margin:.35rem 0 .5rem}
+.ahp{fill:var(--ink)} .ahpa{fill:var(--accent)}
+</style>
+<style>.brute td{text-align:left}.brute td:first-child{color:var(--muted);white-space:nowrap}.brute tr.dies td:first-child{color:var(--gap)}.brute tr.therefore td:first-child{color:var(--accent)}</style>
+<div class="wrap">
+<h1>Midsem Formula Sheet</h1>
+<p class="sub"><a href="index.html">← Index</a> · BM51002 · 5 inventory models + Roll + CRS + Amihud · midsem 29 Sep 2026. Full derivations are on the ledger pages.</p>
+<nav class="toc">
+<a href="#chain">0 · The chain in one table</a>
+<a href="#garman">1 · Garman (1976)</a>
+<a href="#am">2 · Amihud &amp; Mendelson (1980)</a>
+<a href="#stoll">3 · Stoll (1978)</a>
+<a href="#hs">4 · Ho &amp; Stoll (1981)</a>
+<a href="#oo">5 · O'Hara &amp; Oldfield (1986)</a>
+<a href="#roll">6 · Roll (1984)</a>
+<a href="#crs">7 · Chordia, Roll &amp; Subrahmanyam (2000)</a>
+<a href="#amihud">8 · Amihud (2002)</a>
+</nav>
+
+<div class="idea"><p><b>Point of view.</b> Every model is written from the <b>dealer's</b> side. The ask \(p_a\) is the price at which the dealer sells (a public buy). The bid \(p_b\) is the price at which the dealer buys (a public sell). Spread = ask − bid. A public sell raises the dealer's stock; a public buy lowers it.</p>
+<p><b>Why inventory matters (slide 2):</b> the dealer's wealth is limited; buys and sells arrive at different times, so he must hold inventory to bridge the gap; holding inventory costs money and carries risk.</p></div>
+
+<h2 id="chain">0 · The chain in one table</h2>
+<div class="tw"><table>
+<tr><th>Model</th><th>Time</th><th>Dealer</th><th>Spread comes from</th><th>Inventory affects</th></tr>
+<tr><td>Garman 76</td><td>continuous, fixed quotes</td><td>risk-neutral, can't borrow</td><td>avoiding failure (gambler's ruin)</td><td>nothing (quotes fixed)</td></tr>
+<tr><td>A–M 80</td><td>continuous, birth–death</td><td>risk-neutral, inventory bounds</td><td>max expected profit per unit time</td><td>both quotes (both ↓ as I ↑)</td></tr>
+<tr><td>Stoll 78</td><td>2 periods</td><td><b>risk-averse</b></td><td>holding + order + information cost</td><td>placement only, not spread</td></tr>
+<tr><td>Ho–Stoll 81</td><td>multi-period DP</td><td>risk-averse</td><td>risk-neutral part + risk adjustment</td><td>placement only, not spread</td></tr>
+<tr><td>O'H–O 86</td><td>discrete, infinite horizon</td><td>risk-averse</td><td>limit orders + risk-neutral + risk adj.</td><td><b>size and placement</b></td></tr>
+</table></div>
+<p>Each one fixes the previous one: Garman's quotes can't react to inventory → A–M lets them. A–M is risk-neutral → Stoll adds risk aversion. Stoll is one period → Ho–Stoll goes multi-period with random order flow and random returns. Ho–Stoll has market orders only and a fixed horizon → O'Hara–Oldfield adds limit orders and an infinite horizon.</p>
+
+<h2 id="garman">1 · Garman (1976): fixed quotes and gambler's ruin</h2>
+<div class="prob">
+<div class="sec"><p class="sh">Setup</p><p>One monopolist dealer. Fixed \(p_a, p_b\). Public buys arrive as Poisson with rate \(\lambda_a(p_a)\) (falls as \(p_a\) rises), public sells arrive as Poisson with rate \(\lambda_b(p_b)\) (rises as \(p_b\) rises). He cannot borrow. <b>Failure</b> = cash hits 0 or stock hits 0.</p>
+<p>\(I_s(t) = I_s(0) + N_S(t) - N_B(t)\) and \(I_c(t) = I_c(0) + p_a N_B(t) - p_b N_S(t)\).</p></div>
+<div class="sec"><p class="sh">Formulas</p>
+<p>Stock failure: \(\;\left(\dfrac{\lambda_a}{\lambda_b}\right)^{I_s(0)}\) if \(\lambda_b &gt; \lambda_a\), else \(1\).</p>
+<p>Cash failure: \(\;\approx\left(\dfrac{\lambda_b p_b}{\lambda_a p_a}\right)^{I_c(0)/\bar p}\) if \(\lambda_a p_a &gt; \lambda_b p_b\), else \(1\).</p>
+<p>Survival needs both: \(\lambda_b &gt; \lambda_a\) and \(\lambda_a p_a &gt; \lambda_b p_b\). Together these give <span class="ans">\(p_a &gt; p_b\)</span>, so a positive spread is necessary to avoid certain failure.</p>
+<p>Gambler's ruin (steps ±1, up with probability \(q\), \(\rho = (1-q)/q\)): \(P(\text{hit } 0 \mid \text{start } k) = \rho^k\) if \(\rho &lt; 1\), and \(1\) if \(\rho \ge 1\).</p>
+<p>Profit max with linear rates \(\lambda_b = \alpha + \beta p_b\), \(\lambda_a = \gamma - \delta p_a\), and a matched rate \(\lambda\):</p>
+<p class="ans">\(\bar\lambda = \dfrac{\gamma\beta + \alpha\delta}{2(\beta+\delta)},\quad \bar p_b = \dfrac{\bar\lambda-\alpha}{\beta},\quad \bar p_a = \dfrac{\gamma-\bar\lambda}{\delta},\quad \bar\pi = (\bar p_a - \bar p_b)\,\bar\lambda\)</p></div>
+<div class="sec"><p class="sh">Numerical recipes</p><ul>
+<li>Poisson thinning: total rate \(\lambda\), buy with probability \(p\) ⇒ buys ~ Poisson(\(p\lambda\)), sells ~ Poisson(\((1-p)\lambda\)), independent. (2024: 5/min, 0.6 → 3 buys, 2 sells.)</li>
+<li>Given \(n\) orders in total, buys ~ Binomial(\(n, p\)).</li>
+<li>Profit = spread × <b>matched</b> rate \(\min(\lambda_a,\lambda_b)\), not × \((\lambda_a+\lambda_b)\). (2025: \(\bar\lambda = 8\), \(\pi = 5\) ⇒ \(S = 0.625\).)</li>
+<li>Drift of stock = \(\lambda_b - \lambda_a\) per unit time. 12 buys vs 8 sells per hour ⇒ stock falls 4 per hour ⇒ certain stock failure, so raise <i>both</i> quotes.</li></ul></div>
+<div class="sec"><p class="sh">Exam</p><p><b>Gotcha:</b> zero drift (\(\lambda_a = \lambda_b\)) is <i>not</i> safe: \(\rho = 1\), so failure is certain. Even with a positive spread, failure has positive probability.</p>
+<p><b>Findings:</b> dealer's problem with asynchronous buy and sell orders; a dealer market is imperfect (inventory, not one clearing price, makes trade happen); inventory matters because running out means failure; the spread is partly there to cut failure probability, and reflects profit maximisation.</p>
+<p><b>Recognize:</b> "fixed bid and ask", "Poisson arrivals", "cannot borrow", "failure / ruin", "temporal microstructure".</p></div></div>
+
+<h2 id="am">2 · Amihud &amp; Mendelson (1980): quotes depend on inventory</h2>
+<div class="prob">
+<div class="sec"><p class="sh">Setup</p><p>Garman's dealer, but at inventory level \(j\) he posts \(P_{aj}, P_{bj}\). Demand (buy) rate \(D(P_a)\), supply (sell) rate \(S(P_b)\). Inventory is bounded, \(0 \le j \le K\): a birth–death process. He maximises expected average profit per unit time, so he is <b>risk-neutral</b>.</p></div>
+<div class="sec"><p class="sh">Results</p>
+<p class="ans">\(P_{bj} &lt; \Delta_{j+1} &lt; \Delta_j &lt; P_{aj}\)</p>
+<p>Here \(\Delta_j\) is the marginal worth of the \(j\)-th share. So the spread is positive at every level, and both quotes are <b>decreasing</b> in inventory. The drift \(\lambda_j - \mu_j\) is positive at \(j=0\) and negative at \(j=K\), so there is a <b>preferred inventory position</b> that the quotes push toward.</p></div>
+<div class="sec"><p class="sh">Numerical recipe</p><p>Zero drift ⇔ \(D(P_a) = S(P_b)\): solve for the missing price. Total rate \(= D(P_a) + S(P_b)\). (2025: \(D = 100 - 2P_a\), \(S = 20 + P_b\), \(P_a = 30\) ⇒ \(D = 40 = 20 + P_b\) ⇒ \(P_b = 20\), spread 10, rate 80.)</p></div>
+<div class="sec"><p class="sh">Exam</p><p><b>Gotcha:</b> high inventory moves <i>both</i> quotes down; the spread does not just widen. The inventory effect comes from the inventory bounds, not from risk aversion (the slide saying "risk-averse" is wrong).</p>
+<p><b>Findings:</b> bid and ask monotone decreasing in inventory; there is a preferred inventory position; positive spread; the preferred position depends on order arrival rates, not on the asset's value.</p>
+<p><b>Recognize:</b> "prices depend on inventory", "birth–death", "preferred position", "extension of Garman".</p></div></div>
+
+<h2 id="stoll">3 · Stoll (1978): the risk-averse dealer's cost of immediacy</h2>
+<div class="prob">
+<div class="sec"><p class="sh">Setup</p><p>Two periods. The dealer maximises \(E\,U(\text{terminal wealth})\). He accepts a trade of size \(Q_i\) at cost \(C_i\) when it leaves expected utility unchanged: \(E\,U(\tilde W^*) = E\,U(\tilde W^* + \tilde X)\). Relative risk aversion \(z = -U''W_0/U'\), so \(z/W_0\) is the absolute risk aversion. \(Q_p\) = existing trading inventory. \(\sigma_{ip}\) = the <b>covariance</b> of stock \(i\) with that inventory. \(\sigma_i^2\) = variance of stock \(i\).</p></div>
+<div class="sec"><p class="sh">Formulas</p>
+<p>Cost per rupee (2.14): <span class="ans">\(c_i = \dfrac{z}{W_0}\sigma_{ip}Q_p + \dfrac12\dfrac{z}{W_0}\sigma_i^2 Q_i\)</span> (\(Q_i &gt; 0\) when the dealer buys, \(&lt; 0\) when he sells).</p>
+<p>Bid: \(\dfrac{P^* - P_b}{P^*} = c_i(+|Q|)\). Ask: \(\dfrac{P_a - P^*}{P^*} = -c_i(-|Q|)\).</p>
+<p>Spread (2.16): <span class="ans">\(s_i = \dfrac{z}{W_0}\sigma_i^2|Q|\)</span>, with no \(Q_p\) term.</p>
+<p>With order cost \(M\) and information cost \(a_i\): <span class="ans">\(s_i = \dfrac{z\sigma_i^2}{W_0}|Q| + 2a_i + \dfrac{2M}{|Q|}\)</span> (holding + information + order). This is U-shaped in \(|Q|\).</p>
+<p>Optimal scale: \(Q^* = \sqrt{\dfrac{2MW_0}{z\sigma_i^2}}\). Number of dealers: \(d^* = |D_i|/Q^*\).</p></div>
+<div class="sec"><p class="sh">Example</p><p>\(z/W_0 = 2\times10^{-6}\), \(\sigma_i^2 = 0.04\), \(|Q| = 50{,}000\), \(\sigma_{ip}Q_p = 0.02\times200{,}000\), \(P^* = 100\). Inventory term 0.008, size term 0.002 ⇒ bid 99.00, ask 99.40, spread 0.40. With \(Q_p = 0\): bid 99.80, ask 100.20, and the spread is still 0.40.</p></div>
+<div class="sec"><p class="sh">Exam</p><p><b>Gotcha:</b> "independent of inventory" is true for the <i>spread</i>, not the quotes: \(Q_p\) shifts bid and ask together. Higher \(W_0\) lowers cost; higher \(z\) raises it. The spread is not just a transaction cost: it pays for risk bearing (holding), order processing and adverse selection (information). Competition among dealers drives the scale to \(Q^*\) and the number of dealers to \(d^*\).</p>
+<p><b>Findings:</b> cost = holding + order + information; spread linear in risk aversion, trade size and variance; independent of initial inventory; optimal scale \(Q^*\) and equilibrium number of dealers \(d^*\).</p>
+<p><b>Recognize:</b> "risk-averse dealer", "utility of terminal wealth", "two-period", "cost of immediacy", "number of dealers".</p></div></div>
+
+<h2 id="hs">4 · Ho &amp; Stoll (1981): multi-period, random orders and returns</h2>
+<div class="prob">
+<div class="sec"><p class="sh">Setup</p><p>Continuous time, horizon \(T\), time left \(\tau = T - t\). Orders arrive as Poisson with <b>linear demand</b> \(\lambda_a = \alpha - \beta a\) and \(\lambda_b = \alpha - \beta b\), where \(a, b\) are fees: ask \(= p + a\) and bid \(= p - b\). Inventory returns follow a Brownian motion with variance \(\sigma^2\). Wealth \(W = F\,(\text{cash}) + I\,(\text{inventory}) + Y\,(\text{base wealth})\). Absolute risk aversion \(R = -U''/U'\). Solved by dynamic programming; there is <b>no closed form</b> (Taylor series in \(\tau\)).</p></div>
+<div class="sec"><p class="sh">Formulas (first order in \(\tau\))</p>
+<p class="ans">\(b^* = \dfrac{\alpha}{2\beta} + \dfrac{R\sigma^2\tau}{4}(2I + Q),\qquad a^* = \dfrac{\alpha}{2\beta} + \dfrac{R\sigma^2\tau}{4}(Q - 2I)\)</p>
+<p class="ans">\(a^* + b^* = \underbrace{\dfrac{\alpha}{\beta}}_{\text{risk-neutral}} + \underbrace{\tfrac12 R\sigma^2 Q\tau}_{\text{risk adjustment}}\)</p>
+<p>The \(\pm 2I\) cancel, so \(I\) is gone from the spread. Long inventory (\(I &gt; 0\)) raises \(b^*\) and lowers \(a^*\), so both prices move <b>down</b>.</p></div>
+<div class="sec"><p class="sh">Example</p><p>\(\alpha/2\beta = 0.25\%\), \(R\sigma^2\tau/4 = 10^{-8}\), \(Q = 50{,}000\). At \(I = 0\): bid 99.70, ask 100.30, spread 0.60%. At \(I = 100{,}000\): bid 99.50, ask 100.10, spread still 0.60%. With \(\tau = 0.1\): spread 0.51%.</p>
+<p>2024 Q3: bid 98, ask 100, holding 1,000 shares, sells 200 ⇒ spread profit \(200\times2 = \$400\), inventory 800, a $3 price drop costs \(800\times3 = \$2{,}400\). Inventory risk can dwarf spread revenue.</p></div>
+<div class="sec"><p class="sh">Exam</p><p><b>Gotcha:</b> "the spread does not depend on inventory, but the dealer's price adjustment does". The risk part shrinks as \(\tau \to 0\), so the spread narrows toward the close.</p>
+<p><b>Findings:</b> the dealer's risk depends on the time horizon and falls as the end of trading nears; spread = risk-neutral spread + an uncertainty adjustment; the adjustment depends on transaction size, return variance and risk attitude; the spread is independent of inventory but placement is not; in an inactive stock with a minimum trade obligation, profit may not cover the risk; no closed form.</p>
+<p><b>Recognize:</b> "multi-period", "dynamic programming", "Poisson + Brownian / Wiener", "time horizon", "transaction and return uncertainty".</p></div></div>
+
+<h2 id="oo">5 · O'Hara &amp; Oldfield (1986): limit + market orders</h2>
+<div class="prob">
+<div class="sec"><p class="sh">Setup</p><p>Discrete time: \(n\) intervals per day, infinite horizon, objective \(E\sum_j \phi^j U(\text{daily profit})\). Buy orders \(= \alpha - a_n\gamma + \tilde\omega_n\) and sell orders \(= \beta + b_n\phi + \tilde\varepsilon_n\): the <b>limit</b> part is known, the <b>market</b> part (\(\tilde\omega, \tilde\varepsilon\)) is random. Inventory is carried overnight at repo rate \(r\), and its value is \(V(I_n)\).</p></div>
+<div class="sec"><p class="sh">Formulas</p>
+<p>\(a_n = \dfrac{\alpha}{2\gamma} + \dfrac{E(U'\tilde\omega_n)}{2\gamma E(U')} + \dfrac{rE(U'\tilde p)}{2E(U')} + \dfrac{E(V')}{2E(U')}\)</p>
+<p>\(b_n = -\dfrac{\beta}{2\phi} - \dfrac{E(U'\tilde\varepsilon_n)}{2\phi E(U')} + \dfrac{rE(U'\tilde p)}{2E(U')} + \dfrac{E(V')}{2E(U')}\)</p>
+<p class="ans">\(a_n - b_n = \underbrace{\dfrac{\alpha\phi + \beta\gamma}{2\phi\gamma}}_{\text{known limit orders}} + \underbrace{\dfrac{\phi E\tilde\omega_n + \gamma E\tilde\varepsilon_n}{2\phi\gamma}}_{\text{risk-neutral (expected market orders)}} + \underbrace{\dfrac{\phi\,\text{cov}(U',\tilde\omega_n) + \gamma\,\text{cov}(U',\tilde\varepsilon_n)}{2\phi\gamma E(U')}}_{\text{risk adjustment}}\)</p>
+<p>Key tool: \(E(U'X) = E(U')E(X) + \text{cov}(U', X)\). Risk-neutral ⇒ \(U'\) constant ⇒ covariances are 0.</p></div>
+<div class="sec"><p class="sh">Exam</p><p><b>Gotcha:</b> the risk adjustment can have either sign, so the <b>risk-averse spread can be smaller</b> than the risk-neutral one. The inventory terms cancel out of \(a_n - b_n\), yet inventory still changes the spread through \(U'\) inside the covariances. So inventory affects both size and placement.</p>
+<p><b>Findings:</b> spread = known limit orders + risk-neutral adjustment for expected market orders + risk adjustment for market-order and inventory-value uncertainty; risk aversion affects both the spread and the individual quotes; inventory has a pervasive effect; new features: limit and market orders, discrete multi-period, daily payoff, no liquidation date, no fixed stock value.</p>
+<p><b>Recognize:</b> "limit and market orders", "discrete time, infinite horizon", "overnight repo", "three components of the spread".</p></div></div>
+
+<h2 id="roll">6 · Roll (1984): the spread hidden in price changes</h2>
+<div class="prob">
+<div class="sec"><p class="sh">Setup</p><p>(A1) \(P_t = V_t + \tfrac12 S\,Q_t\) with \(Q_t = \pm1\) (buy / sell). (A2) \(V_t = V_{t-1} + \varepsilon_t\): a random walk, so the market is efficient, with variance \(\sigma^2\). (A3) Buy or sell with probability ½ each. (A4) Different trades are independent. (A5) \(\varepsilon\) is independent of \(Q\).</p></div>
+<div class="sec"><p class="sh">Formulas</p>
+<p>\(\Delta P_t = \varepsilon_t + \tfrac12 S(Q_t - Q_{t-1})\)</p>
+<p class="ans">\(\text{Var}(\Delta P) = \underbrace{\sigma^2}_{\text{fundamental}} + \underbrace{\tfrac12 S^2}_{\text{transitory}},\qquad \text{Cov}(\Delta P_t, \Delta P_{t-1}) = -\tfrac14 S^2\)</p>
+<p class="ans">\(S = 2\sqrt{-\text{Cov}(\Delta P_t, \Delta P_{t-1})},\qquad \hat\sigma^2 = \widehat{\text{Var}}(\Delta P) + 2\,\widehat{\text{Cov}}\)</p></div>
+<div class="sec"><p class="sh">Example</p><p>\(V = 50\), \(S = 0.20\). Nine price changes: −0.2, 0, +0.2, −0.2, +0.2, 0, 0, 0, −0.2 ⇒ \(\widehat{\text{Cov}} = -0.08/8 = -0.01\) ⇒ \(\hat S = 2\sqrt{0.01} = 0.20\).</p></div>
+<div class="sec"><p class="sh">Volatility links</p><ul>
+<li>Fundamental (permanent) volatility comes from news: \(\sigma^2\). Transitory volatility comes from trading frictions: \(\tfrac12 S^2\). A negative serial covariance is the sign of transitory volatility.</li>
+<li>Liquidity ↑ ⇒ transaction costs ↓ ⇒ transitory volatility ↓.</li>
+<li>News traders' price impacts add to <b>fundamental</b> volatility. Value traders reverse transitory moves, so they <b>reduce transitory</b> volatility.</li></ul></div>
+<div class="sec"><p class="sh">Exam</p><p><b>Gotcha / limitations:</b> the sample covariance is often <b>positive</b>, and then \(\sqrt{-\text{Cov}}\) is undefined (Hasbrouck finds this for about half of stocks). Causes: small samples; \(V\) not a random walk; quotes that move with informed order flow; clustered orders (buys following buys), which bias \(\hat S\) down.</p>
+<p><b>Findings:</b> the effective spread can be measured from the serial covariance of price changes alone, with no quote data; it is estimated on NYSE and AMEX daily and weekly returns for 1963–1982; the estimated spread is strongly related to firm size (smaller firms have bigger spreads).</p>
+<p><b>Recognize:</b> "spread without quote data", "implicit / effective spread", "bid–ask bounce", "negative serial covariance".</p></div></div>
+
+<h2 id="crs">7 · Chordia, Roll &amp; Subrahmanyam (2000): commonality in liquidity</h2>
+<div class="prob">
+<div class="sec"><p class="sh">Five measures (averaged over a stock's trades each day)</p><div class="tw"><table>
+<tr><th>Measure</th><th>Formula</th><th>Unit</th></tr>
+<tr><td>QSPR (quoted)</td><td>\(P_A - P_B\)</td><td>$</td></tr>
+<tr><td>PQSPR</td><td>\((P_A - P_B)/P_M\)</td><td>fraction of mid</td></tr>
+<tr><td>DEP (depth)</td><td>\(\tfrac12(Q_A + Q_B)\)</td><td>shares</td></tr>
+<tr><td>ESPR (effective)</td><td>\(2\,|P_t - P_M|\)</td><td>$</td></tr>
+<tr><td>PESPR</td><td>\(2\,|P_t - P_M|/P_t\)</td><td>fraction of trade price</td></tr>
+</table></div>
+<p>Example: bid 49.90 (600 shares), ask 50.10 (1,000 shares), trade at 50.08 ⇒ QSPR 0.20, PQSPR 0.40%, DEP 800, ESPR 0.16, PESPR 0.32%.</p>
+<p>Spreads measure <b>width</b>; DEP measures <b>depth</b>. The other two dimensions of liquidity are immediacy and resiliency.</p></div>
+<div class="sec"><p class="sh">Commonality regression</p>
+<p class="ans">\(DL_{j,t} = \alpha_j + \beta_j\,DL_{M,t} + (\text{lag and lead of } DL_M) + \text{controls} + e_{j,t}\)</p>
+<p>\(DL_t = (L_t - L_{t-1})/L_{t-1}\) is the proportional daily change. \(DL_M\) is the equal-weighted average over all stocks <b>except \(j\)</b>. Run one time-series regression per stock, then report the <b>cross-sectional mean</b> of the \(\beta_j\) with \(t = \bar\beta/(sd/\sqrt N)\). \(\beta_j = \sum(x-\bar x)(y-\bar y)/\sum(x-\bar x)^2\).</p>
+<p>Result: mean concurrent \(\beta\) for DQSPR is 0.690 (t = 28.3), for DPQSPR 0.791. Lag and lead coefficients are small. \(R^2\) is small (about 0.01–0.02) but significant.</p></div>
+<div class="sec"><p class="sh">Exam</p><p><b>Gotcha:</b> the regression uses changes, not levels. Stock \(j\) is left out of the market average. A low \(R^2\) does not mean no commonality. A stock's <i>own</i> number of trades <b>raises</b> its spread (information risk); <i>market</i> trading volume <b>lowers</b> it (inventory risk).</p>
+<p><b>Findings:</b> spreads and depth co-move with market-wide and industry-wide liquidity; the common part is small but significant, so liquidity is a systematic, non-diversifiable risk; later work links commonality to correlated institutional trading, investor sentiment and funding constraints, and finds it in 40 markets (Karolyi et al. 2012).</p>
+<p><b>Recognize:</b> "commonality", "co-movement of spreads across stocks", "market-wide liquidity factor".</p></div></div>
+
+<h2 id="amihud">8 · Amihud (2002): ILLIQ and stock returns</h2>
+<div class="prob">
+<div class="sec"><p class="sh">Formula</p>
+<p class="ans">\(\text{ILLIQ}_{iy} = \dfrac{1}{D_{iy}}\sum_{d=1}^{D_{iy}} \dfrac{|R_{iyd}|}{\text{VOLD}_{iyd}}\;(\times 10^6)\)</p>
+<p>This is the average absolute return per dollar traded, i.e. the price move per $1 million traded. Higher ILLIQ means <b>less</b> liquid. Compare the Amivest ratio \(\sum\text{VOLD}/\sum|R|\), where higher means <b>more</b> liquid.</p>
+<p>Example: \(|R| = 2\%\) on $2M of volume ⇒ \(10^{-8}\) per dollar, 0.01 after ×10⁶. With 100 times the volume, ILLIQ is 100 times smaller.</p>
+<p>Validity: \(\text{ILLIQ} = -292 + 247.9\lambda + 49.2\psi\), with \(R^2 = 0.30\). It rises with Kyle's \(\lambda\) (price impact) and with \(\psi\) (fixed cost).</p></div>
+<div class="sec"><p class="sh">Results</p><ul>
+<li><b>Cross-section</b> (Fama–MacBeth, NYSE 1963–1997): expected return rises with ILLIQ, even after controlling for beta and size. This is the illiquidity premium. Characteristics are taken from the <b>previous</b> year.</li>
+<li><b>Time series:</b> <b>expected</b> market illiquidity has a <b>+</b> coefficient on future excess returns. <b>Unexpected</b> illiquidity has a <b>−</b> coefficient on same-period returns: the required return \(r\) rises, so the price \(P = D/r\) falls now.</li>
+<li>Both effects are stronger for small stocks ("flight to liquidity"). The equity premium partly pays for illiquidity.</li></ul></div>
+<div class="sec"><p class="sh">Exam</p><p><b>Gotcha:</b> ILLIQ measures illiquidity, and Amivest measures liquidity. An unexpected rise in illiquidity means <b>lower</b> returns now, not higher.</p>
+<p><b>Recognize:</b> "\(|R|/\text{VOLD}\)", "price impact from daily data", "illiquidity premium", "expected vs unexpected illiquidity".</p></div></div>
+
+</div>

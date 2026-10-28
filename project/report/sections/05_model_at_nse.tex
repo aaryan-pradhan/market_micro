@@ -1,0 +1,60 @@
+\section{The Optimal Quotes at NSE Parameters}
+\label{sec:nse}
+
+\subsection{Choosing the Risk Aversion}
+
+The data pin down $\sigma$, $A$ and $k$; the risk aversion $\gamma$ is the dealer's choice. We set
+$\gamma=\GammaRA$ per rupee by a simple rule: at the open, the two terms of the spread in
+equation~\eqref{eq:spread} should be about equal for the liquid stock. For RELIANCE the
+inventory-risk premium at the open is then \textrm{INR}~0.82 and the market-making edge is
+\textrm{INR}~0.79, so neither consideration dominates the quotes. The same $\gamma$ is used for
+KSCL, because risk aversion belongs to the dealer, not to the stock. Section~\ref{sec:mc} shows the
+conclusions do not depend on this choice.
+
+\subsection{What the Quotes Look Like}
+
+Figure~\ref{fig:quotes} plots the bid and ask against inventory. Each share of inventory moves
+both quotes by $\gamma\sigma^2(T-t)$, which at the open is \textrm{INR}~0.82 for RELIANCE and
+\textrm{INR}~1.34 for KSCL. This is large relative to the half-spread, so the skew quickly runs into
+the constraint $\delta\ge0$: a dealer long a few shares posts its ask at the mid, the most
+aggressive price it is allowed, and moves its bid far away. The quotes are steeper at 09:15 than
+at 12:15 because there is more time left in which the inventory could lose value.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{model_quotes_vs_inventory}
+\caption{Optimal bid and ask relative to the mid against inventory, at the open (solid, dark) and at
+midday (light). The dashed line is the reservation price. When the dealer is long, the ask hits the
+mid and stays there (the $\delta^a\ge 0$ constraint).}
+\label{fig:quotes}
+\end{figure}
+
+Figure~\ref{fig:spreaddecomp} splits the total spread into its two parts across the session. The
+edge term is constant; the inventory-risk premium falls linearly to zero at the close, so the dealer
+quotes widest at the open and narrowest at the end. KSCL's spread is wider throughout: its book
+thins out more slowly (lower $k$, larger edge) and its price is more volatile (larger premium). The
+dashed line is the spread the market actually charges, measured by Roll's estimator. We return to the
+gap between them in Section~\ref{sec:discussion}.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{model_spread_decomposition}
+\caption{Optimal total spread through the session, split into the market-making edge (light) and the
+inventory-risk premium (dark), at the calibrated parameters and $\gamma=\GammaRA$. Dashed: the
+market's average Roll spread.}
+\label{fig:spreaddecomp}
+\end{figure}
+
+Figure~\ref{fig:heatmap} shows the full quoting rule as a map: the skew $r-s$ for every combination of
+time and inventory. Red means the dealer prices the stock above the mid (it is short and wants to
+buy); blue means below (it is long and wants to sell). The contours fan out to the right: the same
+inventory produces less skew as the close approaches, because there is less time for the price to
+move against it.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{model_skew_heatmap}
+\caption{Reservation price minus mid, $-q\gamma\sigma^2(T-t)$, over time of day and inventory.
+Contours at $\pm0.5$, $\pm1$ and $\pm2$ rupees.}
+\label{fig:heatmap}
+\end{figure}

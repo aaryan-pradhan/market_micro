@@ -1,0 +1,160 @@
+\section{Do the Assumptions Hold? Calibration and Tests}
+\label{sec:assumptions}
+
+\subsection{Measuring Fill Intensity from Bars}
+
+Bars do not show the order book, so we infer fills from price excursions. Suppose that at the end
+of minute $t$ a dealer posts an ask at $S_t+\delta$, where $S_t$ is the close. The ask is
+\emph{filled} if the next minute's high reaches it, $H_{t+1}\ge S_t+\delta$; the bid at
+$S_t-\delta$ is filled if $L_{t+1}\le S_t-\delta$. For each distance $\delta$ on a grid we count the
+fraction $p(\delta)$ of minutes with a fill. If fills arrive as a Poisson process with intensity
+$\lambda(\delta)$, the probability of at least one fill in one minute is $1-e^{-\lambda(\delta)}$, so
+\begin{equation}
+\lambda(\delta) = -\ln\big(1-p(\delta)\big), \qquad
+\ln\lambda(\delta) = \ln A - k\,\delta .
+\label{eq:fit}
+\end{equation}
+Under A1 the points $(\delta,\ln\lambda)$ lie on a straight line, and an ordinary least-squares fit
+gives $\ln A$ as the intercept and $-k$ as the slope. We fit only distances with
+$0.02<p(\delta)<0.98$, where $p$ is estimated precisely. The volatility $\sigma$ is the standard
+deviation of one-minute changes in the close. All three are estimated on the calibration window
+only. A synthetic test in the code checks that this procedure recovers known values of $A$ and $k$
+to within 3\%.
+
+\subsection{A1--A2: Fill Intensity Is Exponential and Symmetric}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{calib_fill_curves}
+\caption{The model's central assumption, tested. Implied fill intensity $\lambda(\delta)$ against
+quote distance on a log scale, calibration window. Filled circles: ask side; open squares: bid side;
+grey points lie outside the fitting band. A straight line on this scale is exactly
+$\lambda=Ae^{-k\delta}$.}
+\label{fig:fill}
+\end{figure}
+
+Figure~\ref{fig:fill} is the central test of the paper, and the answer is clear. On a log scale
+the points lie on a straight line for both stocks and both sides of the book, with
+$R^2\ge\RELIANCERTwo$ for RELIANCE and $R^2\ge\KSCLRTwo$ for KSCL (Table~\ref{tab:calibration}).
+The two sides give nearly the same slope ($k_{\text{bid}}/k_{\text{ask}}$ within 10\%), so one
+curve for both sides (A2) is a fair simplification. The liquid stock has the higher $A$ (more fills
+at any distance) and the higher $k$ (its book thins out faster, because competing quotes sit close
+to the mid).
+
+The residuals in Figure~\ref{fig:residuals} show where the fit is imperfect. They curve gently
+upward at both ends: quotes at the mid are filled a little more often than the line predicts,
+and so are quotes far away. The tail of real fill intensity is therefore slightly fatter than
+exponential, consistent with occasional large orders sweeping several price levels. The
+deviations are small: apart from the single point at $\delta=0$, they stay within about 0.25 in log units, so A1 holds.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{calib_fill_residuals}
+\caption{Residuals of the log-linear fit (circles: ask, squares: bid). The gentle upward curve at
+both ends means real fills have a slightly fatter tail than $e^{-k\delta}$.}
+\label{fig:residuals}
+\end{figure}
+
+\begin{table}[!htbp]
+\centering
+\caption{Calibrated parameters, first \CalibDays{} days. The model uses one curve for both sides,
+so $A$ and $k$ are averaged over the bid and the ask.}
+\label{tab:calibration}
+\small
+\input{tables/calibration}
+\end{table}
+
+\subsection{A3--A4: The Mid-Price Is Close to a Random Walk, Except for the Bounce}
+
+The mean one-minute price change is statistically zero for both stocks, so A3 holds. A4 bends.
+Figure~\ref{fig:returns} shows that one-minute changes are far from normal: excess kurtosis is
+\RELIANCEKurt{} for RELIANCE and \KSCLKurt{} for KSCL, because most minutes move by zero or one tick
+and a few move by many (Figure~\ref{fig:qq}). Fat tails matter little for the model, whose
+formulas only use the variance $\sigma^2$.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{data_return_distribution}
+\caption{Distribution of one-minute price changes, binned in whole ticks, on a log scale, with the
+normal density of the same mean and variance. The empirical tails are far heavier.}
+\label{fig:returns}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.56\textwidth]{data_qq}
+\caption{Normal quantile--quantile plot of standardised one-minute price changes. Both stocks
+leave the line beyond about two standard deviations.}
+\label{fig:qq}
+\end{figure}
+
+The important departure is in the dependence of price changes. For KSCL the first-order
+autocorrelation is \KSCLAcfOne{} (Figure~\ref{fig:acf}), well outside the 95\% band, while
+RELIANCE's is \RELIANCEAcfOne{}. This is the bid--ask bounce of Roll~\cite{roll1984}: when the last
+trade is at the ask, the next is more likely at the bid, so recorded prices zig-zag even if the
+true value does not move. The variance ratio of Lo and MacKinlay~\cite{lo1988},
+$\mathrm{VR}(h)=\mathrm{Var}(S_{t+h}-S_t)/\big(h\,\mathrm{Var}(S_{t+1}-S_t)\big)$, which equals one for
+a random walk, tells the same story over longer horizons (Figure~\ref{fig:vr}): it falls to
+\KSCLVRfifteen{} at fifteen minutes for KSCL but stays at \RELIANCEVRfifteen{} for RELIANCE. The
+practical consequence is that one-minute $\sigma$ overstates the true price risk of holding KSCL
+over longer horizons. The model therefore over-penalises KSCL inventory, which makes it, if anything,
+more conservative.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{diag_autocorrelation}
+\caption{Autocorrelation of one-minute price changes, lags 1--10 (shaded: 95\% band under
+independence). KSCL's large negative first lag is the bid--ask bounce.}
+\label{fig:acf}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{diag_variance_ratio}
+\caption{Variance ratio against horizon. A random walk stays on the dashed line; values below one
+mean price changes partly reverse. The illiquid stock reverses much more.}
+\label{fig:vr}
+\end{figure}
+
+\subsection{A5: Parameters Are Not Constant}
+
+Volatility is the assumption that breaks. Figure~\ref{fig:sigma} shows the fifteen-minute
+volatility profile: $\sigma$ in the first fifteen minutes is two to three times its midday value, and across
+the day the highest bucket is \RELIANCESigmaRatio{} times the lowest for RELIANCE (\KSCLSigmaRatio{}
+for KSCL). The model uses one $\sigma$ for the whole day, so it under-prices inventory risk at the
+open and over-prices it at midday. Across days (Figure~\ref{fig:stability}) the parameters are
+steadier but not fixed: the daily $k$ varies with a coefficient of variation of about 0.17, and the
+test window is somewhat more volatile than the calibration window, a realistic handicap for an
+out-of-sample test.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{data_intraday_sigma}
+\caption{(a) Volatility in each fifteen-minute bucket relative to the session average; a model with
+constant $\sigma$ would be the dashed line. (b) Share of minutes with at least one trade.}
+\label{fig:sigma}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{calib_stability}
+\caption{Parameters re-estimated day by day. Dashed lines: the calibration-window values used in
+the rest of the paper. Shaded: calibration window.}
+\label{fig:stability}
+\end{figure}
+
+\subsection{Scorecard}
+
+Table~\ref{tab:scorecard} collects the verdicts. The assumption the model is built on, the
+exponential fill curve, holds. The description of the price process bends, mostly for the illiquid
+stock. Constant intraday volatility breaks. None of these failures is large enough to make the
+calibrated model meaningless, so we now take it to the data.
+
+\begin{table}[!htbp]
+\centering
+\caption{Assumption scorecard. ``Holds'': the data match the assumption. ``Bends'': a measurable
+departure that the model tolerates. ``Breaks'': a departure large enough to change the quotes.}
+\label{tab:scorecard}
+\small
+\input{tables/scorecard}
+\end{table}

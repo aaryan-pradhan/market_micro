@@ -1,0 +1,124 @@
+\section{The Real World: Historical Replay on NSE}
+\label{sec:replay}
+
+\subsection{Design}
+
+The replay runs both dealers over the \RELIANCETestDays{} held-out days, minute by minute, with
+the parameters from the calibration window. At the end of minute $t$ the dealer sees the close $S_t$,
+its inventory $q_t$ and the time left, and posts a bid and an ask for minute $t+1$. The ask sells one
+share at the quoted price if the next minute's high reaches it; the bid buys one share if the low
+reaches it. This is the same fill rule used to calibrate $A$ and $k$, so the model is tested against
+the fill process it was fitted to. The symmetric dealer again quotes AS's average half-spread for the
+same day. Inventory left at 15:14 is marked at the last close. Nothing here is simulated: prices,
+highs and lows are the real ones.
+
+The dealer's PnL over a session splits exactly into three parts, minute by minute:
+\begin{equation}
+\Delta\text{PnL}_{t+1} =
+\underbrace{\mathbb{1}^{\text{sell}}(a_t-S_t)+\mathbb{1}^{\text{buy}}(S_t-b_t)}_{\text{spread capture}}
++\underbrace{(\mathbb{1}^{\text{buy}}-\mathbb{1}^{\text{sell}})(S_{t+1}-S_t)}_{\text{adverse selection}}
++\underbrace{q_t\,(S_{t+1}-S_t)}_{\text{inventory carry}} ,
+\label{eq:decomp}
+\end{equation}
+where $a_t,b_t$ are the quotes and the indicators mark fills in minute $t+1$. \emph{Spread capture}
+is what the dealer earns relative to the mid at the moment it quotes. \emph{Adverse selection} is how
+the mid moves in the same minute as a fresh fill: it is negative when the price keeps moving through
+the dealer's quote after hitting it. \emph{Inventory carry} is the gain or loss on the position
+already held. The model's assumption A6 says the second term is zero on average. The code checks
+that the three parts add up to the PnL exactly.
+
+\subsection{One Day Up Close}
+
+Figure~\ref{fig:heroR} shows the test day on which the symmetric dealer's inventory strayed
+furthest for RELIANCE. The stock rallied about 20 rupees in the first hour. The symmetric dealer
+kept selling into the rally: it was short 14 shares by 11:00 and 23 at its extreme, and its PnL
+fell to nearly $-400$ rupees at the worst point.
+The AS dealer sold too, but each sale lowered both its quotes, so it bought back almost immediately
+and its inventory never left $\pm3$. Panel (b) zooms into forty minutes to show the mechanism: the
+blue band jumps up or down by a step every time a fill changes the inventory. Figure~\ref{fig:heroK}
+shows the same for KSCL, where no-trade minutes leave flat stretches in the price.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{replay_day_reliance}
+\caption{RELIANCE, one held-out day. (a) Mid-price and every AS fill. (b) Zoom: AS ask and bid
+(band), reservation price (dashed) and mid; triangles are fills at the quoted price. (c) Inventory
+and (d) marked-to-market PnL of the two dealers.}
+\label{fig:heroR}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{replay_day_kscl}
+\caption{KSCL, one held-out day, in the same four views as Figure~\ref{fig:heroR}.}
+\label{fig:heroK}
+\end{figure}
+
+\subsection{All Test Days}
+
+Figure~\ref{fig:replayinv} overlays inventory on every test day. The picture is the same as in the
+model's world (Figure~\ref{fig:mcpaths}): AS stays near zero, the symmetric dealer wanders up to
+twenty shares away. Average absolute inventory is \RELIANCEReplayAbsqAS{} against
+\RELIANCEReplayAbsqSym{} shares for RELIANCE and \KSCLReplayAbsqAS{} against \KSCLReplayAbsqSym{}
+for KSCL.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{replay_inventory_paths}
+\caption{Inventory on every held-out day, real NSE minutes.}
+\label{fig:replayinv}
+\end{figure}
+
+Risk control survives (Table~\ref{tab:replay}, Figure~\ref{fig:dailypnl}). The standard deviation
+of daily PnL is \RELIANCEReplaySdAS{} rupees for AS against \RELIANCEReplaySdSym{} for the symmetric
+dealer on RELIANCE, a factor of \RELIANCEReplaySdFactor{}, and \KSCLReplaySdAS{} against
+\KSCLReplaySdSym{} on KSCL, a factor of \KSCLReplaySdFactor{}. Every AS day lands in a narrow range
+around a small loss; the symmetric dealer's days scatter by hundreds of rupees.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{replay_daily_pnl}
+\caption{Daily PnL of the two dealers on each held-out day. The grey bar joins the two results for
+the same day.}
+\label{fig:dailypnl}
+\end{figure}
+
+\begin{table}[!htbp]
+\centering
+\caption{Historical replay, \RELIANCETestDays{} held-out days. Rupees per day (means), except the
+standard deviation (S.d.) of daily PnL, inventory in shares and fills per day. Capture, Adverse and Carry
+are the three parts of equation~\eqref{eq:decomp} and sum to PnL.}
+\label{tab:replay}
+\small
+\setlength{\tabcolsep}{4.5pt}
+\input{tables/replay}
+\end{table}
+
+Profit does not survive. Both dealers lose money on average on RELIANCE (\RELIANCEReplayPnlAS{} and
+\RELIANCEReplayPnlSym{} rupees a day), and Figure~\ref{fig:decomp} shows why. Spread capture is solidly
+positive, \RELIANCECaptureAS{} rupees a day for AS, but adverse selection takes \RELIANCEAdverseAS{}:
+on real NSE minutes, a quote is filled mostly when the price is moving through it, and the price
+keeps going. Adverse selection is about the same size for both dealers, which makes sense: it is a
+property of the order flow, not of where the quotes sit, and no amount of inventory skewing can
+remove it. What skewing does remove is inventory carry: \RELIANCECarryAS{} rupees for AS, against
+large swings for the symmetric dealer.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{replay_pnl_decomposition}
+\caption{PnL per day split into the three parts of equation~\eqref{eq:decomp}, mean $\pm$ one
+standard error over the held-out days. Adverse selection, which the model assumes is zero, is the
+largest term.}
+\label{fig:decomp}
+\end{figure}
+
+On risk-adjusted terms the picture depends on the stock. For RELIANCE the certainty equivalent of the
+daily PnL is \RELIANCEReplayCEAS{} for AS against \RELIANCEReplayCESym{} for the symmetric dealer. For KSCL it
+is \KSCLReplayCEAS{} against \KSCLReplayCESym{}: the symmetric dealer comes out ahead. That result
+rests on its inventory carry (+72.9 rupees a day, with a standard error of about 50), earned mostly
+on two days (23 and 28 October) when the inventory it had drifted into happened to sit on the right
+side of a large move. That is a lucky directional bet, not market making, and it is exactly the risk AS
+is designed to avoid. Over all \KSCLDays{} days, including the calibration window, the symmetric
+dealer's mean falls to \KSCLAllPnlSym{} rupees while its standard deviation stays about
+\KSCLAllSdFactor{} times AS's. The RELIANCE results are the same over all days (AS \RELIANCEAllPnlAS{},
+symmetric \RELIANCEAllPnlSym{}, standard deviation ratio \RELIANCEAllSdFactor{}).

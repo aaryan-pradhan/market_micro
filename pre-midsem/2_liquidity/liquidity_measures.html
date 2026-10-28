@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Liquidity Measures Ledger</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false})"></script>
+<style>
+:root{
+  --bg:#f6f7f9; --ink:#171b24; --muted:#5a6273; --rule:#d9dee6; --card:#ffffff;
+  --accent:#2346a0; --gap:#8a4b00; --gapbg:#fdf1de; --idea:#eef2fb;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0f1218; --ink:#e4e7ee; --muted:#98a1b3; --rule:#283042; --card:#161a22;
+    --accent:#93abff; --gap:#f0b35a; --gapbg:#2a2010; --idea:#1a2033;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0f1218; --ink:#e4e7ee; --muted:#98a1b3; --rule:#283042; --card:#161a22;
+  --accent:#93abff; --gap:#f0b35a; --gapbg:#2a2010; --idea:#1a2033;
+}
+body{background:var(--bg);color:var(--ink);font:20px/1.75 "MesloLGS Nerd Font Propo","MesloLGS NF","MesloLGS Nerd Font",ui-monospace,monospace;padding-inline:16px;padding-block:24px 64px}
+.wrap{max-width:52rem;margin:0 auto}
+h1,h2,h3{font-family:"MesloLGS Nerd Font Propo","MesloLGS NF","MesloLGS Nerd Font",ui-monospace,monospace;font-weight:700;text-wrap:balance;line-height:1.2}
+h1{font-size:2.4rem;margin:0 0 .25rem}
+h2{font-size:1.7rem;margin:3rem 0 .75rem;padding-top:1rem;border-top:1px solid var(--rule)}
+h3{font-size:1.2rem;margin:0 0 .4rem}
+.sub{color:var(--muted);margin:0 0 1.25rem}
+.bar{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-bottom:1rem}
+button{font:inherit;font-size:.9rem;color:var(--accent);background:transparent;border:1px solid var(--rule);border-radius:6px;padding:.3rem .8rem;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+nav.toc{font-size:.92rem;columns:2 14rem;column-gap:2rem;margin:0 0 1rem;padding:0}
+nav.toc a{display:block;color:var(--muted);text-decoration:none;padding:.1rem 0;break-inside:avoid}
+nav.toc a:hover{color:var(--accent)}
+a{color:var(--accent)}
+.idea{background:var(--idea);border-radius:8px;padding:.8rem 1rem;margin:.5rem 0 1.25rem}
+.idea p,.idea ol,.idea ul{margin:.3rem 0}
+.prob{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem;margin:1rem 0}
+.prob > p{margin:.2rem 0 .6rem}
+.ans{font-weight:600}
+.sec{border-top:1px solid var(--rule);padding:.45rem 0}
+.sh{color:var(--accent);font-weight:600;font-size:.95rem;margin:0}
+.sec > *:not(.sh){margin-top:.5rem}
+ol.pf{padding-left:1.6rem;margin:.4rem 0}
+ol.pf li{margin:.2rem 0}
+.why{color:var(--muted);font-size:.85em;white-space:nowrap}
+.qed{float:right;color:var(--muted)}
+.claim{margin:.3rem 0}
+.gap{background:var(--gapbg);color:var(--gap);border-radius:6px;padding:.5rem .8rem;font-size:.92rem}
+table{border-collapse:collapse;font-size:.92rem}
+.tw{overflow-x:auto}
+td,th{border:1px solid var(--rule);padding:.25rem .6rem;text-align:center;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+@media print{body{font-size:11pt;padding:0;background:#fff}nav.toc,#q{display:none}h2{break-before:page;margin-top:0}h1+p+nav+h2,h1+p+h2{break-before:auto}.idea,.gap,tr,li{break-inside:avoid}a{color:inherit;text-decoration:none}}
+</style>
+<style>.katex{font-size:1.15em}.katex-display{overflow-x:auto;overflow-y:hidden;padding:.2rem 0}</style>
+<style>
+pre{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:.6rem .8rem;font-size:.85rem;overflow-x:auto}
+.fig{display:block;margin:.8rem auto;max-width:100%;height:auto;font-size:13px}
+.fig text{fill:var(--ink);font-family:inherit}
+.fig .m{fill:var(--muted)} .fig .a{fill:var(--accent)} .fig .g{fill:var(--gap)}
+.fig .ln{stroke:var(--ink);fill:none;stroke-width:1.5}
+.fig .mu{stroke:var(--muted);fill:none;stroke-width:1}
+.fig .ac{stroke:var(--accent);fill:none;stroke-width:2.5}
+.fig .rg{fill:var(--accent);fill-opacity:.22;stroke:var(--accent);stroke-width:1.5}
+.fig .bad{fill:var(--gap);fill-opacity:.28;stroke:var(--gap);stroke-width:1.5}
+.fig .nd{fill:var(--card);stroke:var(--ink);stroke-width:1.5}
+.fig .dot{fill:var(--ink)} .fig .adot{fill:var(--accent)}
+.fig .dsh{stroke-dasharray:5 4} .fig .gl{stroke:var(--gap);fill:none;stroke-width:2.5} .fig .ink{fill:var(--ink)} .fig .bg{fill:var(--bg);stroke:var(--rule)} .fig .thk{stroke-width:4.5;stroke-linecap:round} .fig .sol{fill:var(--ink);fill-opacity:.55;stroke:var(--ink);stroke-width:1}
+.pf li{margin:.55rem 0} .pf .r{display:block;margin-top:.15rem;font-size:.93em} .pf .r > b:first-child{color:var(--accent)} .setup{margin:.3rem 0 .5rem}
+.prob > p.stmt{margin:.35rem 0 .5rem}
+.ahp{fill:var(--ink)} .ahpa{fill:var(--accent)}
+</style>
+<style>.brute td{text-align:left}.brute td:first-child{color:var(--muted);white-space:nowrap}.brute tr.dies td:first-child{color:var(--gap)}.brute tr.therefore td:first-child{color:var(--accent)}</style>
+<div class="wrap">
+<h1>Liquidity Measures</h1>
+<p class="sub"><a href="../index.html">← Index</a> · BM51002 · 2 papers · midsem 29 Sep 2026. Source: <code>1.5. Empirical Liquidity and it characteristics.pdf</code> slides 2–25 (PDF pages). Papers: Chordia, Roll &amp; Subrahmanyam (2000), "Commonality in liquidity", <i>JFE</i> 56, 3–28; Amihud (2002), "Illiquidity and stock returns: cross-section and time-series effects", <i>JFM</i> 5, 31–56.</p>
+<nav class="toc">
+<a href="#basics">0 · Words used on this page</a>
+<a href="#crsm">1 · Chordia et al.: five liquidity measures</a>
+<a href="#crs">2 · Chordia et al.: commonality in liquidity</a>
+<a href="#amihud">3 · Amihud (2002): ILLIQ and returns</a>
+</nav>
+
+<h2 id="basics">0 · Words used on this page</h2>
+<div class="idea"><ol>
+<li><b>Liquidity</b> = the ability to trade a meaningful quantity quickly, at low cost, and without moving the price much. Its four dimensions (Harris; see <a href="../papers/midsem_2025.html#q1">Midsem 2025 Q1</a>): <i>width</i> (cost per share, e.g. the spread), <i>depth</i> (how much can trade at that cost), <i>immediacy</i> (how fast), <i>resiliency</i> (how fast prices recover after a large trade). <b>Illiquidity</b> is the opposite.</li>
+<li><b>Quotes.</b> \(P_A\) = ask, \(P_B\) = bid, \(P_M = (P_A + P_B)/2\) = mid. \(Q_A\), \(Q_B\) = number of shares offered at the ask and wanted at the bid. \(P_t\) = the price of trade \(t\).</li>
+<li><b>Proportional</b> (relative) measure = a dollar measure divided by a price. It lets you compare a $5 stock with a $500 stock.</li>
+<li><b>Return</b> \(R\) = percentage price change over a period (plus dividends). \(|R|\) = its absolute value (size of the move, ignoring direction). <b>Dollar volume</b> VOLD = shares traded × price = the money value traded that day.</li>
+<li><b>Proportional change</b> of a variable \(L\) from day \(t-1\) to day \(t\): \(DL_t = (L_t - L_{t-1})/L_{t-1}\). Example: spread 0.20 → 0.22 gives \(DL = +0.10\) (+10%).</li>
+<li><b>Cross-section vs time series.</b> A cross-section compares many stocks at one time; a time series follows one thing over many dates.</li>
+<li><b>Regression</b> \(y_t = \alpha + \beta x_t + \varepsilon_t\): explain \(y\) by \(x\). \(\beta\) (slope) = how much \(y\) moves on average when \(x\) moves by one unit; \(\alpha\) = intercept; \(\varepsilon_t\) = residual (the part not explained). <b>OLS</b> (ordinary least squares) chooses \(\alpha, \beta\) to make \(\sum\varepsilon_t^2\) as small as possible. <b>\(R^2\)</b> = the share of the variance of \(y\) that \(x\) explains (0 to 1).</li>
+<li><b>t-statistic</b> = estimate ÷ its standard error (standard error = the typical size of the estimate's sampling error). For an average of \(N\) numbers with standard deviation \(sd\): \(t = \bar x / (sd/\sqrt N)\). Rule of thumb: \(|t| &gt; 2\) (or \(&gt; 1.645\) in a one-sided 5% test) means "significantly different from 0".</li>
+<li><b>Concurrent / lag / lead.</b> Values from the same day, the previous day, and the next day.</li>
+<li><b>Inventory risk</b>: the risk a dealer carries while holding shares he bought from customers (see the inventory ledger). <b>Asymmetric information</b> (adverse selection): some traders know more than the dealer, so the dealer loses to them on average and widens the spread to compensate.</li>
+<li><b>Systematic vs idiosyncratic.</b> A systematic (common) component moves many stocks together; an idiosyncratic one is specific to a single stock. A systematic risk cannot be diversified away, so it can carry a price (a premium in expected returns).</li>
+</ol></div>
+
+<!-- ============ ENTRY 1: CRS measures ============ -->
+<h2 id="crsm">1 · Chordia, Roll &amp; Subrahmanyam (2000): five ways to measure liquidity</h2>
+<div class="idea"><ol>
+<li><b>Width vs depth.</b> A spread measures width (the cost of a small trade). Depth measures how many shares are available at that cost.</li>
+<li><b>Effective spread</b>: \(2|P_t - P_M|\), twice the distance from the trade price to the mid. If a buy executes inside the quotes (below the ask), it is smaller than the quoted spread. It is the directly measured version of what Roll (1984) estimates without quotes.</li>
+<li><b>ISSM data</b>: an intraday record of every NYSE quote and trade (Institute for the Study of Securities Markets). NYSE specialists announce the quoted spread and depth before each trade (slide 8).</li>
+</ol></div>
+<div class="prob"><h3>Liquidity variables (slide 9)</h3>
+<p class="stmt">For each NYSE stock on each trading day of 1992, you have every quote and trade.</p>
+<p class="stmt"><b>Question:</b> How do you turn quotes and trades into daily numbers that measure liquidity, and what do they look like?</p>
+<div class="sec"><p class="sh">Key idea</p><p><b>Measure width in dollars and in proportion to price, both as quoted and as effectively paid, and measure depth in shares.</b> Compute each for every trade, then average across the day's trades to get one daily number per stock (slide 8).</p></div>
+<div class="sec"><p class="sh">Previous model → why it falls short</p><div class="tw"><table class="brute">
+<tr><td>before</td><td>Roll (1984): infer the spread from the serial covariance of trade prices.</td></tr>
+<tr><td>assumes</td><td>Only trade prices are available; buys and sells are independent; the market is efficient.</td></tr>
+<tr class="dies"><td>fails at</td><td>Noisy; undefined when the covariance is positive (about half the stocks); says nothing about depth.</td></tr>
+<tr class="therefore"><td>therefore</td><td>With intraday quote and trade data, measure spreads and depth directly, trade by trade.</td></tr>
+</table></div></div>
+<div class="sec"><p class="sh">Solution</p><p class="setup"><b>Setup.</b> At the moment of trade \(t\): \(P_A, P_B, P_M, Q_A, Q_B\) and \(P_t\) (primer 2 of entry 0). Filters (slide 7): NYSE stocks trading on at least 10 days in 1992; no splits or stock dividends; no ADRs, closed-end funds, REITs, trust units or foreign companies; stock-days with average price below $2 dropped; opening batch trades and special-settlement trades dropped. That leaves 1,169 stocks on 254 trading days.</p>
+<p class="claim"><b>Claim.</b> The five measures and their typical sizes are those in the table below.</p><ol class="pf">
+<li><b>QSPR</b> = \(P_A - P_B\) (dollars): the quoted spread.<span class="r"><b>Why:</b> the cost of buying at the ask and immediately selling at the bid.</span></li>
+<li><b>PQSPR</b> = \((P_A - P_B)/P_M\) (no units): the quoted spread as a fraction of the mid.<span class="r"><b>Why:</b> dividing by price makes stocks with different price levels comparable (primer 3).</span></li>
+<li><b>DEP</b> = \(\tfrac12(Q_A + Q_B)\) (shares): average depth at the best quotes.<span class="r"><b>Why:</b> primer 1: how much can be traded at the quoted spread.</span></li>
+<li><b>ESPR</b> = \(2|P_t - P_M|\) (dollars): the effective spread.<span class="r"><b>Why:</b> a buyer pays \(P_t - P_M\) above the mid; doubling gives the round-trip equivalent, comparable with QSPR.</span></li>
+<li><b>PESPR</b> = \(2|P_t - P_M|/P_t\) (no units): the effective spread as a fraction of the trade price.<span class="r"><b>Why:</b> the same scaling as step 2.</span></li>
+<li>Each measure is averaged over all of a stock's trades on a day, giving a daily value \(L_{j,t}\) for stock \(j\) on day \(t\).<span class="r"><b>Why:</b> slide 8.</span></li>
+</ol>
+<div class="tw"><table>
+<tr><th>1992 NYSE (slide 10)</th><th>QSPR</th><th>PQSPR</th><th>DEP</th><th>ESPR</th><th>PESPR</th></tr>
+<tr><td>mean</td><td>$0.316</td><td>1.60%</td><td>3,776</td><td>$0.225</td><td>1.11%</td></tr>
+<tr><td>median</td><td>$0.269</td><td>1.15%</td><td>2,661</td><td>$0.179</td><td>0.77%</td></tr>
+<tr><td>mean |daily proportional change| (slide 11)</td><td>24.0%</td><td>24.1%</td><td>78.3%</td><td>31.5%</td><td>32.0%</td></tr>
+</table></div>
+<p>Effective spreads are about 70% of quoted spreads, so many trades execute inside the quotes. Depth is the most volatile measure: it changes by 78% from one day to the next on average. Correlations within a stock over time (slide 10): QSPR–PQSPR 0.844, ESPR–PESPR 0.871, QSPR–DEP −0.396 (when spreads widen, depth shrinks).</p>
+<p><b>Conclusion.</b> Five daily measures capture width (quoted and effective, in dollars and in proportion) and depth, and they move together in the expected directions. ∎</p></div>
+<div class="sec"><p class="sh">Numerical example</p>
+<p>Quotes: bid 49.90 for 600 shares, ask 50.10 for 1,000 shares. A buy executes at 50.08.</p><ol class="pf">
+<li>\(P_M = (50.10 + 49.90)/2 = 50.00\).<span class="r"><b>Why:</b> primer 2.</span></li>
+<li>QSPR \(= 50.10 - 49.90 = \$0.20\); PQSPR \(= 0.20/50.00 = 0.0040 = 0.40\%\).<span class="r"><b>Why:</b> steps 1–2.</span></li>
+<li>DEP \(= \tfrac12(1000 + 600) = 800\) shares.<span class="r"><b>Why:</b> step 3.</span></li>
+<li>ESPR \(= 2|50.08 - 50.00| = \$0.16\); PESPR \(= 0.16/50.08 = 0.0032 = 0.32\%\).<span class="r"><b>Why:</b> steps 4–5. The buyer got 2 cents of price improvement (50.08 instead of 50.10), so the effective spread is below the quoted one.</span></li>
+</ol></div>
+<div class="sec"><p class="sh">Exam</p><p><b>Gotcha:</b> ESPR uses the <i>absolute</i> distance to the mid, times 2; PESPR divides by the trade price \(P_t\), while PQSPR divides by the mid \(P_M\). Depth is in shares, not dollars. A larger spread means <i>less</i> liquidity, but larger depth means <i>more</i>.</p><p><b>Recognize:</b> "QSPR / PQSPR / DEP / ESPR / PESPR", "quoted vs effective spread", "depth" → these definitions.</p></div>
+</div>
+
+<!-- ============ ENTRY 2: CRS commonality ============ -->
+<h2 id="crs">2 · Chordia, Roll &amp; Subrahmanyam (2000): commonality in liquidity</h2>
+<div class="idea"><ol>
+<li><b>Commonality in liquidity</b>: the liquidity of individual stocks moves together over time. When the market gets less liquid, most stocks get less liquid on the same day.</li>
+<li><b>Market liquidity change</b> \(DL_{M,t}\): the cross-sectional (equally weighted) average of \(DL_{j,t}\) over all stocks <i>except</i> stock \(j\).</li>
+<li><b>Industry liquidity change</b> \(DL_{I,t}\): the same average over the other stocks in stock \(j\)'s industry (slide 14).</li>
+<li><b>Why liquidity might co-move</b> (slide 5): trading volume, which drives dealer inventories, has market-wide swings; inventory carrying costs depend on market interest rates; inventory risk depends on volatility, which has a market component; program trading puts common pressure on inventories; institutions with similar styles trade in a correlated way; a few large traders may hold private information about many stocks.</li>
+<li><b>Why it matters</b> (slide 6): if trading costs move together, liquidity is a <i>systematic</i> risk (primer 11 of entry 0). Trading costs can affect asset prices through a static channel (higher average costs) and a dynamic channel (liquidity risk that makes traders avoid trading). Episodic and global crises are market-wide liquidity dry-ups.</li>
+</ol></div>
+<div class="prob"><h3>Is liquidity a common, market-wide factor?</h3>
+<p class="stmt">For each of 1,169 NYSE stocks and each day of 1992, compute the five daily liquidity measures of entry 1 and their proportional daily changes.</p>
+<p class="stmt"><b>Question:</b> Do a stock's liquidity changes move with market-wide (and industry-wide) liquidity changes, and are the common movements driven by inventory risk or by asymmetric information?</p>
+<div class="sec"><p class="sh">Key idea</p><p><b>Regress each stock's daily liquidity change on the market's, then average the slopes across stocks.</b> If liquidity were purely stock-specific, the average slope would be 0. A significantly positive average slope means a common liquidity factor exists.</p></div>
+<div class="sec"><p class="sh">Previous model → why it falls short</p><div class="tw"><table class="brute">
+<tr><td>before</td><td>Microstructure models (the inventory models, Roll, adverse selection) study the liquidity of <i>one</i> stock and its own determinants.</td></tr>
+<tr><td>assumes</td><td>Each stock's spread and depth are driven only by that stock's own trading, inventory and information.</td></tr>
+<tr class="dies"><td>fails at</td><td>Market-wide events: volume, interest rates, volatility and crises hit all dealers at once, so liquidity can dry up together, and that cannot be diversified away.</td></tr>
+<tr class="therefore"><td>therefore</td><td>Measure the common (market and industry) component of daily liquidity changes across stocks.</td></tr>
+</table></div></div>
+<div class="sec"><p class="sh">Solution</p><p class="setup"><b>Setup.</b> \(L_{j,t}\) = one of the five daily measures for stock \(j\) on day \(t\). \(DL_{j,t}\) = its proportional change (primer 5 of entry 0). \(DL_{M,t}\), \(DL_{I,t}\) as in primers 2–3. Model (slide 12): \(DL_{j,t} = \alpha_j + \beta_jDL_{M,t} + \varepsilon_{j,t}\), estimated by OLS separately for each stock over its daily changes. The paper also adds the lag and lead of \(DL_{M}\) (to allow for adjustment on neighbouring days), and controls for the market return and the stock's own volatility. The slides show only the core term.</p>
+<p class="claim"><b>Claim.</b> The average \(\beta_j\) is positive and highly significant for every measure: liquidity has a common component.</p><ol class="pf">
+<li>Use proportional <i>changes</i>, not levels.<span class="r"><b>Why:</b> levels differ hugely across stocks (a $0.05 vs a $0.50 spread). Changes remove each stock's permanent level; proportions remove units (primer 3 of entry 0).</span></li>
+<li>Leave stock \(j\) out of the market average.<span class="r"><b>Why:</b> otherwise \(DL_{j,t}\) would sit on both sides of the regression and push \(\beta_j\) up mechanically.</span></li>
+<li>OLS: minimise \(\sum_t(y_t - \alpha - \beta x_t)^2\), with \(y = DL_{j}\) and \(x = DL_{M}\). Setting the derivative with respect to \(\alpha\) to 0: \(\sum_t(y_t - \alpha - \beta x_t) = 0 \Rightarrow \alpha = \bar y - \beta\bar x\).<span class="r"><b>Why:</b> primer 7 of entry 0; divide by the number of days.</span></li>
+<li>Setting the derivative with respect to \(\beta\) to 0: \(\sum_tx_t(y_t - \alpha - \beta x_t) = 0\). Substitute \(\alpha\): \(\sum_tx_t\big[(y_t - \bar y) - \beta(x_t - \bar x)\big] = 0\).<span class="r"><b>Why:</b> step 3.</span></li>
+<li>Because \(\sum_t\bar x(y_t - \bar y) = 0\) and \(\sum_t\bar x(x_t - \bar x) = 0\), replace \(x_t\) by \(x_t - \bar x\) in front: <span class="ans">\(\beta_j = \dfrac{\sum_t(x_t - \bar x)(y_t - \bar y)}{\sum_t(x_t - \bar x)^2}\)</span>.<span class="r"><b>Why:</b> deviations from a mean sum to 0; solve for \(\beta\).</span></li>
+<li>Meaning: \(\beta_j = 0.69\) says that when the market's quoted spread rises by 1% in a day, stock \(j\)'s rises by 0.69% on average.<span class="r"><b>Why:</b> primer 7 of entry 0, with both variables in proportional changes.</span></li>
+<li>Combine the 1,169 slopes: report their mean, the t-statistic of the mean \(= \bar\beta/(sd/\sqrt{1169})\), the % that are positive, and the % whose own t exceeds 1.645 (slide 13).<span class="r"><b>Why:</b> primer 8 of entry 0; one number summarises "on average, is there co-movement?".</span></li>
+<li>Result, concurrent \(\beta\) (slide 13): <span class="ans">DQSPR 0.690 (t = 28.29), DPQSPR 0.791 (30.09), DDEP 1.373 (15.50), DESPR 0.280 (10.64), DPESPR 0.778 (2.06)</span>. 84.9% of the quoted-spread slopes and 81.6% of the depth slopes are positive, and about a third of each are individually significant (34.7% and 31.1%).<span class="r"><b>Why:</b> read from the table; all t's exceed 1.645.</span></li>
+<li>The lag and lead coefficients are small (for DQSPR, 0.123 and 0.053). Most of the co-movement happens on the same day.<span class="r"><b>Why:</b> slide 13, "Lag" and "Lead" rows.</span></li>
+<li>Add industry (slide 14): \(DL_{j,t} = \alpha_j + \beta_{j,M}DL_{M,t} + \beta_{j,I}DL_{I,t} + \varepsilon_{j,t}\). Both are significant; for DQSPR, market 0.264 (t 9.86) and industry 0.467 (t 16.65). For PESPR, only industry is significant.<span class="r"><b>Why:</b> slide 14, "Concurrent" row. Commonality exists at both market and industry level.</span></li>
+<li>\(R^2\) is small (mean 0.014 to 0.024).<span class="r"><b>Why:</b> slide 14. Most daily liquidity change is stock-specific. But the common part is highly significant, and it is the part that cannot be diversified away.</span></li>
+<li>Sources (slide 16, eq. 4): \(DL_{j,t} = \alpha_j + \beta_{j,S}DS_{j,t} + \beta_{j,T}DT_{j,t} + \beta_{j,M}DV_{M,t} + \beta_{j,I}DV_{I,t} + \varepsilon_{j,t}\). \(S_{j,t}\) = average dollar trade size, \(T_{j,t}\) = number of trades in stock \(j\), \(V_{M,t}\) and \(V_{I,t}\) = market and industry dollar volume (both excluding \(j\)).<span class="r"><b>Why:</b> separate the stock's own trading from market-wide trading.</span></li>
+<li>Reading (slides 15–17): the stock's own number of trades \(T_{j,t}\) has a strong <i>positive</i> effect on spreads. Informed traders split their orders into many medium-size trades (Barclay–Warner 1993), so more trades signal more asymmetric information (Jones et al. 1994), and spreads widen. Market-wide volume \(V_{M,t}\) has a <i>negative</i> effect on the quoted spread: heavy market-wide (mostly uninformed) trading lets dealers unwind inventory easily, which lowers inventory risk. Trade size has a strong positive effect on quoted spreads and on depth. Industry volume has an insignificant (negative) effect on depth.<span class="r"><b>Why:</b> slide 17; interpretation from slides 15 and 18.</span></li>
+</ol><p><b>Conclusion.</b> Liquidity measures co-move across stocks (market and industry). A stock's spread rises with its own number of trades (asymmetric information) and falls with aggregate market trading (inventory risk). ∎</p></div>
+<div class="sec"><p class="sh">Numerical example</p>
+<p>Four days of proportional changes: market (excluding A) \(x = DL_M\): +10%, −10%, +20%, 0%. Stock A \(y = DL_A\): +8%, −6%, +14%, 0%.</p><ol class="pf">
+<li>\(\bar x = (0.10 - 0.10 + 0.20 + 0)/4 = 0.05\); \(\bar y = (0.08 - 0.06 + 0.14 + 0)/4 = 0.04\).<span class="r"><b>Why:</b> means.</span></li>
+<li>Deviations: \(x - \bar x\) = 0.05, −0.15, 0.15, −0.05; \(y - \bar y\) = 0.04, −0.10, 0.10, −0.04.<span class="r"><b>Why:</b> subtract the means.</span></li>
+<li>\(\sum(x - \bar x)(y - \bar y) = 0.002 + 0.015 + 0.015 + 0.002 = 0.034\); \(\sum(x - \bar x)^2 = 0.0025 + 0.0225 + 0.0225 + 0.0025 = 0.05\).<span class="r"><b>Why:</b> multiply and add.</span></li>
+<li>\(\beta_A = 0.034/0.05 = 0.68\), \(\alpha_A = 0.04 - 0.68 \times 0.05 = 0.006\).<span class="r"><b>Why:</b> Solution steps 3–5. A 1% market-wide rise in spreads comes with a 0.68% rise in A's spread, close to the paper's 0.690.</span></li>
+<li>If four stocks give \(\beta\) = 0.9, 0.5, 0.7, 0.6: mean 0.675, \(sd\) 0.171, \(t = 0.675/(0.171/\sqrt4) = 7.9\), and 100% are positive.<span class="r"><b>Why:</b> Solution step 7.</span></li>
+</ol></div>
+<div class="sec"><p class="sh">Exam</p><p><b>Gotcha:</b> the reported t-statistic is for the <i>cross-sectional average</i> of time-series slopes, not for any one stock. Low \(R^2\) does not mean "no commonality". And "more trading lowers spreads" holds for <i>market</i> volume; the stock's own <i>number of trades</i> raises its spread (information).</p>
+<p><b>Recognize:</b> "commonality in liquidity", "co-movement of spreads / depth across stocks", "market-wide liquidity factor", "\(DL_{j,t} = \alpha_j + \beta_jDL_{M,t}\)" → Chordia, Roll &amp; Subrahmanyam (2000).</p>
+<p><b>Findings</b> (slide 18 and tables):</p><ul>
+<li>Individual liquidity measures (quoted and effective spreads, depth) co-move with market-wide and industry-wide liquidity.</li>
+<li>A stock's spread is positively related to its own number of transactions, which points to asymmetric-information risk.</li>
+<li>A stock's spread is negatively related to aggregate market trading, which points to inventory risk (uninformed trading).</li>
+<li>The common component is small in \(R^2\) but significant, so liquidity carries systematic risk (implications, slide 6).</li>
+<li>Later evidence (slide 28): institutions' correlated trading, investor sentiment and intermediaries' funding constraints contribute to commonality; Karolyi et al. (2012) find it in 40 equity markets.</li>
+</ul></div>
+</div>
+
+<!-- ============ ENTRY 3: Amihud ============ -->
+<h2 id="amihud">3 · Amihud (2002): ILLIQ, a price-impact measure from daily data</h2>
+<div class="idea"><ol>
+<li><b>Price impact</b>: how much the price moves when a given amount is traded. High price impact = illiquid.</li>
+<li><b>Kyle's \(\lambda\)</b> (Kyle 1985): the price change per unit of net order flow, the classic price-impact coefficient. It needs intraday trade data. \(\psi\) = the fixed-cost component of trading, related to the bid–ask spread (slide 22).</li>
+<li><b>Amivest liquidity ratio</b> (slide 21): \(\sum\text{VOLD}/\sum|R|\), dollar volume per unit of absolute return. It is a <i>liquidity</i> measure (bigger = more liquid).</li>
+<li><b>Expected return</b> = the average return investors require to hold a stock. <b>Excess return</b> = return minus the risk-free (T-bill) rate. <b>Illiquidity premium</b> = the extra expected return investors demand for holding an illiquid stock (Amihud–Mendelson 1986 used the spread; slide 3).</li>
+<li><b>Size</b> = market capitalisation (price × shares outstanding). <b>Beta</b> = sensitivity to the market return (the CAPM risk measure).</li>
+<li><b>Fama–MacBeth (1973) method</b>: (i) every month, run one cross-sectional regression of stock returns on stock characteristics; (ii) average each coefficient over all months; (iii) judge significance by the t-statistic of that average (primer 8 of entry 0).</li>
+<li><b>Expected vs unexpected illiquidity.</b> Expected = the part of this year's market illiquidity that could be forecast from last year's. Unexpected = the surprise, actual minus expected.</li>
+<li><b>Present value.</b> A price is the value today of future cash flows, discounted at the required return. For a constant yearly cash flow \(D\) forever, \(P = D/r\).</li>
+<li><b>CRSP</b>: the Center for Research in Security Prices (University of Chicago) database of daily and monthly US stock returns and volumes.</li>
+</ol></div>
+<div class="prob"><h3>Illiquidity and stock returns</h3>
+<p class="stmt">For stock \(i\) in year \(y\), with \(D_{iy}\) days of data, daily return \(R_{iyd}\) and daily dollar volume \(\text{VOLD}_{iyd}\) (slide 21):
+\[\text{ILLIQ}_{iy} = \frac{1}{D_{iy}}\sum_{d=1}^{D_{iy}}\frac{|R_{iyd}|}{\text{VOLD}_{iyd}}.\]
+Data: NYSE stocks, 1963–1997, CRSP daily and monthly files (slide 23).</p>
+<p class="stmt"><b>Question:</b> (i) Is ILLIQ a sensible illiquidity measure? (ii) Across stocks, do more illiquid stocks earn higher expected returns? (iii) Over time, how does market-wide illiquidity affect market returns?</p>
+<div class="sec"><p class="sh">Key idea</p><p><b>\(|R|/\text{VOLD}\) is the price move per dollar traded, a daily version of price impact that needs only return and volume data.</b> Investors want to be paid for illiquidity. So illiquid stocks have higher expected returns; a rise in <i>expected</i> market illiquidity raises expected returns ahead; and a <i>surprise</i> rise in illiquidity pushes prices down today.</p></div>
+<div class="sec"><p class="sh">Previous model → why it falls short</p><div class="tw"><table class="brute">
+<tr><td>before</td><td>Fine-grained measures: the bid–ask spread (Amihud–Mendelson 1986), Kyle's \(\lambda\), the CRS measures of entry 1.</td></tr>
+<tr><td>assumes</td><td>Intraday quote and trade data are available.</td></tr>
+<tr class="dies"><td>fails at</td><td>Such data do not exist for long histories (US stocks before the 1980s) or for many markets. Testing whether illiquidity is priced needs decades of data.</td></tr>
+<tr class="therefore"><td>therefore</td><td>Build illiquidity from daily return and volume only (ILLIQ), available for 35 years of NYSE data.</td></tr>
+</table></div></div>
+<div class="sec"><p class="sh">Solution</p><p class="setup"><b>Setup.</b> ILLIQ as in the statement, reported ×10⁶ (per $1 million). Assumptions: (A1) A day's absolute return divided by that day's dollar volume measures that day's price response to order flow. (A2) Characteristics used to predict returns in year \(y\) are measured in year \(y-1\), so investors know them in advance (slide 25). (A3) Returns are adjusted for delistings to avoid survivorship bias (Shumway 1997; slide 25).</p>
+<p class="claim"><b>Claim.</b> (i) ILLIQ rises with both price impact and the fixed cost of trading. (ii) Across stocks, expected return rises with ILLIQ. (iii) Over time, expected market illiquidity raises expected market excess returns, and unexpected illiquidity lowers contemporaneous returns.</p>
+<p><b>Part A: the measure.</b></p><ol class="pf">
+<li>\(|R_{iyd}|/\text{VOLD}_{iyd}\) = the absolute percentage price change per dollar traded on day \(d\).<span class="r"><b>Why:</b> primer 4 of entry 0; A1.</span></li>
+<li>Averaging over the year's \(D_{iy}\) days gives ILLIQ\(_{iy}\). Higher ILLIQ = a bigger price move per dollar = more illiquid.<span class="r"><b>Why:</b> primer 1.</span></li>
+<li>Amihud multiplies by \(10^6\): ILLIQ then reads as the price move (as a fraction) per $1 million of trading.<span class="r"><b>Why:</b> the raw numbers are tiny (e.g. \(10^{-8}\) per dollar).</span></li>
+<li>ILLIQ is closely related to the inverse of the Amivest ratio, \(\sum\text{VOLD}/\sum|R|\) (slide 21).<span class="r"><b>Why:</b> both relate absolute returns to dollar volume; ILLIQ averages the daily ratios, Amivest takes the ratio of sums, turned upside down.</span></li>
+<li>Validation (slide 22): across stocks, <span class="ans">\(\text{ILLIQ}_i = -292 + 247.9\,\lambda_i + 49.2\,\psi_i\)</span>, with t = 13.78 and 17.33 and \(R^2 = 0.30\). ILLIQ rises with both Kyle's \(\lambda\) (price impact) and \(\psi\) (fixed cost / spread).<span class="r"><b>Why:</b> both slopes are positive and highly significant; the cheap daily measure tracks the costly intraday ones.</span></li>
+</ol>
+<p><b>Part B: cross-section (Fama–MacBeth, slides 23–25).</b></p><ol class="pf" start="6">
+<li>For each month \(m\) of year \(y\) (1964–1997, 408 months) run the cross-sectional regression \(R_{imy} = k_{0my} + \sum_{j=1}^Jk_{jmy}X_{ji,y-1} + U_{imy}\).<span class="r"><b>Why:</b> primer 6, step (i). \(X_{ji,y-1}\) = characteristic \(j\) of stock \(i\) (illiquidity, beta, size and other controls) from the previous year (A2).</span></li>
+<li>Average each coefficient over the 408 months: \(\bar k_j = \frac{1}{408}\sum k_{jmy}\), with \(t = \bar k_j/(sd(k_j)/\sqrt{408})\).<span class="r"><b>Why:</b> primer 6, steps (ii)–(iii).</span></li>
+<li>Result: <span class="ans">the illiquidity coefficient is positive and significant, also with beta and size in the regression</span>. More illiquid stocks earn higher expected returns: an illiquidity premium.<span class="r"><b>Why:</b> Amihud (2002) cross-section tables.</span></li>
+</ol>
+<p><b>Part C: time series.</b></p><ol class="pf" start="9">
+<li>Market illiquidity in year \(y\): \(\text{MILLIQ}_y\) = the average ILLIQ across stocks. Split it into expected (forecast from last year's value) and unexpected (the surprise).<span class="r"><b>Why:</b> primer 7.</span></li>
+<li>Regress the market's excess return on both parts. Prediction and finding: <span class="ans">expected illiquidity has a positive coefficient; unexpected illiquidity has a negative coefficient</span>.<span class="r"><b>Why:</b> steps 11–12 give the reasons; Amihud finds both signs.</span></li>
+<li>Expected illiquidity ↑ → investors require a higher return to hold stocks over the coming year → expected excess return ↑.<span class="r"><b>Why:</b> primer 4 (the illiquidity premium).</span></li>
+<li>Unexpected illiquidity ↑ → investors now expect more illiquidity ahead, so the required return \(r\) jumps → the price \(D/r\) falls immediately → the same-period return is negative.<span class="r"><b>Why:</b> primer 8: a higher \(r\) means a lower \(P\).</span></li>
+<li>Both effects are stronger for small-firm stocks.<span class="r"><b>Why:</b> small stocks are the most illiquid, so their required return reacts most. When illiquidity rises, investors move toward large, liquid stocks ("flight to liquidity").</span></li>
+</ol><p><b>Conclusion.</b> ILLIQ, built from daily returns and volume, tracks price impact and spread costs. It is priced in the cross-section (illiquid stocks earn more), and over time expected market illiquidity raises expected returns while surprise illiquidity lowers current prices, most of all for small firms. So part of the stock excess return is compensation for illiquidity. ∎</p></div>
+<div class="sec"><p class="sh">Numerical example</p>
+<p><b>(1) ILLIQ for stock X over 5 days.</b></p>
+<div class="tw"><table>
+<tr><th>day</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+<tr><td>return \(R\)</td><td>+2%</td><td>−1%</td><td>+3%</td><td>−2%</td><td>0%</td></tr>
+<tr><td>VOLD</td><td>$2M</td><td>$1M</td><td>$3M</td><td>$4M</td><td>$1M</td></tr>
+<tr><td>\(|R|/\text{VOLD} \times 10^6\)</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.005</td><td>0</td></tr>
+</table></div>
+<ol class="pf">
+<li>Day 1: \(0.02/2{,}000{,}000 = 1\times10^{-8}\); ×10⁶ = 0.01. Days 2–5 are computed the same way.<span class="r"><b>Why:</b> Part A, steps 1 and 3.</span></li>
+<li>ILLIQ \(= (0.01 + 0.01 + 0.01 + 0.005 + 0)/5 = 0.007\).<span class="r"><b>Why:</b> step 2.</span></li>
+<li>Reading: on average, $1 million of trading moves X's price by 0.7%.<span class="r"><b>Why:</b> step 3.</span></li>
+<li>Stock Y has the same returns but 100 times the volume: ILLIQ \(= 0.00007\), so $1 million moves it by only 0.007%. Y is far more liquid.<span class="r"><b>Why:</b> VOLD in the denominator is 100 times larger.</span></li>
+<li>Amivest for X: \(\sum\text{VOLD}/\sum|R| = 11{,}000{,}000/0.08 = 137.5\) million, i.e. $1.375M of trading per 1% of absolute return.<span class="r"><b>Why:</b> primer 3.</span></li>
+</ol>
+<p><b>(2) Fama–MacBeth in miniature.</b> Suppose three monthly cross-sections give illiquidity coefficients 0.20, 0.05, 0.14. Mean \(= 0.13\), \(sd = 0.0755\), \(t = 0.13/(0.0755/\sqrt3) = 2.98\): significantly positive. (Amihud's version averages 408 months.)</p>
+<p><b>(3) Why a surprise lowers prices.</b> A stock pays $5 a year forever. With a required return of 10%, \(P = 5/0.10 = \$50\). Unexpected illiquidity raises the required return to 12.5%: \(P = 5/0.125 = \$40\). The return today is \((40 - 50)/50 = -20\%\), and from then on the expected return is 12.5% instead of 10%. Negative now, higher later: exactly the two time-series signs.</p></div>
+<div class="sec"><p class="sh">Exam</p><p><b>Gotcha:</b> ILLIQ measures <i>il</i>liquidity (higher = worse), while Amivest measures liquidity (higher = better). Unexpected illiquidity gives <i>lower</i> returns now, not higher. Characteristics come from the <i>previous</i> year.</p>
+<p><b>Recognize:</b> "\(|R|/\text{VOLD}\)", "illiquidity measure from daily data", "illiquidity premium", "Fama–MacBeth", "expected vs unexpected market illiquidity", "cross-section and time-series effects" → Amihud (2002).</p>
+<p><b>Findings:</b></p><ul>
+<li>ILLIQ is positively and significantly related to Kyle's \(\lambda\) and to the fixed-cost (spread) component \(\psi\) (\(R^2 = 0.30\)), so it is a valid price-impact measure (slide 22).</li>
+<li>Cross-section: expected stock returns increase with illiquidity (NYSE 1963–1997), controlling for beta and size.</li>
+<li>Time series: expected market illiquidity positively affects ex-ante market excess returns; unexpected market illiquidity lowers contemporaneous stock returns.</li>
+<li>Both effects are stronger for small-firm stocks, consistent with a flight to liquidity.</li>
+<li>So the stock excess return (the "equity premium") partly compensates investors for illiquidity.</li>
+</ul></div>
+<p class="gap">⚠ Slide gap. The slide-21 formula has index typos (the sum runs over \(t\) but the terms use \(d\); "VOLD\(_{ivyd}\)"), and it omits the \(10^6\) scaling that Amihud uses to report ILLIQ. Without the scaling, the numbers are of order \(10^{-8}\) per dollar. The slides stop at the model statement (slide 25). The cross-section and time-series results listed above come from the paper.</p>
+</div>
+</div>

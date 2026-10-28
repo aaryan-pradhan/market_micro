@@ -1,0 +1,92 @@
+\section{The Model's World: Monte Carlo at NSE Parameters}
+\label{sec:mc}
+
+\subsection{Design}
+
+We first ask what the model promises when its own assumptions are true. We reuse the base paper's
+simulation design~\cite{amargos2026} with the NSE parameters of Table~\ref{tab:calibration}. Time
+steps are $\Delta t=0.02$ minutes. In each step the mid moves by $\sigma\sqrt{\Delta t}\,Z$, and each
+quote is filled with probability $\lambda(\delta)\Delta t$, which is at most 0.03, so the
+Bernoulli step approximates the Poisson process well. The two strategies use \emph{common random
+numbers}: identical normal and uniform draws, in the same order, so any difference between them comes
+from the quoting rule alone. The benchmark is a \emph{symmetric dealer} who quotes a fixed
+half-spread around the mid, blind to inventory, set equal to the average half-spread the AS dealer
+actually quoted (\textrm{INR}~\RELIANCEHalfSpread{} and \textrm{INR}~\KSCLHalfSpread{}). The two
+dealers therefore differ only in \emph{where} they quote, not \emph{how wide}. We simulate
+\Paths{} sessions per stock and strategy.
+
+A built-in check confirms the simulator works. The symmetric dealer's terminal inventory is the
+difference of two independent Poisson counts, so its variance must equal $2Ae^{-k\bar\delta}T$. For
+RELIANCE theory gives \RELIANCEVarqTheory{} and the simulation gives \RELIANCEVarqSym{}; for KSCL,
+\KSCLVarqTheory{} against \KSCLVarqSym{}.
+
+\begin{table}[!htbp]
+\centering
+\caption{Monte Carlo results, \Paths{} sessions per row, $\gamma=\GammaRA$. CE is the certainty
+equivalent $-\frac1\gamma\ln\mathbb{E}[e^{-\gamma W_T}]$, the sure amount the dealer values the
+strategy at. All amounts in rupees per session.}
+\label{tab:mc}
+\small
+\input{tables/monte_carlo}
+\end{table}
+
+\subsection{Results}
+
+Table~\ref{tab:mc} reproduces the base paper's result at Indian parameters. The skewing dealer
+earns a slightly \emph{lower} mean, because it gives up some spread to unload inventory, but the standard deviation of
+its wealth is seven to nine times smaller, and its certainty equivalent is far higher:
+\RELIANCECEAS{} against \RELIANCECESym{} for RELIANCE (paired bootstrap 95\% interval for the
+difference: [\RELIANCECEciLo, \RELIANCECEciHi]) and \KSCLCEAS{} against \KSCLCESym{} for KSCL
+([\KSCLCEciLo, \KSCLCEciHi]). Terminal-inventory variance falls by a factor of
+\RELIANCEVarqFactor{} for RELIANCE and \KSCLVarqFactor{} for KSCL.
+
+Figure~\ref{fig:mcpaths} shows why. The symmetric dealer's inventory is a random walk that drifts
+twenty or thirty shares away from zero; the AS dealer's inventory never leaves a narrow band,
+because every share of inventory pushes its quotes towards unloading it. Figure~\ref{fig:mcterminal}
+shows the resulting distributions at the close: a tall narrow spike for AS, a wide bell for the
+benchmark.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{mc_inventory_paths}
+\caption{Inventory through the session in the model's world: 40 simulated sessions (thin) and the
+5th and 95th percentiles across all \Paths{} (thick).}
+\label{fig:mcpaths}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{mc_terminal_distributions}
+\caption{Distribution of terminal inventory (top) and terminal wealth (bottom) over \Paths{}
+simulated sessions.}
+\label{fig:mcterminal}
+\end{figure}
+
+\subsection{Robustness to the Risk Aversion}
+
+Figure~\ref{fig:gamma} repeats the comparison for $\gamma$ from 0.0005 to 0.05 (2,000 sessions
+each). The certainty-equivalent gain of AS is positive at every value, so the conclusion does not hinge
+on our choice of $\gamma$. The variance reduction is largest near our headline value and falls at the
+highest $\gamma$, where the AS spread becomes so wide that the matched symmetric dealer hardly trades
+and so carries little inventory either. Figure~\ref{fig:frontier} shows the same trade-off as a
+frontier: across all $\gamma$, AS reaches a given mean with much less risk than the symmetric dealer.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{mc_gamma_sensitivity}
+\caption{(a) Certainty-equivalent gain of AS over the symmetric dealer, and (b) the factor by which
+AS reduces terminal-inventory variance, across risk aversion. Dashed: the headline $\gamma=\GammaRA$.}
+\label{fig:gamma}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{mc_frontier}
+\caption{Mean against standard deviation of terminal wealth as $\gamma$ varies. Each AS point is
+paired with a symmetric dealer quoting the same average spread. AS sits up and to the left: more
+return per unit of risk.}
+\label{fig:frontier}
+\end{figure}
+
+So in the model's world, the answer to our second question is an emphatic yes. The open question is
+whether any of this survives on real order flow.
