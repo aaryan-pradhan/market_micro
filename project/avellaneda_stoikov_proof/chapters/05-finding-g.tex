@@ -1,0 +1,99 @@
+\chapter{Finding \texorpdfstring{$g$}{g}: the dealer who stops trading}
+\label{ch:g}
+
+\begin{question}
+The best quotes of \cref{res:foc} still contain the unknown function $g(q,t)$. What is $g$?
+\end{question}
+
+\begin{whatfor}
+\begin{itemize}
+  \item Explains why finding $g$ exactly is hard, and states the one approximation of the book.
+  \item Computes the value of a dealer who holds the inventory to the close without trading, using the normal moment generating function.
+  \item Reads off $g(q,t)=-\tfrac12\gamma\sigma^2q^2\Tt$.
+\end{itemize}
+\end{whatfor}
+
+\begin{setup}[Setup]
+The two guesses of \cref{ch:guesses}: $v=-e^{-\gamma x}e^{-\gamma(qs+g(q,t))}$ with $g(q,T)=0$.
+\end{setup}
+
+%=====================================================================
+\section{The one approximation}
+
+To find $g$ exactly, we would put the best quotes back into the HJB equation. That gives one differential equation in $t$ for each inventory level $q$, and each equation involves $g$ at $q-1$, $q$ and $q+1$. This chain of equations has no short closed-form solution. Instead we take $g$ from a simpler dealer.
+
+\begin{definition}[Frozen-inventory value]
+\label{def:frozen}
+The \dfn{frozen-inventory value} is the expected utility of a dealer who receives no more fills after time $t$ and so holds cash $x$ and inventory $q$ to the close:
+\[
+  v_0(s,x,q,t)=\E_{W}\!\left[-e^{-\gamma(x+qS_T)}\right],
+\]
+where $\E_W$ averages over the Brownian motion from $t$ to $T$, given $S_t=s$.
+\end{definition}
+
+\begin{remark}[Approximation]
+We take $g$ to be the function that makes $v_0$ fit the two guesses. This is exact when no fills come ($A=0$), and close to exact while the inventory $|q|$ stays small. It is the only approximation in the book. Every formula from here on inherits it.
+\end{remark}
+
+%=====================================================================
+\section{Computing \texorpdfstring{$g$}{g}}
+
+\begin{result}[The risk correction]
+\label{res:g}
+\[
+  v_0(s,x,q,t)=-e^{-\gamma x}\,e^{-\gamma\left(qs-\frac12\gamma\sigma^2q^2(T-t)\right)},
+  \qquad\text{so}\qquad
+  g(q,t)=-\tfrac12\,\gamma\sigma^2q^2\,\Tt .
+\]
+\end{result}
+
+\begin{proof}
+\begin{steps}
+  \item Write the closing mid-price as $S_T=s+\sigma\sqrt{T-t}\;Z$ with $Z\sim N(0,1)$.
+  \\ \emph{Why:} by \cref{def:mid} and F2, $S_T-s=\sigma(W_T-W_t)\sim N\big(0,\sigma^2\Tt\big)$, and a $N(0,\sigma^2\Tt)$ variable is $\sigma\sqrt{T-t}$ times a standard normal.
+  \item So $x+qS_T=x+qs+q\sigma\sqrt{T-t}\;Z$, and
+  \[
+    -e^{-\gamma(x+qS_T)}=-e^{-\gamma(x+qs)}\;e^{-\gamma q\sigma\sqrt{T-t}\,Z}.
+  \]
+  \emph{Why:} Step 1; $e^{a+b}=e^ae^b$.
+  \item The factor $-e^{-\gamma(x+qs)}$ is not random, so it comes out of the average:
+  \[
+    v_0=-e^{-\gamma(x+qs)}\;\E_Z\!\left[e^{-\gamma q\sigma\sqrt{T-t}\,Z}\right].
+  \]
+  \emph{Why:} \cref{def:frozen}; the expectation of a constant times a random variable is the constant times its expectation.
+  \item Apply F4 with $a=-\gamma q\sigma\sqrt{T-t}$, so that $a^2/2=\tfrac12\gamma^2q^2\sigma^2\Tt$:
+  \[
+    v_0=-e^{-\gamma(x+qs)}\;e^{\frac12\gamma^2q^2\sigma^2(T-t)}.
+  \]
+  \emph{Why:} F4.
+  \item Write the exponent as $-\gamma$ times one bracket:
+  \[
+    \begin{aligned}
+      v_0&=-e^{-\gamma x}\;e^{-\gamma qs+\frac12\gamma^2q^2\sigma^2(T-t)}\\
+      &=-e^{-\gamma x}\;e^{-\gamma\left(qs-\frac12\gamma\sigma^2q^2(T-t)\right)}.
+    \end{aligned}
+  \]
+  \emph{Why:} $e^{-\gamma(x+qs)}=e^{-\gamma x}e^{-\gamma qs}$; then take out $-\gamma$.
+  \item Compare with the guesses $v=-e^{-\gamma x}e^{-\gamma(qs+g)}$. The two agree exactly when $g(q,t)=-\tfrac12\gamma\sigma^2q^2\Tt$. At $t=T$ this gives $g(q,T)=0$, as the second guess requires.
+  \\ \emph{Why:} \cref{def:guess1,def:guess2}; equal exponentials have equal exponents.
+\end{steps}
+\end{proof}
+
+\begin{intuition}
+Read $-v=e^{-\gamma(x+qs+g)}$ as the utility of a sure wealth $x+qs+g$. So $g$ is a rupee amount: what the risk of holding $q$ shares until the close is worth to the dealer. It is negative, grows with $q^2$ (long or short, risk is risk), with the variance $\sigma^2\Tt$ of the closing price, and with the risk aversion $\gamma$. It vanishes at the close, when no risk is left.
+\end{intuition}
+
+\begin{example}
+For RELIANCE, $\gamma=0.005$, $\sigma=0.676$ and a session of $T=360$ minutes. A dealer holding $q=10$ shares at the open ($t=0$) carries a risk correction of
+\[
+  g(10,0)=-\tfrac12\times0.005\times0.676^2\times10^2\times360\approx-41.13\text{ rupees}.
+\]
+\end{example}
+
+\begin{recall}
+\textbf{Why approximate.} The exact $g$ solves a chain of equations, one for each $q$. Instead, freeze inventory: no fills after $t$.
+
+\textbf{Computation.} $S_T=s+\sigma\sqrt{T-t}\,Z$; F4 gives $\E_Z\big[e^{-\gamma q\sigma\sqrt{T-t}Z}\big]=e^{\frac12\gamma^2q^2\sigma^2(T-t)}$.
+
+\textbf{Result.} $g(q,t)=-\tfrac12\gamma\sigma^2q^2\Tt$: the rupee cost of the inventory risk.
+\end{recall}
