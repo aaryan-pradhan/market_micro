@@ -1,0 +1,25 @@
+\documentclass[11pt,oneside]{book}
+\input{preamble}
+
+\title{The Avellaneda--Stoikov Model\\[0.3em]\large A proof of the optimal quotes, with no step skipped}
+\author{Aaryan Pradhan}
+\date{November 2026}
+\ifdefined\only\includeonly{\only}\fi   % set by `make review CH=NN`
+
+\begin{document}
+\frontmatter
+\maketitle
+\tableofcontents
+\include{chapters/00-front}
+
+\mainmatter
+\include{chapters/01-problem}
+\include{chapters/02-hjb}
+\include{chapters/03-guesses}
+\include{chapters/04-best-quote}
+\include{chapters/05-finding-g}
+\include{chapters/06-answers}
+
+\backmatter
+\printindex
+\end{document}

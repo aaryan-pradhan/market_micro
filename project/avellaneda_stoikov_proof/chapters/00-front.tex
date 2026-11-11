@@ -1,0 +1,30 @@
+\chapter{Before you start}
+
+\begin{prereq}
+This book assumes the five facts below and never re-teaches them. Each is cited by name, F1 to F5.
+\begin{itemize}
+  \item[\textbf{F1}] \textbf{Taylor expansion to second order.} For a smooth function $h(s,t)$ and small changes $\Delta s$ and $\Delta t$,
+  \[
+    h(s+\Delta s,\,t+\Delta t)=h+h_t\,\Delta t+h_s\,\Delta s+\tfrac12 h_{ss}\,(\Delta s)^2+\dots,
+  \]
+  where $h,h_t,h_s,h_{ss}$ are evaluated at $(s,t)$ and ``$\dots$'' collects the smaller terms.
+  \item[\textbf{F2}] \textbf{Brownian motion.} A Brownian motion $W$ has independent normal increments: $W_{t+u}-W_t\sim N(0,u)$. Over a short step $dt$ the increment $dW$ has $\E_{dW}[dW]=0$ and $\E_{dW}[(dW)^2]=dt$, and its higher powers have expectations of size $o(dt)$.
+  \item[\textbf{F3}] \textbf{Poisson arrivals.} For events arriving as a Poisson process with rate $\lambda$, over a short time $dt$ there is exactly one event with probability $\lambda\,dt+o(dt)$, and two or more with probability $o(dt)$. Two independent Poisson processes both fire in the same $dt$ with probability $o(dt)$.
+  \item[\textbf{F4}] \textbf{The normal moment generating function.} If $Z\sim N(0,1)$, then $\E_Z\!\left[e^{aZ}\right]=e^{a^2/2}$ for every real number $a$.
+  \item[\textbf{F5}] \textbf{Maximum test.} Let $f$ be differentiable. If $f'>0$ to the left of a point $\delta^*$ and $f'<0$ to its right, then $f$ is largest at $\delta^*$.
+\end{itemize}
+Notation: $o(dt)$ stands for any quantity with $o(dt)/dt\to0$ as $dt\to0$. A subscript on a function names a partial derivative: $v_t=\partial v/\partial t$ and $v_{ss}=\partial^2v/\partial s^2$.
+\end{prereq}
+
+\section*{What this book proves}
+A dealer posts a price to buy and a price to sell a stock, all day long. The dealer wants to end the day rich, but not holding a risky pile of shares. The model of this book gives two formulas for where to quote:
+\[
+  r=s-q\,\gamma\sigma^2\,(T-t),\qquad
+  \delta^a+\delta^b=\gamma\sigma^2\,(T-t)+\frac{2}{\gamma}\ln\!\Big(1+\frac{\gamma}{k}\Big).
+\]
+Chapter 1 sets up the problem. Chapter 2 turns it into one equation. Chapters 3 to 5 solve that equation. Chapter 6 reads off the two formulas. Every symbol above is defined before the chapters use it.
+
+\section*{How to read this book}
+Every term is defined, in bold, before it is used. Every result is proved before it is used, in numbered steps, and each step ends with the reason it holds. Every expectation names, as a subscript, what it averages over. One worked example with real numbers runs through the chapters: the stock RELIANCE on the National Stock Exchange of India. Each chapter ends with a recall sheet, and the glossary at the end lists every defined term with its page.
+
+The whole argument contains exactly one approximation. It is in Chapter 5, and it is labelled there.

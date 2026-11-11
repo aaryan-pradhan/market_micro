@@ -1,0 +1,94 @@
+% ---------- page and fonts ----------
+\usepackage[a4paper,margin=2.6cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+
+% ---------- mathematics ----------
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+
+% Shared notation. A book's own symbols go in notation.tex (loaded at the end if present).
+\DeclareMathOperator{\E}{E}                     % write \E_{y\mid\vect{x}}\!\left[\cdot\right]
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Bias}{Bias}
+\DeclareMathOperator{\MSE}{MSE}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\given}{\mid}
+\newcommand{\iid}{\overset{\text{iid}}{\sim}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\ind}[1]{\mathbf{1}\{#1\}}          % indicator
+\newcommand{\T}{^{\mathsf{T}}}                  % transpose
+
+% ---------- boxes and theorem-like environments ----------
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\definecolor{defc}{HTML}{1F4F8F}
+\definecolor{thmc}{HTML}{1F7A4D}
+\definecolor{intc}{HTML}{7A5A12}
+\definecolor{prec}{HTML}{5B6068}
+\definecolor{exc}{HTML}{6A4C93}
+\definecolor{trapc}{HTML}{A23B2A}
+
+% ---------- links (before the theorem types, so cleveref names each type correctly) ----------
+\usepackage[colorlinks=true,linkcolor=defc,citecolor=defc,urlcolor=defc]{hyperref}
+\usepackage[capitalise,noabbrev]{cleveref}
+\crefname{result}{Result}{Results}
+\crefname{steps}{Step}{Steps}
+
+% Body starts on a new line under the head (so a list never sits beside the title); upright text throughout.
+\newtheoremstyle{slmthm}{0pt}{0pt}{\normalfont}{}{\bfseries}{.}{\newline}{}
+\newtheoremstyle{slmrem}{0pt}{0pt}{\normalfont}{}{\itshape}{.}{\newline}{}
+\usepackage{thmtools}   % declares the types so cleveref names each one correctly despite the shared counter
+\declaretheorem[style=slmthm,numberwithin=chapter]{theorem}
+\declaretheorem[style=slmthm,sibling=theorem]{result}
+\declaretheorem[style=slmthm,sibling=theorem]{lemma}
+\declaretheorem[style=slmthm,sibling=theorem]{corollary}
+\declaretheorem[style=slmthm,sibling=theorem]{definition}
+\declaretheorem[style=slmthm,sibling=theorem]{example}
+\declaretheorem[style=slmrem,sibling=theorem]{remark}
+% unique link targets per chapter (otherwise "definition.1" repeats in every chapter and links jump to the wrong box)
+\makeatletter\@for\thm@env:=theorem,result,lemma,corollary,definition,example,remark\do{\expandafter\def\csname theH\thm@env\endcsname{\thechapter.\arabic{theorem}}}\makeatother
+
+% amsthm's proof, with "Proof." on its own line
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par\pushQED{\qed}\normalfont\topsep6\p@\@plus6\p@\relax\trivlist\item[\hskip\labelsep\itshape#1\@addpunct{.}]\mbox{}\par\nobreak}{\popQED\endtrivlist\@endpefalse}
+\makeatother
+
+\tcbset{slm/.style={enhanced,before upper={\setlength{\parskip}{0.55em}},breakable,boxrule=0.5pt,arc=1.5pt,left=6pt,right=6pt,top=4pt,bottom=4pt,before skip=10pt,after skip=10pt}}
+\tcolorboxenvironment{definition}{slm,colback=defc!4,colframe=defc!70}
+\tcolorboxenvironment{theorem}{slm,colback=thmc!5,colframe=thmc!75}
+\tcolorboxenvironment{result}{slm,colback=thmc!5,colframe=thmc!75}
+\tcolorboxenvironment{lemma}{slm,colback=thmc!5,colframe=thmc!75}
+\tcolorboxenvironment{corollary}{slm,colback=thmc!5,colframe=thmc!75}
+\tcolorboxenvironment{example}{slm,colback=exc!4,colframe=exc!60}
+
+\newtcolorbox{intuition}{slm,colback=intc!5,colframe=intc!70,title={Intuition},fonttitle=\bfseries\small}
+\newtcolorbox{prereq}{slm,colback=prec!5,colframe=prec!70,title={Before you start this chapter},fonttitle=\bfseries\small}
+\newtcolorbox{whatfor}{slm,colback=white,colframe=prec!50,title={What this chapter does},fonttitle=\bfseries\small}
+\newtcolorbox{recall}{slm,colback=thmc!3,colframe=thmc!75}
+\newtcolorbox{question}{slm,colback=exc!3,colframe=exc!50,title={The question},fonttitle=\bfseries\small}
+\newtcolorbox{setup}[1][Setup]{slm,colback=defc!2,colframe=defc!45,title={#1},fonttitle=\bfseries\small}
+\newtcolorbox{trap}{slm,colback=trapc!4,colframe=trapc!70,title={Trap},fonttitle=\bfseries\small}
+
+% Numbered derivation steps: Step-1, Step-2, ...
+\newlist{steps}{enumerate}{1}
+\setlist[steps]{label=\textbf{Step-\arabic*.},ref=\arabic*,leftmargin=*,align=left,itemsep=0.4em}
+\setlist[itemize]{itemsep=0.15em,topsep=0.3em}
+
+% ---------- small markers ----------
+% first, defining use of a term: bold + a glossary entry (order checked by tools/check.py)
+\usepackage{makeidx}\makeindex
+\renewcommand{\indexname}{Glossary}
+\newcommand{\dfn}[1]{\textbf{#1}\index{#1}}
+
+\InputIfFileExists{notation}{}{}
+
