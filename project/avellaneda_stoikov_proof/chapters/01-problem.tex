@@ -1,0 +1,128 @@
+\chapter{The dealer's problem}
+\label{ch:problem}
+
+\begin{question}
+What exactly is the dealer trying to maximise, and over what choices?
+\end{question}
+
+\begin{whatfor}
+\begin{itemize}
+  \item Describes the market: a randomly moving mid-price, and orders that fill the dealer's quotes at random times.
+  \item Describes the dealer: inventory, cash, wealth at the close, and a utility that dislikes risk.
+  \item Defines the value function, the object every later chapter works on, and finds its value at the close.
+\end{itemize}
+\end{whatfor}
+
+\begin{setup}[Setup]
+One stock, one trading session from time $0$ to the close at time $T$ (we measure time in minutes). One dealer posts a price to buy and a price to sell. At each moment the dealer may change both prices.
+\end{setup}
+
+%=====================================================================
+\section{The market}
+
+\begin{definition}[Mid-price]
+\label{def:mid}
+The \dfn{mid-price} $S_t$ is the reference price of the stock at time $t$. It moves as
+\[
+  dS_t=\sigma\,dW_t ,
+\]
+where $W$ is a Brownian motion and the \dfn{volatility} $\sigma>0$ is a constant, in rupees per $\sqrt{\text{minute}}$. There is no drift: on average the mid-price does not move.
+\end{definition}
+
+By F2, over the time from $t$ to $T$ the mid-price changes by $\sigma(W_T-W_t)$, which is normal with mean $0$ and variance $\sigma^2\Tt$.
+
+\begin{definition}[Quotes]
+\label{def:quotes}
+At time $t$ the dealer posts a \dfn{bid quote} $p^b=S_t-\delta^b$, a price at which the dealer buys one share, and an \dfn{ask quote} $p^a=S_t+\delta^a$, a price at which the dealer sells one share. The numbers $\delta^b\ge0$ and $\delta^a\ge0$ are the \dfn{quote distances}: how far below and above the mid-price the dealer quotes. They are the dealer's only choice.
+\end{definition}
+
+\begin{definition}[Fill rate]
+\label{def:fill}
+A quote at distance $\delta$ from the mid-price is filled by other traders' orders arriving as a Poisson process with \dfn{fill rate}
+\[
+  \lambda(\delta)=A\,e^{-k\delta},
+\]
+with constants $A>0$ and $k>0$. Sell orders hit the bid at rate $\lambda(\delta^b)$; buy orders lift the ask at rate $\lambda(\delta^a)$. The two streams of orders are independent, and each fill is for one share.
+\end{definition}
+
+$A$ is the fill rate of a quote sitting exactly at the mid-price. $k$ says how fast the fill rate falls as the quote moves away. This is the dealer's basic trade-off: a quote further away earns more per fill, but is filled less often.
+
+\begin{example}
+For RELIANCE the calibrated values are $A=1.49$ fills per minute and $k=2.52$ per rupee. A quote $0.5$ rupees from the mid-price is filled at rate
+\[
+  \lambda(0.5)=1.49\,e^{-2.52\times0.5}=1.49\,e^{-1.26}\approx0.423
+\]
+fills per minute, about one fill every $2.4$ minutes.
+\end{example}
+
+%=====================================================================
+\section{The dealer}
+
+\begin{definition}[Inventory and cash]
+\label{def:inventory}
+The dealer's \dfn{inventory} $q_t$ is the number of shares held at time $t$ (negative if the dealer is short). The dealer's \dfn{cash} $X_t$ is money in hand. A fill changes them as follows.
+\begin{itemize}
+  \item A bid fill: the dealer buys one share at $p^b=S_t-\delta^b$. Inventory rises by $1$; cash falls by $S_t-\delta^b$.
+  \item An ask fill: the dealer sells one share at $p^a=S_t+\delta^a$. Inventory falls by $1$; cash rises by $S_t+\delta^a$.
+\end{itemize}
+Between fills, inventory and cash do not change.
+\end{definition}
+
+\begin{definition}[Terminal wealth]
+\label{def:wealth}
+The dealer's \dfn{terminal wealth} is cash plus the shares valued at the closing mid-price, $X_T+q_TS_T$.
+\end{definition}
+
+\begin{definition}[CARA utility]
+\label{def:cara}
+The dealer scores a terminal wealth $w$ with the \dfn{CARA utility} $u(w)=-e^{-\gamma w}$, where the constant $\gamma>0$ is the dealer's \dfn{risk aversion} (per rupee). CARA stands for constant absolute risk aversion.
+\end{definition}
+
+$u$ is increasing, so more wealth is better. $u$ is also concave, so a sure amount beats a gamble with the same average. A larger $\gamma$ makes the dealer dislike risk more.
+
+\begin{intuition}
+An inventory is a bet on the closing price. A dealer long $q$ shares gains $q$ rupees for every rupee the price rises and loses $q$ for every rupee it falls. The utility $u$ is what makes this bet costly: it penalises the spread of outcomes, not just their average.
+\end{intuition}
+
+%=====================================================================
+\section{The value function}
+
+\begin{definition}[Value function]
+\label{def:value}
+The \dfn{value function} is the best expected utility the dealer can reach from time $t$, starting with mid-price $s$, cash $x$ and inventory $q$:
+\[
+  v(s,x,q,t)=\sup_{\delta^b,\,\delta^a\text{ on }[t,T]}\E_t\!\left[-e^{-\gamma(X_T+q_TS_T)}\right].
+\]
+Here $\E_t$ averages over everything random after time $t$, namely the Brownian motion and the fill arrivals, given $S_t=s$, $X_t=x$, $q_t=q$. The $\sup$ is over all ways of choosing the two quote distances at every moment from $t$ to $T$.
+\end{definition}
+
+Once $v$ is known, the best quotes are the ones that reach it. So the whole problem is to find $v$.
+
+\begin{result}[The value at the close]
+\label{res:end}
+At the close the value function equals the utility of the wealth in hand:
+\[
+  v(s,x,q,T)=-e^{-\gamma(x+qs)}.
+\]
+\end{result}
+
+\begin{proof}
+\begin{steps}
+  \item At time $T$ there is no time left, so there is nothing to choose and nothing random: $X_T=x$, $q_T=q$, $S_T=s$.
+  \\ \emph{Why:} \cref{def:value} with $t=T$.
+  \item So the terminal wealth is $x+qs$, and its utility is $-e^{-\gamma(x+qs)}$.
+  \\ \emph{Why:} \cref{def:wealth,def:cara}.
+\end{steps}
+\end{proof}
+
+\begin{remark}
+The model rests on these assumptions, all used above: the mid-price has no drift and constant volatility; fill rates are exponential in distance, the same on both sides and constant over time; each fill is one share; there are no fees; and a fill says nothing about where the price goes next.
+\end{remark}
+
+\begin{recall}
+\textbf{Market.} $dS_t=\sigma\,dW_t$; bid $S_t-\delta^b$, ask $S_t+\delta^a$; fills at rate $\lambda(\delta)=Ae^{-k\delta}$, one share each.
+
+\textbf{Dealer.} A bid fill: $q\to q+1$, $x\to x-(s-\delta^b)$. An ask fill: $q\to q-1$, $x\to x+(s+\delta^a)$. Utility $u(w)=-e^{-\gamma w}$ of $X_T+q_TS_T$.
+
+\textbf{Value function.} $v(s,x,q,t)=\sup\E_t\big[-e^{-\gamma(X_T+q_TS_T)}\big]$, and $v(s,x,q,T)=-e^{-\gamma(x+qs)}$.
+\end{recall}
