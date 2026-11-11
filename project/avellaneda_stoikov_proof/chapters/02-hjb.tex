@@ -1,0 +1,169 @@
+\chapter{The HJB equation}
+\label{ch:hjb}
+
+\begin{question}
+What equation must the value function $v$ satisfy?
+\end{question}
+
+\begin{whatfor}
+\begin{itemize}
+  \item Splits the problem into one short step of length $dt$ followed by the best plan from then on.
+  \item Lists the three things that can happen in that step: nothing, a bid fill, or an ask fill.
+  \item Averages over the step and lets $dt\to0$. The result is the HJB (Hamilton--Jacobi--Bellman) equation.
+\end{itemize}
+\end{whatfor}
+
+\begin{setup}[Setup]
+The market and the dealer of \cref{ch:problem}. We assume $v$ is smooth in $s$ and $t$, so F1 applies to it. We write $v$ for $v(s,x,q,t)$ and $v_t$, $v_s$, $v_{ss}$ for its partial derivatives at $(s,x,q,t)$.
+\end{setup}
+
+%=====================================================================
+\section{One short step}
+
+\begin{result}[Dynamic programming principle]
+\label{res:dpp}
+For a short step $dt$,
+\[
+  v(s,x,q,t)=\sup_{\delta^b,\,\delta^a}\E_t\!\left[v\big(S_{t+dt},\,X_{t+dt},\,q_{t+dt},\,t+dt\big)\right]+o(dt),
+\]
+where the $\sup$ is over the quote distances used during $[t,t+dt]$.
+\end{result}
+
+\begin{proof}
+\begin{steps}
+  \item Any plan on $[t,T]$ consists of quotes on $[t,t+dt]$ followed by quotes on $[t+dt,T]$.
+  \\ \emph{Why:} the two intervals cover $[t,T]$.
+  \item Whatever happens on $[t,t+dt]$, the best the dealer can do from $t+dt$ onwards is $v(S_{t+dt},X_{t+dt},q_{t+dt},t+dt)$.
+  \\ \emph{Why:} \cref{def:value} at time $t+dt$.
+  \item So the best plan on $[t,T]$ is the best first step, followed by the best plan from $t+dt$. Its value is the $\sup$ over the first step of the average of $v$ at $t+dt$.
+  \\ \emph{Why:} Steps 1 and 2. Holding the quotes fixed over $[t,t+dt]$ instead of changing them within the step costs only $o(dt)$.
+\end{steps}
+\end{proof}
+
+This is the \dfn{dynamic programming principle}: a best plan stays best from every later point on.
+
+\begin{result}[Three cases]
+\label{res:cases}
+During $[t,t+dt]$, with quote distances $\delta^b$ and $\delta^a$:
+\begin{itemize}
+  \item no fill, with probability $1-\lambda(\delta^b)\,dt-\lambda(\delta^a)\,dt+o(dt)$;
+  \item one bid fill, with probability $\lambda(\delta^b)\,dt+o(dt)$;
+  \item one ask fill, with probability $\lambda(\delta^a)\,dt+o(dt)$;
+  \item anything else, with probability $o(dt)$.
+\end{itemize}
+\end{result}
+
+\begin{proof}
+\begin{steps}
+  \item One bid fill has probability $\lambda(\delta^b)\,dt+o(dt)$, and one ask fill has probability $\lambda(\delta^a)\,dt+o(dt)$.
+  \\ \emph{Why:} \cref{def:fill} and F3.
+  \item Two or more fills, on one side or on both, have probability $o(dt)$.
+  \\ \emph{Why:} F3; the two streams are independent.
+  \item The probabilities add up to $1$, so ``no fill'' has the rest: $1-\lambda(\delta^b)\,dt-\lambda(\delta^a)\,dt+o(dt)$.
+  \\ \emph{Why:} the cases cover every outcome and do not overlap.
+\end{steps}
+\end{proof}
+
+%=====================================================================
+\section{Averaging over the step}
+
+Over the step the mid-price moves from $s$ to $s+\sigma\,dW$ (\cref{def:mid}).
+
+\begin{result}[No fill]
+\label{res:nofill}
+If no fill happens,
+\[
+  \E_{dW}\!\left[v(s+\sigma dW,\,x,\,q,\,t+dt)\right]=v+\big(v_t+\tfrac12\sigma^2v_{ss}\big)\,dt+o(dt).
+\]
+\end{result}
+
+\begin{proof}
+\begin{steps}
+  \item Without a fill, cash stays $x$ and inventory stays $q$. Only $s$ and $t$ change.
+  \\ \emph{Why:} \cref{def:inventory}.
+  \item Expand in $s$ and $t$:
+  \[
+    \begin{aligned}
+      v(s+\sigma dW,x,q,t+dt)&=v+v_t\,dt+v_s\,\sigma\,dW\\
+      &\quad+\tfrac12v_{ss}\,\sigma^2(dW)^2+\dots
+    \end{aligned}
+  \]
+  \emph{Why:} F1 with $\Delta t=dt$ and $\Delta s=\sigma\,dW$.
+  \item Take the average over $dW$. The term $v_s\,\sigma\,dW$ averages to $0$, the term $\tfrac12v_{ss}\sigma^2(dW)^2$ averages to $\tfrac12v_{ss}\sigma^2\,dt$, and ``$\dots$'' averages to $o(dt)$.
+  \\ \emph{Why:} F2: $\E_{dW}[dW]=0$, $\E_{dW}[(dW)^2]=dt$, and higher powers give $o(dt)$.
+\end{steps}
+\end{proof}
+
+\begin{definition}[Values after a fill]
+\label{def:jumps}
+Write $v^b$ for the value just after a bid fill and $v^a$ for the value just after an ask fill:
+\[
+  v^b=v\big(s,\;x-s+\delta^b,\;q+1,\;t\big),\qquad
+  v^a=v\big(s,\;x+s+\delta^a,\;q-1,\;t\big).
+\]
+\end{definition}
+
+The cash and inventory in $v^b$ and $v^a$ come from \cref{def:inventory}. During the step the mid-price and the clock also move a little. Averaged, that changes $v^b$ and $v^a$ only by an amount of size $dt$, as in \cref{res:nofill}. Multiplied by the probability $\lambda\,dt$ of the fill, it becomes a product of two $dt$'s, which is $o(dt)$.
+
+%=====================================================================
+\section{Letting the step shrink}
+
+\begin{result}[The HJB equation]
+\label{res:hjb}
+The value function satisfies
+\[
+  0=v_t+\tfrac12\sigma^2v_{ss}
+  +\sup_{\delta^b\ge0}\Big\{\lambda(\delta^b)\big[v^b-v\big]\Big\}
+  +\sup_{\delta^a\ge0}\Big\{\lambda(\delta^a)\big[v^a-v\big]\Big\},
+\]
+with the end condition $v(s,x,q,T)=-e^{-\gamma(x+qs)}$ of \cref{res:end}.
+\end{result}
+
+\begin{proof}
+\begin{steps}
+  \item Average over the three cases, each weighted by its probability:
+  \[
+    \begin{aligned}
+      \E_t\!\left[v(\text{after }dt)\right]
+      &=\big(1-\lambda(\delta^b)dt-\lambda(\delta^a)dt\big)\Big[v+\big(v_t+\tfrac12\sigma^2v_{ss}\big)dt\Big]\\
+      &\quad+\lambda(\delta^b)dt\;v^b+\lambda(\delta^a)dt\;v^a+o(dt).
+    \end{aligned}
+  \]
+  \emph{Why:} \cref{res:cases,res:nofill} and \cref{def:jumps}, with the remark after it.
+  \item Multiply out the first product. The terms $\lambda\,dt\cdot\big(v_t+\tfrac12\sigma^2v_{ss}\big)dt$ are products of two $dt$'s, so they are $o(dt)$:
+  \[
+    \begin{aligned}
+      \E_t\!\left[v(\text{after }dt)\right]
+      &=v+\big(v_t+\tfrac12\sigma^2v_{ss}\big)dt\\
+      &\quad+\lambda(\delta^b)\big[v^b-v\big]dt+\lambda(\delta^a)\big[v^a-v\big]dt+o(dt).
+    \end{aligned}
+  \]
+  \emph{Why:} $-\lambda(\delta^b)dt\cdot v+\lambda(\delta^b)dt\cdot v^b=\lambda(\delta^b)\big[v^b-v\big]dt$, and the same on the ask side.
+  \item Put this into the dynamic programming principle and subtract $v$ from both sides:
+  \[
+    0=\sup_{\delta^b,\,\delta^a}\Big\{\big(v_t+\tfrac12\sigma^2v_{ss}\big)dt+\lambda(\delta^b)\big[v^b-v\big]dt+\lambda(\delta^a)\big[v^a-v\big]dt\Big\}+o(dt).
+  \]
+  \emph{Why:} \cref{res:dpp}; $v$ does not depend on the quotes, so it comes out of the $\sup$.
+  \item Divide by $dt$ and let $dt\to0$. The term $o(dt)/dt$ goes to $0$.
+  \\ \emph{Why:} the definition of $o(dt)$.
+  \item The term $v_t+\tfrac12\sigma^2v_{ss}$ does not depend on the quotes, so it comes out of the $\sup$. The bid term depends only on $\delta^b$ and the ask term only on $\delta^a$, so the $\sup$ of their sum is the sum of two separate $\sup$s.
+  \\ \emph{Why:} $v^b$ contains $\delta^b$ but not $\delta^a$, and $v^a$ the reverse (\cref{def:jumps}).
+\end{steps}
+\end{proof}
+
+We call it the \dfn{HJB equation}. Its two $\sup$ terms are the \dfn{jump terms}: each one is the rate of a fill times the change in value that the fill causes.
+
+\begin{intuition}
+Read the HJB equation as a budget for the value over one instant. $v_t$ is the change from time passing. $\tfrac12\sigma^2v_{ss}$ is the change from the price wobbling. Each jump term is the change from a fill. Under the best quotes, these add up to zero, because nothing better is left to gain.
+\end{intuition}
+
+\begin{recall}
+\textbf{Dynamic programming.} $v=\sup\E_t[v(\text{after }dt)]+o(dt)$.
+
+\textbf{Three cases over $dt$.} No fill: $v+(v_t+\frac12\sigma^2v_{ss})dt$ on average. A bid fill, with probability $\lambda(\delta^b)dt$: $v^b$. An ask fill, with probability $\lambda(\delta^a)dt$: $v^a$.
+
+\textbf{HJB.}
+\[
+  0=v_t+\tfrac12\sigma^2v_{ss}+\sup_{\delta^b}\lambda(\delta^b)\big[v^b-v\big]+\sup_{\delta^a}\lambda(\delta^a)\big[v^a-v\big],\qquad v(\cdot,T)=-e^{-\gamma(x+qs)}.
+\]
+\end{recall}
