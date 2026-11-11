@@ -1,0 +1,153 @@
+\chapter{Removing cash and the mid-price}
+\label{ch:guesses}
+
+\begin{question}
+The HJB equation has four variables $s,x,q,t$. Can we remove some of them?
+\end{question}
+
+\begin{whatfor}
+\begin{itemize}
+  \item Makes two guesses about the shape of $v$, each read off from the end condition.
+  \item Shows that, under the guesses, the jump terms no longer contain cash $x$ or the mid-price $s$.
+  \item Leaves one unknown function $g(q,t)$ of inventory and time.
+\end{itemize}
+\end{whatfor}
+
+\begin{setup}[Setup]
+The HJB equation of \cref{res:hjb}, with $v^b$ and $v^a$ as in \cref{def:jumps}. A guess is allowed in solving an equation: we guess a shape, and the rest of the book finds the pieces that make the shape work.
+\end{setup}
+
+%=====================================================================
+\section{Two guesses}
+
+At the close, \cref{res:end} gives $v=-e^{-\gamma x}\,e^{-\gamma qs}$. Cash enters only through the factor $e^{-\gamma x}$. Cash carries no risk and does not change between fills, so we guess it stays a separate factor at every time.
+
+\begin{definition}[First guess]
+\label{def:guess1}
+The \dfn{first guess} is that the value function has the form
+\[
+  v(s,x,q,t)=-e^{-\gamma x}\,e^{-\gamma\theta(s,q,t)}
+\]
+for some function $\theta$ that does not involve $x$, with $\theta(s,q,T)=qs$ so that the end condition holds.
+\end{definition}
+
+At the close, $\theta=qs$: the shares valued at the mid-price. We guess that $\theta$ stays ``$qs$ plus a correction'', and that the correction does not depend on $s$.
+
+\begin{definition}[Second guess]
+\label{def:guess2}
+The \dfn{second guess} is that
+\[
+  \theta(s,q,t)=qs+g(q,t)
+\]
+for some function $g$ of inventory and time only, with $g(q,T)=0$.
+\end{definition}
+
+\begin{definition}[Differences of $g$]
+\label{def:dg}
+The bid and ask differences of $g$ are
+\[
+  \Delta^bg=g(q+1,t)-g(q,t),\qquad \Delta^ag=g(q,t)-g(q-1,t).
+\]
+\end{definition}
+
+$\Delta^bg$ is the change in $g$ when one share is bought; $\Delta^ag$ is the change in $g$ from the inventory one share lower, the one an ask fill leads to.
+
+%=====================================================================
+\section{The jump terms become simple}
+
+\begin{result}[Differences of $\theta$]
+\label{res:dtheta}
+\[
+  \begin{aligned}
+    \theta(s,q+1,t)-\theta(s,q,t)&=s+\Delta^bg,\\
+    \theta(s,q,t)-\theta(s,q-1,t)&=s+\Delta^ag.
+  \end{aligned}
+\]
+\end{result}
+
+\begin{proof}
+\begin{steps}
+  \item By the second guess, $\theta(s,q+1,t)-\theta(s,q,t)=(q+1)s+g(q+1,t)-qs-g(q,t)=s+\Delta^bg$.
+  \\ \emph{Why:} \cref{def:guess2,def:dg}.
+  \item In the same way, $\theta(s,q,t)-\theta(s,q-1,t)=qs+g(q,t)-(q-1)s-g(q-1,t)=s+\Delta^ag$.
+  \\ \emph{Why:} \cref{def:guess2,def:dg}.
+\end{steps}
+\end{proof}
+
+\begin{result}[The ratios $v^b/v$ and $v^a/v$]
+\label{res:ratios}
+\[
+  \frac{v^b}{v}=e^{-\gamma(\delta^b+\Delta^bg)},\qquad
+  \frac{v^a}{v}=e^{-\gamma(\delta^a-\Delta^ag)}.
+\]
+\end{result}
+
+\begin{proof}
+\begin{steps}
+  \item Put the first guess into $v^b=v(s,x-s+\delta^b,q+1,t)$ and divide by $v$:
+  \[
+    \begin{aligned}
+      \frac{v^b}{v}
+      &=\frac{-e^{-\gamma(x-s+\delta^b)}\,e^{-\gamma\theta(s,q+1,t)}}{-e^{-\gamma x}\,e^{-\gamma\theta(s,q,t)}}\\
+      &=e^{\gamma s-\gamma\delta^b}\;e^{-\gamma\left[\theta(s,q+1,t)-\theta(s,q,t)\right]}.
+    \end{aligned}
+  \]
+  \emph{Why:} \cref{def:jumps,def:guess1}; $e^{-\gamma(x-s+\delta^b)}/e^{-\gamma x}=e^{\gamma s-\gamma\delta^b}$.
+  \item Replace the bracket by $s+\Delta^bg$:
+  \[
+    \frac{v^b}{v}=e^{\gamma s-\gamma\delta^b}\,e^{-\gamma s-\gamma\Delta^bg}=e^{-\gamma(\delta^b+\Delta^bg)}.
+  \]
+  \emph{Why:} \cref{res:dtheta}; the two $\gamma s$ cancel.
+  \item Do the same for $v^a=v(s,x+s+\delta^a,q-1,t)$:
+  \[
+    \begin{aligned}
+      \frac{v^a}{v}
+      &=\frac{-e^{-\gamma(x+s+\delta^a)}\,e^{-\gamma\theta(s,q-1,t)}}{-e^{-\gamma x}\,e^{-\gamma\theta(s,q,t)}}\\
+      &=e^{-\gamma s-\gamma\delta^a}\;e^{\gamma\left[\theta(s,q,t)-\theta(s,q-1,t)\right]}\\
+      &=e^{-\gamma s-\gamma\delta^a}\,e^{\gamma s+\gamma\Delta^ag}=e^{-\gamma(\delta^a-\Delta^ag)}.
+    \end{aligned}
+  \]
+  \emph{Why:} \cref{def:jumps,def:guess1}, then \cref{res:dtheta}; the two $\gamma s$ cancel.
+\end{steps}
+\end{proof}
+
+\begin{result}[The jump terms]
+\label{res:jump}
+Under the two guesses,
+\[
+  \begin{aligned}
+    \lambda(\delta^b)\big[v^b-v\big]&=(-v)\;Ae^{-k\delta^b}\big[1-e^{-\gamma(\delta^b+\Delta^bg)}\big],\\
+    \lambda(\delta^a)\big[v^a-v\big]&=(-v)\;Ae^{-k\delta^a}\big[1-e^{-\gamma(\delta^a-\Delta^ag)}\big].
+  \end{aligned}
+\]
+Neither bracket contains cash $x$ or the mid-price $s$.
+\end{result}
+
+\begin{proof}
+\begin{steps}
+  \item $v^b-v=v\Big(\dfrac{v^b}{v}-1\Big)=(-v)\Big(1-\dfrac{v^b}{v}\Big)$.
+  \\ \emph{Why:} factor out $v$, then move the minus sign.
+  \item Put in \cref{res:ratios} and $\lambda(\delta^b)=Ae^{-k\delta^b}$. This gives the first line.
+  \\ \emph{Why:} \cref{res:ratios,def:fill}.
+  \item The same two steps with $v^a$ give the second line.
+  \\ \emph{Why:} \cref{res:ratios,def:fill}.
+\end{steps}
+\end{proof}
+
+The factor $-v=e^{-\gamma x}e^{-\gamma\theta}$ is positive, and it is the same for the bid and the ask. It does not depend on the quotes.
+
+\begin{intuition}
+Why does cash drop out? Under CARA utility, adding a fixed amount of cash multiplies every outcome's utility by the same positive number $e^{-\gamma x}$. Multiplying by a positive number never changes which choice is best. So a rich dealer and a poor dealer quote the same way.
+\end{intuition}
+
+\begin{example}
+The bracket $1-e^{-\gamma(\delta^b+\Delta^bg)}$ is the gain from a bid fill, as a fraction of $-v$. It is positive when $\delta^b+\Delta^bg>0$: buying at a discount $\delta^b$ more than makes up for the change $\Delta^bg$ in the risk correction. It is negative when the discount is too small. Then the fill hurts the dealer, who would rather not buy.
+\end{example}
+
+\begin{recall}
+\textbf{Guesses.} $v=-e^{-\gamma x}e^{-\gamma\theta(s,q,t)}$ and $\theta=qs+g(q,t)$, with $g(q,T)=0$.
+
+\textbf{Differences.} $\Delta^bg=g(q+1,t)-g(q,t)$ and $\Delta^ag=g(q,t)-g(q-1,t)$; $\theta(q+1)-\theta(q)=s+\Delta^bg$ and $\theta(q)-\theta(q-1)=s+\Delta^ag$.
+
+\textbf{Jump terms.} $(-v)\,Ae^{-k\delta^b}\big[1-e^{-\gamma(\delta^b+\Delta^bg)}\big]$ and $(-v)\,Ae^{-k\delta^a}\big[1-e^{-\gamma(\delta^a-\Delta^ag)}\big]$: free of $x$ and $s$.
+\end{recall}
