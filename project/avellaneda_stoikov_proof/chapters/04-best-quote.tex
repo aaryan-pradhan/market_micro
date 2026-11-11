@@ -1,0 +1,142 @@
+\chapter{The best quote on each side}
+\label{ch:best}
+
+\begin{question}
+Given $g$, which quote distances $\delta^b$ and $\delta^a$ reach the two $\sup$s in the HJB equation?
+\end{question}
+
+\begin{whatfor}
+\begin{itemize}
+  \item Reduces each $\sup$ to maximising one function of one variable.
+  \item Differentiates it, finds where the derivative changes sign, and solves.
+  \item Shows that $A$ cancels: how often fills come does not change where to quote.
+\end{itemize}
+\end{whatfor}
+
+\begin{setup}[Setup]
+The jump terms of \cref{res:jump}. Inventory $q$ and time $t$ are held fixed, so $\Delta^bg$ and $\Delta^ag$ are fixed numbers.
+\end{setup}
+
+%=====================================================================
+\section{One variable per side}
+
+\begin{definition}[The bid objective]
+\label{def:f}
+For a fixed number $c$, let
+\[
+  f(\delta)=A\,e^{-k\delta}\Big(1-e^{-\gamma(\delta+c)}\Big).
+\]
+\end{definition}
+
+\begin{result}[Each $\sup$ is a $\sup$ of $f$]
+\label{res:reduce}
+\[
+  \begin{aligned}
+    \sup_{\delta^b}\lambda(\delta^b)\big[v^b-v\big]&=(-v)\sup_{\delta}f(\delta)\quad\text{with }c=\Delta^bg,\\
+    \sup_{\delta^a}\lambda(\delta^a)\big[v^a-v\big]&=(-v)\sup_{\delta}f(\delta)\quad\text{with }c=-\Delta^ag.
+  \end{aligned}
+\]
+\end{result}
+
+\begin{proof}
+\begin{steps}
+  \item The bid jump term is $(-v)\,f(\delta^b)$ with $c=\Delta^bg$.
+  \\ \emph{Why:} \cref{res:jump} and \cref{def:f}.
+  \item The ask jump term is $(-v)\,f(\delta^a)$ with $c=-\Delta^ag$, because $\delta^a-\Delta^ag=\delta^a+c$.
+  \\ \emph{Why:} \cref{res:jump} and \cref{def:f}.
+  \item $-v>0$ does not depend on the quote, and a positive constant comes out of a $\sup$.
+  \\ \emph{Why:} the remark after \cref{res:jump}; $\sup(aF)=a\sup F$ for $a>0$.
+\end{steps}
+\end{proof}
+
+%=====================================================================
+\section{The first-order condition}
+
+\begin{result}[Derivative of $f$]
+\label{res:fprime}
+\[
+  f'(\delta)=A\,e^{-k\delta}\Big[-k+(k+\gamma)\,e^{-\gamma(\delta+c)}\Big].
+\]
+\end{result}
+
+\begin{proof}
+\begin{steps}
+  \item By the product rule, with $\frac{d}{d\delta}Ae^{-k\delta}=-kAe^{-k\delta}$ and $\frac{d}{d\delta}\big(1-e^{-\gamma(\delta+c)}\big)=\gamma e^{-\gamma(\delta+c)}$,
+  \[
+    f'(\delta)=-kA\,e^{-k\delta}\Big(1-e^{-\gamma(\delta+c)}\Big)+A\,e^{-k\delta}\,\gamma\,e^{-\gamma(\delta+c)}.
+  \]
+  \emph{Why:} $(uw)'=u'w+uw'$; the chain rule for each exponential.
+  \item Take out $Ae^{-k\delta}$ and collect the $e^{-\gamma(\delta+c)}$ terms:
+  \[
+    \begin{aligned}
+      f'(\delta)&=A\,e^{-k\delta}\Big[-k+k\,e^{-\gamma(\delta+c)}+\gamma\,e^{-\gamma(\delta+c)}\Big]\\
+      &=A\,e^{-k\delta}\Big[-k+(k+\gamma)\,e^{-\gamma(\delta+c)}\Big].
+    \end{aligned}
+  \]
+  \emph{Why:} $-k\big(1-e^{-\gamma(\delta+c)}\big)=-k+ke^{-\gamma(\delta+c)}$.
+\end{steps}
+\end{proof}
+
+\begin{result}[The best quote distance]
+\label{res:foc}
+$f$ is largest at
+\[
+  \delta^*=\frac1\gamma\ln\!\Big(1+\frac\gamma k\Big)-c .
+\]
+So the best bid and ask distances are
+\[
+  \delta^{b*}=\frac1\gamma\ln\!\Big(1+\frac\gamma k\Big)-\Delta^bg,\qquad
+  \delta^{a*}=\frac1\gamma\ln\!\Big(1+\frac\gamma k\Big)+\Delta^ag.
+\]
+\end{result}
+
+\begin{proof}
+\begin{steps}
+  \item $Ae^{-k\delta}>0$, so $f'(\delta)$ has the sign of the bracket $B(\delta)=-k+(k+\gamma)e^{-\gamma(\delta+c)}$.
+  \\ \emph{Why:} \cref{res:fprime}; $A>0$ and an exponential is positive.
+  \item $B$ is strictly decreasing in $\delta$, falls below $0$ for large $\delta$, and is above $0$ for $\delta$ far enough to the left.
+  \\ \emph{Why:} $e^{-\gamma(\delta+c)}$ strictly decreases from $+\infty$ to $0$ as $\delta$ grows, and $k+\gamma>0$.
+  \item So $B$, and with it $f'$, is positive to the left of one point $\delta^*$ and negative to its right. At $\delta^*$,
+  \[
+    -k+(k+\gamma)e^{-\gamma(\delta^*+c)}=0,\qquad\text{that is}\qquad e^{-\gamma(\delta^*+c)}=\frac{k}{k+\gamma}.
+  \]
+  By F5, $f$ is largest at $\delta^*$.
+  \\ \emph{Why:} Steps 1 and 2; F5.
+  \item Take logarithms and use $\ln\frac{k}{k+\gamma}=-\ln\frac{k+\gamma}{k}=-\ln\!\big(1+\frac\gamma k\big)$:
+  \[
+    \begin{aligned}
+      -\gamma(\delta^*+c)&=-\ln\!\Big(1+\frac\gamma k\Big)\\
+      \delta^*&=\frac1\gamma\ln\!\Big(1+\frac\gamma k\Big)-c.
+    \end{aligned}
+  \]
+  \emph{Why:} $\ln$ is the inverse of $\exp$; divide by $-\gamma$.
+  \item For the bid, put $c=\Delta^bg$; for the ask, put $c=-\Delta^ag$.
+  \\ \emph{Why:} \cref{res:reduce}.
+\end{steps}
+\end{proof}
+
+The equation $f'(\delta^*)=0$ is the \dfn{first-order condition}. The quotes may not cross the mid-price ($\delta\ge0$). If the formula gives a negative distance, the best allowed choice is $\delta=0$, because there $f$ is still rising.
+
+\begin{intuition}
+$A$ has disappeared from $\delta^*$. $A$ multiplies the whole of $f$, so it changes how big the best value is, but not where it is. How often fills come does not matter; what matters is how fast the fill rate falls with distance ($k$) against how much the dealer dislikes risk ($\gamma$).
+\end{intuition}
+
+\begin{example}
+For RELIANCE, $\gamma=0.005$ per rupee and $k=2.52$ per rupee, so the common part of both distances is
+\[
+  \frac1\gamma\ln\!\Big(1+\frac\gamma k\Big)=200\,\ln(1.001984)\approx0.396\text{ rupees}.
+\]
+A dealer with no risk correction ($\Delta g=0$) would quote about $0.40$ rupees on each side of the mid-price.
+\end{example}
+
+\begin{recall}
+\textbf{Objective.} $f(\delta)=Ae^{-k\delta}\big(1-e^{-\gamma(\delta+c)}\big)$, with $c=\Delta^bg$ (bid) or $c=-\Delta^ag$ (ask).
+
+\textbf{Derivative.} $f'=Ae^{-k\delta}\big[-k+(k+\gamma)e^{-\gamma(\delta+c)}\big]$, positive and then negative.
+
+\textbf{First-order condition.} $e^{-\gamma(\delta^*+c)}=\frac{k}{k+\gamma}$, so
+\[
+  \delta^{b*}=\edge-\Delta^bg,\qquad \delta^{a*}=\edge+\Delta^ag .
+\]
+$A$ cancels.
+\end{recall}
