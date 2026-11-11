@@ -1,0 +1,214 @@
+\chapter{Reservation price and spread}
+\label{ch:answers}
+
+\begin{question}
+Where should the dealer centre the quotes, and how wide should they be?
+\end{question}
+
+\begin{whatfor}
+\begin{itemize}
+  \item Defines the reservation prices: the prices at which one more trade leaves the dealer exactly as well off.
+  \item Proves $r=s-q\gamma\sigma^2\Tt$.
+  \item Proves that the total spread is $\gamma\sigma^2\Tt+\frac2\gamma\ln(1+\frac\gamma k)$, and that the quotes sit half a spread either side of $r$.
+\end{itemize}
+\end{whatfor}
+
+\begin{setup}[Setup]
+The best quotes of \cref{res:foc} and the risk correction $g(q,t)=-\tfrac12\gamma\sigma^2q^2\Tt$ of \cref{res:g}.
+\end{setup}
+
+%=====================================================================
+\section{Reservation prices}
+
+\begin{definition}[Reservation prices]
+\label{def:reservation}
+The \dfn{reservation bid} $r^b$ is the price at which buying one more share leaves the value unchanged:
+\[
+  v(s,\,x-r^b,\,q+1,\,t)=v(s,\,x,\,q,\,t).
+\]
+The \dfn{reservation ask} $r^a$ is the price at which selling one more share leaves the value unchanged:
+\[
+  v(s,\,x+r^a,\,q-1,\,t)=v(s,\,x,\,q,\,t).
+\]
+The \dfn{reservation price} is their midpoint, $r=\tfrac12\big(r^a+r^b\big)$.
+\end{definition}
+
+\begin{result}[Reservation bid and ask]
+\label{res:rbra}
+\[
+  r^b=s+\Delta^bg,\qquad r^a=s+\Delta^ag.
+\]
+\end{result}
+
+\begin{proof}
+\begin{steps}
+  \item Put the first guess into the definition of $r^b$:
+  \[
+    -e^{-\gamma(x-r^b)}\,e^{-\gamma\theta(s,q+1,t)}=-e^{-\gamma x}\,e^{-\gamma\theta(s,q,t)}.
+  \]
+  \emph{Why:} \cref{def:reservation,def:guess1}.
+  \item Divide both sides by $-e^{-\gamma x}$ and take logarithms:
+  \[
+    \begin{aligned}
+      \gamma r^b-\gamma\theta(s,q+1,t)&=-\gamma\theta(s,q,t)\\
+      r^b&=\theta(s,q+1,t)-\theta(s,q,t)=s+\Delta^bg.
+    \end{aligned}
+  \]
+  \emph{Why:} $e^{-\gamma(x-r^b)}/e^{-\gamma x}=e^{\gamma r^b}$; divide by $\gamma$; then \cref{res:dtheta}.
+  \item Put the first guess into the definition of $r^a$:
+  \[
+    -e^{-\gamma(x+r^a)}\,e^{-\gamma\theta(s,q-1,t)}=-e^{-\gamma x}\,e^{-\gamma\theta(s,q,t)}.
+  \]
+  \emph{Why:} \cref{def:reservation,def:guess1}.
+  \item Divide both sides by $-e^{-\gamma x}$ and take logarithms:
+  \[
+    \begin{aligned}
+      -\gamma r^a-\gamma\theta(s,q-1,t)&=-\gamma\theta(s,q,t)\\
+      r^a&=\theta(s,q,t)-\theta(s,q-1,t)=s+\Delta^ag.
+    \end{aligned}
+  \]
+  \emph{Why:} $e^{-\gamma(x+r^a)}/e^{-\gamma x}=e^{-\gamma r^a}$; divide by $-\gamma$; then \cref{res:dtheta}.
+\end{steps}
+\end{proof}
+
+\begin{result}[The differences of $g$]
+\label{res:dgvalues}
+\[
+  \Delta^bg=-\tfrac12\gamma\sigma^2\Tt\,(2q+1),\qquad
+  \Delta^ag=-\tfrac12\gamma\sigma^2\Tt\,(2q-1).
+\]
+\end{result}
+
+\begin{proof}
+\begin{steps}
+  \item $\Delta^bg=-\tfrac12\gamma\sigma^2\Tt\big[(q+1)^2-q^2\big]$ and $(q+1)^2-q^2=2q+1$.
+  \\ \emph{Why:} \cref{def:dg,res:g}; $(q+1)^2=q^2+2q+1$.
+  \item $\Delta^ag=-\tfrac12\gamma\sigma^2\Tt\big[q^2-(q-1)^2\big]$ and $q^2-(q-1)^2=2q-1$.
+  \\ \emph{Why:} \cref{def:dg,res:g}; $(q-1)^2=q^2-2q+1$.
+\end{steps}
+\end{proof}
+
+\begin{result}[Reservation price]
+\label{res:r}
+\[
+  r=s-q\,\gamma\sigma^2\,\Tt .
+\]
+\end{result}
+
+\begin{proof}
+\begin{steps}
+  \item $r=\tfrac12(r^a+r^b)=s+\tfrac12\big(\Delta^ag+\Delta^bg\big)$.
+  \\ \emph{Why:} \cref{def:reservation,res:rbra}.
+  \item $\Delta^ag+\Delta^bg=-\tfrac12\gamma\sigma^2\Tt\big[(2q-1)+(2q+1)\big]=-\tfrac12\gamma\sigma^2\Tt\cdot4q=-2q\gamma\sigma^2\Tt$.
+  \\ \emph{Why:} \cref{res:dgvalues}.
+  \item So $r=s+\tfrac12\big(-2q\gamma\sigma^2\Tt\big)=s-q\gamma\sigma^2\Tt$.
+  \\ \emph{Why:} Steps 1 and 2.
+\end{steps}
+\end{proof}
+
+\begin{intuition}
+A dealer who is long ($q>0$) already carries price risk, so one more share is worth less to them than the mid-price: $r<s$. A short dealer ($q<0$) values a share above the mid-price. The gap grows with the inventory, the variance and the time left, and it is zero at the close.
+\end{intuition}
+
+%=====================================================================
+\section{The spread}
+
+\begin{result}[Total spread]
+\label{res:spread}
+\[
+  \delta^{a*}+\delta^{b*}=\gamma\sigma^2\Tt+\frac2\gamma\ln\!\Big(1+\frac\gamma k\Big).
+\]
+\end{result}
+
+\begin{proof}
+\begin{steps}
+  \item Add the two best distances:
+  \[
+    \delta^{a*}+\delta^{b*}=\frac2\gamma\ln\!\Big(1+\frac\gamma k\Big)+\Delta^ag-\Delta^bg.
+  \]
+  \emph{Why:} \cref{res:foc}.
+  \item Compute the difference:
+  \[
+    \begin{aligned}
+      \Delta^ag-\Delta^bg&=-\tfrac12\gamma\sigma^2\Tt\big[(2q-1)-(2q+1)\big]\\
+      &=-\tfrac12\gamma\sigma^2\Tt\cdot(-2)=\gamma\sigma^2\Tt.
+    \end{aligned}
+  \]
+  \emph{Why:} \cref{res:dgvalues}.
+  \item Put Step 2 into Step 1.
+  \\ \emph{Why:} substitution.
+\end{steps}
+\end{proof}
+
+The total spread has two parts. The \dfn{inventory-risk premium} $\gamma\sigma^2\Tt$ pays for carrying price risk over the time left, and shrinks to $0$ at the close. The \dfn{market-making edge} $\frac2\gamma\ln(1+\frac\gamma k)$ is what the dealer charges for the trade-off between fill rate and profit per fill. Neither part depends on $q$.
+
+\begin{result}[The quotes sit half a spread either side of $r$]
+\label{res:quotes}
+Write $\Sigma=\delta^{a*}+\delta^{b*}$. Then the best bid and ask are
+\[
+  s-\delta^{b*}=r-\tfrac12\Sigma,\qquad s+\delta^{a*}=r+\tfrac12\Sigma .
+\]
+\end{result}
+
+\begin{proof}
+\begin{steps}
+  \item $s+\Delta^bg=s-q\gamma\sigma^2\Tt-\tfrac12\gamma\sigma^2\Tt=r-\tfrac12\gamma\sigma^2\Tt$.
+  \\ \emph{Why:} \cref{res:dgvalues}: $\Delta^bg=-q\gamma\sigma^2\Tt-\tfrac12\gamma\sigma^2\Tt$; then \cref{res:r}.
+  \item The bid:
+  \[
+    \begin{aligned}
+      s-\delta^{b*}&=s+\Delta^bg-\edge\\
+      &=r-\tfrac12\gamma\sigma^2\Tt-\edge\\
+      &=r-\tfrac12\Big[\gamma\sigma^2\Tt+\tfrac2\gamma\ln\!\big(1+\tfrac\gamma k\big)\Big]=r-\tfrac12\Sigma.
+    \end{aligned}
+  \]
+  \emph{Why:} \cref{res:foc}; Step 1; \cref{res:spread}.
+  \item $s+\Delta^ag=s-q\gamma\sigma^2\Tt+\tfrac12\gamma\sigma^2\Tt=r+\tfrac12\gamma\sigma^2\Tt$.
+  \\ \emph{Why:} \cref{res:dgvalues}: $\Delta^ag=-q\gamma\sigma^2\Tt+\tfrac12\gamma\sigma^2\Tt$; then \cref{res:r}.
+  \item The ask:
+  \[
+    \begin{aligned}
+      s+\delta^{a*}&=s+\Delta^ag+\edge\\
+      &=r+\tfrac12\gamma\sigma^2\Tt+\edge\\
+      &=r+\tfrac12\Big[\gamma\sigma^2\Tt+\tfrac2\gamma\ln\!\big(1+\tfrac\gamma k\big)\Big]=r+\tfrac12\Sigma.
+    \end{aligned}
+  \]
+  \emph{Why:} \cref{res:foc}; Step 3; \cref{res:spread}.
+\end{steps}
+\end{proof}
+
+\begin{intuition}
+Inventory moves only the centre $r$ of the quotes, never their width. A long dealer shifts both quotes down: the ask comes closer to the mid-price, so the dealer sells more often, and the bid moves away, so the dealer buys less often. Inventory is pushed back towards zero.
+\end{intuition}
+
+\begin{example}
+For RELIANCE ($\gamma=0.005$, $\sigma=0.676$, $k=2.52$, $T=360$ minutes), at the open ($t=0$):
+\begin{itemize}
+  \item inventory-risk premium $\gamma\sigma^2T=0.005\times0.676^2\times360\approx0.823$ rupees;
+  \item market-making edge $\frac2\gamma\ln(1+\frac\gamma k)\approx0.793$ rupees;
+  \item total spread $\approx1.615$ rupees.
+\end{itemize}
+With an hour left ($T-t=60$) the premium falls to about $0.137$ and the spread to about $0.930$ rupees. A dealer long $q=10$ shares at the open has $r=s-10\times0.823\approx s-8.23$ rupees.
+\end{example}
+
+%=====================================================================
+\clearpage
+\section{The whole argument}
+
+\begin{recall}
+\begin{enumerate}
+  \item \textbf{Problem.} Choose $\delta^b,\delta^a$ to maximise $\E_{t=0}\big[-e^{-\gamma(X_T+q_TS_T)}\big]$; the best value is $v(s,x,q,t)$, with $v=-e^{-\gamma(x+qs)}$ at $T$.
+  \item \textbf{One step.} Taylor plus $\E_{dW}[(dW)^2]=dt$ gives $v_t+\frac12\sigma^2v_{ss}$; each fill adds rate $\times$ jump in value.
+  \item \textbf{HJB.} $0=v_t+\frac12\sigma^2v_{ss}+\sup_{\delta^b}\lambda(\delta^b)[v^b-v]+\sup_{\delta^a}\lambda(\delta^a)[v^a-v]$.
+  \item \textbf{Guesses.} $v=-e^{-\gamma x}e^{-\gamma(qs+g(q,t))}$ removes $x$ and $s$. The jump brackets are
+  \[
+    1-e^{-\gamma(\delta^b+\Delta^bg)}\qquad\text{and}\qquad 1-e^{-\gamma(\delta^a-\Delta^ag)}.
+  \]
+  \item \textbf{First-order condition.} $e^{-\gamma(\delta+c)}=\frac{k}{k+\gamma}$ gives
+  \[
+    \delta^{b*}=\edge-\Delta^bg,\qquad \delta^{a*}=\edge+\Delta^ag .
+  \]
+  \item \textbf{Approximation.} Freeze inventory; F4 gives $g=-\frac12\gamma\sigma^2q^2\Tt$.
+  \item \textbf{Answers.} $r=s-q\gamma\sigma^2\Tt$; $\delta^a+\delta^b=\gamma\sigma^2\Tt+\frac2\gamma\ln(1+\frac\gamma k)$; quotes $r\pm\frac12(\delta^a+\delta^b)$.
+\end{enumerate}
+\end{recall}
