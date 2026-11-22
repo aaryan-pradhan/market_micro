@@ -94,24 +94,28 @@ Informed traders  <--- dealer loses ---  DEALER  <--- dealer gains ---  Uninform
 
 ### 4.1 The idea
 
-a. The model has one period. Some fraction of the traders has superior information.
+| Point | What the model says |
+|---|---|
+| Periods | One period |
+| Traders | Some fraction of the traders has superior information |
+| Profit view | A risk-neutral dealer sets the bid and ask to maximize expected profit |
+| Option view | The dealer gives traders two free options: the ask and the bid |
 
-b. The model can be read in two ways.
-   - **Profit view:** A risk-neutral dealer sets the bid and ask to maximize expected profit.
-   - **Option view:** The ask is a free call option. The bid is a free put option. The dealer gives both options to traders.
-
-c. The option view works like this.
-   - A trader may buy at $P_A$ when the true value is higher. This is a call with strike $P_A$.
-   - A trader may sell at $P_B$ when the true value is lower. This is a put with strike $P_B$.
+| Quote | Option it is | A trader uses it when |
+|---|---|---|
+| Ask $P_A$ | Free call with strike $P_A$ | The true value is above $P_A$ |
+| Bid $P_B$ | Free put with strike $P_B$ | The true value is below $P_B$ |
 
 ### 4.2 Assumptions
 
-- **A1:** There is a single risk-neutral dealer.
-- **A2:** Informed traders know the actual price $P$.
-- **A3:** Uninformed traders know only the general price. Call it $P_0$.
-- **A4:** Traders arrive with given probabilities, as in inventory models.
-- **A5:** All trades have the same fixed size.
-- **A6:** Quotes are instantaneous. No time passes between setting the quote and trading.
+| No. | Assumption |
+|---|---|
+| A1 | There is a single risk-neutral dealer |
+| A2 | Informed traders know the actual price $P$ |
+| A3 | Uninformed traders know only the general price. Call it $P_0$ |
+| A4 | Traders arrive with given probabilities, as in inventory models |
+| A5 | All trades have the same fixed size |
+| A6 | Quotes are instantaneous. No time passes between setting the quote and trading |
 
 ### 4.3 Notation
 
@@ -127,61 +131,61 @@ c. The option view works like this.
 
 ### 4.4 ⭐ Solution step by step
 
-**Step 1: Find the loss to an informed trader.**
+**What each trade does to the dealer:**
 
-- The informed trader buys only if $P \gt P_A$. The dealer then loses $P-P_A$.
-- The informed trader sells only if $P \lt P_B$. The dealer then loses $P_B-P$.
-- Average these losses over all possible prices. This is equation 3.1.
+| Trader | Action | When it happens | Dealer's result |
+|---|---|---|---|
+| Informed | Buys | Only if $P \gt P_A$ | Loses $P-P_A$ |
+| Informed | Sells | Only if $P \lt P_B$ | Loses $P_B-P$ |
+| Uninformed | Buys | With probability $\pi_{BL}$ | Gains $P_A-P_0$ |
+| Uninformed | Sells | With probability $\pi_{SL}$ | Gains $P_0-P_B$ |
+| Uninformed | No trade | With probability $\pi_{NL}$ | Zero |
+
+**Step 1: Loss to an informed trader (equation 3.1).** Average the two informed losses over all possible prices.
 
 $$L_I=\int_{P_A}^{\infty}(P-P_A)f(P) dP+\int_{0}^{P_B}(P_B-P)f(P) dP$$
 
-**Step 2: Find the gain from an uninformed trader.**
-
-- A purchase gives the dealer $P_A-P_0$.
-- A sale gives the dealer $P_0-P_B$.
-- No trade gives zero. This is equation 3.2. The slide writes $P$ in place of $P_0$.
+**Step 2: Gain from an uninformed trader (equation 3.2).** Add the three uninformed rows. The slide writes $P$ in place of $P_0$.
 
 $$G_U=\pi_{BL}(P_A-P_0)+\pi_{SL}(P_0-P_B)+\pi_{NL}(0)$$
 
-**Step 3: Weight the gain and the loss.**
-
-- The gain comes with probability $1-\pi_I$.
-- The loss comes with probability $\pi_I$.
+**Step 3: Weight the gain and the loss.** The gain comes with probability $1-\pi_I$. The loss comes with probability $\pi_I$.
 
 $$\max_{P_A, P_B}\left[(1-\pi_I)G_U-\pi_I L_I\right]$$
 
-**Step 4: Add the participation condition.**
-
-- The dealer stays only if expected profit is not negative.
-- With competition, expected profit becomes zero.
+**Step 4: Participation condition.** The dealer stays only if expected profit is not negative. With competition, expected profit becomes zero.
 
 $$(1-\pi_I)G_U-\pi_I L_I\ge 0$$
 
-**Step 5: Read the trade-off.**
+**Step 5: The trade-off.**
 
-- A wider spread makes $L_I$ smaller.
-- A wider spread earns more per uninformed trade.
-- A wider spread also drives uninformed traders away. This stops the spread from growing without limit.
+| A wider spread | Effect on the dealer |
+|---|---|
+| Makes $L_I$ smaller | Good |
+| Earns more per uninformed trade | Good |
+| Drives uninformed traders away | Bad. This stops the spread from growing without limit |
 
 ### 4.5 Worked example
 
-The true price is 110 or 90 with equal chance. So $P_0=100$. Also $\pi_I=0.2$ and $\pi_{BL}=\pi_{SL}=0.5$. The quotes are $100+h$ and $100-h$. Competition makes profit zero.
+**Data:** The true price is 110 or 90 with equal chance. So $P_0=100$. Also $\pi_I=0.2$ and $\pi_{BL}=\pi_{SL}=0.5$. The quotes are $100+h$ and $100-h$. Competition makes profit zero.
 
-1. The gain is $G_U=0.5h+0.5h=h$.
-2. The loss is $L_I=0.5(10-h)+0.5(10-h)=10-h$.
-3. Zero profit gives $0.8h=0.2(10-h)$.
-4. Expand the right side. It gives $0.8h=2-0.2h$.
-5. Add $0.2h$ to both sides. It gives $h=2$.
-
-**Answer:** The ask is 102, the bid is 98 and the spread is 4.
+| Step | Working | Result |
+|---|---|---|
+| 1. Gain | $G_U=0.5h+0.5h$ | $G_U=h$ |
+| 2. Loss | $L_I=0.5(10-h)+0.5(10-h)$ | $L_I=10-h$ |
+| 3. Zero profit | $0.8h=0.2(10-h)$ | One equation in $h$ |
+| 4. Expand the right side | $0.8h=2-0.2h$ | |
+| 5. Add $0.2h$ to both sides | $h=2$ | Ask 102, bid 98, spread 4 |
 
 ### 4.6 ⭐ Findings and limitations
 
-- **Information asymmetry:** It explains the dealer's spread.
-- **Higher spread:** The spread rises with the price level and with the variance of return.
-- **Lower spread:** The spread falls with market activity, depth and continuity.
-- **First limitation:** The model has only one period.
-- **Second limitation:** New information is revealed instantly through the trade.
+| Type | Point |
+|---|---|
+| Finding | Information asymmetry explains the dealer's spread |
+| Finding | The spread rises with the price level and with the variance of return |
+| Finding | The spread falls with market activity, depth and continuity |
+| Limitation | The model has only one period |
+| Limitation | New information is revealed instantly through the trade |
 
 > **Exam:** Do not stop at the objective function. Explain the sign of each term and the option view.
 
