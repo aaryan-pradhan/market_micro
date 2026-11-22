@@ -2,6 +2,8 @@
 
 These notes follow the deck "1.5 Empirical Liquidity and it characteristics", slides 1 to 34. Section 5 covers Lesmond (2005), which is not in the slides.
 
+Everything in this file is exam material. A ⭐ marks what to know without notes. Worked examples use made-up numbers to practise the slide formulas.
+
 | Paper | Question | Measure | Answer |
 |---|---|---|---|
 | Chordia, Roll and Subrahmanyam (2000) | Does liquidity move together across stocks? | Spreads and depth | Yes, there is commonality |
@@ -38,7 +40,7 @@ The deck has three main papers. They are Chordia and others (2000), Amihud (2002
 - **Two causes of change:** Inventory risk and asymmetric information both change liquidity over time.
 - **Common causes:** Trading cost and other microstructure effects have common determinants.
 
-### 2.2 Seven reasons for commonality (slide 5)
+### 2.2 ⭐ Seven reasons for commonality (slide 5)
 
 1. **Price swings:** Trading activity across the market responds to market-wide price swings.
 2. **Volume:** Volume drives dealer inventory. So the desired inventory levels of dealers move together.
@@ -72,7 +74,7 @@ The deck has three main papers. They are Chordia and others (2000), Amihud (2002
 - **NYSE feature:** The specialist announces the spread and depth some seconds before a trade.
 - **Daily value:** Each measure is averaged over all trades of that stock on that day.
 
-### 2.5 The five measures (slide 9)
+### 2.5 ⭐ The five measures (slide 9)
 
 | Symbol | Name | Formula | Unit | Higher value means |
 |---|---|---|---|---|
@@ -133,7 +135,7 @@ $$DL_t=\frac{L_t-L_{t-1}}{L_{t-1}}$$
 
 Liquidity changes a lot from day to day. Depth changes the most.
 
-### 2.8 Test 1: market commonality (slides 12 and 13)
+### 2.8 ⭐ Test 1: market commonality (slides 12 and 13)
 
 $$DL_{j,t}=\alpha_j+\beta_jDL_{M,t}+\varepsilon_{j,t}$$
 
@@ -202,7 +204,7 @@ $$DL_{j,t}=\alpha_j+\beta_SDS_{j,t}+\beta_TDT_{j,t}+\beta_MDV_{M,t}+\beta_IDV_{I
 - **Trade size:** It has a strong positive effect on the quoted spread and on depth.
 - **Industry volume:** Its effect on depth is negative and not significant.
 
-### 2.12 Conclusion (slide 18)
+### 2.12 ⭐ Conclusion (slide 18)
 
 1. Liquidity measures of individual stocks move together.
 2. The spread of a stock rises with its own number of transactions. This is asymmetric information.
@@ -218,7 +220,7 @@ $$DL_{j,t}=\alpha_j+\beta_SDS_{j,t}+\beta_TDT_{j,t}+\beta_MDV_{M,t}+\beta_IDV_{I
 - **Advantage:** The measure needs only daily returns and daily volume. It needs no quote data.
 - **Claim:** Investors demand a higher expected return for an illiquid stock.
 
-### 3.2 The measure (slide 21)
+### 3.2 ⭐ The measure (slide 21)
 
 $$ILLIQ_{iy}=\frac{1}{D_{iy}}\sum_{d=1}^{D_{iy}}\frac{\lvert R_{iyd}\rvert}{VOLD_{iyd}}$$
 
@@ -258,7 +260,7 @@ $$ILLIQ_i=-292+247.9\lambda_i+49.2\psi_i$$
 - R-squared is 0.30.
 - Both slopes are positive. So the simple measure agrees with the detailed measures.
 
-### 3.4 Effect on returns: data and method (slides 23 and 24)
+### 3.4 ⭐ Effect on returns: data and method (slides 23 and 24)
 
 - **Market:** The sample is NYSE stocks from 1963 to 1997.
 - **Source:** The data is CRSP daily and monthly.
@@ -284,14 +286,7 @@ The method has three steps.
 
 ### 3.5 Findings
 
-The findings slide is blank in our deck. These findings come from my knowledge of the paper. They are not from the slides.
-
-- **Across stocks:** Higher illiquidity gives higher expected return.
-- **Over time:** Higher expected market illiquidity gives higher expected excess return on stocks.
-- **Surprise:** An unexpected rise in illiquidity lowers stock prices at that time.
-- **Small firms:** Both time effects are stronger for small firms.
-
-> **Exam:** Expected illiquidity raises the future return. Unexpected illiquidity lowers the present return. Both are true together, because the price falls today so that the future return can be higher.
+The findings slide (slide 25) is blank in our deck. The [midsem liquidity notes](../pre-midsem/2_liquidity/liquidity_measures.html), section 3, list them.
 
 ## 4. Ince (2022): liquidity components (slides 26 to 28 and slide 34)
 
@@ -302,10 +297,6 @@ The paper splits the monthly illiquidity of a firm into three parts.
 1. **Alpha:** It is the constant part for that firm.
 2. **Systematic:** It moves with the market.
 3. **Idiosyncratic:** It is specific to the firm.
-
-The split can be written like this. The equation shows the idea and is not from the slide.
-
-$$ILLIQ_{i,t}=\alpha_i+\beta_iILLIQ_{M,t}+e_{i,t}$$
 
 ### 4.2 Findings
 
@@ -334,7 +325,7 @@ This slide sits after Stoll in the deck, but it belongs to Ince.
 
 The paper is in the Journal of Financial Economics, volume 77, pages 411 to 452.
 
-> **Source:** The full paper is behind a paywall, and I did not read it. The main findings below come from parts of the abstract and from summaries, both shown by web search. The LOT model in 5.4 comes from the original 1999 paper. The last column of the table in 5.3 and the section on applications are explanation. They are not claims of the paper.
+> **Source:** The full paper is behind a paywall, and I did not read it. The main findings below come from parts of the abstract and from summaries, both shown by web search. The LOT model in 5.4 comes from the original 1999 paper. The last column of the table in 5.3 is explanation. It is not a claim of the paper.
 
 ### 5.1 The problem
 
@@ -359,7 +350,7 @@ The paper is in the Journal of Financial Economics, volume 77, pages 411 to 452.
 | Amihud | Average of absolute return over traded value | Price impact | Returns and volume | It fails with zero volume |
 | Turnover | Shares traded over shares outstanding | Volume based | Volume and share count | Volume can rise in a crisis while cost also rises |
 
-### 5.4 The LOT model (Lesmond, Ogden and Trzcinka, 1999)
+### 5.4 ⭐ The LOT model (Lesmond, Ogden and Trzcinka, 1999)
 
 **Idea:** An investor trades only if the value of information exceeds the cost of trading. Otherwise the price does not move. So many zero-return days indicate high trading cost.
 
@@ -400,7 +391,7 @@ The 1999 paper estimated round-trip costs of 1.2 percent for the largest US firm
 
 **Simpler cousin:** The share of zero-return days also measures illiquidity. Bekaert, Harvey and Lundblad report that Lesmond (2005) found it highly correlated with hand-collected spreads in emerging markets.
 
-### 5.5 Findings
+### 5.5 ⭐ Findings
 
 1. **Across countries:** The price-based measures, LOT and Roll, work better than volume-based measures.
 2. **Within a country:** LOT works best. Amihud works to a lesser extent.
@@ -458,32 +449,6 @@ January and February 1998 give similar results. Adjusted R-squared is 0.7763 and
 |---|---|---|
 | Quoted half-spread | $S=(A-B)/2$ | Total friction |
 | Effective half-spread | $ES=\lvert P-M\rvert$ | Total friction on actual trades |
-| Traded half-spread | Half of the difference between the average price of ask-side trades and the average price of bid-side trades | Real friction |
-
-The slide says "refer to article" for the traded spread. Its row comes from my knowledge of the article.
+| Traded spread | Not given. The slide says "refer to article". | Not given |
 
 > **Exam:** Stoll uses half-spreads. Chordia uses full spreads. So Chordia's effective spread is twice Stoll's.
-
-## 7. All measures in one place
-
-| Dimension | Measure | Best use | Limitation |
-|---|---|---|---|
-| Width | Quoted spread | Cost of a small immediate trade | Ignores trades inside or beyond the quotes |
-| Width | Effective spread | Cost actually paid | Needs trade and quote data |
-| Width | Roll | Spread from prices alone | Undefined for positive covariance |
-| Width and other costs | LOT and zero returns | Markets with no quote data | Depends on model and on news |
-| Depth | Quoted depth | Size available at best quotes | Ignores the rest of the book |
-| Depth | Kyle's lambda | Price impact of order flow | Needs detailed data |
-| Depth | Amihud and Amivest | Long histories with daily data | Mix news with price impact |
-| Immediacy | Trades per day and time to fill | Speed of trading | Busy trading can still be costly |
-| Activity | Volume and turnover | Simple comparison | Can rise when markets are stressed |
-
-## 8. Applications
-
-1. **Asset pricing:** Use Amihud to test whether illiquid stocks earn a premium.
-2. **Portfolio risk:** Use commonality betas. They show whether all holdings become illiquid together.
-3. **Country comparison:** Use LOT or Roll when quote data is missing.
-4. **Picking stocks within one country:** Use LOT, and then Amihud.
-5. **Market design:** Use Stoll's split. It shows whether cost comes from real resources or from information.
-6. **Execution:** Use depth and price impact to decide the size and speed of an order.
-7. **Crisis monitoring:** Use a rise in spreads across many stocks as a warning of a spiral.
