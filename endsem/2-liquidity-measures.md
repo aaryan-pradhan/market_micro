@@ -31,6 +31,10 @@ The deck has three main papers. They are Chordia and others (2000), Amihud (2002
 3. **Chordia and others (2001):** They studied the cross-sectional relation with the level of illiquidity.
 4. **Huberman and Halka (2001):** They found a systematic part of liquidity that changes over time.
 
+![liquidity slide 2](slides/liquidity/liquidity-02.png)
+
+![liquidity slide 3](slides/liquidity/liquidity-03.png)
+
 ## 2. Chordia, Roll and Subrahmanyam (2000): "Commonality in liquidity" (slides 4 to 18)
 
 ### 2.1 The gap (slide 4)
@@ -39,6 +43,8 @@ The deck has three main papers. They are Chordia and others (2000), Amihud (2002
 - **Liquidity moves together:** Changes in liquidity are correlated across stocks.
 - **Two causes of change:** Inventory risk and asymmetric information both change liquidity over time.
 - **Common causes:** Trading cost and other microstructure effects have common determinants.
+
+![liquidity slide 4](slides/liquidity/liquidity-04.png)
 
 ### 2.2 ⭐ Seven reasons for commonality (slide 5)
 
@@ -49,6 +55,8 @@ The deck has three main papers. They are Chordia and others (2000), Amihud (2002
 5. **Program trading:** It puts common pressure on many inventories at once.
 6. **Institutional funds:** Funds with similar styles trade in a similar way.
 7. **Asymmetric information:** A small group of large traders may know more about many stocks.
+
+![liquidity slide 5](slides/liquidity/liquidity-05.png)
 
 ### 2.3 Implications (slide 6)
 
@@ -63,6 +71,8 @@ The deck has three main papers. They are Chordia and others (2000), Amihud (2002
 | Static | The average cost of trading | A costly stock must pay a higher return |
 | Dynamic | The risk that liquidity changes | Traders avoid trading, so a risky-liquidity stock must pay more |
 
+![liquidity slide 6](slides/liquidity/liquidity-06.png)
+
 ### 2.4 Data (slides 7 and 8)
 
 - **Source:** NYSE transaction data comes from the Institute for the Study of Security Markets.
@@ -73,6 +83,10 @@ The deck has three main papers. They are Chordia and others (2000), Amihud (2002
 - **Trade filter:** The opening batch and special-settlement trades are removed.
 - **NYSE feature:** The specialist announces the spread and depth some seconds before a trade.
 - **Daily value:** Each measure is averaged over all trades of that stock on that day.
+
+![liquidity slide 7](slides/liquidity/liquidity-07.png)
+
+![liquidity slide 8](slides/liquidity/liquidity-08.png)
 
 ### 2.5 ⭐ The five measures (slide 9)
 
@@ -97,6 +111,8 @@ Here $P_t$ is the trade price. $Q_A$ and $Q_B$ are the shares offered at the ask
 
 > **Exam:** The effective spread has a 2 in it. The proportional quoted spread divides by the mid price. The proportional effective spread divides by the trade price.
 
+![liquidity slide 9](slides/liquidity/liquidity-09.png)
+
 ### 2.6 Cross-sectional statistics (slide 10)
 
 | Measure | Mean | Median | Standard deviation |
@@ -119,6 +135,8 @@ Here $P_t$ is the trade price. $Q_A$ and $Q_B$ are the shares offered at the ask
 - **Spreads agree:** All spread measures have positive correlation with each other.
 - **Depth is opposite:** A wide spread comes with low depth.
 
+![liquidity slide 10](slides/liquidity/liquidity-10.png)
+
 ### 2.7 Daily changes (slide 11)
 
 The letter D means the proportional change from the previous day.
@@ -134,6 +152,8 @@ $$DL_t=\frac{L_t-L_{t-1}}{L_{t-1}}$$
 | DPESPR | 0.3196 | 0.2977 | 0.1811 |
 
 Liquidity changes a lot from day to day. Depth changes the most.
+
+![liquidity slide 11](slides/liquidity/liquidity-11.png)
 
 ### 2.8 ⭐ Test 1: market commonality (slides 12 and 13)
 
@@ -162,6 +182,10 @@ $$DL_{j,t}=\alpha_j+\beta_jDL_{M,t}+\varepsilon_{j,t}$$
 - **Timing:** The same day matters much more than the lag or the lead.
 - **Reading a number:** A value of 0.69 means that a 1 percent change in the market spread goes with a 0.69 percent change in the stock spread.
 
+![liquidity slide 12](slides/liquidity/liquidity-12.png)
+
+![liquidity slide 13](slides/liquidity/liquidity-13.png)
+
 ### 2.9 Test 2: market and industry (slide 14)
 
 $$DL_{j,t}=\alpha_j+\beta_{j,M}DL_{M,t}+\beta_{j,I}DL_{I,t}+\varepsilon_{j,t}$$
@@ -180,6 +204,8 @@ Here $DL_{I,t}$ is the change in average industry liquidity.
 - **Sum:** It adds the same day, the lag and the lead.
 - **Small power:** The regression explains only about 2 percent of daily changes. Most changes are specific to the firm.
 
+![liquidity slide 14](slides/liquidity/liquidity-14.png)
+
 ### 2.10 Test 3: inventory risk or information (slides 15 and 16)
 
 - **Number of trades:** It indicates asymmetric information (Jones and others, 1994).
@@ -195,6 +221,10 @@ $$DL_{j,t}=\alpha_j+\beta_SDS_{j,t}+\beta_TDT_{j,t}+\beta_MDV_{M,t}+\beta_IDV_{I
 | $V_M$ | Market dollar volume without stock $j$ | Balanced, uninformed trading |
 | $V_I$ | Industry dollar volume without stock $j$ | Trading in the industry |
 
+![liquidity slide 15](slides/liquidity/liquidity-15.png)
+
+![liquidity slide 16](slides/liquidity/liquidity-16.png)
+
 ### 2.11 Observations (slide 17)
 
 - **The usual view:** More trading should reduce spreads.
@@ -204,6 +234,8 @@ $$DL_{j,t}=\alpha_j+\beta_SDS_{j,t}+\beta_TDT_{j,t}+\beta_MDV_{M,t}+\beta_IDV_{I
 - **Trade size:** It has a strong positive effect on the quoted spread and on depth.
 - **Industry volume:** Its effect on depth is negative and not significant.
 
+![liquidity slide 17](slides/liquidity/liquidity-17.png)
+
 ### 2.12 ⭐ Conclusion (slide 18)
 
 1. Liquidity measures of individual stocks move together.
@@ -212,7 +244,13 @@ $$DL_{j,t}=\alpha_j+\beta_SDS_{j,t}+\beta_TDT_{j,t}+\beta_MDV_{M,t}+\beta_IDV_{I
 
 > **Exam:** Write in this order: meaning, reasons, data, five measures, regression, sign and conclusion. One number is enough: the quoted spread coefficient is 0.69.
 
-## 3. Amihud (2002): "Illiquidity and stock returns: cross-section and time-series effects" (slides 20 to 24)
+![liquidity slide 18](slides/liquidity/liquidity-18.png)
+
+## 3. Amihud (2002): "Illiquidity and stock returns: cross-section and time-series effects" (slides 19 to 25)
+
+![liquidity slide 19](slides/liquidity/liquidity-19.png)
+
+![liquidity slide 20](slides/liquidity/liquidity-20.png)
 
 ### 3.1 The idea
 
@@ -248,6 +286,8 @@ $$ILLIQ_{iy}=\frac{1}{D_{iy}}\sum_{d=1}^{D_{iy}}\frac{\lvert R_{iyd}\rvert}{VOLD
 
 > **Exam:** Take the ratio for each day first. Then take the average. Do not divide the average return by the average volume. Always state the unit.
 
+![liquidity slide 21](slides/liquidity/liquidity-21.png)
+
 ### 3.3 Is it a good measure? (slide 22)
 
 The test compares it with two measures from detailed trade data.
@@ -259,6 +299,8 @@ $$ILLIQ_i=-292+247.9\lambda_i+49.2\psi_i$$
 - The t values are 12.25, 13.78 and 17.33, in the order of the terms.
 - R-squared is 0.30.
 - Both slopes are positive. So the simple measure agrees with the detailed measures.
+
+![liquidity slide 22](slides/liquidity/liquidity-22.png)
 
 ### 3.4 ⭐ Effect on returns: data and method (slides 23 and 24)
 
@@ -284,11 +326,21 @@ The method has three steps.
 2. Save the coefficients of each month.
 3. Average them over 408 months and test whether the average is zero.
 
+![liquidity slide 23](slides/liquidity/liquidity-23.png)
+
+![liquidity slide 24](slides/liquidity/liquidity-24.png)
+
 ### 3.5 Findings
 
 The findings slide (slide 25) is blank in our deck. The [midsem liquidity notes](../pre-midsem/2_liquidity/liquidity_measures.html), section 3, list them.
 
+![liquidity slide 25](slides/liquidity/liquidity-25.png)
+
 ## 4. Ince (2022): liquidity components (slides 26 to 28 and slide 34)
+
+![liquidity slide 26](slides/liquidity/liquidity-26.png)
+
+![liquidity slide 27](slides/liquidity/liquidity-27.png)
 
 ### 4.1 What the paper does
 
@@ -311,6 +363,8 @@ This slide sits after Stoll in the deck, but it belongs to Ince.
 - The period is January 1964 to December 2018.
 - The source is CRSP.
 
+![liquidity slide 34](slides/liquidity/liquidity-34.png)
+
 ### 4.4 Other articles on commonality (slide 28)
 
 | Article | Cause or finding |
@@ -320,6 +374,8 @@ This slide sits after Stoll in the deck, but it belongs to Ince.
 | Huberman and Halka (2001) | Investor sentiment |
 | Coughenour and Saad (2004), Hameed and others (2010) | Funding limits of intermediaries |
 | Karolyi and others (2012) | Evidence from 40 markets |
+
+![liquidity slide 28](slides/liquidity/liquidity-28.png)
 
 ## 5. Lesmond (2005): "Liquidity of emerging markets"
 
@@ -412,6 +468,8 @@ The 1999 paper estimated round-trip costs of 1.2 percent for the largest US firm
 
 Stoll uses the price view.
 
+![liquidity slide 30](slides/liquidity/liquidity-30.png)
+
 ### 6.2 What the paper does (slide 29)
 
 - **Focus:** It studies the sources of trading friction.
@@ -419,6 +477,8 @@ Stoll uses the price view.
 - **Sample:** It has 1,706 NYSE and AMSE stocks and 2,184 Nasdaq stocks.
 - **Insights:** It shows the size of cost, real against informational friction, and the effect of market structure.
 - **Relations:** It studies how the measures relate to each other and to trading characteristics.
+
+![liquidity slide 29](slides/liquidity/liquidity-29.png)
 
 ### 6.3 Price of immediacy (slides 31 and 32)
 
@@ -440,6 +500,10 @@ Results for December 1997 have t values in brackets.
 
 January and February 1998 give similar results. Adjusted R-squared is 0.7763 and 0.7914 for NYSE and AMSE. It is 0.6588 and 0.6688 for Nasdaq.
 
+![liquidity slide 31](slides/liquidity/liquidity-31.png)
+
+![liquidity slide 32](slides/liquidity/liquidity-32.png)
+
 ### 6.4 Real and informational friction (slide 33)
 
 - **Real friction:** Trading uses real resources, such as labour, systems and capital to bear inventory risk.
@@ -452,3 +516,5 @@ January and February 1998 give similar results. Adjusted R-squared is 0.7763 and
 | Traded spread | Not given. The slide says "refer to article". | Not given |
 
 > **Exam:** Stoll uses half-spreads. Chordia uses full spreads. So Chordia's effective spread is twice Stoll's.
+
+![liquidity slide 33](slides/liquidity/liquidity-33.png)
