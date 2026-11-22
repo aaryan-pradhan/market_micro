@@ -2,6 +2,8 @@
 
 These notes follow the deck "3. Information based Models", slides 1 to 47, in the slide order.
 
+Everything in this file is exam material. A ⭐ marks what to know without notes. Worked examples use made-up numbers to practise the slide formulas.
+
 | Model | What it adds | What the dealer does | Main result |
 |---|---|---|---|
 | Bagehot (1971) | Some traders know more | Recovers losses from the uninformed | The spread exists because of information |
@@ -103,7 +105,7 @@ c. The option view works like this.
 | $f(P)$ | Density of the true price |
 | $P_A$ and $P_B$ | Ask and bid |
 
-### 4.4 Solution step by step
+### 4.4 ⭐ Solution step by step
 
 **Step 1: Find the loss to an informed trader.**
 
@@ -153,7 +155,7 @@ The true price is 110 or 90 with equal chance. So $P_0=100$. Also $\pi_I=0.2$ an
 
 **Answer:** The ask is 102, the bid is 98 and the spread is 4.
 
-### 4.6 Findings and limitations
+### 4.6 ⭐ Findings and limitations
 
 - **Information asymmetry:** It explains the dealer's spread.
 - **Higher spread:** The spread rises with the price level and with the variance of return.
@@ -248,7 +250,7 @@ $$a=E[V\mid B]=V_L\Pr(V_L\mid B)+V_H\Pr(V_H\mid B)$$
 
 $$b=E[V\mid S]=V_L\Pr(V_L\mid S)+V_H\Pr(V_H\mid S)$$
 
-### 5.6 Solution step by step
+### 5.6 ⭐ Solution step by step
 
 **Step 1: Find the probability of a buy.** Add the buy column of the table.
 
@@ -308,7 +310,7 @@ $$s=\mu(V_H-V_L)$$
 
 **Conclusion:** The spread is positive with zero cost and zero profit. It rises with $\mu$. This spread is pure adverse selection.
 
-### 5.7 Worked example
+### 5.7 ⭐ Worked example
 
 Take $V_H=110$, $V_L=90$, $\theta=0.3$ and $\mu=0.4$.
 
@@ -326,7 +328,7 @@ Now suppose a buy happens. The dealer learns from it.
 2. The new ask is 108.541. The new bid is 104.
 3. Both quotes move up after a buy.
 
-### 5.8 Findings
+### 5.8 ⭐ Findings
 
 - **Simple description:** The model explains the adverse selection cost. The dealer puts it in the spread to avoid losses.
 - **Beliefs change:** Information affects the beliefs of the dealer.
@@ -369,7 +371,7 @@ Here $\lambda$ is inverse liquidity. A lower $\lambda$ means lower price impact.
 
 > **Slide gap:** Slide 28 says that the dealer sets the price to optimize profit. In Kyle, competition forces zero expected profit. Use A5.
 
-### 6.4 Solution step by step
+### 6.4 ⭐ Solution step by step
 
 **Step 1: Write the insider's profit.** This is equation 4.3.
 
@@ -445,7 +447,7 @@ $$E[\pi_L]=E[y(p-v)]=\lambda\sigma_y^2=\frac{\sigma_y\sigma_0}{2}$$
 
 **Conclusion:** The trading cost of noise traders equals the insider's profit. The dealer's expected net profit is zero.
 
-### 6.5 What changes what
+### 6.5 ⭐ What changes what
 
 | Change | Price impact | Insider's profit | Meaning |
 |---|---|---|---|
@@ -465,7 +467,7 @@ Take $p_0=100$, $\sigma_0=10$, $\sigma_y=1000$, $v=110$ and $y=-400$.
 7. The expected profit before $v$ is known is $0.5(1000)(10)=5000$.
 8. The remaining variance is $100/2=50$.
 
-### 6.7 Findings (slide 32)
+### 6.7 ⭐ Findings (slide 32)
 
 - **Noise distorts information:** Order flow from liquidity traders hides the insider's information. A large random buy makes the dealer raise the price.
 - **Who pays:** Liquidity traders fund the insider's profit. The dealer's net loss is zero.
@@ -534,7 +536,7 @@ flowchart TD
     O --> U[All traders are uninformed]
 ```
 
-### 7.4 Two equilibria (slides 41 and 43)
+### 7.4 ⭐ Two equilibria (slides 41 and 43)
 
 | Point | Separating equilibrium | Pooling equilibrium |
 |---|---|---|
@@ -546,7 +548,7 @@ flowchart TD
 
 In pooling, both types choose the same action at the same price with positive probability.
 
-### 7.5 Separating prices step by step (slide 42)
+### 7.5 ⭐ Separating prices step by step (slide 42)
 
 **Step 1: List the ways a large sale can happen.**
 
@@ -610,7 +612,7 @@ $$S_i=E[V\mid B^i]-E[V\mid S^i]+2C$$
 
 The model itself assumes $C=0$.
 
-### 7.8 Price path after a block sale (slides 45 and 46)
+### 7.8 ⭐ Price path after a block sale (slides 45 and 46)
 
 ```text
 Figure 1: only the trader type is uncertain (an event is known)
@@ -647,14 +649,14 @@ Take $\bar{V}=110$, $\underline{V}=90$, $\delta=0.5$, $\alpha=0.5$, $\mu=0.4$ an
 6. Separation needs $B^2/B^1\ge 1.5$.
 7. A small trade after a block sale happens at 97.391. This shows the partial recovery.
 
-### 7.10 Findings (slide 47)
+### 7.10 ⭐ Findings (slide 47)
 
 - **Block trades:** Their price effects come from informed trading.
 - **Quantity matters:** Trade size is correlated with private information.
 - **Informed preference:** At any given price, informed traders prefer larger amounts.
 - **Optimal pricing:** The price depends on quantity. Large-trade prices show a higher probability of informed trading.
 
-## 8. Compare the five theories
+## 8. ⭐ Compare the five theories
 
 | Point | Bagehot | Copeland and Galai | Glosten and Milgrom | Kyle | Easley and O'Hara |
 |---|---|---|---|---|---|
