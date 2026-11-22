@@ -37,6 +37,8 @@ Everything in this file is exam material. A ⭐ marks what to know without notes
 | What a trade changes | The inventory | The belief about value |
 | Price effect | Mostly temporary | Permanent, as far as the trade has information |
 
+![info slide 2](slides/info/info-02.png)
+
 ## 2. The five theories (slide 3)
 
 1. Bagehot (1971)
@@ -46,6 +48,8 @@ Everything in this file is exam material. A ⭐ marks what to know without notes
 5. Easley and O'Hara (1987)
 
 Each theory fixes a weakness of the theory before it.
+
+![info slide 3](slides/info/info-03.png)
 
 ## 3. Bagehot (1971): "The only game in town" (slide 4)
 
@@ -68,9 +72,25 @@ Informed traders  <--- dealer loses ---  DEALER  <--- dealer gains ---  Uninform
 
 > **Exam:** Bagehot has no equations. Write three things: the two gains, the two kinds of traders, and the spread as the balance.
 
+![info slide 4](slides/info/info-04.png)
+
 ## 4. Copeland and Galai (1983): "Information effects on the bid-ask spread" (slides 5 to 11)
 
 **Why this model is needed:** Bagehot gave only words. Copeland and Galai turn the idea into a profit function.
+
+![info slide 5](slides/info/info-05.png)
+
+![info slide 6](slides/info/info-06.png)
+
+![info slide 7](slides/info/info-07.png)
+
+![info slide 8](slides/info/info-08.png)
+
+![info slide 9](slides/info/info-09.png)
+
+![info slide 10](slides/info/info-10.png)
+
+![info slide 11](slides/info/info-11.png)
 
 ### 4.1 The idea
 
@@ -169,6 +189,12 @@ The true price is 110 or 90 with equal chance. So $P_0=100$. Also $\pi_I=0.2$ an
 
 **Why this model is needed:** Copeland and Galai have one period. Their dealer does not learn. Here the dealer learns from every trade.
 
+![info slide 12](slides/info/info-12.png)
+
+![info slide 13](slides/info/info-13.png)
+
+![info slide 24](slides/info/info-24.png)
+
 ### 5.1 The idea
 
 - **Competitive market:** The dealer earns zero expected profit.
@@ -189,6 +215,14 @@ The true price is 110 or 90 with equal chance. So $P_0=100$. Also $\pi_I=0.2$ an
 The profit of insiders equals the loss of liquidity traders.
 
 > **Slide error:** The slides change the meaning of $\theta$. Slides 14, 16 and 17 use it for good news. Slides 18 and 20 and equation 4.27 use it for bad news. These notes always use $\theta=\Pr(V_L)$, because the final formulas need it. Define $\theta$ in your first line in the exam.
+
+![info slide 14](slides/info/info-14.png)
+
+![info slide 18](slides/info/info-18.png)
+
+![info slide 19](slides/info/info-19.png)
+
+![info slide 20](slides/info/info-20.png)
 
 ### 5.3 The event tree (slides 16 to 18)
 
@@ -220,6 +254,10 @@ $$\Pr(B)=(1-\mu)\gamma^B+(1-\theta)\mu$$
 
 $$\Pr(S)=(1-\mu)\gamma^S+\theta\mu$$
 
+![info slide 16](slides/info/info-16.png)
+
+![info slide 17](slides/info/info-17.png)
+
 ### 5.4 Bayes rule (slides 21 to 23)
 
 1. The data can happen with the event or without it. This is equation 3.10.
@@ -240,6 +278,12 @@ $$\Pr(E\mid D)=\frac{\Pr(D\mid E)\Pr(E)}{\Pr(D\mid E)\Pr(E)+\Pr(D\mid E^c)\Pr(E^
 
 5. Read the result in words. The posterior equals the prior times the likelihood, divided by the marginal likelihood. This is equation 3.14.
 
+![info slide 21](slides/info/info-21.png)
+
+![info slide 22](slides/info/info-22.png)
+
+![info slide 23](slides/info/info-23.png)
+
 ### 5.5 Regret-free quotes (slide 15)
 
 - A quote is regret free if it is still fair after the trade happens.
@@ -249,6 +293,8 @@ $$\Pr(E\mid D)=\frac{\Pr(D\mid E)\Pr(E)}{\Pr(D\mid E)\Pr(E)+\Pr(D\mid E^c)\Pr(E^
 $$a=E[V\mid B]=V_L\Pr(V_L\mid B)+V_H\Pr(V_H\mid B)$$
 
 $$b=E[V\mid S]=V_L\Pr(V_L\mid S)+V_H\Pr(V_H\mid S)$$
+
+![info slide 15](slides/info/info-15.png)
 
 ### 5.6 ⭐ Solution step by step
 
@@ -343,6 +389,16 @@ Now suppose a buy happens. The dealer learns from it.
 
 **Why this model is needed:** The insider in Glosten and Milgrom trades one unit and does not think about price impact. Kyle's insider chooses the size strategically.
 
+![info slide 25](slides/info/info-25.png)
+
+![info slide 27](slides/info/info-27.png)
+
+![info slide 29](slides/info/info-29.png)
+
+![info slide 30](slides/info/info-30.png)
+
+![info slide 31](slides/info/info-31.png)
+
 ### 6.1 The idea and the players
 
 - **Strategic insider:** One risk-neutral informed trader knows how their order moves the price.
@@ -358,6 +414,8 @@ Now suppose a buy happens. The dealer learns from it.
 3. How does noise trading affect price volatility?
 4. What decides the liquidity of a market?
 
+![info slide 26](slides/info/info-26.png)
+
 ### 6.3 Assumptions
 
 - **A1:** The final value is $v\sim N(p_0,\sigma_0^2)$. Only the insider knows it.
@@ -370,6 +428,8 @@ Now suppose a buy happens. The dealer learns from it.
 Here $\lambda$ is inverse liquidity. A lower $\lambda$ means lower price impact. The symbol $\mu$ is an intercept here. It is not the share of insiders.
 
 > **Slide gap:** Slide 28 says that the dealer sets the price to optimize profit. In Kyle, competition forces zero expected profit. Use A5.
+
+![info slide 28](slides/info/info-28.png)
 
 ### 6.4 ⭐ Solution step by step
 
@@ -475,6 +535,8 @@ Take $p_0=100$, $\sigma_0=10$, $\sigma_y=1000$, $v=110$ and $y=-400$.
 
 > **Slide gap:** Slide 32 says that noise distorts the information "available to informed traders". The insider already knows $v$. The noise hides the information from the dealer.
 
+![info slide 32](slides/info/info-32.png)
+
 ## 7. Easley and O'Hara (1987): "Price, trade size, and information in securities markets" (slides 33 to 47)
 
 **Why this model is needed:** Earlier sequential models used one fixed trade size. They also assumed that information exists.
@@ -487,6 +549,10 @@ Take $p_0=100$, $\sigma_0=10$, $\sigma_y=1000$, $v=110$ and $y=-400$.
 - **Dual uncertainty:** The dealer does not know whether information exists. The dealer also does not know its direction.
 - **Object of study:** The paper studies price movements, trade size and the spread of information.
 - **Main message:** The size and the sequence of trades both move prices and pass information.
+
+![info slide 33](slides/info/info-33.png)
+
+![info slide 34](slides/info/info-34.png)
 
 ### 7.2 Assumptions (slides 35 to 37)
 
@@ -503,6 +569,12 @@ Take $p_0=100$, $\sigma_0=10$, $\sigma_y=1000$, $v=110$ and $y=-400$.
 The value without news is the prior mean.
 
 $$V^{\ast}=\delta\underline{V}+(1-\delta)\bar{V}$$
+
+![info slide 35](slides/info/info-35.png)
+
+![info slide 36](slides/info/info-36.png)
+
+![info slide 37](slides/info/info-37.png)
 
 ### 7.3 Market structure (slides 37 to 40)
 
@@ -536,6 +608,12 @@ flowchart TD
     O --> U[All traders are uninformed]
 ```
 
+![info slide 38](slides/info/info-38.png)
+
+![info slide 39](slides/info/info-39.png)
+
+![info slide 40](slides/info/info-40.png)
+
 ### 7.4 ⭐ Two equilibria (slides 41 and 43)
 
 | Point | Separating equilibrium | Pooling equilibrium |
@@ -547,6 +625,12 @@ flowchart TD
 | Effect on price | Large trades get worse prices | Prices are averaged and may hide the true price |
 
 In pooling, both types choose the same action at the same price with positive probability.
+
+![info slide 41](slides/info/info-41.png)
+
+![info slide 42](slides/info/info-42.png)
+
+![info slide 43](slides/info/info-43.png)
 
 ### 7.5 ⭐ Separating prices step by step (slide 42)
 
@@ -612,6 +696,8 @@ $$S_i=E[V\mid B^i]-E[V\mid S^i]+2C$$
 
 The model itself assumes $C=0$.
 
+![info slide 44](slides/info/info-44.png)
+
 ### 7.8 ⭐ Price path after a block sale (slides 45 and 46)
 
 ```text
@@ -637,6 +723,10 @@ b2        o-----
 - **At time t+2 in Figure 1:** A small trade says nothing new. The price stays at the low level.
 - **At time t+2 in Figure 2:** A small trade comes only from an uninformed trader. It makes "no event" more likely. The price recovers partly.
 
+![info slide 45](slides/info/info-45.png)
+
+![info slide 46](slides/info/info-46.png)
+
 ### 7.9 Worked example
 
 Take $\bar{V}=110$, $\underline{V}=90$, $\delta=0.5$, $\alpha=0.5$, $\mu=0.4$ and $X_S^2=X_B^2=0.25$.
@@ -655,6 +745,8 @@ Take $\bar{V}=110$, $\underline{V}=90$, $\delta=0.5$, $\alpha=0.5$, $\mu=0.4$ an
 - **Quantity matters:** Trade size is correlated with private information.
 - **Informed preference:** At any given price, informed traders prefer larger amounts.
 - **Optimal pricing:** The price depends on quantity. Large-trade prices show a higher probability of informed trading.
+
+![info slide 47](slides/info/info-47.png)
 
 ## 8. ⭐ Compare the five theories
 
