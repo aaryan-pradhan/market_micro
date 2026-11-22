@@ -133,6 +133,7 @@ $$Spiral_{10}=\sum_{k=0}^{9}Score_{t-k}$$
 ## 8. How far to trust these notes
 
 - **Slides:** The notes cover the four endsem decks. Slide numbers are in the headings.
+- **Slide images:** Each section ends with the official slides it uses, as PNGs from `slides/`. Title slides are left out. In Topic 5, only the slides that the notes cover are shown.
 - **Lesmond (2005):** It is not in the slides and the full paper is behind a paywall. Topic 2 says where each part comes from.
 - **Amihud's findings:** The slide is blank, so Topic 2 points to the midsem notes for them.
 - **Stars:** A ⭐ in each topic marks what to know without notes.
