@@ -2,6 +2,8 @@
 
 These notes follow the deck "5. Market Wide impacts", slides 1 to 20.
 
+Everything in this file is exam material. A ⭐ marks what to know without notes. Worked examples use made-up numbers to practise the slide formulas.
+
 | Part | Paper | Why liquidity disappears |
 |---|---|---|
 | Predatory trading | Brunnermeier and Pedersen (2005) | Others trade against a distressed trader |
@@ -21,7 +23,7 @@ These notes follow the deck "5. Market Wide impacts", slides 1 to 20.
 
 ## 1. Predatory trading: Brunnermeier and Pedersen (2005) (slides 2 to 12)
 
-### 1.1 Definition (slide 2)
+### 1.1 ⭐ Definition (slide 2)
 
 - **Slide definition:** Predatory trading exploits an information advantage to profit at the expense of others. It may use non-public information or market dynamics. It benefits the predator unfairly and harms other investors or the market.
 - **The basic pattern:** One trader must sell. Other traders also sell. They buy back later.
@@ -55,7 +57,7 @@ c. **It is hard to identify.** A regulator must separate a legitimate strategy f
 
 d. **It hurts market quality.** It affects liquidity, price efficiency, stability and investor confidence.
 
-### 1.4 Findings (slide 5)
+### 1.4 ⭐ Findings (slide 5)
 
 1. A distressed large investor must unwind a position.
 2. Other strategic traders first trade in the same direction.
@@ -98,13 +100,7 @@ The position has a limit. It comes from risk or from capital. This is equation 2
 
 $$-\bar{x}\le x^i(t)\le\bar{x}$$
 
-The long-term investors hold what the strategic traders do not hold. Let $X$ be the total holding of strategic traders. The slides do not print this price rule. I added it because it reproduces the prices on slides 9 to 11.
-
-$$p=\mu-\lambda(S-X)$$
-
-Here $\lambda$ is the illiquidity of the market. When strategic traders sell, $X$ falls and the price falls.
-
-### 1.7 Simulated example (slides 9 to 11)
+### 1.7 ⭐ Simulated example (slides 9 to 11)
 
 | Input | Value |
 |---|---|
@@ -121,21 +117,15 @@ Here $\lambda$ is the illiquidity of the market. When strategic traders sell, $X
 
 At time 7, the asset pays off or the market becomes perfectly liquid.
 
-**Step 1: Find the starting price.** The two traders hold 16.
+**Step 1: Read the starting price.** The slide figure starts at 116.
 
-$$p=140-(40-16)=116$$
+**Step 2: Let both sell.** The distressed trader sells 8 shares at speed $A/2=10$. It needs $8/10=0.8$ time units, so it finishes at time 5.8. The predator sells all its 8 shares at the same time.
 
-**Step 2: Let both sell.** Each sells at speed $A/2=10$. Each needs $8/10=0.8$ time units. Both finish at time 5.8.
-
-**Step 3: Find the lowest price.** They hold zero.
-
-$$p=140-(40-0)=100$$
+**Step 3: Find the lowest price.** Together they sell 16 shares. Each share moves the price by $\lambda=1$. So the price drops 16 points, from 116 to 100.
 
 **Step 4: Let the predator buy back.** It now trades alone at speed 20. It buys up to its limit of 10 in 0.5 time units. It finishes at time 6.3.
 
-**Step 5: Find the new price.**
-
-$$p=140-(40-10)=110$$
+**Step 5: Find the new price.** The slide says that the price recovers to 110.
 
 **Step 6: Find the overshoot.** It is $110-100=10$.
 
@@ -151,8 +141,6 @@ time     5   5.8  6.3    7
 ```
 
 The slide also marks the marginal selling price and the marginal buying price. The predator sells at higher prices and buys back at lower prices.
-
-**Cost to the victim:** The price falls in a straight line from 116 to 100 while the victim sells 8 shares. The victim gets $8(116+100)/2=864$. Selling alone moves the price only to 108, so the victim would get $8(116+108)/2=896$. Predation costs the victim 32. This comparison is my calculation and is not on the slide.
 
 ### 1.8 Multiple predators (slide 12)
 
@@ -174,7 +162,7 @@ The total starting holding stays the same.
 
 Episodic illiquidity comes from a breakdown of cooperation.
 
-### 2.2 The model step by step
+### 2.2 ⭐ The model step by step
 
 1. The stage game is a trading game in continuous time over one period. A pricing equation gives price impact.
 2. In one period, a trader gains by predating.
@@ -195,8 +183,6 @@ Episodic illiquidity comes from a breakdown of cooperation.
 | Action | Traders supply liquidity to the one in need | Traders sell with the one in need |
 | Market | It looks liquid | It suddenly becomes illiquid |
 
-**Analogy:** Shopkeepers lend change to each other every day, but they may refuse when one of them is close to closing down.
-
 > **Exam:** The key words are repeated game, high stakes, episodic and contagion.
 
 ## 3. Empirical setup: Shkilko, Van Ness and Van Ness (2012) (slides 14 and 15)
@@ -212,7 +198,7 @@ The paper is "Short selling and intraday price pressures". It is in Financial Ma
 - **Change of role:** Short sellers usually provide liquidity. They switch to demanding it.
 - **Conclusion:** Their effect is second to that of long sellers. This contradicts the view that short sellers destabilize markets on their own.
 
-### 3.2 How a large price reversal is identified (slide 15)
+### 3.2 ⭐ How a large price reversal is identified (slide 15)
 
 **Step 1: Find the normal movement.** Let $\sigma_i$ be the average standard deviation of five-minute cumulative returns over the previous 20 trading days.
 
@@ -258,7 +244,7 @@ initial loss --> funding problem --> sell positions --> price leaves fundamental
 
 Topic 3 explains this loop with a numerical example.
 
-### 4.3 Findings (slide 20)
+### 4.3 ⭐ Findings (slide 20)
 
 1. **Sudden dry-up:** It happens when financiers are imperfectly informed and fundamental volatility varies over time.
 2. **Commonality:** Liquidity and fragility move together across assets. A change in funding affects liquidity supply in all assets.
@@ -290,8 +276,5 @@ The slide cuts off the last sentence. The words "funding conditions do" complete
 | Is the seller forced? | The victim is forced, and the predator chooses | The predators choose | All are forced by funding |
 | Is strategy needed? | Yes | Yes | No |
 | Key limit | Position limit of buyers | Value of future cooperation | Capital and margin |
-| Remedy | Hide positions and allow orderly unwinding | Keep stakes and concentration low | Provide funding and stable margins |
-
-The remedy row is explanation and is not on the slides.
 
 > **Exam:** A question on market-wide liquidity needs three layers. First define commonality. Then give the mechanism. Then give the evidence.
