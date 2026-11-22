@@ -14,22 +14,27 @@ Everything in this file is exam material. A ⭐ marks what to know without notes
 
 ## 0. Words to know first
 
-- **Liquidity:** It is the ability to trade a large size, quickly, at low cost, when you want to.
-- **Immediacy:** It means trading now without waiting.
-- **Mid price:** It is $P_M=(P_A+P_B)/2$.
-- **Price impact:** It is how much a trade moves the price.
-- **Commonality:** The liquidity of many stocks moves together.
-- **Premium:** It is the extra return that investors demand.
-- **Coefficient and t value:** The coefficient gives the size and direction of an effect. The t value tells whether it differs from zero. An absolute value above about 2 is significant.
+| Term | Meaning |
+|---|---|
+| Liquidity | The ability to trade a large size, quickly, at low cost, when you want to |
+| Immediacy | Trading now without waiting |
+| Mid price | $P_M=(P_A+P_B)/2$ |
+| Price impact | How much a trade moves the price |
+| Commonality | The liquidity of many stocks moves together |
+| Premium | The extra return that investors demand |
+| Coefficient | The size and direction of an effect |
+| t value | Tells whether the coefficient differs from zero. An absolute value above about 2 is significant |
 
 ## 1. Background (slides 2 and 3)
 
 The deck has three main papers. They are Chordia and others (2000), Amihud (2002) and Ince (2022).
 
-1. **Amihud and Mendelson (1986):** They introduced the spread as a proxy for illiquidity.
-2. **Chordia and others (2000):** They documented commonality in liquidity.
-3. **Chordia and others (2001):** They studied the cross-sectional relation with the level of illiquidity.
-4. **Huberman and Halka (2001):** They found a systematic part of liquidity that changes over time.
+| No. | Paper | Contribution |
+|---|---|---|
+| 1 | Amihud and Mendelson (1986) | Introduced the spread as a proxy for illiquidity |
+| 2 | Chordia and others (2000) | Documented commonality in liquidity |
+| 3 | Chordia and others (2001) | Studied the cross-sectional relation with the level of illiquidity |
+| 4 | Huberman and Halka (2001) | Found a systematic part of liquidity that changes over time |
 
 ![liquidity slide 2](slides/liquidity/liquidity-02.png)
 
@@ -39,32 +44,38 @@ The deck has three main papers. They are Chordia and others (2000), Amihud (2002
 
 ### 2.1 The gap (slide 4)
 
-- **Earlier studies looked at one stock at a time:** They gave little attention to common causes of liquidity.
-- **Liquidity moves together:** Changes in liquidity are correlated across stocks.
-- **Two causes of change:** Inventory risk and asymmetric information both change liquidity over time.
-- **Common causes:** Trading cost and other microstructure effects have common determinants.
+| Point | What it says |
+|---|---|
+| Earlier studies looked at one stock at a time | They gave little attention to common causes of liquidity |
+| Liquidity moves together | Changes in liquidity are correlated across stocks |
+| Two causes of change | Inventory risk and asymmetric information both change liquidity over time |
+| Common causes | Trading cost and other microstructure effects have common determinants |
 
 ![liquidity slide 4](slides/liquidity/liquidity-04.png)
 
 ### 2.2 ⭐ Seven reasons for commonality (slide 5)
 
-1. **Price swings:** Trading activity across the market responds to market-wide price swings.
-2. **Volume:** Volume drives dealer inventory. So the desired inventory levels of dealers move together.
-3. **Interest rates:** The cost of carrying inventory depends on market interest rates.
-4. **Volatility:** Inventory risk depends on volatility. Volatility has a market component.
-5. **Program trading:** It puts common pressure on many inventories at once.
-6. **Institutional funds:** Funds with similar styles trade in a similar way.
-7. **Asymmetric information:** A small group of large traders may know more about many stocks.
+| No. | Reason | How it makes liquidity move together | Type |
+|---|---|---|---|
+| 1 | Price swings | Trading activity across the market responds to market-wide price swings | Inventory |
+| 2 | Volume | Volume drives dealer inventory. So the desired inventory levels of dealers move together | Inventory |
+| 3 | Interest rates | The cost of carrying inventory depends on market interest rates | Inventory |
+| 4 | Volatility | Inventory risk depends on volatility. Volatility has a market component | Inventory |
+| 5 | Program trading | It puts common pressure on many inventories at once | Inventory |
+| 6 | Institutional funds | Funds with similar styles trade in a similar way | Correlated trading |
+| 7 | Asymmetric information | A small group of large traders may know more about many stocks | Information |
 
 ![liquidity slide 5](slides/liquidity/liquidity-05.png)
 
 ### 2.3 Implications (slide 6)
 
-- **Covariation:** Liquidity moves together.
-- **Trading cost:** The costs of trading also move together.
-- **Crises:** Liquidity crises can be episodic. They can also be global.
-- **A liquidity factor:** Trading cost has a common factor. See Amihud and Mendelson (1986) and Brennan and Subrahmanyam (1996).
-- **Asset prices:** Liquidity affects prices through two channels.
+| Implication | What it says |
+|---|---|
+| Covariation | Liquidity moves together |
+| Trading cost | The costs of trading also move together |
+| Crises | Liquidity crises can be episodic. They can also be global |
+| A liquidity factor | Trading cost has a common factor. See Amihud and Mendelson (1986) and Brennan and Subrahmanyam (1996) |
+| Asset prices | Liquidity affects prices through two channels, in the next table |
 
 | Channel | What matters | Effect |
 |---|---|---|
@@ -75,14 +86,16 @@ The deck has three main papers. They are Chordia and others (2000), Amihud (2002
 
 ### 2.4 Data (slides 7 and 8)
 
-- **Source:** NYSE transaction data comes from the Institute for the Study of Security Markets.
-- **Period:** The year is 1992. It has 254 trading days.
-- **Sample:** It has 1,169 stocks. Each traded at least once on 10 or more days.
-- **Excluded stocks:** Stocks with splits or stock dividends, certificates, ADRs, non-US firms, Americus Trust, closed-end funds and REITs are removed.
-- **Price filter:** A stock-day is deleted if the average price is below 2 dollars.
-- **Trade filter:** The opening batch and special-settlement trades are removed.
-- **NYSE feature:** The specialist announces the spread and depth some seconds before a trade.
-- **Daily value:** Each measure is averaged over all trades of that stock on that day.
+| Item | Detail |
+|---|---|
+| Source | NYSE transaction data from the Institute for the Study of Security Markets |
+| Period | The year 1992. It has 254 trading days |
+| Sample | 1,169 stocks. Each traded at least once on 10 or more days |
+| Excluded stocks | Stocks with splits or stock dividends, certificates, ADRs, non-US firms, Americus Trust, closed-end funds and REITs |
+| Price filter | A stock-day is deleted if the average price is below 2 dollars |
+| Trade filter | The opening batch and special-settlement trades are removed |
+| NYSE feature | The specialist announces the spread and depth some seconds before a trade |
+| Daily value | Each measure is averaged over all trades of that stock on that day |
 
 ![liquidity slide 7](slides/liquidity/liquidity-07.png)
 
@@ -98,16 +111,22 @@ The deck has three main papers. They are Chordia and others (2000), Amihud (2002
 | ESPR | Effective spread | $2\lvert P_t-P_M\rvert$ | Dollars | Less liquidity |
 | PESPR | Proportional effective spread | $2\lvert P_t-P_M\rvert/P_t$ | Pure number | Less liquidity |
 
-Here $P_t$ is the trade price. $Q_A$ and $Q_B$ are the shares offered at the ask and the bid.
+| Symbol | Meaning |
+|---|---|
+| $P_t$ | The trade price |
+| $Q_A$ and $Q_B$ | The shares offered at the ask and the bid |
 
 **Worked example:** The bid is 99.80 and the ask is 100.20. A buy happens at 100.10. The depths are 600 at the bid and 400 at the ask.
 
-1. The quoted spread is 0.40.
-2. The mid price is 100. So the proportional quoted spread is 0.004.
-3. The depth is 500 shares.
-4. The effective spread is $2(0.10)=0.20$.
-5. The proportional effective spread is $0.20/100.10=0.002$.
-6. The effective spread is smaller because the trade is inside the quotes.
+| Step | Measure | Working | Result |
+|---|---|---|---|
+| 1 | Quoted spread | $100.20-99.80$ | 0.40 |
+| 2 | Mid price | $(100.20+99.80)/2$ | 100 |
+| 3 | Proportional quoted spread | $0.40/100$ | 0.004 |
+| 4 | Depth | $(600+400)/2$ | 500 shares |
+| 5 | Effective spread | $2\lvert 100.10-100\rvert=2(0.10)$ | 0.20 |
+| 6 | Proportional effective spread | $0.20/100.10$ | 0.002 |
+| 7 | Compare | 0.20 against 0.40 | The effective spread is smaller because the trade is inside the quotes |
 
 > **Exam:** The effective spread has a 2 in it. The proportional quoted spread divides by the mid price. The proportional effective spread divides by the trade price.
 
@@ -130,10 +149,12 @@ Here $P_t$ is the trade price. $Q_A$ and $Q_B$ are the shares offered at the ask
 | DEP | | | -0.228 | -0.156 |
 | ESPR | | | | 0.871 |
 
-- **Effective below quoted:** Many trades happen inside the quotes.
-- **Mean above median:** A few illiquid stocks pull the mean up.
-- **Spreads agree:** All spread measures have positive correlation with each other.
-- **Depth is opposite:** A wide spread comes with low depth.
+| What we see | Why |
+|---|---|
+| Effective below quoted | Many trades happen inside the quotes |
+| Mean above median | A few illiquid stocks pull the mean up |
+| Spreads agree | All spread measures have positive correlation with each other |
+| Depth is opposite | A wide spread comes with low depth |
 
 ![liquidity slide 10](slides/liquidity/liquidity-10.png)
 
@@ -159,11 +180,13 @@ Liquidity changes a lot from day to day. Depth changes the most.
 
 $$DL_{j,t}=\alpha_j+\beta_jDL_{M,t}+\varepsilon_{j,t}$$
 
-- $DL_{j,t}$ is the change in liquidity of stock $j$.
-- $DL_{M,t}$ is the change in average market liquidity on the same day.
-- A positive $\beta_j$ means that the stock moves with the market. This is commonality.
-- The regression also has a lag and a lead of the market change.
-- In the table, t values are in brackets. "Significant" means positive with t above 1.645.
+| Part | Meaning |
+|---|---|
+| $DL_{j,t}$ | The change in liquidity of stock $j$ |
+| $DL_{M,t}$ | The change in average market liquidity on the same day |
+| $\beta_j\gt 0$ | The stock moves with the market. This is commonality |
+| Extra terms | The regression also has a lag and a lead of the market change |
+| Table notation | t values are in brackets. "Significant" means positive with t above 1.645 |
 
 | Item | DQSPR | DPQSPR | DDEP | DESPR | DPESPR |
 |---|---|---|---|---|---|
@@ -177,10 +200,12 @@ $$DL_{j,t}=\alpha_j+\beta_jDL_{M,t}+\varepsilon_{j,t}$$
 | Percent positive | 55.35 | 56.29 | 56.54 | 53.21 | 55.00 |
 | Percent significant | 6.84 | 7.01 | 7.19 | 5.73 | 6.76 |
 
-- **Main result:** The same-day coefficient is positive for all five measures.
-- **Breadth:** About 69 to 85 percent of stocks have a positive coefficient.
-- **Timing:** The same day matters much more than the lag or the lead.
-- **Reading a number:** A value of 0.69 means that a 1 percent change in the market spread goes with a 0.69 percent change in the stock spread.
+| Result | What it says |
+|---|---|
+| Main result | The same-day coefficient is positive for all five measures |
+| Breadth | About 69 to 85 percent of stocks have a positive coefficient |
+| Timing | The same day matters much more than the lag or the lead |
+| Reading a number | A value of 0.69 means that a 1 percent change in the market spread goes with a 0.69 percent change in the stock spread |
 
 ![liquidity slide 12](slides/liquidity/liquidity-12.png)
 
@@ -200,17 +225,21 @@ Here $DL_{I,t}$ is the change in average industry liquidity.
 | DESPR | 0.164 (5.26) | 0.414 (7.51) | 0.260 | 0.429 | 0.020 |
 | DPESPR | -0.172 (-0.60) | 0.970 (1.81) | -0.468 | 1.285 | 0.018 |
 
-- **Two sources:** Both the market and the industry matter.
-- **Sum:** It adds the same day, the lag and the lead.
-- **Small power:** The regression explains only about 2 percent of daily changes. Most changes are specific to the firm.
+| Result | What it says |
+|---|---|
+| Two sources | Both the market and the industry matter |
+| Sum | It adds the same day, the lag and the lead |
+| Small power | The regression explains only about 2 percent of daily changes. Most changes are specific to the firm |
 
 ![liquidity slide 14](slides/liquidity/liquidity-14.png)
 
 ### 2.10 Test 3: inventory risk or information (slides 15 and 16)
 
-- **Number of trades:** It indicates asymmetric information (Jones and others, 1994).
-- **Stealth trading:** Informed traders break up orders. They are most active in medium sizes (Barclay and Warner, 1993).
-- **Frequency:** The trading frequency of a stock is strongly influenced by the market and the industry.
+| Idea used | Source |
+|---|---|
+| The number of trades indicates asymmetric information | Jones and others, 1994 |
+| Stealth trading: informed traders break up orders. They are most active in medium sizes | Barclay and Warner, 1993 |
+| The trading frequency of a stock is strongly influenced by the market and the industry | Slide 15 |
 
 $$DL_{j,t}=\alpha_j+\beta_SDS_{j,t}+\beta_TDT_{j,t}+\beta_MDV_{M,t}+\beta_IDV_{I,t}+\varepsilon_{j,t}$$
 
@@ -227,20 +256,23 @@ $$DL_{j,t}=\alpha_j+\beta_SDS_{j,t}+\beta_TDT_{j,t}+\beta_MDV_{M,t}+\beta_IDV_{I
 
 ### 2.11 Observations (slide 17)
 
-- **The usual view:** More trading should reduce spreads.
-- **With informed traders:** Spreads rise with the number of transactions.
-- **Number of trades:** It has a strong positive effect on spreads.
-- **Market volume:** It has a negative and marginal effect on the quoted spread.
-- **Trade size:** It has a strong positive effect on the quoted spread and on depth.
-- **Industry volume:** Its effect on depth is negative and not significant.
+| Variable | Effect | Explanation |
+|---|---|---|
+| Trading in general | The usual view: more trading should reduce spreads | Inventory view |
+| Number of transactions | Spreads rise with it. It has a strong positive effect on spreads | Informed traders |
+| Market volume | Negative and marginal effect on the quoted spread | Balanced, uninformed trading |
+| Trade size | Strong positive effect on the quoted spread and on depth | Block pressure or information |
+| Industry volume | Its effect on depth is negative and not significant | No clear effect |
 
 ![liquidity slide 17](slides/liquidity/liquidity-17.png)
 
 ### 2.12 ⭐ Conclusion (slide 18)
 
-1. Liquidity measures of individual stocks move together.
-2. The spread of a stock rises with its own number of transactions. This is asymmetric information.
-3. The spread falls with market-wide trading. This is inventory risk, because such trading is mostly uninformed and balances inventory.
+| No. | Conclusion | Which theory |
+|---|---|---|
+| 1 | Liquidity measures of individual stocks move together | Commonality |
+| 2 | The spread of a stock rises with its own number of transactions | Asymmetric information |
+| 3 | The spread falls with market-wide trading, because such trading is mostly uninformed and balances inventory | Inventory risk |
 
 > **Exam:** Write in this order: meaning, reasons, data, five measures, regression, sign and conclusion. One number is enough: the quoted spread coefficient is 0.69.
 
@@ -254,9 +286,11 @@ $$DL_{j,t}=\alpha_j+\beta_SDS_{j,t}+\beta_TDT_{j,t}+\beta_MDV_{M,t}+\beta_IDV_{I
 
 ### 3.1 The idea
 
-- **Illiquidity:** A stock is illiquid if a small traded value moves the price a lot.
-- **Advantage:** The measure needs only daily returns and daily volume. It needs no quote data.
-- **Claim:** Investors demand a higher expected return for an illiquid stock.
+| Point | What it says |
+|---|---|
+| Illiquidity | A stock is illiquid if a small traded value moves the price a lot |
+| Advantage | The measure needs only daily returns and daily volume. It needs no quote data |
+| Claim | Investors demand a higher expected return for an illiquid stock |
 
 ### 3.2 ⭐ The measure (slide 21)
 
@@ -268,9 +302,11 @@ $$ILLIQ_{iy}=\frac{1}{D_{iy}}\sum_{d=1}^{D_{iy}}\frac{\lvert R_{iyd}\rvert}{VOLD
 | $VOLD_{iyd}$ | Dollar volume on that day |
 | $D_{iy}$ | Number of days with data in that year |
 
-- **Meaning:** It is the average absolute return per dollar traded. It is a price impact measure.
-- **Direction:** A higher value means less liquidity.
-- **Related measure:** The Amivest ratio is total volume divided by total absolute return. See Cooper and others (1985) and Khan and Baker (1993). A higher Amivest ratio means more liquidity.
+| Point | What it says |
+|---|---|
+| Meaning | The average absolute return per dollar traded. It is a price impact measure |
+| Direction | A higher value means less liquidity |
+| Related measure | The Amivest ratio is total volume divided by total absolute return. See Cooper and others (1985) and Khan and Baker (1993). A higher Amivest ratio means more liquidity |
 
 **Worked example:**
 
@@ -280,9 +316,14 @@ $$ILLIQ_{iy}=\frac{1}{D_{iy}}\sum_{d=1}^{D_{iy}}\frac{\lvert R_{iyd}\rvert}{VOLD
 | 2 | -0.01 | 5 | 0.002 |
 | 3 | 0.03 | 10 | 0.003 |
 
-1. Add the last column. The total is 0.007.
-2. Divide by three days. The answer is 0.002333 per million dollars.
-3. The Amivest ratio is $25/0.06=416.67$ million dollars per unit return.
+| Step | Working | Result |
+|---|---|---|
+| 1. Ratio for each day | $0.02/10$, $0.01/5$, $0.03/10$ | 0.002, 0.002, 0.003 |
+| 2. Add the last column | $0.002+0.002+0.003$ | 0.007 |
+| 3. Divide by three days | $0.007/3$ | ILLIQ is 0.002333 per million dollars |
+| 4. Total volume | $10+5+10$ | 25 |
+| 5. Total absolute return | $0.02+0.01+0.03$ | 0.06 |
+| 6. Amivest ratio | $25/0.06=416.67$ | 416.67 million dollars per unit return |
 
 > **Exam:** Take the ratio for each day first. Then take the average. Do not divide the average return by the average volume. Always state the unit.
 
@@ -294,22 +335,27 @@ The test compares it with two measures from detailed trade data.
 
 $$ILLIQ_i=-292+247.9\lambda_i+49.2\psi_i$$
 
-- $\lambda_i$ is Kyle's price impact.
-- $\psi_i$ is the fixed-cost part of the spread.
-- The t values are 12.25, 13.78 and 17.33, in the order of the terms.
-- R-squared is 0.30.
-- Both slopes are positive. So the simple measure agrees with the detailed measures.
+| Term | Meaning | t value |
+|---|---|---|
+| Intercept | $-292$ | 12.25 |
+| $\lambda_i$ | Kyle's price impact | 13.78 |
+| $\psi_i$ | The fixed-cost part of the spread | 17.33 |
+| R-squared | 0.30 | |
+
+Both slopes are positive. So the simple measure agrees with the detailed measures.
 
 ![liquidity slide 22](slides/liquidity/liquidity-22.png)
 
 ### 3.4 ⭐ Effect on returns: data and method (slides 23 and 24)
 
-- **Market:** The sample is NYSE stocks from 1963 to 1997.
-- **Source:** The data is CRSP daily and monthly.
-- **Method:** It uses Fama and MacBeth (1973).
-- **Tests:** It runs one cross-section in each month from 1964 to 1997. That is 408 months.
-- **Delisting:** Returns are adjusted for delisting (Shumway, 1997). This avoids survivorship bias.
-- **Timing:** Each stock characteristic comes from year $y-1$. So it is known at the start of year $y$.
+| Item | Detail |
+|---|---|
+| Market | NYSE stocks from 1963 to 1997 |
+| Source | CRSP daily and monthly |
+| Method | Fama and MacBeth (1973) |
+| Tests | One cross-section in each month from 1964 to 1997. That is 408 months |
+| Delisting | Returns are adjusted for delisting (Shumway, 1997). This avoids survivorship bias |
+| Timing | Each stock characteristic comes from year $y-1$. So it is known at the start of year $y$ |
 
 $$R_{imy}=k_{0my}+\sum_{j=1}^{J}k_{jmy}X_{ji,y-1}+U_{imy}$$
 
@@ -322,9 +368,11 @@ $$R_{imy}=k_{0my}+\sum_{j=1}^{J}k_{jmy}X_{ji,y-1}+U_{imy}$$
 
 The method has three steps.
 
-1. Run one regression across stocks in each month.
-2. Save the coefficients of each month.
-3. Average them over 408 months and test whether the average is zero.
+| Step | What we do |
+|---|---|
+| 1 | Run one regression across stocks in each month |
+| 2 | Save the coefficients of each month |
+| 3 | Average them over 408 months and test whether the average is zero |
 
 ![liquidity slide 23](slides/liquidity/liquidity-23.png)
 
@@ -346,22 +394,28 @@ The findings slide (slide 25) is blank in our deck. The [midsem liquidity notes]
 
 The paper splits the monthly illiquidity of a firm into three parts.
 
-1. **Alpha:** It is the constant part for that firm.
-2. **Systematic:** It moves with the market.
-3. **Idiosyncratic:** It is specific to the firm.
+| No. | Part | What it is |
+|---|---|---|
+| 1 | Alpha | The constant part for that firm |
+| 2 | Systematic | It moves with the market |
+| 3 | Idiosyncratic | It is specific to the firm |
 
 ### 4.2 Findings
 
-- **Systematic premium:** It disappears when very small stocks are removed.
-- **Idiosyncratic part:** High idiosyncratic liquidity gives positive future risk-adjusted returns. Low idiosyncratic liquidity gives negative ones.
+| Part | Finding |
+|---|---|
+| Systematic premium | It disappears when very small stocks are removed |
+| Idiosyncratic part | High idiosyncratic liquidity gives positive future risk-adjusted returns. Low idiosyncratic liquidity gives negative ones |
 
 ### 4.3 Data (slide 34)
 
 This slide sits after Stoll in the deck, but it belongs to Ince.
 
-- The stocks are common stocks on NYSE, Amex and Nasdaq.
-- The period is January 1964 to December 2018.
-- The source is CRSP.
+| Item | Detail |
+|---|---|
+| Stocks | Common stocks on NYSE, Amex and Nasdaq |
+| Period | January 1964 to December 2018 |
+| Source | CRSP |
 
 ![liquidity slide 34](slides/liquidity/liquidity-34.png)
 
@@ -385,17 +439,21 @@ The paper is in the Journal of Financial Economics, volume 77, pages 411 to 452.
 
 ### 5.1 The problem
 
-- **Data is missing:** Many emerging markets lack long records of bids and asks.
-- **Cost still matters:** Trading can be very costly in these markets.
-- **Solution:** Estimate liquidity from daily prices and volume.
-- **Question:** Which low-frequency measure works across countries and within a country?
+| Point | What it says |
+|---|---|
+| Data is missing | Many emerging markets lack long records of bids and asks |
+| Cost still matters | Trading can be very costly in these markets |
+| Solution | Estimate liquidity from daily prices and volume |
+| Question | Which low-frequency measure works across countries and within a country? |
 
 ### 5.2 Setting
 
-- **Markets:** Summaries say that it covers 31 emerging markets. One citing paper says 23.
-- **Period:** A summary of the paper reports 1987 to 2000.
-- **Test:** It compares five liquidity measures with quoted spreads, where spreads are available.
-- **Named measures:** Search summaries name LOT, Roll, Amihud and turnover. I remember the fifth as Amivest, but I did not verify this.
+| Item | Detail |
+|---|---|
+| Markets | Summaries say that it covers 31 emerging markets. One citing paper says 23 |
+| Period | A summary of the paper reports 1987 to 2000 |
+| Test | It compares five liquidity measures with quoted spreads, where spreads are available |
+| Named measures | Search summaries name LOT, Roll, Amihud and turnover. I remember the fifth as Amivest, but I did not verify this |
 
 ### 5.3 The measures
 
@@ -412,11 +470,20 @@ The paper is in the Journal of Financial Economics, volume 77, pages 411 to 452.
 
 **Assumptions:**
 
-- **A1:** The true return $R^{\ast}$ follows the market model.
-- **A2:** Selling needs a true return below $\alpha_1$, where $\alpha_1\lt 0$.
-- **A3:** Buying needs a true return above $\alpha_2$, where $\alpha_2\gt 0$.
-- **A4:** The marginal informed investor trades only beyond these limits.
-- **A5:** The error is normal.
+| No. | Assumption |
+|---|---|
+| A1 | The true return $R^{\ast}$ follows the market model |
+| A2 | Selling needs a true return below $\alpha_1$, where $\alpha_1\lt 0$ |
+| A3 | Buying needs a true return above $\alpha_2$, where $\alpha_2\gt 0$ |
+| A4 | The marginal informed investor trades only beyond these limits |
+| A5 | The error is normal |
+
+| Step | What we do |
+|---|---|
+| 1 | Write the true return |
+| 2 | Write what we observe in each of the three regions |
+| 3 | Estimate by maximum likelihood |
+| 4 | Take the difference of the two limits |
 
 **Step 1: Write the true return.**
 
@@ -430,18 +497,34 @@ $$R^{\ast}_{jt}=\beta_jR_{mt}+\varepsilon_{jt}$$
 | $\alpha_1\le R^{\ast}\le\alpha_2$ | $R=0$ | News is too small, so the return is zero |
 | $R^{\ast}\gt\alpha_2$ | $R=R^{\ast}-\alpha_2$ | Good news is larger than the buying cost |
 
-**Step 3: Estimate by maximum likelihood.** The likelihood has three parts. They are the falls, the zeros and the rises. It chooses $\alpha_1$, $\alpha_2$, $\beta$ and the error variance to make the observed returns most likely.
+**Step 3: Estimate by maximum likelihood.**
 
-**Step 4: Take the difference.** The selling cost is $-\alpha_1$. The buying cost is $\alpha_2$. Their sum is the round-trip cost.
+| Part of the likelihood | Days it covers |
+|---|---|
+| Falls | Days with $R\lt 0$ |
+| Zeros | Days with $R=0$ |
+| Rises | Days with $R\gt 0$ |
+
+It chooses $\alpha_1$, $\alpha_2$, $\beta$ and the error variance to make the observed returns most likely.
+
+**Step 4: Take the difference.**
+
+| Cost | Value |
+|---|---|
+| Selling cost | $-\alpha_1$ |
+| Buying cost | $\alpha_2$ |
+| Round-trip cost | Their sum |
 
 $$LOT=\alpha_2-\alpha_1$$
 
 **Worked example:** Take $\alpha_1=-0.010$ and $\alpha_2=0.015$.
 
-1. The round-trip cost is $0.015+0.010=0.025$, which is 2.5 percent.
-2. A true return of 0.025 is observed as $0.025-0.015=0.010$.
-3. A true return of 0.007 is observed as zero.
-4. A true return of -0.018 is observed as $-0.018+0.010=-0.008$.
+| Step | Case | Working | Result |
+|---|---|---|---|
+| 1 | Round-trip cost | $0.015+0.010=0.025$ | 2.5 percent |
+| 2 | True return 0.025, above $\alpha_2$ | $0.025-0.015=0.010$ | Observed 0.010 |
+| 3 | True return 0.007, between the limits | No trade | Observed zero |
+| 4 | True return -0.018, below $\alpha_1$ | $-0.018+0.010=-0.008$ | Observed -0.008 |
 
 The 1999 paper estimated round-trip costs of 1.2 percent for the largest US firms and 10.3 percent for the smallest, for 1963 to 1990.
 
@@ -449,11 +532,13 @@ The 1999 paper estimated round-trip costs of 1.2 percent for the largest US firm
 
 ### 5.5 ⭐ Findings
 
-1. **Across countries:** The price-based measures, LOT and Roll, work better than volume-based measures.
-2. **Within a country:** LOT works best. Amihud works to a lesser extent.
-3. **Institutions:** Countries with weak political and legal institutions have significantly higher liquidity cost. The abstract says that this holds "even to the exclusion of legal origin or insider trading enforcement".
-4. **Political risk:** More political risk goes with 10 basis points higher cost by LOT. It goes with 1.9 percent higher price impact by Amihud.
-5. **Which risk is stronger:** Political risk appears stronger than information risk created by legal institutions.
+| No. | Topic | Finding |
+|---|---|---|
+| 1 | Across countries | The price-based measures, LOT and Roll, work better than volume-based measures |
+| 2 | Within a country | LOT works best. Amihud works to a lesser extent |
+| 3 | Institutions | Countries with weak political and legal institutions have significantly higher liquidity cost. The abstract says that this holds "even to the exclusion of legal origin or insider trading enforcement" |
+| 4 | Political risk | More political risk goes with 10 basis points higher cost by LOT. It goes with 1.9 percent higher price impact by Amihud |
+| 5 | Which risk is stronger | Political risk appears stronger than information risk created by legal institutions |
 
 > **Exam:** Remember the pair. LOT and Roll are for comparisons across countries. LOT and then Amihud are for comparisons within a country. Then add institutions and political risk.
 
@@ -472,11 +557,13 @@ Stoll uses the price view.
 
 ### 6.2 What the paper does (slide 29)
 
-- **Focus:** It studies the sources of trading friction.
-- **Measures:** It builds seven robust measures from transaction data.
-- **Sample:** It has 1,706 NYSE and AMSE stocks and 2,184 Nasdaq stocks.
-- **Insights:** It shows the size of cost, real against informational friction, and the effect of market structure.
-- **Relations:** It studies how the measures relate to each other and to trading characteristics.
+| Item | Detail |
+|---|---|
+| Focus | It studies the sources of trading friction |
+| Measures | It builds seven robust measures from transaction data |
+| Sample | 1,706 NYSE and AMSE stocks and 2,184 Nasdaq stocks |
+| Insights | The size of cost, real against informational friction, and the effect of market structure |
+| Relations | How the measures relate to each other and to trading characteristics |
 
 ![liquidity slide 29](slides/liquidity/liquidity-29.png)
 
@@ -484,7 +571,14 @@ Stoll uses the price view.
 
 $$s=a_0+a_1\log V+a_2\sigma^2+a_3\log MV+a_4\log P+a_5\log N+e$$
 
-Here $s=(A-B)/2P$ is the proportional quoted half-spread. $V$ is daily dollar volume. $\sigma^2$ is return variance. $MV$ is market value. $P$ is price. $N$ is trades per day.
+| Symbol | Meaning |
+|---|---|
+| $s=(A-B)/2P$ | The proportional quoted half-spread |
+| $V$ | Daily dollar volume |
+| $\sigma^2$ | Return variance |
+| $MV$ | Market value |
+| $P$ | Price |
+| $N$ | Trades per day |
 
 Results for December 1997 have t values in brackets.
 
@@ -498,7 +592,12 @@ Results for December 1997 have t values in brackets.
 | Log trades | 0.0003 (2.63) | -0.0011 (-5.60) | The sign differs by market |
 | Adjusted R-squared | 0.7731 | 0.6467 | The fit is strong |
 
-January and February 1998 give similar results. Adjusted R-squared is 0.7763 and 0.7914 for NYSE and AMSE. It is 0.6588 and 0.6688 for Nasdaq.
+January and February 1998 give similar results.
+
+| Month | NYSE and AMSE adjusted R-squared | Nasdaq adjusted R-squared |
+|---|---|---|
+| January 1998 | 0.7763 | 0.6588 |
+| February 1998 | 0.7914 | 0.6688 |
 
 ![liquidity slide 31](slides/liquidity/liquidity-31.png)
 
@@ -506,8 +605,10 @@ January and February 1998 give similar results. Adjusted R-squared is 0.7763 and
 
 ### 6.4 Real and informational friction (slide 33)
 
-- **Real friction:** Trading uses real resources, such as labour, systems and capital to bear inventory risk.
-- **Informational friction:** Wealth moves from less informed traders to better informed traders.
+| Friction | What it is |
+|---|---|
+| Real friction | Trading uses real resources, such as labour, systems and capital to bear inventory risk |
+| Informational friction | Wealth moves from less informed traders to better informed traders |
 
 | Measure | Formula | What it contains |
 |---|---|---|
