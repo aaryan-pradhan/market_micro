@@ -36,11 +36,15 @@ The pattern has five results.
 4. A trader can profit by triggering the crisis of another trader.
 5. The crisis spills over across traders and markets.
 
+![marketwide slide 2](slides/marketwide/marketwide-02.png)
+
 ### 1.2 Contribution (slide 3)
 
 - **New framework:** It studies strategic interaction among large traders who have market impact.
 - **Slow trading:** Traders trade continuously. They limit their speed to keep temporary impact cost low.
 - **Known distress:** Some traders become distressed. The other traders know that they need to sell.
+
+![marketwide slide 3](slides/marketwide/marketwide-03.png)
 
 ### 1.3 Specific contributions (slide 4)
 
@@ -57,6 +61,8 @@ c. **It is hard to identify.** A regulator must separate a legitimate strategy f
 
 d. **It hurts market quality.** It affects liquidity, price efficiency, stability and investor confidence.
 
+![marketwide slide 4](slides/marketwide/marketwide-04.png)
+
 ### 1.4 ⭐ Findings (slide 5)
 
 1. A distressed large investor must unwind a position.
@@ -69,6 +75,8 @@ d. **It hurts market quality.** It affects liquidity, price efficiency, stabilit
 
 > **Exam:** The normal view says that others buy when someone sells cheaply. Predation says that they sell first and buy later. Write this contrast.
 
+![marketwide slide 5](slides/marketwide/marketwide-05.png)
+
 ### 1.5 Examples (slide 6)
 
 | Example | What happened |
@@ -80,6 +88,8 @@ d. **It hurts market quality.** It affects liquidity, price efficiency, stabilit
 | Systemic risk (Greenspan, 1 October 1998) | A forced sale by LTCM would distort prices. It could hurt creditors, counterparties and people who were not involved. |
 | Hedge funds as predators (Cramer, 2002) | "When you smell blood in the water, you become a shark." |
 | Credit General (June 1995) | It bought a billion pounds sterling from a client and tried to sell for marks. The market evaporated. Price and liquidity fell quickly. |
+
+![marketwide slide 6](slides/marketwide/marketwide-06.png)
 
 ### 1.6 Framework and assumptions (slides 7 and 8)
 
@@ -99,6 +109,10 @@ $$x^i(t)=x^i(0)+\int_0^t a^i(\tau) d\tau$$
 The position has a limit. It comes from risk or from capital. This is equation 2.
 
 $$-\bar{x}\le x^i(t)\le\bar{x}$$
+
+![marketwide slide 7](slides/marketwide/marketwide-07.png)
+
+![marketwide slide 8](slides/marketwide/marketwide-08.png)
 
 ### 1.7 ⭐ Simulated example (slides 9 to 11)
 
@@ -142,6 +156,12 @@ time     5   5.8  6.3    7
 
 The slide also marks the marginal selling price and the marginal buying price. The predator sells at higher prices and buys back at lower prices.
 
+![marketwide slide 9](slides/marketwide/marketwide-09.png)
+
+![marketwide slide 10](slides/marketwide/marketwide-10.png)
+
+![marketwide slide 11](slides/marketwide/marketwide-11.png)
+
 ### 1.8 Multiple predators (slide 12)
 
 The total starting holding stays the same.
@@ -156,7 +176,11 @@ The total starting holding stays the same.
 - **Smaller overshoot:** The overshoot falls as predators increase.
 - **Reason:** Competition among predators removes part of the predation.
 
+![marketwide slide 12](slides/marketwide/marketwide-12.png)
+
 ## 2. Carlin, Lobo and Viswanathan (2007): "Episodic liquidity crises: cooperative and predatory trading" (slide 13)
+
+![marketwide slide 13](slides/marketwide/marketwide-13.png)
 
 ### 2.1 The main idea
 
@@ -189,6 +213,8 @@ Episodic illiquidity comes from a breakdown of cooperation.
 
 The paper is "Short selling and intraday price pressures". It is in Financial Management, volume 41, issue 2, pages 345 to 370.
 
+![marketwide slide 14](slides/marketwide/marketwide-14.png)
+
 ### 3.1 What it finds
 
 - **Subject:** It studies intraday downward price pressure in single stocks.
@@ -220,6 +246,8 @@ $$0.9\lvert\ell\rvert\le R_{close}-\ell\le 1.1\lvert\ell\rvert$$
 
 > **Slide error:** The figure prints the decline condition with the sign reversed. It shows $\ell\ge-2\sigma$. The text needs $\ell\le-2\sigma$.
 
+![marketwide slide 15](slides/marketwide/marketwide-15.png)
+
 ## 4. Spirals (slides 16 to 20)
 
 ### 4.1 Contribution (slides 16 and 17)
@@ -228,6 +256,10 @@ $$0.9\lvert\ell\rvert\le R_{close}-\ell\le 1.1\lvert\ell\rvert$$
 - **Funding affects the market:** Traders provide market liquidity according to their funding.
 - **The market affects funding:** Capital and margins depend on the market liquidity of assets.
 - **The loop:** Margins can destabilize. The two kinds of liquidity then reinforce each other.
+
+![marketwide slide 16](slides/marketwide/marketwide-16.png)
+
+![marketwide slide 17](slides/marketwide/marketwide-17.png)
 
 ### 4.2 Trigger and spirals (slides 18 and 19)
 
@@ -244,6 +276,10 @@ initial loss --> funding problem --> sell positions --> price leaves fundamental
 
 Topic 3 explains this loop with a numerical example.
 
+![marketwide slide 18](slides/marketwide/marketwide-18.png)
+
+![marketwide slide 19](slides/marketwide/marketwide-19.png)
+
 ### 4.3 ⭐ Findings (slide 20)
 
 1. **Sudden dry-up:** It happens when financiers are imperfectly informed and fundamental volatility varies over time.
@@ -253,6 +289,8 @@ Topic 3 explains this loop with a numerical example.
 5. **Moves with the market:** Liquidity moves with the market because funding conditions do.
 
 The slide cuts off the last sentence. The words "funding conditions do" complete it.
+
+![marketwide slide 20](slides/marketwide/marketwide-20.png)
 
 ## 5. Join the whole topic
 
