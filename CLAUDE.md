@@ -62,8 +62,8 @@ Everything below lives under `pre-midsem/` (moved there when the project started
 - `index.html`: the entry point that links every ledger page.
 - `_template.html`: the ledger page to copy (one worked entry, Roll 1984).
 
-`*.pdf` and `*.xlsx` are gitignored. The slides are the instructor's, so the
-public repo gets only the notes. Older Avellaneda–Stoikov material lives in
+`*.pdf` and `*.xlsx` are gitignored. Slide images may be public: `endsem/slides/`
+holds a PNG of every slide, embedded in the endsem notes after the section that uses it. Older Avellaneda–Stoikov material lives in
 `../MarketMicrostructure/`.
 
 ## Ledger format (copied from dsa-prep)

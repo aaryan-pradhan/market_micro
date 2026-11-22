@@ -1,9 +1,10 @@
 .DS_Store
-# course slides are the instructor's; group sheet has classmates' emails
+# slide PDFs stay out (PNG renders in endsem/slides are public); group sheet has classmates' emails
 *.pdf
 *.xlsx
 pre-midsem/course/Links.txt
 slides/
+!endsem/slides/
 
 # project build artefacts
 __pycache__/
