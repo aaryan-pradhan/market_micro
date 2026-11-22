@@ -31,9 +31,15 @@ Everything in this file is exam material. A ⭐ marks what to know without notes
 
 In an extreme case, funding can decide liquidity. This is why these cases need study.
 
+![extreme slide 2](slides/extreme/extreme-02.png)
+
 ## 2. Brunnermeier and Pedersen (2009): "Market liquidity and funding liquidity" (slides 3 and 4)
 
 The paper is in the Review of Financial Studies, volume 22, issue 6, pages 2201 to 2238.
+
+![extreme slide 3](slides/extreme/extreme-03.png)
+
+![extreme slide 4](slides/extreme/extreme-04.png)
 
 ### 2.1 ⭐ The main idea
 
@@ -74,6 +80,8 @@ The largest position falls when capital falls. It also falls when the margin ris
 
 > **Exam:** These five features are an easy question. Write each feature with its reason.
 
+![extreme slide 5](slides/extreme/extreme-05.png)
+
 ## 4. Extreme market events (slide 6)
 
 The chart shows margins on S&P 500 futures from 1982 to 2008. The margins are for exchange members. They are a percent of contract value. Initial margin equals maintenance margin for members. Each dot is a change in the dollar margin. The levels below are read from the chart, so they are approximate.
@@ -92,6 +100,8 @@ The chart shows margins on S&P 500 futures from 1982 to 2008. The margins are fo
 
 Margins rise when markets are in trouble. So traders lose funding exactly when the market needs them.
 
+![extreme slide 6](slides/extreme/extreme-06.png)
+
 ## 5. ⭐ The liquidity spiral (slide 7)
 
 ```mermaid
@@ -104,6 +114,8 @@ flowchart LR
     E --> B
     F --> B
 ```
+
+![extreme slide 7](slides/extreme/extreme-07.png)
 
 ### 5.1 Triggers
 
@@ -154,6 +166,8 @@ The paper builds two measures for the equity market.
 1. The illiquidity spiral uses the spread.
 2. The loss spiral uses the price.
 
+![extreme slide 8](slides/extreme/extreme-08.png)
+
 ### 6.1 ⭐ Illiquidity spiral (slide 9)
 
 Let $s_{t}$ be today's spread, $\bar{s}$ be the average spread of the previous year and $\sigma_s$ be its standard deviation in that year.
@@ -174,6 +188,8 @@ $$S_{spiral,10}=\sum_{k=0}^{9}S_{t-k}$$
 
 A large positive sum means that the stock is in an illiquidity spiral.
 
+![extreme slide 9](slides/extreme/extreme-09.png)
+
 ### 6.2 ⭐ Loss spiral (slide 10)
 
 Let $P_t$ be today's price, $\bar{M}$ be the midpoint of the previous year and $\sigma_P$ be the standard deviation in that year.
@@ -193,6 +209,8 @@ The slide uses the letter P for this score. These notes use $L_t$ so that it is 
 $$P_{spiral,10}=\sum_{k=0}^{9}L_{t-k}$$
 
 > **Exam:** A score of +1 always means bad. For spreads, bad means higher. For prices, bad means lower. So the inequality signs are opposite in the two measures.
+
+![extreme slide 10](slides/extreme/extreme-10.png)
 
 ### 6.3 Worked example
 
@@ -218,6 +236,8 @@ If the last 10 scores are 1, 1, 0, 1, 1, -1, 1, 0, 1, 1, then the spiral value i
 - **Datastream International:** It gives price to book value, dividend per share, total assets and return on equity. It also gives the market value and the P/E of the S&P 500.
 - **Final sample:** It has 476 firms.
 
+![extreme slide 11](slides/extreme/extreme-11.png)
+
 ## 8. Spiral and alternative measures (slide 12)
 
 The slide has four histograms of the 10-day counts. The counts run from -10 to 10. The heights below are approximate.
@@ -230,6 +250,8 @@ The slide has four histograms of the 10-day counts. The counts run from -10 to 1
 | Alternative loss | Two humps and a valley at 0 | -5 with about 265,000 and +5 with about 205,000 |
 
 Losses and gains come in runs. This is why the loss measures have humps away from zero.
+
+![extreme slide 12](slides/extreme/extreme-12.png)
 
 ## 9. Effect on valuation (slide 13)
 
@@ -247,6 +269,8 @@ The regressions explain price to book value (PTBV) and price to earnings (P/E). 
 | Dividend dummy | | | -0.63** (-27.35) | | | -10.13** (-205.36) |
 | Observations | 848,064 | 848,064 | 834,231 | 1,550,914 | 1,550,914 | 1,525,707 |
 | R-squared | 0.0002 | 0.001 | 0.0306 | 0.008 | 0.008 | 0.06 |
+
+![extreme slide 13](slides/extreme/extreme-13.png)
 
 ### 9.1 ⭐ How to read it
 
