@@ -13,65 +13,72 @@ Everything in this file is exam material. A ⭐ marks what to know without notes
 
 ## 0. Words to know first
 
-- **Distressed trader:** This trader is forced to sell.
-- **Predator:** This trader uses the forced sale to make a profit.
-- **Liquidation value:** It is the money received from selling a position.
-- **Price overshooting:** The price moves beyond its new long-run level and then comes back.
-- **Front running:** It means trading ahead of a known order.
-- **Short sale:** It means selling a borrowed share.
-- **Contagion:** A crisis spreads from one trader or market to another.
+| Term | Meaning |
+|---|---|
+| Distressed trader | A trader who is forced to sell |
+| Predator | A trader who uses the forced sale to make a profit |
+| Liquidation value | The money received from selling a position |
+| Price overshooting | The price moves beyond its new long-run level and then comes back |
+| Front running | Trading ahead of a known order |
+| Short sale | Selling a borrowed share |
+| Contagion | A crisis spreads from one trader or market to another |
 
 ## 1. Predatory trading: Brunnermeier and Pedersen (2005) (slides 2 to 12)
 
 ### 1.1 ⭐ Definition (slide 2)
 
-- **Slide definition:** Predatory trading exploits an information advantage to profit at the expense of others. It may use non-public information or market dynamics. It benefits the predator unfairly and harms other investors or the market.
-- **The basic pattern:** One trader must sell. Other traders also sell. They buy back later.
+| Point | What it says |
+|---|---|
+| Slide definition | Predatory trading exploits an information advantage to profit at the expense of others. It may use non-public information or market dynamics. It benefits the predator unfairly and harms other investors or the market |
+| The basic pattern | One trader must sell. Other traders also sell. They buy back later |
 
 The pattern has five results.
 
-1. The price overshoots.
-2. The distressed trader gets a lower liquidation value.
-3. The market is illiquid exactly when liquidity is most needed.
-4. A trader can profit by triggering the crisis of another trader.
-5. The crisis spills over across traders and markets.
+| No. | Result |
+|---|---|
+| 1 | The price overshoots |
+| 2 | The distressed trader gets a lower liquidation value |
+| 3 | The market is illiquid exactly when liquidity is most needed |
+| 4 | A trader can profit by triggering the crisis of another trader |
+| 5 | The crisis spills over across traders and markets |
 
 ![marketwide slide 2](slides/marketwide/marketwide-02.png)
 
 ### 1.2 Contribution (slide 3)
 
-- **New framework:** It studies strategic interaction among large traders who have market impact.
-- **Slow trading:** Traders trade continuously. They limit their speed to keep temporary impact cost low.
-- **Known distress:** Some traders become distressed. The other traders know that they need to sell.
+| Point | What it says |
+|---|---|
+| New framework | It studies strategic interaction among large traders who have market impact |
+| Slow trading | Traders trade continuously. They limit their speed to keep temporary impact cost low |
+| Known distress | Some traders become distressed. The other traders know that they need to sell |
 
 ![marketwide slide 3](slides/marketwide/marketwide-03.png)
 
 ### 1.3 Specific contributions (slide 4)
 
-a. **It introduces predatory trading.**
-   - It is strategic behaviour that exploits the information disadvantage of others.
-   - It causes inefficiency and harms market quality.
-
-b. **It has several types.**
-   - A trader may front run.
-   - A trader may anticipate orders.
-   - A trader may trade strategically ahead of a large order.
-
-c. **It is hard to identify.** A regulator must separate a legitimate strategy from manipulation.
-
-d. **It hurts market quality.** It affects liquidity, price efficiency, stability and investor confidence.
+| Part | Contribution | Detail |
+|---|---|---|
+| a | It introduces predatory trading | It is strategic behaviour that exploits the information disadvantage of others. It causes inefficiency and harms market quality |
+| b | It has several types | A trader may front run. A trader may anticipate orders. A trader may trade strategically ahead of a large order |
+| c | It is hard to identify | A regulator must separate a legitimate strategy from manipulation |
+| d | It hurts market quality | It affects liquidity, price efficiency, stability and investor confidence |
 
 ![marketwide slide 4](slides/marketwide/marketwide-04.png)
 
 ### 1.4 ⭐ Findings (slide 5)
 
-1. A distressed large investor must unwind a position.
-2. Other strategic traders first trade in the same direction.
-3. They withdraw liquidity instead of providing it.
-4. The liquidation becomes costly and the price overshoots.
-5. Predation is profitable under two conditions.
-   - The market is illiquid.
-   - The distressed position is large relative to the buying capacity of the others.
+| Step | Finding |
+|---|---|
+| 1 | A distressed large investor must unwind a position |
+| 2 | Other strategic traders first trade in the same direction |
+| 3 | They withdraw liquidity instead of providing it |
+| 4 | The liquidation becomes costly and the price overshoots |
+| 5 | Predation is profitable under the two conditions in the next table |
+
+| Condition | What it says |
+|---|---|
+| 1 | The market is illiquid |
+| 2 | The distressed position is large relative to the buying capacity of the others |
 
 > **Exam:** The normal view says that others buy when someone sells cheaply. Predation says that they sell first and buy later. Write this contrast.
 
@@ -93,20 +100,28 @@ d. **It hurts market quality.** It affects liquidity, price efficiency, stabilit
 
 ### 1.6 Framework and assumptions (slides 7 and 8)
 
-- **A1:** Time is continuous.
-- **A2:** There is a riskless bond and a risky asset.
-- **A3:** The risky asset has supply $S\gt 0$. It pays $v$ at time $T$, with $E(v)=\mu$.
-- **A4:** The price at time $t$ is $p(t)$.
-- **A5:** There are $I$ large strategic traders. Hedge funds and proprietary desks are examples.
-- **A6:** There are long-term investors. Pension funds and individuals are examples.
-- **A7:** Strategic traders are risk neutral. They maximize expected profit.
-- **A8:** They are large, so they count their own price impact.
+| No. | Assumption |
+|---|---|
+| A1 | Time is continuous |
+| A2 | There is a riskless bond and a risky asset |
+| A3 | The risky asset has supply $S\gt 0$. It pays $v$ at time $T$, with $E(v)=\mu$ |
+| A4 | The price at time $t$ is $p(t)$ |
+| A5 | There are $I$ large strategic traders. Hedge funds and proprietary desks are examples |
+| A6 | There are long-term investors. Pension funds and individuals are examples |
+| A7 | Strategic traders are risk neutral. They maximize expected profit |
+| A8 | They are large, so they count their own price impact |
 
-The position of trader $i$ changes with the trading speed $a^i$. This is equation 1.
+| Symbol | Meaning |
+|---|---|
+| $x^i(t)$ | Position of trader $i$ at time $t$ |
+| $a^i(t)$ | Trading speed of trader $i$: shares bought per unit of time. It is negative for selling |
+| $\bar{x}$ | Position limit |
+
+**Equation 1: The position adds up the trades.** The position at $t$ is the starting position plus all trades from 0 to $t$.
 
 $$x^i(t)=x^i(0)+\int_0^t a^i(\tau) d\tau$$
 
-The position has a limit. It comes from risk or from capital. This is equation 2.
+**Equation 2: The position has a limit.** The limit comes from risk or from capital.
 
 $$-\bar{x}\le x^i(t)\le\bar{x}$$
 
@@ -131,17 +146,20 @@ $$-\bar{x}\le x^i(t)\le\bar{x}$$
 
 At time 7, the asset pays off or the market becomes perfectly liquid.
 
-**Step 1: Read the starting price.** The slide figure starts at 116.
-
-**Step 2: Let both sell.** The distressed trader sells 8 shares at speed $A/2=10$. It needs $8/10=0.8$ time units, so it finishes at time 5.8. The predator sells all its 8 shares at the same time.
-
-**Step 3: Find the lowest price.** Together they sell 16 shares. Each share moves the price by $\lambda=1$. So the price drops 16 points, from 116 to 100.
-
-**Step 4: Let the predator buy back.** It now trades alone at speed 20. It buys up to its limit of 10 in 0.5 time units. It finishes at time 6.3.
-
-**Step 5: Find the new price.** The slide says that the price recovers to 110.
-
-**Step 6: Find the overshoot.** It is $110-100=10$.
+| Step | What we find | Working | Result |
+|---|---|---|---|
+| 1 | Starting price | Read from the slide figure | 116 |
+| 2 | Speed of each seller | Two traders share the speed $A$: $A/2=20/2$ | 10 per time unit |
+| 3 | Time the distressed trader needs | $8/10$ | 0.8 time units |
+| 4 | When the selling ends | $5+0.8$ | Time 5.8 |
+| 5 | Predator's action | It sells all its 8 shares at the same time | Holding 0 |
+| 6 | Total shares sold | $8+8$ | 16 |
+| 7 | Price fall | $16\times\lambda=16\times 1$ | 16 points |
+| 8 | Lowest price | $116-16$ | 100 |
+| 9 | Predator's buy-back | From 0 up to its limit of 10, alone at speed 20: $10/20$ | 0.5 time units |
+| 10 | When the buy-back ends | $5.8+0.5$ | Time 6.3 |
+| 11 | New price | Read from the slide | 110 |
+| 12 | Overshoot | $110-100$ | 10 |
 
 ```text
 price
@@ -164,17 +182,19 @@ The slide also marks the marginal selling price and the marginal buying price. T
 
 ### 1.8 Multiple predators (slide 12)
 
-The total starting holding stays the same.
+The total starting holding stays the same. It is $2\times 8=16$.
 
 | Traders | Predators | Distressed | Start per trader | Lowest price, approximate | Final price, approximate |
 |---|---|---|---|---|---|
-| 3 | 2 | 1 | 5.3 | 110 | 113.3 |
-| 9 | 6 | 3 | 1.8 | 112.5 | 113.3 |
-| 27 | 18 | 9 | 0.6 | 113.1 | 113.3 |
+| 3 | 2 | 1 | $16/3=5.3$ | 110 | 113.3 |
+| 9 | 6 | 3 | $16/9=1.8$ | 112.5 | 113.3 |
+| 27 | 18 | 9 | $16/27=0.6$ | 113.1 | 113.3 |
 
-- **Earlier buy-back:** More predators start buying back earlier.
-- **Smaller overshoot:** The overshoot falls as predators increase.
-- **Reason:** Competition among predators removes part of the predation.
+| Point | What it says |
+|---|---|
+| Earlier buy-back | More predators start buying back earlier |
+| Smaller overshoot | The overshoot falls as predators increase. Final minus lowest is about 3.3, then 0.8, then 0.2 |
+| Reason | Competition among predators removes part of the predation |
 
 ![marketwide slide 12](slides/marketwide/marketwide-12.png)
 
@@ -188,18 +208,27 @@ Episodic illiquidity comes from a breakdown of cooperation.
 
 ### 2.2 ⭐ The model step by step
 
-1. The stage game is a trading game in continuous time over one period. A pricing equation gives price impact.
-2. In one period, a trader gains by predating.
-3. In many periods, the traders meet again and again.
-4. They cooperate most of the time. They give apparent liquidity to each other.
-5. A trader who predates today loses cooperation in the future.
-6. Cooperation breaks when the stakes are high. The gain today is then larger than the future loss.
-7. Predatory trading starts. It causes episodic illiquidity.
+| Step | What happens |
+|---|---|
+| 1 | The stage game is a trading game in continuous time over one period. A pricing equation gives price impact |
+| 2 | In one period, a trader gains by predating |
+| 3 | In many periods, the traders meet again and again |
+| 4 | They cooperate most of the time. They give apparent liquidity to each other |
+| 5 | A trader who predates today loses cooperation in the future |
+| 6 | Cooperation breaks when the stakes are high. The gain today is then larger than the future loss |
+| 7 | Predatory trading starts. It causes episodic illiquidity |
+
+| Compare | Value | When it wins |
+|---|---|---|
+| Predate today | Gain today | Stakes are high |
+| Cooperate | Value of future cooperation | Stakes are small |
 
 ### 2.3 Cooperation across markets
 
-- **Benefit:** Cooperation across markets makes crises less frequent.
-- **Cost:** A breakdown then hits all those markets. This is contagion.
+| Point | What it says |
+|---|---|
+| Benefit | Cooperation across markets makes crises less frequent |
+| Cost | A breakdown then hits all those markets. This is contagion |
 
 | Point | Cooperation | Predation |
 |---|---|---|
@@ -217,18 +246,32 @@ The paper is "Short selling and intraday price pressures". It is in Financial Ma
 
 ### 3.1 What it finds
 
-- **Subject:** It studies intraday downward price pressure in single stocks.
-- **Main driver:** Non-short volume that demands liquidity drives most declines. This is selling by long sellers.
-- **Short sellers:** They are also active. They make declines somewhat worse.
-- **Large reversals:** Short selling becomes more intense in the decline stage.
-- **Change of role:** Short sellers usually provide liquidity. They switch to demanding it.
-- **Conclusion:** Their effect is second to that of long sellers. This contradicts the view that short sellers destabilize markets on their own.
+| Point | What it says |
+|---|---|
+| Subject | It studies intraday downward price pressure in single stocks |
+| Main driver | Non-short volume that demands liquidity drives most declines. This is selling by long sellers |
+| Short sellers | They are also active. They make declines somewhat worse |
+| Large reversals | Short selling becomes more intense in the decline stage |
+| Change of role | Short sellers usually provide liquidity. They switch to demanding it |
+| Conclusion | Their effect is second to that of long sellers. This contradicts the view that short sellers destabilize markets on their own |
 
 ### 3.2 ⭐ How a large price reversal is identified (slide 15)
 
-**Step 1: Find the normal movement.** Let $\sigma_i$ be the average standard deviation of five-minute cumulative returns over the previous 20 trading days.
+| Symbol | Meaning |
+|---|---|
+| $\sigma_i$ | Average standard deviation of five-minute cumulative returns of stock $i$ over the previous 20 trading days |
+| $\ell$ | Lowest cumulative return of the day |
+| $R_{close}$ | Cumulative return at the close |
 
-**Step 2: Check the decline.** Let $\ell$ be the lowest cumulative return of the day. It must be at least two standard deviations below zero.
+| Step | Check |
+|---|---|
+| 1 | Find the normal movement $\sigma_i$ |
+| 2 | Check the decline |
+| 3 | Check the rebound |
+
+**Step 1: Find the normal movement.** Compute $\sigma_i$ from the previous 20 trading days.
+
+**Step 2: Check the decline.** The lowest point must be at least two standard deviations below zero.
 
 $$\ell\le-2\sigma_i$$
 
@@ -236,13 +279,23 @@ $$\ell\le-2\sigma_i$$
 
 $$0.9\lvert\ell\rvert\le R_{close}-\ell\le 1.1\lvert\ell\rvert$$
 
+| Line | Expression | Why |
+|---|---|---|
+| 1 | $R_{close}-\ell$ | The rise from the low to the close is the rebound |
+| 2 | $\lvert\ell\rvert$ | The size of the decline from zero to the low |
+| 3 | Rebound between 90 and 110 percent of the decline | The slide's recovery rule |
+
 **Worked example:** Take $\sigma_i$ as 1 percent.
 
-1. The decline must reach -2 percent or lower.
-2. Suppose that it reaches exactly -2 percent.
-3. A rebound of 90 percent ends at $(1-0.9)(-2)=-0.2$ percent.
-4. A rebound of 110 percent ends at $(1-1.1)(-2)=0.2$ percent.
-5. So the day must end between -0.2 and 0.2 percent.
+| Step | What we find | Working | Result |
+|---|---|---|---|
+| 1 | Decline limit | $-2\sigma_i=-2(1)$ | The low must be -2 percent or lower |
+| 2 | Choose a low | Suppose that it reaches exactly -2 percent | $\ell=-2$, $\lvert\ell\rvert=2$ |
+| 3 | Smallest rebound | $0.9(2)$ | 1.8 |
+| 4 | Close after the smallest rebound | $-2+1.8$ | -0.2 percent |
+| 5 | Largest rebound | $1.1(2)$ | 2.2 |
+| 6 | Close after the largest rebound | $-2+2.2$ | 0.2 percent |
+| 7 | Rule | Steps 4 and 6 | The day must end between -0.2 and 0.2 percent |
 
 > **Slide error:** The figure prints the decline condition with the sign reversed. It shows $\ell\ge-2\sigma$. The text needs $\ell\le-2\sigma$.
 
@@ -252,10 +305,12 @@ $$0.9\lvert\ell\rvert\le R_{close}-\ell\le 1.1\lvert\ell\rvert$$
 
 ### 4.1 Contribution (slides 16 and 17)
 
-- **The link:** Brunnermeier and Pedersen (2009) link market liquidity with funding liquidity.
-- **Funding affects the market:** Traders provide market liquidity according to their funding.
-- **The market affects funding:** Capital and margins depend on the market liquidity of assets.
-- **The loop:** Margins can destabilize. The two kinds of liquidity then reinforce each other.
+| Point | What it says |
+|---|---|
+| The link | Brunnermeier and Pedersen (2009) link market liquidity with funding liquidity |
+| Funding affects the market | Traders provide market liquidity according to their funding |
+| The market affects funding | Capital and margins depend on the market liquidity of assets |
+| The loop | Margins can destabilize. The two kinds of liquidity then reinforce each other |
 
 ![marketwide slide 16](slides/marketwide/marketwide-16.png)
 
@@ -263,9 +318,11 @@ $$0.9\lvert\ell\rvert\le R_{close}-\ell\le 1.1\lvert\ell\rvert$$
 
 ### 4.2 Trigger and spirals (slides 18 and 19)
 
-- **Trigger:** Margin requirements rise in crises. The S&P 500 futures chart shows this for 1987, 1998 and 2007.
-- **Loss spiral:** Losses reduce capital and force sales.
-- **Margin and haircut spiral:** Higher margins reduce allowed leverage and force sales.
+| Part | What it says |
+|---|---|
+| Trigger | Margin requirements rise in crises. The S&P 500 futures chart shows this for 1987, 1998 and 2007 |
+| Loss spiral | Losses reduce capital and force sales |
+| Margin and haircut spiral | Higher margins reduce allowed leverage and force sales |
 
 ```text
 initial loss --> funding problem --> sell positions --> price leaves fundamentals
@@ -282,11 +339,13 @@ Topic 3 explains this loop with a numerical example.
 
 ### 4.3 ⭐ Findings (slide 20)
 
-1. **Sudden dry-up:** It happens when financiers are imperfectly informed and fundamental volatility varies over time.
-2. **Commonality:** Liquidity and fragility move together across assets. A change in funding affects liquidity supply in all assets.
-3. **Volatility:** Liquidity is correlated with volatility. Volatile assets need higher margins, and speculators supply liquidity across assets.
-4. **Flight to quality:** It arises from the model.
-5. **Moves with the market:** Liquidity moves with the market because funding conditions do.
+| No. | Finding | What it says |
+|---|---|---|
+| 1 | Sudden dry-up | It happens when financiers are imperfectly informed and fundamental volatility varies over time |
+| 2 | Commonality | Liquidity and fragility move together across assets. A change in funding affects liquidity supply in all assets |
+| 3 | Volatility | Liquidity is correlated with volatility. Volatile assets need higher margins, and speculators supply liquidity across assets |
+| 4 | Flight to quality | It arises from the model |
+| 5 | Moves with the market | Liquidity moves with the market because funding conditions do |
 
 The slide cuts off the last sentence. The words "funding conditions do" complete it.
 
