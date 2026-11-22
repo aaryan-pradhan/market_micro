@@ -1,194 +1,161 @@
 # Topic 5: Basic Concepts Discussed in Class
 
-These notes are a short revision of the basic concepts from before the midsem. They come from the midsem notes of this course and from Harris, "Trading and Exchanges".
+These notes follow the midsem decks: "1. Introduction of Market Microstructure", "1.1 Exchanges", "1.1 Orders and Trades" and "2.1 Sources of Volatility".
 
-| Part | Main question |
-|---|---|
-| Microstructure | How does trading form a price? |
-| Traders | Who trades and why? |
-| Orders and market design | How do trades take place? |
-| Liquidity | How easy is it to trade? |
-| Cost | What does a trade really cost? |
-| Volatility | Why do prices move? |
-| Roll | How can we find the spread from prices alone? |
+This is the least important topic. Read it once after Topics 1 to 4. A ⭐ marks what to know without notes.
 
 ## 1. What market microstructure is
 
-- **Definition:** It studies how the process and rules of trading affect prices, costs, volume and traders' behaviour.
-- **Classical view:** Price equals value. Trading has no cost.
-- **Microstructure view:** Price can differ from value because of cost, inventory, information and market rules.
+The introduction slides list what microstructure covers.
 
-Madhavan (2000) divides the subject into four areas.
+1. Trading rules.
+2. Physical layouts, such as the NSE NEAT trading system.
+3. The systems that present and communicate information.
+4. How market participants interact.
+5. Safeguards for the market. Examples are price bands, circuit breakers and trading halts.
 
-1. Price formation and price discovery.
-2. Market design.
-3. Transparency.
-4. Links to other areas of finance.
+**Textbook definition (Kissell, 2014):** Market microstructure studies financial markets and how they operate. It focuses on five things.
 
-**Price discovery** is the process by which new information enters the price. Informed traders make prices informative. Uninformed traders make the market possible, and they pay for price discovery.
+1. The structure of exchanges and trading venues, both displayed and dark.
+2. The price discovery process.
+3. The determinants of spreads and quotes.
+4. Intraday trading behaviour.
+5. Transaction costs.
 
-## 2. Who trades
+**Why we trade:** The slides give three reasons. They are profit, information and price discovery.
 
-| Group | Types | Why they trade |
-|---|---|---|
-| Utilitarian traders | Investors, borrowers, hedgers, asset exchangers and gamblers | They need a service other than profit from trading |
-| Informed traders | Value traders, news traders, technical traders and arbitrageurs | They know or estimate value better |
-| Parasitic traders | Order anticipators and bluffers | They profit from the orders of others |
-| Dealers | Market makers and specialists | They sell immediacy and earn the spread |
-| Futile traders | Traders who wrongly think that they have an edge | They expect a profit but lose |
-| Agents | Brokers | They trade for clients and earn commission |
+## 2. Dimensions of a market
 
-- **Buy side:** These firms and people buy the services of the exchange.
-- **Sell side:** Dealers, brokers and broker-dealers sell those services.
-- **Zero-sum game:** Relative to the market average, the gain of one trader is the loss of another.
+1. **Trading platform:** It can be manual or fully automated. Speed, market integration and stabilizing mechanisms matter.
+2. **Information flow mechanism:** It decides how information reaches traders.
+3. **Traders' interaction:** It decides how traders meet and trade.
+4. **Regulatory mechanism:** It sets the rules.
+5. **Imperfections:** Transaction cost and information asymmetry are the two imperfections.
 
-## 3. Orders
+## 3. ⭐ Traders and participants
 
-| Order | Instruction | Benefit | Risk |
-|---|---|---|---|
-| Market | Trade now at the best available price | It is almost sure to execute | The price is uncertain |
-| Limit | Trade at this price or better | The price is controlled | It may not execute |
-| Marketable limit | A limit order that can execute now | It gives immediacy with a price cap | It may execute only partly |
-| Stop | Become active when the price reaches a trigger | It limits a loss | The final price may be worse |
+**Types of traders:** The slides list proprietary traders, brokers or agency traders, dealers, hedgers, arbitrageurs, value investors and front runners.
 
-- **Liquidity demand:** A market order takes liquidity.
-- **Liquidity supply:** A waiting limit order gives liquidity.
-- **Adverse selection of limit orders:** A waiting order is most likely to execute when the news is against it.
+The exchanges deck adds these facts from Harris.
 
-## 4. Market design
+- **Zero-sum game:** Trading is zero-sum when gains and losses are measured relative to the market average.
+- **Brokers:** They are agents who arrange trades for their clients.
+- **Patient traders:** They get better prices than impatient traders, because they search longer for good terms.
+- **Speculators:** They trade to profit from information about future prices.
+- **Dealers:** They lose to well-informed speculators, because they end up on the wrong side of the trade.
+- **Bluffers:** They sometimes fool uninformed traders into trading unwisely.
+- **Investors and borrowers:** Investors move money from the present to the future. Borrowers do the opposite.
+- **Hedgers:** They trade to manage financial risks.
+- **Asset exchangers:** They trade one asset for another that they value more.
+- **Gamblers:** They trade to entertain themselves.
+- **Arbitrageurs:** They make sure that prices do not differ much across markets.
+- **Sell side:** Dealers and brokers provide exchange services to the buy side.
 
-| Point | Call market | Continuous market |
-|---|---|---|
-| When trades happen | At fixed times | At any time |
-| Price | One price that maximizes volume | A different price for each trade |
-| Immediacy | No | Yes |
-| Strength | It pools orders and discovers price well | It is fast and flexible |
-| Weakness | Traders must wait | Limit orders face more adverse selection |
+## 4. ⭐ Basic terms
 
-| Point | Quote-driven market | Order-driven market |
-|---|---|---|
-| Counterparty | A dealer | Another trader |
-| Price comes from | Dealer quotes | Rules that match orders |
-| Liquidity comes from | Dealer capital | Limit orders |
-| Example | Bond and currency dealers | NSE order book |
+- **Bid and ask:** The bid is the best price to sell at. The ask is the best price to buy at.
+- **Mid quote:** It is the average of the best bid and the best ask.
+- **Spread:** It is the best ask minus the best bid.
+- **BBO and NBBO:** BBO is the best bid and offer. NBBO is the national best bid and offer.
+- **Price impact:** It is how much an order moves the price.
+- **Tick:** An uptick is a price above the last price. A downtick is a price below it. A zero tick is the same price.
+- **Block deal:** It is one trade of at least 5,00,000 shares or at least Rs 10 crore. It happens in a separate window, from 8:45 to 9:00 AM or from 2:05 to 2:20 PM. Retail investors cannot see it.
+- **Bulk deal:** It involves at least 0.5 percent of a company's listed shares. It happens in normal hours, and everyone can see it.
 
-- **Pre-trade transparency:** Traders can see quotes and depth before they trade.
-- **Post-trade transparency:** Traders can see prices and sizes after trades happen.
-- **Circuit breaker:** It halts trading after a large move. Indian index limits are 10, 15 and 20 percent.
+**Worked example (the Axis Bank slide):** The bid is 664.40 for 453 shares. The ask is 664.55 for 714 shares.
 
-## 5. Liquidity
-
-Liquidity is the ability to trade a large size, quickly, at low cost, when you want to.
-
-| Dimension | Question | Measure |
-|---|---|---|
-| Immediacy | How fast can I trade? | Time to execution |
-| Width | How much does a small trade cost? | Quoted and effective spread |
-| Depth | How much can I trade at a given cost? | Shares at the quotes and in the book |
-| Resiliency | How fast does the price recover? | Speed of return after a shock |
-
-**Worked example:** Axis Bank has a bid of 664.40 for 453 shares. Its ask is 664.55 for 714 shares.
-
-1. The quoted spread is $664.55-664.40=0.15$.
-2. The mid price is $(664.55+664.40)/2=664.475$.
-3. The proportional quoted spread is $0.15/664.475=0.000226$, which is 0.0226 percent.
+1. The spread is $664.55-664.40=0.15$.
+2. The mid price is 664.475.
+3. The proportional spread is $0.15/664.475=0.0226$ percent.
 4. The depth is $(714+453)/2=583.5$ shares.
 
-> **Exam:** Volume is activity. Liquidity is the ease of trading. A crash can have high volume and low liquidity.
+## 5. ⭐ Liquidity dimensions
 
-## 6. Transaction costs
+The 2025 midsem asked for the four dimensions of liquidity, so they were taught in class.
 
-| Kind | Cost | Meaning |
+| Dimension | Question |
+|---|---|
+| Immediacy | How fast can I trade? |
+| Width | How much does a small trade cost? This is the spread. |
+| Depth | How much can I trade at a given price? |
+| Resiliency | How fast does the price recover after a large trade? |
+
+## 6. Orders
+
+| Order | Instruction | Role |
 |---|---|---|
-| Explicit | Commission | Payment to the broker |
-| Explicit | Fees and taxes | Payments to the exchange and the government |
-| Implicit | Spread | Cost of immediacy |
-| Implicit | Price impact | The order moves the price against the trader |
-| Implicit | Delay | The price moves before the trade is done |
-| Implicit | Missed trade | The profit is lost because the order did not execute |
+| Market | Trade now at the best price available | It takes liquidity and pays the spread |
+| Limit | Trade only at the limit price or better | It provides liquidity |
+| Stop | Activate the order when the price reaches the stop price | A sell stop is a safety net for a long position |
 
-The spread has three economic parts.
+- **Market order risk:** It fills quickly, but sometimes at a poor price. Its price impact depends on available liquidity.
+- **Limit order risk 1:** It faces execution uncertainty. The price can move away, so the trader fails to trade.
+- **Limit order risk 2:** It faces adverse selection. The order fills when informed traders know that it is mispriced. This causes ex post regret.
 
-1. **Order processing cost:** It pays for systems and labour.
-2. **Inventory cost:** It pays for the risk of holding a position.
-3. **Adverse selection cost:** It pays for losses to informed traders.
+## 7. Market design
 
-## 7. Inventory models and information models
+- **Continuous market:** Trades happen at any time during the session.
+- **Call market:** Orders are collected and executed together at one time. NSE uses a call auction in its pre-open session.
+- **Quote-driven market:** Dealers quote prices, and traders trade with dealers.
+- **Order-driven market:** Rules match buy and sell orders directly.
+- **Circuit breaker:** It halts trading after a large market move.
+
+**Market quality** has five measures. They are liquidity, transaction cost, informative prices, volatility and trading profits.
+
+## 8. ⭐ Volatility
+
+Prices change for two reasons. New information arrives about values. Impatient traders also demand liquidity.
+
+| Point | Fundamental volatility | Transitory volatility |
+|---|---|---|
+| Cause | Unanticipated changes in values | Trading by impatient uninformed traders |
+| Life | Permanent | Temporary, because prices revert to value |
+| Example | Earnings news | Bid-ask bounce and large uninformed orders |
+| Who causes it | Informed traders move the price to the new value | Uninformed orders push the price away from value |
+| Who ends it | Not applicable | Value traders and arbitrageurs push the price back |
+
+- **Total volatility:** It is fundamental volatility plus transitory volatility.
+- **Dealers:** They infer information from order flow. This creates the adverse selection part of the spread. Price changes from this part add to fundamental volatility.
+- **Bid-ask bounce:** Market buyers trade at the ask and market sellers trade at the bid. So the price jumps without any news.
+
+## 9. ⭐ Inventory models and information models
 
 | Point | Inventory models | Information models |
 |---|---|---|
 | Problem of the dealer | Unbalanced inventory | Better-informed customers |
 | Source of the spread | Cost and risk of inventory | Expected loss to informed traders |
-| Effect of a trade | Temporary | Permanent |
-| Price change after a buy | It reverses | It stays, because beliefs changed |
-| Is risk aversion needed? | In the Stoll and Ho-Stoll models | No |
+| Effect of a trade on price | Temporary | Permanent |
 | Main papers | Garman, Amihud-Mendelson, Stoll, Ho-Stoll, O'Hara-Oldfield | Bagehot, Copeland-Galai, Glosten-Milgrom, Kyle, Easley-O'Hara |
 
-> **Exam:** An information spread exists even with zero processing cost, zero inventory cost and a risk-neutral dealer.
+## 10. ⭐ Roll (1984): the spread from prices
 
-## 8. Volatility
+**Assumptions:**
 
-| Point | Fundamental volatility | Transitory volatility |
-|---|---|---|
-| Cause | News about value | Demand for liquidity by uninformed traders |
-| Life | Permanent | Temporary |
-| Price pattern | Random walk | Reversal |
-| Serial correlation | Near zero | Negative |
-| Example | An earnings surprise | Bid-ask bounce or a large forced sale |
-
-- **News traders:** They add fundamental volatility by moving the price to its new value.
-- **Value traders:** They reduce transitory volatility by trading against a wrong price.
-- **Bid-ask bounce:** Trades move between bid and ask even when value does not change.
-
-## 9. Roll (1984): the spread from prices
-
-### 9.1 Setup
-
-- **A1:** The mid value follows $V_t=V_{t-1}+\varepsilon_t$. The news term $\varepsilon_t$ has mean zero, has variance $\sigma^2$ and is independent over time.
+- **A1:** The value follows a random walk: $V_t=V_{t-1}+\varepsilon_t$.
 - **A2:** The spread $S$ is constant.
-- **A3:** The trade sign $Q_t$ is +1 for a buy and -1 for a sell, each with probability one half.
-- **A4:** Trade signs are independent over time and independent of news. So trades carry no information.
-
-### 9.2 Derivation
+- **A3:** The trade sign $Q_t$ is +1 for a buy and -1 for a sale, each with probability one half.
+- **A4:** Trade signs are independent over time and independent of news.
 
 **Step 1: Write the trade price.**
 
 $$P_t=V_t+\frac{S}{2}Q_t$$
 
-**Step 2: Subtract the previous price.**
+**Step 2: Take the price change.**
 
 $$\Delta P_t=\varepsilon_t+\frac{S}{2}(Q_t-Q_{t-1})$$
 
-**Step 3: Find the variance of the sign change.** Each sign has variance 1 and the two signs are independent by A3 and A4.
+**Step 3: Find the variance.** The sign change has $E[(\Delta Q_t)^2]=2$.
 
-$$E[(\Delta Q_t)^2]=1+1=2$$
+$$\mathrm{Var}(\Delta P_t)=\sigma^2+\frac{S^2}{2}$$
 
-**Step 4: Find the variance of the price change.** News is independent of signs by A4.
+**Step 4: Find the covariance.** Only the shared term $-Q_{t-1}^2$ survives, so $E[\Delta Q_t\Delta Q_{t-1}]=-1$.
 
-$$\mathrm{Var}(\Delta P_t)=\sigma^2+\frac{S^2}{4}(2)=\sigma^2+\frac{S^2}{2}$$
+$$\mathrm{Cov}(\Delta P_t,\Delta P_{t-1})=-\frac{S^2}{4}$$
 
-**Step 5: Multiply two neighbouring sign changes.**
-
-$$\Delta Q_t\Delta Q_{t-1}=Q_tQ_{t-1}-Q_tQ_{t-2}-Q_{t-1}^2+Q_{t-1}Q_{t-2}$$
-
-**Step 6: Take the expectation.** The three products of different signs have mean zero. The square has mean 1.
-
-$$E[\Delta Q_t\Delta Q_{t-1}]=0-0-1+0=-1$$
-
-**Step 7: Find the covariance.** The news terms drop out by A1 and A4.
-
-$$\mathrm{Cov}(\Delta P_t,\Delta P_{t-1})=\frac{S^2}{4}(-1)=-\frac{S^2}{4}$$
-
-**Step 8: Solve for the spread.** Multiply by -4 and take the square root.
+**Step 5: Solve for the spread.**
 
 $$S=2\sqrt{-\mathrm{Cov}(\Delta P_t,\Delta P_{t-1})}$$
 
-**Worked example:** The covariance is -0.0625. The spread is $2\sqrt{0.0625}=0.5$.
+**Example:** A covariance of -0.0625 gives $S=2(0.25)=0.5$.
 
-### 9.3 Limits
-
-- **Positive covariance:** The formula has no real answer.
-- **No information:** The model ignores adverse selection.
-- **Constant spread:** Real spreads change during the day.
-
-> **Exam:** The negative covariance comes from the bid-ask bounce. Keep the minus sign inside the root.
+**Limits:** The formula fails when the sample covariance is positive. It assumes that trades carry no information. It assumes a constant spread.
