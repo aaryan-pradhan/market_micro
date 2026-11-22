@@ -13,23 +13,27 @@ Everything in this file is exam material. A ⭐ marks what to know without notes
 
 ## 0. Words to know first
 
-- **Market liquidity:** It is how easily an asset can be traded.
-- **Funding liquidity:** It is how easily a trader can obtain money to trade.
-- **Speculator:** This trader supplies liquidity by buying cheap and selling dear. Dealers and hedge funds are examples.
-- **Financier:** This is the bank or broker who lends to the speculator.
-- **Margin:** It is the part of a position that the trader must pay with their own capital. A haircut means the same thing for a collateral loan.
-- **Deleveraging:** It means selling positions to reduce borrowing.
-- **Spiral:** It is a loop in which a bad event causes more of itself.
-- **Fundamental volatility:** It is the variation of the true value.
-- **Flight to quality:** Capital moves out of risky assets and into safe assets.
+| Term | Meaning |
+|---|---|
+| Market liquidity | How easily an asset can be traded |
+| Funding liquidity | How easily a trader can obtain money to trade |
+| Speculator | A trader who supplies liquidity by buying cheap and selling dear. Dealers and hedge funds are examples |
+| Financier | The bank or broker who lends to the speculator |
+| Margin | The part of a position that the trader must pay with their own capital. A haircut means the same thing for a collateral loan |
+| Deleveraging | Selling positions to reduce borrowing |
+| Spiral | A loop in which a bad event causes more of itself |
+| Fundamental volatility | The variation of the true value |
+| Flight to quality | Capital moves out of risky assets and into safe assets |
 
 ## 1. Why extreme cases are critical (slide 2)
 
-1. **Liquidity is key:** A market cannot work well without it.
-2. **Trading should govern change:** Changes should come from the trading of participants.
-3. **Outside factors should not rule:** External factors should not influence the liquidity of an asset or of the market.
+| No. | Principle | What it says |
+|---|---|---|
+| 1 | Liquidity is key | A market cannot work well without it |
+| 2 | Trading should govern change | Changes should come from the trading of participants |
+| 3 | Outside factors should not rule | External factors should not influence the liquidity of an asset or of the market |
 
-In an extreme case, funding can decide liquidity. This is why these cases need study.
+In an extreme case, funding can decide liquidity. This breaks principle 3. This is why these cases need study.
 
 ![extreme slide 2](slides/extreme/extreme-02.png)
 
@@ -43,11 +47,13 @@ The paper is in the Review of Financial Studies, volume 22, issue 6, pages 2201 
 
 ### 2.1 ⭐ The main idea
 
-- **The link:** The model links market liquidity and funding liquidity.
-- **First direction:** Traders provide market liquidity. They can do this only when they have funding.
-- **Second direction:** Funding means capital and margin. Both depend on how liquid the assets are.
-- **The danger:** Under some conditions margins are destabilizing. The two kinds of liquidity then reinforce each other.
-- **The result:** This gives liquidity spirals.
+| Point | What it says |
+|---|---|
+| The link | The model links market liquidity and funding liquidity |
+| First direction | Traders provide market liquidity. They can do this only when they have funding |
+| Second direction | Funding means capital and margin. Both depend on how liquid the assets are |
+| The danger | Under some conditions margins are destabilizing. The two kinds of liquidity then reinforce each other |
+| The result | This gives liquidity spirals |
 
 | Point | Market liquidity | Funding liquidity |
 |---|---|---|
@@ -58,15 +64,24 @@ The paper is in the Review of Financial Studies, volume 22, issue 6, pages 2201 
 
 ### 2.2 Why capital limits liquidity supply
 
-Let $W$ be capital, $m$ be the margin rate and $X$ be the position in money.
+| Symbol | Meaning |
+|---|---|
+| $W$ | Capital of the speculator |
+| $m$ | Margin rate, a share between 0 and 1 |
+| $X$ | Position in money |
 
-1. Every position needs capital equal to $mX$.
-2. The trader cannot use more capital than $W$. So $mX\le W$.
-3. Divide by $m$.
+| Line | Expression | Why |
+|---|---|---|
+| 1 | Capital needed $=mX$ | The trader pays the share $m$ of the position from own capital |
+| 2 | $mX\le W$ | The trader cannot use more capital than $W$ |
+| 3 | $X\le W/m$ | Divide both sides by $m$, which is positive |
 
 $$X\le\frac{W}{m}$$
 
-The largest position falls when capital falls. It also falls when the margin rises. These are the two spirals.
+| Change | Effect on the largest position $W/m$ | Spiral |
+|---|---|---|
+| Capital $W$ falls | Numerator falls, so the limit falls | Loss spiral |
+| Margin $m$ rises | Denominator rises, so the limit falls | Margin spiral |
 
 ## 3. ⭐ Five features of liquidity (slide 5)
 
@@ -119,20 +134,24 @@ flowchart LR
 
 ### 5.1 Triggers
 
-1. **A first loss:** Speculators lose capital.
-2. **A funding shock:** Lenders cut credit or capital is withdrawn.
-3. **A volatility shock:** Financiers cannot tell news from illiquidity. They raise margins.
-4. **A forced sale:** A large trader must unwind. Others may predate, as Topic 4 explains.
+| No. | Trigger | What happens |
+|---|---|---|
+| 1 | A first loss | Speculators lose capital |
+| 2 | A funding shock | Lenders cut credit or capital is withdrawn |
+| 3 | A volatility shock | Financiers cannot tell news from illiquidity. They raise margins |
+| 4 | A forced sale | A large trader must unwind. Others may predate, as Topic 4 explains |
 
 ### 5.2 The loop step by step
 
-1. Speculators suffer an initial loss.
-2. They face funding problems.
-3. They reduce their positions.
-4. Their selling moves prices away from fundamentals.
-5. The price fall creates losses on the positions that remain. This is the **loss spiral**.
-6. The price movement also makes lenders raise margins. This is the **margin spiral**.
-7. Both send the trader back to step 2. The loop repeats and becomes stronger.
+| Step | What happens | Name |
+|---|---|---|
+| 1 | Speculators suffer an initial loss | Trigger |
+| 2 | They face funding problems | Funding liquidity falls |
+| 3 | They reduce their positions | Deleveraging |
+| 4 | Their selling moves prices away from fundamentals | Market liquidity falls |
+| 5 | The price fall creates losses on the positions that remain | **Loss spiral** |
+| 6 | The price movement also makes lenders raise margins | **Margin spiral** |
+| 7 | Steps 5 and 6 send the trader back to step 2. The loop repeats and becomes stronger | Spiral |
 
 | Point | Loss spiral | Margin spiral |
 |---|---|---|
@@ -143,15 +162,19 @@ flowchart LR
 
 ### 5.3 Worked example
 
-A speculator has capital of 10. The margin is 10 percent.
+A speculator has capital of 10. The margin is 10 percent. The speculator holds the largest position allowed.
 
-**Step 1: Find the first position.** It is $10/0.10=100$. The loan is 90.
-
-**Step 2: Apply a price fall of 3 percent.** The position is now 97. The loan is still 90. So capital is $97-90=7$.
-
-**Step 3: Find the loss spiral sale.** The allowed position is $7/0.10=70$. The speculator must sell $97-70=27$.
-
-**Step 4: Find the margin spiral sale.** The margin rises to 14 percent. The allowed position is $7/0.14=50$. The speculator must sell 20 more.
+| Step | What we find | Working | Result |
+|---|---|---|---|
+| 1 | First position | $W/m=10/0.10$ | 100 |
+| 2 | Loan | $100-10$ | 90 |
+| 3 | Position after a 3 percent price fall | $100(1-0.03)$ | 97 |
+| 4 | Capital after the fall | Position minus loan: $97-90$ | 7 |
+| 5 | Allowed position at the old margin | $7/0.10$ | 70 |
+| 6 | Loss spiral sale | $97-70$ | 27 |
+| 7 | Allowed position at the new margin of 14 percent | $7/0.14$ | 50 |
+| 8 | Margin spiral sale | $70-50$ | 20 more |
+| 9 | Total sale | $27+20$ | 47 out of 97 |
 
 **Conclusion:** A price fall of 3 percent forced the sale of 47 out of 97. This selling pushes the price down again.
 
@@ -163,14 +186,21 @@ Pankaj K. Jain, Ajay K. Mishra and Thomas H. McInish wrote "Identification and v
 
 The paper builds two measures for the equity market.
 
-1. The illiquidity spiral uses the spread.
-2. The loss spiral uses the price.
+| No. | Measure | Based on | Bad direction |
+|---|---|---|---|
+| 1 | Illiquidity spiral | The spread | The spread rises |
+| 2 | Loss spiral | The price | The price falls |
 
 ![extreme slide 8](slides/extreme/extreme-08.png)
 
 ### 6.1 ⭐ Illiquidity spiral (slide 9)
 
-Let $s_{t}$ be today's spread, $\bar{s}$ be the average spread of the previous year and $\sigma_s$ be its standard deviation in that year.
+| Symbol | Meaning |
+|---|---|
+| $s_t$ | Today's spread |
+| $s_{t-1}$ | Yesterday's spread |
+| $\bar{s}$ | Average spread of the previous year |
+| $\sigma_s$ | Standard deviation of the spread in that year |
 
 **Step 1: Give each day a score.**
 
@@ -192,7 +222,12 @@ A large positive sum means that the stock is in an illiquidity spiral.
 
 ### 6.2 ⭐ Loss spiral (slide 10)
 
-Let $P_t$ be today's price, $\bar{M}$ be the midpoint of the previous year and $\sigma_P$ be the standard deviation in that year.
+| Symbol | Meaning |
+|---|---|
+| $P_t$ | Today's price |
+| $P_{t-1}$ | Yesterday's price |
+| $\bar{M}$ | Midpoint of the previous year |
+| $\sigma_P$ | Standard deviation of the price in that year |
 
 **Step 1: Give each day a score.**
 
@@ -214,27 +249,45 @@ $$P_{spiral,10}=\sum_{k=0}^{9}L_{t-k}$$
 
 ### 6.3 Worked example
 
-Today's spread is 0.95. Yesterday's was 0.90. The previous year has an average of 0.80 and a standard deviation of 0.20.
+**Spread score:** Today's spread is 0.95. Yesterday's was 0.90. The previous year has an average of 0.80 and a standard deviation of 0.20.
 
-1. Today's spread is higher than yesterday's.
-2. The upper limit is $0.80+0.5(0.20)=0.90$.
-3. Today's spread is above the limit. So the score is +1.
+| Step | Check | Working | Result |
+|---|---|---|---|
+| 1 | Condition 1: higher than yesterday? | $0.95\gt 0.90$ | Yes |
+| 2 | Upper limit | $0.80+0.5(0.20)=0.80+0.10$ | 0.90 |
+| 3 | Condition 2: above the limit? | $0.95\gt 0.90$ | Yes |
+| 4 | Score | Both conditions hold, equation 29.2 | +1 |
 
-Today's price is 95. Yesterday's was 97. The previous year has a midpoint of 100 and a standard deviation of 8.
+**Price score:** Today's price is 95. Yesterday's was 97. The previous year has a midpoint of 100 and a standard deviation of 8.
 
-1. Today's price is lower than yesterday's.
-2. The lower limit is $100-0.5(8)=96$.
-3. Today's price is below the limit. So the score is +1.
+| Step | Check | Working | Result |
+|---|---|---|---|
+| 1 | Condition 1: lower than yesterday? | $95\lt 97$ | Yes |
+| 2 | Lower limit | $100-0.5(8)=100-4$ | 96 |
+| 3 | Condition 2: below the limit? | $95\lt 96$ | Yes |
+| 4 | Score | Both conditions hold, equation 29.5 | +1 |
 
-If the last 10 scores are 1, 1, 0, 1, 1, -1, 1, 0, 1, 1, then the spiral value is 6.
+**10-day sum:** Take the last 10 scores.
+
+| Day $k$ | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Score | 1 | 1 | 0 | 1 | 1 | -1 | 1 | 0 | 1 | 1 |
+
+| Step | Working | Result |
+|---|---|---|
+| 1 | Count the +1 scores | 7 |
+| 2 | Count the -1 scores | 1 |
+| 3 | Sum: $7(1)+1(-1)+2(0)$ | 6 |
 
 ## 7. Data (slide 11)
 
-- **CRSP:** It gives daily closing bid, ask, volume, ticker, close price, market capitalization and PERMCO.
-- **Firms:** They are S&P 500 firms in the US.
-- **Period:** It is November 1982 to December 2010.
-- **Datastream International:** It gives price to book value, dividend per share, total assets and return on equity. It also gives the market value and the P/E of the S&P 500.
-- **Final sample:** It has 476 firms.
+| Item | Detail |
+|---|---|
+| CRSP | Daily closing bid, ask, volume, ticker, close price, market capitalization and PERMCO |
+| Firms | S&P 500 firms in the US |
+| Period | November 1982 to December 2010 |
+| Datastream International | Price to book value, dividend per share, total assets and return on equity. Also the market value and the P/E of the S&P 500 |
+| Final sample | 476 firms |
 
 ![extreme slide 11](slides/extreme/extreme-11.png)
 
@@ -274,8 +327,10 @@ The regressions explain price to book value (PTBV) and price to earnings (P/E). 
 
 ### 9.1 ⭐ How to read it
 
-- **Loss spiral:** It lowers both PTBV and P/E in all six models.
-- **Illiquidity spiral:** It lowers P/E in all three models. It lowers PTBV significantly after controls are added.
-- **Size of the effect:** A loss spiral of 10 lowers PTBV by $10(0.034)=0.34$ in model 5.1.
-- **Caution:** R-squared is small. The effects are significant, but they explain little of the variation.
-- **Conclusion:** Financial market spirals have valuation implications.
+| Point | What it says |
+|---|---|
+| Loss spiral | It lowers both PTBV and P/E in all six models |
+| Illiquidity spiral | It lowers P/E in all three models. It lowers PTBV significantly after controls are added |
+| Size of the effect | A loss spiral of 10 lowers PTBV by $10(0.034)=0.34$ in model 5.1 |
+| Caution | R-squared is small. The effects are significant, but they explain little of the variation |
+| Conclusion | Financial market spirals have valuation implications |
