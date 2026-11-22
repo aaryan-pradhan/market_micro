@@ -24,6 +24,12 @@ The introduction slides list what microstructure covers.
 
 **Why we trade:** The slides give three reasons. They are profit, information and price discovery.
 
+![intro slide 2](slides/intro/intro-02.png)
+
+![intro slide 3](slides/intro/intro-03.png)
+
+![intro slide 5](slides/intro/intro-05.png)
+
 ## 2. Dimensions of a market
 
 1. **Trading platform:** It can be manual or fully automated. Speed, market integration and stabilizing mechanisms matter.
@@ -31,6 +37,8 @@ The introduction slides list what microstructure covers.
 3. **Traders' interaction:** It decides how traders meet and trade.
 4. **Regulatory mechanism:** It sets the rules.
 5. **Imperfections:** Transaction cost and information asymmetry are the two imperfections.
+
+![intro slide 7](slides/intro/intro-07.png)
 
 ## 3. ⭐ Traders and participants
 
@@ -51,6 +59,18 @@ The exchanges deck adds these facts from Harris.
 - **Arbitrageurs:** They make sure that prices do not differ much across markets.
 - **Sell side:** Dealers and brokers provide exchange services to the buy side.
 
+![intro slide 8](slides/intro/intro-08.png)
+
+![intro slide 9](slides/intro/intro-09.png)
+
+![exchanges slide 4](slides/exchanges/exchanges-04.png)
+
+![exchanges slide 5](slides/exchanges/exchanges-05.png)
+
+![exchanges slide 6](slides/exchanges/exchanges-06.png)
+
+![exchanges slide 7](slides/exchanges/exchanges-07.png)
+
 ## 4. ⭐ Basic terms
 
 - **Bid and ask:** The bid is the best price to sell at. The ask is the best price to buy at.
@@ -68,6 +88,16 @@ The exchanges deck adds these facts from Harris.
 2. The mid price is 664.475.
 3. The proportional spread is $0.15/664.475=0.0226$ percent.
 4. The depth is $(714+453)/2=583.5$ shares.
+
+![intro slide 10](slides/intro/intro-10.png)
+
+![intro slide 11](slides/intro/intro-11.png)
+
+![intro slide 12](slides/intro/intro-12.png)
+
+![intro slide 20](slides/intro/intro-20.png)
+
+![orders slide 9](slides/orders/orders-09.png)
 
 ## 5. ⭐ Liquidity dimensions
 
@@ -92,6 +122,22 @@ The 2025 midsem asked for the four dimensions of liquidity, so they were taught 
 - **Limit order risk 1:** It faces execution uncertainty. The price can move away, so the trader fails to trade.
 - **Limit order risk 2:** It faces adverse selection. The order fills when informed traders know that it is mispriced. This causes ex post regret.
 
+![intro slide 21](slides/intro/intro-21.png)
+
+![intro slide 23](slides/intro/intro-23.png)
+
+![orders slide 2](slides/orders/orders-02.png)
+
+![orders slide 3](slides/orders/orders-03.png)
+
+![orders slide 4](slides/orders/orders-04.png)
+
+![orders slide 5](slides/orders/orders-05.png)
+
+![orders slide 6](slides/orders/orders-06.png)
+
+![orders slide 7](slides/orders/orders-07.png)
+
 ## 7. Market design
 
 - **Continuous market:** Trades happen at any time during the session.
@@ -101,6 +147,14 @@ The 2025 midsem asked for the four dimensions of liquidity, so they were taught 
 - **Circuit breaker:** It halts trading after a large market move.
 
 **Market quality** has five measures. They are liquidity, transaction cost, informative prices, volatility and trading profits.
+
+![intro slide 24](slides/intro/intro-24.png)
+
+![intro slide 25](slides/intro/intro-25.png)
+
+![intro slide 26](slides/intro/intro-26.png)
+
+![intro slide 30](slides/intro/intro-30.png)
 
 ## 8. ⭐ Volatility
 
@@ -117,6 +171,24 @@ Prices change for two reasons. New information arrives about values. Impatient t
 - **Total volatility:** It is fundamental volatility plus transitory volatility.
 - **Dealers:** They infer information from order flow. This creates the adverse selection part of the spread. Price changes from this part add to fundamental volatility.
 - **Bid-ask bounce:** Market buyers trade at the ask and market sellers trade at the bid. So the price jumps without any news.
+
+![volatility slide 2](slides/volatility/volatility-02.png)
+
+![volatility slide 3](slides/volatility/volatility-03.png)
+
+![volatility slide 4](slides/volatility/volatility-04.png)
+
+![volatility slide 5](slides/volatility/volatility-05.png)
+
+![volatility slide 6](slides/volatility/volatility-06.png)
+
+![volatility slide 7](slides/volatility/volatility-07.png)
+
+![volatility slide 8](slides/volatility/volatility-08.png)
+
+![volatility slide 9](slides/volatility/volatility-09.png)
+
+![volatility slide 10](slides/volatility/volatility-10.png)
 
 ## 9. ⭐ Inventory models and information models
 
@@ -159,3 +231,13 @@ $$S=2\sqrt{-\mathrm{Cov}(\Delta P_t,\Delta P_{t-1})}$$
 **Example:** A covariance of -0.0625 gives $S=2(0.25)=0.5$.
 
 **Limits:** The formula fails when the sample covariance is positive. It assumes that trades carry no information. It assumes a constant spread.
+
+![volatility slide 11](slides/volatility/volatility-11.png)
+
+![volatility slide 12](slides/volatility/volatility-12.png)
+
+![volatility slide 13](slides/volatility/volatility-13.png)
+
+![volatility slide 14](slides/volatility/volatility-14.png)
+
+![volatility slide 15](slides/volatility/volatility-15.png)
