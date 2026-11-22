@@ -2,6 +2,8 @@
 
 These notes follow the deck "4. Extreme illiquidity in Market", slides 1 to 13.
 
+Everything in this file is exam material. A ⭐ marks what to know without notes. Worked examples use made-up numbers to practise the slide formulas.
+
 | Part | Source | Main point |
 |---|---|---|
 | Theory | Brunnermeier and Pedersen (2009) | Market liquidity and funding liquidity feed each other |
@@ -33,7 +35,7 @@ In an extreme case, funding can decide liquidity. This is why these cases need s
 
 The paper is in the Review of Financial Studies, volume 22, issue 6, pages 2201 to 2238.
 
-### 2.1 The main idea
+### 2.1 ⭐ The main idea
 
 - **The link:** The model links market liquidity and funding liquidity.
 - **First direction:** Traders provide market liquidity. They can do this only when they have funding.
@@ -60,7 +62,7 @@ $$X\le\frac{W}{m}$$
 
 The largest position falls when capital falls. It also falls when the margin rises. These are the two spirals.
 
-## 3. Five features of liquidity (slide 5)
+## 3. ⭐ Five features of liquidity (slide 5)
 
 | Feature | What happens | Why, in the model |
 |---|---|---|
@@ -90,7 +92,7 @@ The chart shows margins on S&P 500 futures from 1982 to 2008. The margins are fo
 
 Margins rise when markets are in trouble. So traders lose funding exactly when the market needs them.
 
-## 5. The liquidity spiral (slide 7)
+## 5. ⭐ The liquidity spiral (slide 7)
 
 ```mermaid
 flowchart LR
@@ -141,8 +143,6 @@ A speculator has capital of 10. The margin is 10 percent.
 
 **Conclusion:** A price fall of 3 percent forced the sale of 47 out of 97. This selling pushes the price down again.
 
-**Analogy:** A crowd runs for one door, and the door becomes narrower as more people push.
-
 ## 6. Empirical measure: Jain, Mishra and McInish (2013) (slide 8)
 
 Pankaj K. Jain, Ajay K. Mishra and Thomas H. McInish wrote "Identification and valuation implications of financial market spirals". It is in the book Rethinking Valuation and Pricing Models, from page 471.
@@ -154,7 +154,7 @@ The paper builds two measures for the equity market.
 1. The illiquidity spiral uses the spread.
 2. The loss spiral uses the price.
 
-### 6.1 Illiquidity spiral (slide 9)
+### 6.1 ⭐ Illiquidity spiral (slide 9)
 
 Let $s_{t}$ be today's spread, $\bar{s}$ be the average spread of the previous year and $\sigma_s$ be its standard deviation in that year.
 
@@ -174,7 +174,7 @@ $$S_{spiral,10}=\sum_{k=0}^{9}S_{t-k}$$
 
 A large positive sum means that the stock is in an illiquidity spiral.
 
-### 6.2 Loss spiral (slide 10)
+### 6.2 ⭐ Loss spiral (slide 10)
 
 Let $P_t$ be today's price, $\bar{M}$ be the midpoint of the previous year and $\sigma_P$ be the standard deviation in that year.
 
@@ -248,7 +248,7 @@ The regressions explain price to book value (PTBV) and price to earnings (P/E). 
 | Observations | 848,064 | 848,064 | 834,231 | 1,550,914 | 1,550,914 | 1,525,707 |
 | R-squared | 0.0002 | 0.001 | 0.0306 | 0.008 | 0.008 | 0.06 |
 
-### 9.1 How to read it
+### 9.1 ⭐ How to read it
 
 - **Loss spiral:** It lowers both PTBV and P/E in all six models.
 - **Illiquidity spiral:** It lowers P/E in all three models. It lowers PTBV significantly after controls are added.
