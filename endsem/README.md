@@ -10,8 +10,8 @@ The exam is on Monday, 23 November 2026, from 3:00 PM to 5:00 PM. It carries 25 
 | Liquidity measures and applications (Lesmond, Chordia, Amihud) | [Topic 2](2-liquidity-measures.md) | 2 | 50 minutes |
 | Triggers of extreme illiquidity | [Topic 3](3-extreme-illiquidity.md) | 3 | 35 minutes |
 | Market-wide liquidity phenomena | [Topic 4](4-market-wide-liquidity.md) | 4 | 35 minutes |
-| Basic concepts discussed in class | [Topic 5](5-basic-concepts.md) | 5 | 20 minutes |
-| Written practice | Section 7 of this page | Last | 25 minutes |
+| Basic concepts discussed in class | [Topic 5](5-basic-concepts.md) | 5, least important | 10 minutes |
+| Written practice | Section 7 of this page | Last | 35 minutes |
 
 The total is 4 hours.
 
@@ -26,16 +26,16 @@ The 2025 midsem had 6 questions for 40 marks in 2 hours. Two were numericals and
 | Very high | Find the bid, ask and spread in Glosten and Milgrom | Topic 1, section 5 |
 | Very high | Derive or explain Kyle's price impact and insider profit | Topic 1, section 6 |
 | High | Explain trade size, separating and pooling in Easley and O'Hara | Topic 1, section 7 |
-| High | Compare Lesmond, Chordia and Amihud, with the use of each measure | Topic 2, sections 2, 3, 5 and 8 |
+| High | Compare Lesmond, Chordia and Amihud, with the use of each measure | Topic 2, sections 2, 3 and 5 |
 | High | Explain liquidity spirals and their triggers | Topic 3, sections 3 and 5 |
 | High | Identify illiquidity and loss spirals from spread and price data | Topic 3, section 6 |
 | High | Explain predatory trading and price overshooting | Topic 4, section 1 |
 | Medium | Explain commonality and market-wide illiquidity | Topic 2, section 2 and Topic 4, section 5 |
 | Medium | Explain the option view of Copeland and Galai | Topic 1, section 4 |
 | Medium | Explain episodic crises or the test for price reversals | Topic 4, sections 2 and 3 |
-| Medium | Compare inventory and information models | Topic 5, section 7 |
+| Low | Compare inventory and information models | Topic 5, section 9 |
 | Low | Explain Bagehot, Ince or Stoll's friction | Topic 1, section 3 and Topic 2, sections 4 and 6 |
-| Low | Derive Roll's spread | Topic 5, section 9 |
+| Low | Derive Roll's spread | Topic 5, section 10 |
 
 ## 3. What to do
 
@@ -50,6 +50,7 @@ The 2025 midsem had 6 questions for 40 marks in 2 hours. Two were numericals and
 ## 4. What not to do
 
 - **Inventory models:** Do not study their derivations again. The comparison table in Topic 5 is enough.
+- **Basic concepts:** Do not spend more than 10 minutes on Topic 5. Topics 1 to 4 are all very important.
 - **Large tables:** Do not learn every number. Learn the sign and the meaning.
 - **New papers:** Do not read other papers from the course outline.
 - **Slide errors:** Do not copy a marked slide error. Use the corrected step in the notes.
@@ -127,14 +128,14 @@ $$X\le\frac{W}{m}$$
 
 $$Spiral_{10}=\sum_{k=0}^{9}Score_{t-k}$$
 
-**Predatory trading:** Large traders selling together push the price down.
-
-$$p=\mu-\lambda(S-X)$$
+**Predatory trading:** In the slide example, 16 shares are sold with $\lambda=1$. The price falls from 116 to 100. The predator buys back 10 shares, and the price recovers to 110. The overshoot is 10.
 
 ## 8. How far to trust these notes
 
 - **Slides:** The notes cover the four endsem decks. Slide numbers are in the headings.
 - **Lesmond (2005):** It is not in the slides and the full paper is behind a paywall. Topic 2 says where each part comes from.
-- **Amihud's findings:** The slide is blank. Topic 2 marks the findings that come from outside the slides.
+- **Amihud's findings:** The slide is blank, so Topic 2 points to the midsem notes for them.
+- **Stars:** A ⭐ in each topic marks what to know without notes.
+- **Scope:** The notes explain only what is on the slides. Lesmond (2005) is the one exception, because the syllabus names it.
 - **Chart readings:** Numbers read from charts are marked as approximate.
 - **Worked examples:** The examples are for practice. They are not results of the papers.
