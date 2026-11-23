@@ -580,12 +580,33 @@ Now suppose a buy happens. The dealer learns from it.
 | 3. Meaning | Compare with 106.897 and 100 | Both quotes move up after a buy |
 
 
-::: {.box title="Formulas: Glosten and Milgrom"}
-1. After a **buy**, the weights are $w_L=\theta(1-\mu)$ and $w_H=(1-\theta)(1+\mu)$. The ask is $(w_LV_L+w_HV_H)/(w_L+w_H)$.
-2. After a **sale**, the weights are $w_L=\theta(1+\mu)$ and $w_H=(1-\theta)(1-\mu)$. The bid is the same weighted average.
-3. The probability of a buy is $\Pr(B)=0.5[1+\mu(1-2\theta)]$, and $\Pr(S)=1-\Pr(B)$.
-4. After a buy, the new $\theta$ is $w_L/(w_L+w_H)$. Use it to find the next quotes.
-5. Check your answer: $\Pr(B)\,a+\Pr(S)\,b$ must equal the prior mean. This is the martingale property.
+::: {.box title="Formulas: Glosten and Milgrom. Learn one grid, and read every formula off it"}
+**Step 1: draw the grid.** The columns are the two values with their priors. The rows are the two trades.
+
+$$\begin{array}{l|cc|c}
+ & V_L\ \ (\text{prior }\theta) & V_H\ \ (\text{prior }1-\theta) & \text{Row sum}\\ \hline
+\text{Buy (gives the ask)} & \theta(1-\mu) & (1-\theta)(1+\mu) & R_B=1+\mu(1-2\theta)\\
+\text{Sale (gives the bid)} & \theta(1+\mu) & (1-\theta)(1-\mu) & R_S=1-\mu(1-2\theta)
+\end{array}$$
+
+**Step 2: fill the signs with one rule.** The state that agrees with the trade gets $1+\mu$. The other state gets $1-\mu$. A buy agrees with good news, so $V_H$ gets the plus. A sale agrees with bad news, so $V_L$ gets the plus.
+
+The plus signs sit on **Buy-High** and **Sale-Low**. Remember it as **"Buy High, Sell Low gets the plus"**. In trading this is the worst rule there is. Here it is exactly right, and that is why it sticks.
+
+**Step 3: read every formula off the grid.**
+
+1. **Ask** = the average of $V_L$ and $V_H$ with the Buy row as weights: $a=(\text{left}\cdot V_L+\text{right}\cdot V_H)/R_B$.
+2. **Bid** = the same average with the Sale row: $b=(\text{left}\cdot V_L+\text{right}\cdot V_H)/R_S$.
+3. **Probability of a buy** = half the Buy row sum: $\Pr(B)=\tfrac12R_B$. **Probability of a sale** = half the Sale row sum: $\Pr(S)=\tfrac12R_S$. The two row sums add to 2, so the halves add to 1.
+4. **New $\theta$ after a buy** = the left cell of the Buy row over its sum: $\theta(1-\mu)/R_B$. Use it to draw the next grid.
+5. **Spread** = **"4 coins, mu, range, over the two row sums"**:
+$$s=\frac{4\cdot\theta(1-\theta)\cdot\mu\cdot(V_H-V_L)}{R_B\cdot R_S}$$
+The coin is $\theta(1-\theta)$. When $\theta=\tfrac12$, both row sums are 1, so $s=\mu(V_H-V_L)$.
+6. **Check:** $\Pr(B)\,a+\Pr(S)\,b$ must equal the prior mean. This is the martingale property.
+
+**Example.** $V_H=110$, $V_L=90$, $\theta=0.3$, $\mu=0.4$. The Buy row is $0.18,\ 0.98$, with sum 1.16. The Sale row is $0.42,\ 0.42$, with sum 0.84.
+Ask $=(0.18\cdot 90+0.98\cdot 110)/1.16=106.897$. Bid $=(0.42\cdot 90+0.42\cdot 110)/0.84=100$. $\Pr(B)=0.58$.
+Spread $=4(0.21)(0.4)(20)/(1.16\cdot 0.84)=6.72/0.9744=6.897$. Check: $0.58(106.897)+0.42(100)=104$, the prior mean.
 :::
 
 
@@ -851,12 +872,32 @@ The trading cost of noise traders equals the insider's profit. The dealer's expe
 | 8. Remaining variance | $100/2$ | 50 |
 
 
-::: {.box title="Formulas: Kyle"}
-1. $\lambda=\sigma_0/(2\sigma_y)$ and $\beta=\sigma_y/\sigma_0$.
-2. The insider's order is $x=\beta(v-p_0)$.
-3. The order flow is $z=x+y$, and the price is $p=p_0+\lambda z$.
-4. The realized profit is $x(v-p)$. The expected profit, before $v$ is known, is $\sigma_0\sigma_y/2$.
-5. The variance left after trading is $\sigma_0^2/2$.
+::: {.box title="Formulas: Kyle. The units write the formulas, and three halves finish them"}
+**Trick 1: the units tell you which way up each ratio goes.** $\sigma_0$ is measured in price. $\sigma_y$ is measured in shares.
+
+- $\lambda$ is the price change per share. Price over shares is $\sigma_0/\sigma_y$.
+- $\beta$ is the number of shares per unit of price gap. Shares over price is $\sigma_y/\sigma_0$.
+- The profit is price times shares. So it is built from $\sigma_0\sigma_y$.
+- The variance left is a price squared. So it is built from $\sigma_0^2$.
+
+You never have to remember which one is on top. The units decide it.
+
+**Trick 2: three halves.** The only extra thing to remember is where the halves go.
+
+1. $\lambda\cdot\beta=\tfrac12$. This comes from the insider's best response, $\beta=1/2\lambda$. The insider trades only half as hard as the price impact allows. So the 2 sits under $\lambda$: $\lambda=\dfrac{\sigma_0}{2\sigma_y}$ and $\beta=\dfrac{\sigma_y}{\sigma_0}$.
+2. The expected profit is half of price times shares: $E[\pi_I]=\tfrac12\sigma_0\sigma_y$.
+3. The variance left after trading is half of the prior variance: $\mathrm{Var}(v\mid z)=\tfrac12\sigma_0^2$.
+
+**Trick 3: what the noise traders lose, the insider wins.** The noise loss is $\lambda\sigma_y^2=\tfrac12\sigma_0\sigma_y$, which is the same number as the profit. The dealer earns zero.
+
+**The trade itself, in the order it happens.**
+
+1. The insider sends $x=\beta(v-p_0)$.
+2. The dealer sees the order flow $z=x+y$.
+3. The dealer sets the price $p=p_0+\lambda z$.
+4. The realized profit is $x(v-p)$.
+
+**Example.** $p_0=100$, $\sigma_0=10$, $\sigma_y=1000$, $v=110$, $y=-400$. Then $\lambda=10/2000=0.005$ and $\beta=1000/10=100$. Check: $\lambda\beta=0.5$. The order is $x=100(10)=1000$. The flow is $z=600$. The price is $p=100+0.005(600)=103$. The realized profit is $1000(110-103)=7000$. The expected profit is $\tfrac12(10)(1000)=5000$. The variance left is $\tfrac12(100)=50$.
 :::
 
 
@@ -998,10 +1039,10 @@ The large ask is the same, with buyers, $X_B^2$ and $(1-\delta)$ in place of $\d
 $$\frac{B^2}{B^1}\ge 1+\frac{\alpha\mu(1-\delta)}{X_B^2(1-\alpha\mu)}$$
 If this fails, the informed also trade small, and the result is pooling.
 :::
-::: {.hook title="The large bid in words"}
-The large bid is **$V^{\ast}$ minus (the variance over the range) times (the informed over all large sellers, without the $\delta$ on top)**.
-
-In a numerical, skip the formula. Take the weighted average from move 2 of the proof map.
+::: {.hook title="The large bid in words: pulled down by the informed share"}
+Call the uninformed large sellers $U$ and the informed large sellers $I$. Then the large bid is
+$$b_2=V^{\ast}-\frac{I}{U+I}\,(V^{\ast}-\underline{V})$$
+In words, **the bid starts at $V^{\ast}$ and is pulled toward the bad value by the informed share of the large sellers.** This is the same as the slide's formula. The $\delta$ inside $I$ and the $(1-\delta)$ inside $V^{\ast}-\underline{V}$ multiply to the $\sigma_v^2/(\bar{V}-\underline{V})$ on the slide.
 :::
 
 
@@ -1166,13 +1207,36 @@ b2        o-----
 | 10. Meaning | 97.391 lies between 96.667 and 100 | This shows the partial recovery |
 
 
-::: {.box title="Formulas: Easley and O'Hara"}
-1. $V^{\ast}=\delta\underline{V}+(1-\delta)\bar{V}$, and $\sigma_v^2=\delta(1-\delta)(\bar{V}-\underline{V})^2$.
-2. The large bid is the average of $V^{\ast}$, with weight $X_S^2(1-\alpha\mu)$, and $\underline{V}$, with weight $\alpha\delta\mu$.
-3. The large ask is the average of $V^{\ast}$, with weight $X_B^2(1-\alpha\mu)$, and $\bar{V}$, with weight $\alpha(1-\delta)\mu$.
-4. In the separating equilibrium, the small quotes are $a_1=b_1=V^{\ast}$.
-5. Separation needs $B^2/B^1\ge 1+\alpha\mu(1-\delta)/[X_B^2(1-\alpha\mu)]$.
-6. For a small trade after a block, take the three state weights after the block sale. Multiply each weight by the chance that the trader is uninformed: $1-\mu$ after an event, and 1 with no event. Then average the values with these weights.
+::: {.box title="Formulas: Easley and O'Hara. Two weights, U and I, give everything"}
+**Trick 1: the informed weight is the tree, read in time order.** First an event arrives ($\alpha$). Then the signal is decided ($\delta$ for low). Then the informed trade ($\mu$). Multiply down the branch:
+
+- Informed large **sellers**: $I_S=\alpha\cdot\delta\cdot\mu$.
+- Informed large **buyers**: $I_B=\alpha\cdot(1-\delta)\cdot\mu$.
+
+**Trick 2: the uninformed weight is "wants large, times is uninformed".**
+
+- Uninformed large sellers: $U_S=X_S^2\cdot(1-\alpha\mu)$.
+- Uninformed large buyers: $U_B=X_B^2\cdot(1-\alpha\mu)$.
+
+Here $1-\alpha\mu$ is the chance that a random trader is uninformed.
+
+**Trick 3: every quote is "start at $V^{\ast}$, then get pulled by the informed share".**
+
+1. $V^{\ast}=\delta\underline{V}+(1-\delta)\bar{V}$. This is the plain expected value.
+2. Large bid: $b_2=V^{\ast}-\dfrac{I_S}{U_S+I_S}(V^{\ast}-\underline{V})$. It is pulled **down** toward the bad value.
+3. Large ask: $a_2=V^{\ast}+\dfrac{I_B}{U_B+I_B}(\bar{V}-V^{\ast})$. It is pulled **up** toward the good value.
+4. Small quotes (separating): nobody informed trades small, so the pull is zero, and $a_1=b_1=V^{\ast}$.
+
+**Trick 4: separation means "the size ratio must beat the crowd ratio".**
+$$\frac{B^2}{B^1}\ \ge\ \frac{U_B+I_B}{U_B}=1+\frac{\alpha\mu(1-\delta)}{X_B^2(1-\alpha\mu)}$$
+Why: in a large trade, the informed buyer's profit per share shrinks to the uninformed share $U_B/(U_B+I_B)$ of the small-trade profit. So the large size must be big enough to make up for it.
+
+**Trick 5: the variance is "coin times range squared".** $\sigma_v^2=\delta(1-\delta)(\bar{V}-\underline{V})^2$. The coin $\delta(1-\delta)$ is the same kind of coin as $\theta(1-\theta)$ in Glosten and Milgrom.
+
+**Small trade after a block sale.** Take the three state weights after the block sale. Multiply each by the chance that the trader is uninformed: $1-\mu$ after an event, and 1 with no event. Then average the values with these weights.
+
+**Example.** $\bar{V}=110$, $\underline{V}=90$, $\delta=\alpha=0.5$, $\mu=0.4$, $X=0.25$. Then $V^{\ast}=100$, $1-\alpha\mu=0.8$, $U=0.25(0.8)=0.2$ and $I=0.5(0.5)(0.4)=0.1$. The informed share is $0.1/0.3=1/3$.
+Large bid $=100-\tfrac13(10)=96.667$. Large ask $=100+\tfrac13(10)=103.333$. Small quotes are 100. Separation needs $B^2/B^1\ge 0.3/0.2=1.5$.
 :::
 
 
@@ -3206,9 +3270,9 @@ $$S=2\sqrt{-\mathrm{Cov}(\Delta P_t,\Delta P_{t-1})}$$
 
 ::: {.box title="All formulas for numericals"}
 - **Copeland and Galai:** maximize $(1-\pi_I)G_U-\pi_IL_I$. In the symmetric case, $h=\pi_I\Delta$.
-- **Glosten and Milgrom** ($\theta=\Pr(V_L)$): the buy weights are $\theta(1-\mu)$ and $(1-\theta)(1+\mu)$. The sale weights are $\theta(1+\mu)$ and $(1-\theta)(1-\mu)$. The spread is $\dfrac{4\theta(1-\theta)\mu(V_H-V_L)}{1-(1-2\theta)^2\mu^2}$, which is $\mu\Delta V$ when $\theta=\tfrac12$. $\Pr(B)=\tfrac12[1+\mu(1-2\theta)]$.
-- **Kyle:** $\lambda=\sigma_0/2\sigma_y$, $\beta=\sigma_y/\sigma_0$, $p=p_0+\lambda z$. The expected profit is $\sigma_0\sigma_y/2$, which equals the noise traders' loss. The variance left is $\sigma_0^2/2$.
-- **Easley and O'Hara:** $V^{\ast}=\delta\underline{V}+(1-\delta)\bar{V}$. The large bid is the average of $V^{\ast}$ (weight $X_S^2(1-\alpha\mu)$) and $\underline{V}$ (weight $\alpha\delta\mu$). The small quotes are $V^{\ast}$. Separation needs $B^2/B^1\ge 1+\alpha\mu(1-\delta)/[X_B^2(1-\alpha\mu)]$.
+- **Glosten and Milgrom** ($\theta=\Pr(V_L)$): draw the grid. "Buy High, Sell Low gets the plus." The Buy row is $\theta(1-\mu),\ (1-\theta)(1+\mu)$, and the Sale row is $\theta(1+\mu),\ (1-\theta)(1-\mu)$. The ask and the bid are the row averages. $\Pr(B)$ is half the Buy row sum. The spread is $4\cdot\theta(1-\theta)\cdot\mu\cdot\Delta V/(R_B R_S)$, which is $\mu\Delta V$ when $\theta=\tfrac12$.
+- **Kyle:** the units set each ratio, and three halves finish them. $\lambda\beta=\tfrac12$, so $\lambda=\sigma_0/2\sigma_y$ and $\beta=\sigma_y/\sigma_0$. The profit is $\tfrac12\sigma_0\sigma_y$, which equals the noise traders' loss. The variance left is $\tfrac12\sigma_0^2$. The price is $p=p_0+\lambda z$.
+- **Easley and O'Hara:** $I_S=\alpha\delta\mu$ (the tree in time order) and $U_S=X_S^2(1-\alpha\mu)$. Then $b_2=V^{\ast}-\frac{I}{U+I}(V^{\ast}-\underline{V})$, and the ask is the mirror image. The small quotes are $V^{\ast}$. Separation needs $B^2/B^1\ge(U_B+I_B)/U_B$: the size ratio must beat the crowd ratio.
 - **Chordia:** QSPR $=A-B$. PQSPR divides it by $P_M$. DEP $=(Q_A+Q_B)/2$. ESPR $=2\lvert P_t-P_M\rvert$. PESPR divides it by $P_t$. Test 1 is $DL_{j,t}=\alpha_j+\beta_jDL_{M,t}+\varepsilon$, with $\beta\approx 0.69$.
 - **Amihud:** ILLIQ is the average of $\lvert R_d\rvert/VOLD_d$, ratio first. Amivest $=\sum VOLD/\sum\lvert R\rvert$.
 - **Lesmond:** $LOT=\alpha_2-\alpha_1$. **Stoll:** half-spreads $(A-B)/2$ and $\lvert P-M\rvert$.
